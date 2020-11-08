@@ -21,7 +21,7 @@ import {
   position,
   PositionProps,
   shadow,
-  ShadowProps,
+  ShadowProps
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
 
@@ -38,7 +38,7 @@ export type LabelProps = SpaceProps &
   React.LabelHTMLAttributes<HTMLLabelElement>;
 
 const Label = styled('label', { shouldForwardProp })<LabelProps>(
-  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow),
+  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow)
 );
 
 export default Label;

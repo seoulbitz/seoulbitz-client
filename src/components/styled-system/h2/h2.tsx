@@ -21,7 +21,7 @@ import {
   position,
   PositionProps,
   shadow,
-  ShadowProps,
+  ShadowProps
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
 
@@ -38,7 +38,7 @@ export type H2Props = SpaceProps &
   React.HTMLAttributes<HTMLHeadingElement>;
 
 const H2 = styled('h2', { shouldForwardProp })<H2Props>(
-  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow),
+  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow)
 );
 
 export default H2;
