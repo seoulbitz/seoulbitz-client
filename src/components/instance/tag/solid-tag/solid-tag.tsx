@@ -2,10 +2,6 @@ import React, { FC } from 'react';
 import Div, { DivProps } from '../../../styled-system/div/div';
 import Span from '../../../styled-system/span/span';
 
-// type SolidTagProps = {
-//   onClick?: (event: MouseEvent) => void;
-// };
-
 const SolidTag: FC<any> = (props) => {
   return (
     <Div
