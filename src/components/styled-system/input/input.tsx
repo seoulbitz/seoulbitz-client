@@ -21,7 +21,7 @@ import {
   position,
   PositionProps,
   shadow,
-  ShadowProps,
+  ShadowProps
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
 
@@ -37,7 +37,7 @@ export type InputProps = SpaceProps &
   ShadowProps &
   React.InputHTMLAttributes<HTMLInputElement>;
 const Input = styled('input', { shouldForwardProp })<InputProps>(
-  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow),
+  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow)
 );
 
 export default Input;
