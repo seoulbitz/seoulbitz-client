@@ -7,7 +7,7 @@ const PlaceItem: FC<any> = (props) => {
   return (
     <Div display="block" position="relative" padding="0">
       <Img
-        height="232px"
+        height="360px"
         width="100%"
         verticalAlign="middle"
         borderRadius="8px"
