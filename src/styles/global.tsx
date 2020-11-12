@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, Global } from '@emotion/core';
+import { futura } from './fonts/futura';
 
 export const globalStyles = (
   <Global
@@ -10,9 +11,13 @@ export const globalStyles = (
 
       html,
       body {
-        padding: 0;
-        margin: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
+
+      ${futura}
     `}
   />
 );
