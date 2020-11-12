@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Div from '../../styled-system/div/div';
-import OutlinedTag from '../tag/outlined-tag/outlined-tag';
+import OutlinedTag from './outlined-tag/outlined-tag';
 import SolidTag from './solid-tag/solid-tag';
 
 export type TagProps = {
