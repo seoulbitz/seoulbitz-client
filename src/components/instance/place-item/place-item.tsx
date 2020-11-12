@@ -31,7 +31,8 @@ const PlaceItem: FC<any> = (props) => {
         </Span>
       </Div>
       <Div marginTop="4px" fontSize="14px" lineHeight="18px">
-        A flower shop with a twist asdfasdf
+        A flower shop with a twist A flower shop with a twist A flower shop with a twist A flower A
+        shop with a twist
       </Div>
     </Div>
   );
