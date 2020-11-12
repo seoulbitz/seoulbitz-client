@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import Div, { DivProps } from '../../styled-system/div/div';
 import Span, { SpanProps } from '../../styled-system/span/span';
 import Img from '../../styled-system/img/img';
-import H6 from '../../styled-system/h5/h5';
 
 const PlaceItem: FC<any> = (props) => {
   return (
