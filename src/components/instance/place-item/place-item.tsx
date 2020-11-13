@@ -8,10 +8,11 @@ const DesktopImage = styled(Div)`
   > div {
     visibility: hidden;
   }
-
   &:hover {
     > div {
       visibility: visible;
+      background-color: rgb(5, 18, 242, 0.5)
+      }
     }
   }
 `;
@@ -28,12 +29,52 @@ const PlaceItem: FC<any> = (props) => {
         <Div
           display="flex"
           flexDirection="column"
-          justifyContent="space-evenly"
+          justifyContent="space-between"
+          padding="26px"
           alignItems="center"
           height="100%">
-          <Div>Shopping/Ittaewon,</Div>
-          <Div>Shopping/Ittaewon,</Div>
-          <Div>Lorem ipsum dolor sit amet consectetur</Div>
+          <Div
+            fontFamily={theme.fonts.futura}
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight="500"
+            color="#ffffff">
+            Restaurants/Itaewon
+          </Div>
+          <Div display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+            <Div
+              fontFamily={theme.fonts.nanumsquare}
+              fontSize="22px"
+              lineHeight="32px"
+              fontWeight="800"
+              color="#ffffff">
+              맥파이 브루잉 컴퍼니
+            </Div>
+            <Div
+              fontFamily={theme.fonts.futura}
+              fontSize="24px"
+              lineHeight="32px"
+              fontWeight="700"
+              color="#ffffff">
+              Magpei Bewing Co.
+            </Div>
+          </Div>
+          <Div
+            fontFamily={theme.fonts.futura}
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight="400"
+            color="#ffffff">
+            Lorem ipsum dolor sit amet consectetur
+          </Div>
+          <Div
+            fontFamily={theme.fonts.futura}
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight="500"
+            color="#ffffff">
+            12 likes / 0.6km far
+          </Div>
         </Div>
       </DesktopImage>
 
