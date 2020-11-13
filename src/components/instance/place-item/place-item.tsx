@@ -17,7 +17,15 @@ const DesktopImage = styled(Div)`
   }
 `;
 
-const PlaceItem: FC<any> = (props) => {
+const PlaceItem: FC<any> = ({
+  categorylocation,
+  koreanname,
+  englishname,
+  discription,
+  likes,
+  image,
+  ...rest
+}) => {
   return (
     <Div>
       <DesktopImage
@@ -39,7 +47,7 @@ const PlaceItem: FC<any> = (props) => {
             lineHeight="20px"
             fontWeight="500"
             color="#ffffff">
-            Restaurants/Itaewon
+            {categorylocation}
           </Div>
           <Div display="flex" flexDirection="column" justifyContent="center" alignItems="center">
             <Div
@@ -48,7 +56,7 @@ const PlaceItem: FC<any> = (props) => {
               lineHeight="32px"
               fontWeight="800"
               color="#ffffff">
-              맥파이 브루잉 컴퍼니
+              {koreanname}
             </Div>
             <Div
               fontFamily={theme.fonts.futura}
@@ -56,16 +64,17 @@ const PlaceItem: FC<any> = (props) => {
               lineHeight="32px"
               fontWeight="700"
               color="#ffffff">
-              Magpei Bewing Co.
+              {englishname}
             </Div>
           </Div>
           <Div
             fontFamily={theme.fonts.futura}
+            alignItems="center"
             fontSize="16px"
             lineHeight="20px"
             fontWeight="400"
             color="#ffffff">
-            Lorem ipsum dolor sit amet consectetur
+            {discription}
           </Div>
           <Div
             fontFamily={theme.fonts.futura}
@@ -73,7 +82,7 @@ const PlaceItem: FC<any> = (props) => {
             lineHeight="20px"
             fontWeight="500"
             color="#ffffff">
-            12 likes / 0.6km far
+            {likes}
           </Div>
         </Div>
       </DesktopImage>
@@ -104,7 +113,7 @@ const PlaceItem: FC<any> = (props) => {
           lineHeight="20px"
           fontWeight="800"
           color=" #080CCE">
-          파도식물,
+          {koreanname}
         </Span>
         <Span
           fontFamily={theme.fonts.futura}
@@ -113,7 +122,7 @@ const PlaceItem: FC<any> = (props) => {
           fontSize="15px"
           lineHeight="20px"
           color=" #080CCE">
-          Padosikmul
+          {englishname}
         </Span>
       </Div>
       <Div
@@ -127,7 +136,7 @@ const PlaceItem: FC<any> = (props) => {
           fontSize="12px"
           lineHeight="16px"
           color="#777777">
-          Shopping/Ittaewon,
+          {categorylocation}
         </Span>
         <Span
           fontFamily={theme.fonts.futura}
@@ -136,7 +145,7 @@ const PlaceItem: FC<any> = (props) => {
           fontSize="12px"
           lineHeight="16px"
           color="#777777">
-          12 likes, 0.5km far
+          {likes}
         </Span>
       </Div>
       <Div
@@ -146,8 +155,7 @@ const PlaceItem: FC<any> = (props) => {
         marginTop="6px"
         fontSize="14px"
         lineHeight="18px">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa illo magnam corporis ipsam
-        perferendis dolorem unde quis reiciendis
+        {discription}
       </Div>
     </Div>
   );
