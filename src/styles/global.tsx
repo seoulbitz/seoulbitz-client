@@ -1,6 +1,7 @@
 import React from 'react';
 import { css, Global } from '@emotion/core';
 import { futura } from './fonts/futura';
+import { nanumsquare } from './fonts/nanum-square';
 
 export const globalStyles = (
   <Global
@@ -17,7 +18,7 @@ export const globalStyles = (
         -moz-osx-font-smoothing: grayscale;
       }
 
-      ${futura}
+      ${[futura, nanumsquare]}
     `}
   />
 );
