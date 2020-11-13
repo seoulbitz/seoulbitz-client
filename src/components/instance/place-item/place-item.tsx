@@ -57,7 +57,12 @@ const PlaceItem: FC<any> = (props) => {
         flexDirection="row"
         alignItems="flex-start"
         paddingTop="12px">
-        <Span fontSize="15px" lineHeight="20px" fontWeight="800" color=" #080CCE">
+        <Span
+          fontFamily={theme.fonts.nanumsquare}
+          fontSize="15px"
+          lineHeight="20px"
+          fontWeight="800"
+          color=" #080CCE">
           파도식물,
         </Span>
         <Span
