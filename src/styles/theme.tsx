@@ -3,7 +3,7 @@ export const theme = {
   fonts: {
     futura:
       'Futura PT, -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji',
-    nanumsquare:
-      'nanumsquare , -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji'
+    nanumSquare:
+      'NanumSquare , -apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji'
   }
 };
