@@ -21,6 +21,9 @@ const Template = (args) => (
         <Button variant="mixed">MIXED BUTTON</Button>
       </Cell>
       <Cell width={[1, 1 / 3]} marginBottom="24px">
+        <Button variant="warning">WARNING BUTTON</Button>
+      </Cell>
+      <Cell width={[1, 1 / 3]} marginBottom="24px">
         <Button disabled>DISABLED BUTTON</Button>
       </Cell>
     </Grid>

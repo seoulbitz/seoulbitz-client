@@ -38,6 +38,13 @@ const MixedButton = styled(BaseButton)`
   }
 `;
 
+const WarningButton = styled(BaseButton)`
+  &:hover {
+    color: #ffffff;
+    background-color: #f43333;
+  }
+`;
+
 const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
   if (rest.disabled) {
     return (
@@ -104,6 +111,24 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         padding="13px 22px"
         backgroundColor="unset"
         border="1px solid #0511F2"
+        fontFamily={theme.fonts.futura}
+        fontWeight="700"
+        {...rest}
+      />
+    );
+  }
+
+  if (variant === 'warning') {
+    return (
+      <WarningButton
+        display="block"
+        width="100%"
+        fontSize="16px"
+        lineHeight="22px"
+        color="#F43333"
+        padding="13px 22px"
+        backgroundColor="unset"
+        border="1px solid #F43333"
         fontFamily={theme.fonts.futura}
         fontWeight="700"
         {...rest}
