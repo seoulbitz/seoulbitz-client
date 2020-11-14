@@ -14,11 +14,13 @@ const DesktopImage = styled(Div)`
     }
   }
 `;
+
 type ArticleItemProps = {
   title: string;
   description: string;
   thumbnailUrl: string;
 };
+
 const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, ...rest }) => {
   return (
     <Div>
