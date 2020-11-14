@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'emotion-theming';
 import React from 'react';
-import { theme } from '../../../../styles/theme';
+import { theme } from '../../../styles/theme';
 import Div from '../../styled-system/div/div';
 import { Cell, Grid } from './layout-grid';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Tag from './tag';
-import { theme } from '../../../../styles/theme';
+import { theme } from '../../../styles/theme';
 import { ThemeProvider } from 'emotion-theming';
 
 export default {
