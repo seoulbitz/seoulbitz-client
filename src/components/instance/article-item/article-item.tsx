@@ -76,7 +76,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, .
         display={['flex', null, 'none']}
         flexDirection="column"
         alignItems="flex-start"
-        paddingTop="12px">
+        marginTop="12px">
         <Div
           fontFamily={theme.fonts.futura}
           fontSize="16px"
