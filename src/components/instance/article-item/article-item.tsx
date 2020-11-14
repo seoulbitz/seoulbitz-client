@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import Div from '../../styled-system/div/div';
 import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
+
 const DesktopImage = styled(Div)`
   > div {
     visibility: hidden;
