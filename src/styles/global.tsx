@@ -2,6 +2,7 @@ import React from 'react';
 import { css, Global } from '@emotion/core';
 import { futura } from './fonts/futura';
 import { nanumSquare } from './fonts/nanum-square';
+import { adelle } from './fonts/adelle';
 
 export const globalStyles = (
   <Global
@@ -20,6 +21,7 @@ export const globalStyles = (
 
       ${futura}
       ${nanumSquare}
+      ${adelle}
     `}
   />
 );
