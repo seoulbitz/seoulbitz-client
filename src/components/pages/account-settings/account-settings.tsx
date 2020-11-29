@@ -24,6 +24,7 @@ const AccountSettingsContent = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          textAlign="center"
           marginTop={['40px', null, '56px']}
           fontFamily={theme.fonts.futura}
           fontSize={['24px', null, '28px']}
