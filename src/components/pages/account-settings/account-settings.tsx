@@ -53,20 +53,6 @@ const AccountSettingsContent = () => {
         </Div>
         <Div display="flex" alignItems="center" justifyContent="center" marginTop="24px">
           <CurrentPasswordInput />
-
-          {/* <Button
-            width="100%"
-            fontFamily="Futura"
-            marginTop="32px"
-            fontSize="16px"
-            lineHeight="22px"
-            border="1px solid #0511F2"
-            backgroundColor="#FFFFFF"
-            color="#0511F2"
-            type="submit"
-            disabled={isSubmitting}>
-            Save
-          </Button> */}
         </Div>
         <Div
           display="flex"
