@@ -10,8 +10,8 @@ import { theme } from '@/styles/theme';
 const styledInput = styled(Input)`
   cursor: 'pointer';
   width: 100%;
-  border: '1px solid ';
-  border-color: #0511f2;
+  box-shadow: 0;
+  border: 1px solid #0511f2;
 `;
 
 const StyledErrorMessage = styled(Div)`
