@@ -1,5 +1,4 @@
 import { css } from '@emotion/core';
-
 export const futura = css`
   // Book
   @font-face {
@@ -12,7 +11,6 @@ export const futura = css`
       url('/fonts/futura/Futura-Book.ttf') format('ttf');
     unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
   }
-
   // Medium
   @font-face {
     font-family: 'Futura Seoulbitz';
@@ -24,7 +22,6 @@ export const futura = css`
       url('/fonts/futura/Futura-Medium.ttf') format('ttf');
     unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
   }
-
   // Heavy
   @font-face {
     font-family: 'Futura Seoulbitz';
