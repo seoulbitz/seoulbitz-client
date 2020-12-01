@@ -1,6 +1,5 @@
 import NextApp from 'next/app';
 import { CacheProvider } from '@emotion/core';
-import '@/services/swiper/bundle.css';
 
 // Use only { cache } from 'emotion'. Don't use { css }.
 import { cache } from 'emotion';
