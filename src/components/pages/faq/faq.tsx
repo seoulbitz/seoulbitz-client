@@ -64,10 +64,10 @@ const FAQContent = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          marginTop={['72px', null, '80px']}
+          marginTop={['48px', null, '88px']}
           fontFamily={theme.fonts.futura}
-          fontSize="24px"
-          lineHeight="30px"
+          fontSize="28px"
+          lineHeight="34px"
           fontWeight="700"
           color="#000000">
           FAQ
@@ -75,7 +75,7 @@ const FAQContent = () => {
         <Div display="flex" justifyContent="center" alignItems="center" marginTop="32px">
           <Img width="150px" src="https://via.placeholder.com/300x188" />
         </Div>
-        <Div marginTop={['48px', null, '56px']}>
+        <Div marginTop={['40px', null, '48px']}>
           <FAQItem />
           <FAQItem />
           <FAQItem />
