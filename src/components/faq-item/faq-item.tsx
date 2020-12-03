@@ -29,8 +29,8 @@ const FAQItem = () => {
           display="flex"
           alignItems="flex-end"
           fontFamily={theme.fonts.futura}
-          fontSize={['14px', null, '16px']}
-          lineHeight={['18px', null, '20px']}
+          fontSize={'16px'}
+          lineHeight={'20px'}
           fontWeight="500"
           color={isOpen ? '#0511F2' : '#000000'}>
           Pater noster qui es in caelis
@@ -44,8 +44,8 @@ const FAQItem = () => {
           <P
             margin="0px"
             fontFamily={theme.fonts.adelle}
-            fontSize={['14px', null, '16px']}
-            lineHeight={['18px', null, '20px']}
+            fontSize={'16px'}
+            lineHeight={'24px'}
             fontWeight="400">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna. Lorem ipsum dolor sit amet, consectetur adipiscing
