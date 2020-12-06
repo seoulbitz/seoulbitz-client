@@ -54,7 +54,7 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         fontSize="16px"
         lineHeight="22px"
         color="##D1D1D1"
-        padding="13px 22px"
+        padding="12px 22px"
         backgroundColor="unset"
         border="1px solid ##D1D1D1"
         fontFamily={theme.fonts.futura}
@@ -72,7 +72,7 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         fontSize="16px"
         lineHeight="22px"
         color="#000000"
-        padding="13px 22px"
+        padding="12px 22px"
         backgroundColor="unset"
         border="1px solid #000000"
         fontFamily={theme.fonts.futura}
@@ -90,7 +90,7 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         fontSize="16px"
         lineHeight="22px"
         color="#0511F2"
-        padding="13px 22px"
+        padding="12px 22px"
         backgroundColor="unset"
         border="1px solid #0511F2"
         fontFamily={theme.fonts.futura}
@@ -108,7 +108,7 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         fontSize="16px"
         lineHeight="22px"
         color="#FF0E66"
-        padding="13px 22px"
+        padding="12px 22px"
         backgroundColor="unset"
         border="1px solid #0511F2"
         fontFamily={theme.fonts.futura}
@@ -126,7 +126,7 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         fontSize="16px"
         lineHeight="22px"
         color="#F43333"
-        padding="13px 22px"
+        padding="12px 22px"
         backgroundColor="unset"
         border="1px solid #F43333"
         fontFamily={theme.fonts.futura}
