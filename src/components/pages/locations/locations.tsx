@@ -64,7 +64,7 @@ const LocationsContent = () => {
         <Cell
           key={i}
           width={[1, 1 / 2, remainder === 1 || remainder === 2 ? 1 / 3 : 2 / 3]}
-          maginBottom={['20px', null, '24px']}>
+          marginBottom={['20px', null, '24px']}>
           <Div backgroundColor="#f2f2f2" height="288px"></Div>
         </Cell>
       </>
