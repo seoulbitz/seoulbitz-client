@@ -1,8 +1,5 @@
 import Clock from '@/components/icons/clock/clock';
-import ColoredClock from '@/components/icons/clock/colored-clock';
-import ColoredDistance from '@/components/icons/distance/colored-distance';
 import Distance from '@/components/icons/distance/distance';
-import ColoredHeart from '@/components/icons/heart/colored-heart';
 import Heart from '@/components/icons/heart/heart';
 import Div from '@/components/styled-system/div/div';
 import Span from '@/components/styled-system/span/span';
@@ -10,21 +7,11 @@ import { theme } from '@/styles/theme';
 import React, { useState } from 'react';
 
 const LocationsToggle = () => {
-  const [isColoredHeart, setIsColoredHeart] = useState(false);
-  const [isColoredClock, setIsColoredClock] = useState(false);
-  const [isColoredDistance, setIsColoredDistance] = useState(false);
+  const [state, setState] = useState<'latest' | 'likes' | 'distance'>('latest');
 
-  const handleClickDistance = () => {
-    setIsColoredDistance(!isColoredDistance);
-  };
-
-  const handleClickHeart = () => {
-    setIsColoredHeart(!isColoredHeart);
-  };
-
-  const handleClickClock = () => {
-    setIsColoredClock(!isColoredClock);
-  };
+  const handleLatestClick = () => setState('latest');
+  const handleLikesClick = () => setState('likes');
+  const handleDistanceClick = () => setState('distance');
 
   return (
     <>
@@ -49,11 +36,42 @@ const LocationsToggle = () => {
         border="2px solid #0511F2"
         borderRadius="29px"
         marginTop="16px">
-        <Div onClick={handleClickDistance}>
-          {isColoredDistance ? <Distance /> : <ColoredDistance />}
+        <Div
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          onClick={handleLatestClick}
+          width="48px"
+          height="48px"
+          margin="2px"
+          borderRadius="100px"
+          backgroundColor={state === 'latest' ? '#0511F2' : 'initial'}>
+          Latest
         </Div>
-        <Div onClick={handleClickClock}> {isColoredClock ? <Clock /> : <ColoredClock />}</Div>
-        <Div onClick={handleClickHeart}>{isColoredHeart ? <Heart /> : <ColoredHeart />}</Div>
+        <Div
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          onClick={handleDistanceClick}
+          width="48px"
+          height="48px"
+          margin="2px"
+          borderRadius="100px"
+          backgroundColor={state === 'latest' ? '#0511F2' : 'initial'}>
+          Distance
+        </Div>
+        <Div
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          onClick={handleLikesClick}
+          width="48px"
+          height="48px"
+          margin="2px"
+          borderRadius="100px"
+          backgroundColor={state === 'latest' ? '#0511F2' : 'initial'}>
+          Likes
+        </Div>
       </Div>
     </>
   );
