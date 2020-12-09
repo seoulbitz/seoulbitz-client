@@ -27,7 +27,11 @@ const LocationsContent = () => {
 const Locations = () => {
   return (
     <Layout>
-      <LocationsToggle />
+      <Cell display="flex" justifyContent="center" alignItems="center" width={[1]}>
+        <Div>
+          <LocationsToggle />
+        </Div>
+      </Cell>
       <LocationsContent />
     </Layout>
   );
