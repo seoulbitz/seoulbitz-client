@@ -9,6 +9,10 @@ export const outline = system({
   outline: true
 });
 
+export const whiteSpace = system({
+  whiteSpace: true
+});
+
 export interface CursorProps<
   ThemeType extends Theme = RequiredTheme,
   TVal = CSS.Property.Left<TLengthStyledSystem>
@@ -21,4 +25,11 @@ export interface OutlineProps<
   TVal = CSS.Property.Left<TLengthStyledSystem>
 > {
   outline?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface WhiteSpaceProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  whiteSpace?: ResponsiveValue<TVal, ThemeType>;
 }
