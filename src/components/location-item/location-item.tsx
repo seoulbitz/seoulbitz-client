@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import Div from '../../styled-system/div/div';
-import Span from '../../styled-system/span/span';
+import Div from '../styled-system/div/div';
+import Span from '../styled-system/span/span';
 import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 const DesktopImage = styled(Div)`
   > div {
@@ -17,24 +18,22 @@ const DesktopImage = styled(Div)`
   }
 `;
 
-type PlaceItemProps = {
-  name: string;
-  nameKO: string;
-  category: string;
+type LocationItemProps = {
+  title: string;
+  titleKo: string;
+  slug: string;
+  subtitle: string;
+  images: SanityImageSource[];
   likes: number;
-  distance: number;
-  description: string;
-  thumbnailUrl: string;
 };
 
-const PlaceItem: FC<PlaceItemProps> = ({
-  name,
-  nameKO,
-  category,
+const LocationItem: FC<LocationItemProps> = ({
+  title,
+  titleKo,
+  slug,
+  subtitle,
+  images,
   likes,
-  distance,
-  description,
-  thumbnailUrl,
   ...rest
 }) => {
   return (
@@ -44,7 +43,7 @@ const PlaceItem: FC<PlaceItemProps> = ({
         display={['none', null, 'block']}
         width="100%"
         height="288px"
-        backgroundImage={`url(${thumbnailUrl})`}
+        backgroundImage="url('https://cdn.herenow.city/assets/uploads/sites/9/2018/06/02175213/pado8-765x510.jpg')"
         backgroundPosition="center"
         backgroundSize="cover">
         <Div
@@ -60,57 +59,59 @@ const PlaceItem: FC<PlaceItemProps> = ({
             lineHeight="20px"
             fontWeight="500"
             color="#ffffff">
-            {category}
+            Shopping / Ittaewon
           </Div>
-          <Div display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+          <Div>
             <Div
-              fontFamily={theme.fonts.nanumSquare}
-              fontSize="22px"
-              lineHeight="32px"
-              fontWeight="800"
-              color="#ffffff">
-              {nameKO}
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center">
+              <Div
+                fontFamily={theme.fonts.futura}
+                fontSize="24px"
+                lineHeight="32px"
+                fontWeight="800"
+                color="#ffffff">
+                {title}
+              </Div>
+              <Div
+                fontFamily={theme.fonts.nanumSquare}
+                fontSize="24px"
+                lineHeight="32px"
+                fontWeight="700"
+                color="#ffffff">
+                {titleKo}
+              </Div>
             </Div>
             <Div
+              marginTop="16px"
               fontFamily={theme.fonts.futura}
-              fontSize="24px"
-              lineHeight="32px"
-              fontWeight="700"
+              alignItems="center"
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight="400"
+              textAlign="center"
               color="#ffffff">
-              {name}
+              {subtitle}
             </Div>
           </Div>
           <Div
             fontFamily={theme.fonts.futura}
-            alignItems="center"
-            fontSize="16px"
-            lineHeight="20px"
-            fontWeight="400"
-            textAlign="center"
-            color="#ffffff">
-            {description}
-          </Div>
-          <Div
-            fontFamily={theme.fonts.futura}
             fontSize="16px"
             lineHeight="20px"
             fontWeight="500"
             color="#ffffff">
-            {likes} likes
-          </Div>
-          <Div
-            fontFamily={theme.fonts.futura}
-            fontSize="16px"
-            lineHeight="20px"
-            fontWeight="500"
-            color="#ffffff">
-            {distance} km far
+            {likes} likes / 3 km far
           </Div>
         </Div>
       </DesktopImage>
 
       {/* For mobile & tablet view */}
-      <Div display={[null, null, 'none']} position="relative" paddingTop="66.66%">
+      <Div
+        display={[null, null, 'none']}
+        position="relative"
+        paddingTop="66.66%">
         <Div
           position="absolute"
           top="0"
@@ -118,7 +119,7 @@ const PlaceItem: FC<PlaceItemProps> = ({
           right="0"
           bottom="0"
           backgroundSize="cover"
-          backgroundImage="url('https://scontent-ort2-1.cdninstagram.com/v/t51.2885-15/e35/57286270_114670046398227_2576349361528457787_n.jpg?_nc_ht=scontent-ort2-1.cdninstagram.com&_nc_cat=103&_nc_ohc=js3DIwAOIPkAX8dsjiC&tp=18&oh=76cb6bf0910fc3ef3ed12303dcb65cbe&oe=5FD47285')"
+          backgroundImage="url('https://cdn.herenow.city/assets/uploads/sites/9/2018/06/02175213/pado8-765x510.jpg')"
           backgroundPosition="center"
           borderRadius="8px"
         />
@@ -128,68 +129,69 @@ const PlaceItem: FC<PlaceItemProps> = ({
         display={['flex', null, 'none']}
         flexDirection="row"
         alignItems="flex-start"
-        paddingTop="12px">
+        paddingTop="16px">
         <Span
-          fontFamily={theme.fonts.nanumSquare}
-          fontSize="15px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
           lineHeight="20px"
           fontWeight="800"
           color=" #080CCE">
-          {nameKO},
+          {title},
         </Span>
         <Span
-          fontFamily={theme.fonts.futura}
+          fontFamily={theme.fonts.nanumSquare}
           fontWeight="700"
           marginLeft="4px"
-          fontSize="15px"
+          fontSize="16px"
           lineHeight="20px"
           color=" #080CCE">
-          {name}
-        </Span>
-      </Div>
-      <Div
-        display={['flex', null, 'none']}
-        flexDirection="row"
-        alignItems="flex-start"
-        marginTop="2px">
-        <Span
-          fontFamily={theme.fonts.futura}
-          fontWeight="400"
-          fontSize="12px"
-          lineHeight="16px"
-          color="#777777">
-          {category}
-        </Span>
-        <Span
-          fontFamily={theme.fonts.futura}
-          fontWeight="400"
-          marginLeft="4px"
-          fontSize="12px"
-          lineHeight="16px"
-          color="#777777">
-          {likes} likes
-        </Span>
-        <Span
-          fontFamily={theme.fonts.futura}
-          fontWeight="400"
-          marginLeft="4px"
-          fontSize="12px"
-          lineHeight="16px"
-          color="#777777">
-          , {distance} km far
+          {titleKo}
         </Span>
       </Div>
       <Div
         display={[null, null, 'none']}
         fontFamily={theme.fonts.futura}
         fontWeight="400"
-        marginTop="6px"
-        fontSize="14px"
-        lineHeight="18px">
-        {description}
+        marginTop="8px"
+        fontSize="16px"
+        lineHeight="20px">
+        {subtitle}
+      </Div>
+      <Div
+        display={['flex', null, 'none']}
+        flexDirection="row"
+        alignItems="flex-start"
+        marginTop="8px"
+        whiteSpace="nowrap">
+        <Span
+          fontFamily={theme.fonts.futura}
+          fontSize="14px"
+          lineHeight="18px"
+          fontWeight="500"
+          color="#777777">
+          Shoppint / Ittaewon,
+        </Span>
+        <Span
+          fontFamily={theme.fonts.futura}
+          marginLeft="4px"
+          fontSize="14px"
+          lineHeight="18px"
+          fontWeight="500"
+          color="#777777">
+          {likes} likes
+        </Span>
+        <Span
+          fontFamily={theme.fonts.futura}
+          marginLeft="4px"
+          fontSize="14px"
+          lineHeight="18px"
+          fontWeight="500"
+          color="#777777">
+          , 3 km far
+        </Span>
       </Div>
     </Div>
   );
 };
 
-export default PlaceItem;
+export default LocationItem;
