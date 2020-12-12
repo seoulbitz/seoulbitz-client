@@ -24,7 +24,12 @@ import {
   ShadowProps
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
-import { cursor, CursorProps } from '@/services/styled-system';
+import {
+  whiteSpace,
+  WhiteSpaceProps,
+  cursor,
+  CursorProps
+} from '@/services/styled-system';
 
 export type DivProps = SpaceProps &
   ColorProps &
@@ -36,6 +41,7 @@ export type DivProps = SpaceProps &
   BorderProps &
   PositionProps &
   ShadowProps &
+  WhiteSpaceProps &
   CursorProps &
   React.HTMLAttributes<HTMLDivElement>;
 
@@ -51,6 +57,7 @@ const Div = styled('div', { shouldForwardProp })<DivProps>(
     border,
     position,
     shadow,
+    whiteSpace,
     cursor
   )
 );

@@ -1,23 +1,37 @@
-import SVG, { SVGProps } from '@/components/styled-system/svg/svg';
-import React, { FC } from 'react';
+import * as React from 'react';
 
-const Heart: FC<SVGProps> = (props) => {
+type HeartProps = {
+  fillColor?: string;
+};
+
+const Heart: React.FC<HeartProps> = ({ fillColor = '#8288F9', ...rest }) => {
   return (
-    <SVG
+    <svg
       width={24}
       height={24}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}>
-      <path
-        d="M21.5 9.102a5.207 5.207 0 00-2.712-4.543A4.638 4.638 0 0016.528 4c-.788.01-1.611.178-2.416.711C13.305 5.244 12 7 12 7s-1.348-1.755-2.154-2.288a4.076 4.076 0 00-2.374-.71c-1.173 0-2.609.566-3.54 1.522A5.043 5.043 0 002.5 9.102a5.184 5.184 0 001.763 3.891l7.583 7.73a.234.234 0 00.261.053.237.237 0 00.079-.054l3.992-4.07 3.872-3.948a5.129 5.129 0 001.45-3.602z"
-        stroke="#000"
-        strokeWidth={1.5}
-        strokeMiterlimit={10}
-        strokeLinejoin="round"
-      />
-    </SVG>
+      {...rest}>
+      <g clipPath="url(#prefix__clip0)">
+        <path
+          d="M22.045 8.532a5.493 5.493 0 00-2.861-4.793A4.894 4.894 0 0016.8 3.15c-.832.01-1.7.187-2.55.75-.85.563-2.227 2.414-2.227 2.414S10.6 4.463 9.75 3.9c-.85-.563-1.646-.75-2.505-.75-1.237 0-2.752.598-3.735 1.607A5.321 5.321 0 002 8.532a5.47 5.47 0 001.86 4.106l8 8.154a.246.246 0 00.276.056.25.25 0 00.082-.056l4.212-4.294 4.085-4.165a5.41 5.41 0 001.53-3.801z"
+          stroke={fillColor}
+          strokeWidth={1.5}
+          strokeMiterlimit={10}
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="prefix__clip0">
+          <path
+            fill="#fff"
+            transform="translate(1.25 2.4)"
+            d="M0 0h21.545v19.216H0z"
+          />
+        </clipPath>
+      </defs>
+    </svg>
   );
 };
 
