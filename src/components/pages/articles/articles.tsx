@@ -1,11 +1,9 @@
-@@ -0,0 +1,40 @@
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Div from '@/components/styled-system/div/div';
-import { theme } from '@/styles/theme';
-import { ThemeProvider } from 'emotion-theming';
 import React from 'react';
 import ArticlesToggle from './articles-toggle';
 import Layout from '@/components/layout/layout';
+import ArticleItem from '@/components/instance/article-item/article-item';
 
 const ArticlesContent = () => {
   const contents = [];
@@ -15,24 +13,26 @@ const ArticlesContent = () => {
       <>
         <Cell
           key={i}
-          width={[1, 1 / 2, remainder === 1 || remainder === 2 ? 1 / 3 : 2 / 3]}
-          marginBottom={['20px', null, '24px']}>
-          <Div backgroundColor="#f2f2f2" height="288px"></Div>
+          width={[1, 1 / 2, remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12]}
+          marginBottom={['40px', null, '24px']}>
+          <ArticleItem />
         </Cell>
       </>
     );
   }
-  return <Grid paddingTop={['20px', '24px', '80px']}>{contents}</Grid>;
+  return <Grid paddingTop={['40px', '40px', '48px']}>{contents}</Grid>;
 };
 
 const Articles = () => {
   return (
     <Layout>
-      <Cell display="flex" justifyContent="center" alignItems="center" width={[1]}>
-        <Div>
-          <ArticlesToggle />
-        </Div>
-      </Cell>
+      <Grid>
+        <Cell display="flex" justifyContent="center" alignItems="center" width={[1]}>
+          <Div>
+            <ArticlesToggle />
+          </Div>
+        </Cell>
+      </Grid>
       <ArticlesContent />
     </Layout>
   );

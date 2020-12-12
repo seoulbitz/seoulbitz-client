@@ -1,18 +1,9 @@
-@@ -0,0 +1,92 @@
 import Clock from '@/components/icons/clock/clock';
-import WhiteClock from '@/components/icons/clock/white-clock';
-import Distance from '@/components/icons/distance/distance';
-import WhiteDistance from '@/components/icons/distance/white-distance';
 import Heart from '@/components/icons/heart/heart';
-import WhiteHeart from '@/components/icons/heart/white-heart';
 import Div from '@/components/styled-system/div/div';
 import Span from '@/components/styled-system/span/span';
 import { theme } from '@/styles/theme';
 import React, { useState } from 'react';
-
-const StyledDistance = () => {
-  <Distance color="#ffffff"></Distance>;
-};
 
 const ArticlesToggle = () => {
   const [state, setState] = useState<'latest' | 'likes'>('latest');
@@ -22,14 +13,25 @@ const ArticlesToggle = () => {
 
   return (
     <>
-      <Div display="flex" alignItems="center" justifyContent="center" marginTop="40px">
-        <Span fontFamily={theme.fonts.futura} fontSize="16px" lineHeight="22px" fontWeight="500">
+      <Div
+        display="flex"
+        alignItems="center"
+        justifyContent="flex-start"
+        marginTop="48px"
+        marginLeft="12px"
+        width="100%">
+        <Span
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="22px"
+          whiteSpace="nowrap"
+          fontWeight="500">
           Sort by
         </Span>
 
         {state === 'latest' && (
           <Span
-            marginLeft="2px"
+            marginLeft="4px"
             fontFamily={theme.fonts.futura}
             fontStyle="italic"
             fontSize="16px"
@@ -41,7 +43,7 @@ const ArticlesToggle = () => {
         )}
         {state === 'likes' && (
           <Span
-            marginLeft="2px"
+            marginLeft="4px"
             fontFamily={theme.fonts.futura}
             fontStyle="italic"
             fontSize="16px"
@@ -71,7 +73,7 @@ const ArticlesToggle = () => {
           margin="2px"
           borderRadius="100px"
           backgroundColor={state === 'latest' ? '#0511F2' : 'initial'}>
-          {state === 'latest' ? <WhiteClock /> : <Clock />}
+          <Clock fillColor={state === 'latest' ? '#FFFFFF' : '#8288F9'} />
         </Div>
         <Div
           display="flex"
@@ -83,7 +85,7 @@ const ArticlesToggle = () => {
           margin="2px"
           borderRadius="100px"
           backgroundColor={state === 'likes' ? '#0511F2' : 'initial'}>
-          {state === 'likes' ? <WhiteHeart /> : <Heart />}
+          <Heart fillColor={state === 'likes' ? '#FFFFFF' : '#8288F9'} />
         </Div>
       </Div>
     </>
