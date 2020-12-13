@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import Div from '../../styled-system/div/div';
 import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 const DesktopImage = styled(Div)`
   > div {
@@ -18,11 +19,22 @@ const DesktopImage = styled(Div)`
 
 type ArticleItemProps = {
   title: string;
-  description: string;
-  thumbnailUrl: string;
+  titleKo: string;
+  slug: string;
+  subtitle: string;
+  images: SanityImageSource[];
+  likes: number;
 };
 
-const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, ...rest }) => {
+const ArticleItem: FC<ArticleItemProps> = ({
+  title,
+  titleKo,
+  slug,
+  subtitle,
+  images,
+  likes,
+  ...rest
+}) => {
   return (
     <Div>
       {/* For desktop view */}
@@ -30,7 +42,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, .
         display={['none', null, 'block']}
         width="100%"
         height="288px"
-        backgroundImage={`url(${thumbnailUrl})`}
+        backgroundImage="url('https://cdn.herenow.city/assets/uploads/sites/9/2018/06/02175213/pado8-765x510.jpg')"
         backgroundPosition="center"
         backgroundSize="cover">
         <Div
@@ -41,13 +53,13 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, .
           alignItems="center"
           height="100%">
           <Div
-            textAlign="center"
             fontFamily={theme.fonts.futura}
             fontSize="24px"
             lineHeight="32px"
-            fontWeight="700"
-            color=" #ffffff">
-            {title}
+            fontWeight="500"
+            color="#FFFFFF">
+            {/* {title} */}
+            Pater noster qui es in caelis
           </Div>
           <Div
             textAlign="center"
@@ -56,8 +68,9 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, .
             lineHeight="20px"
             fontWeight="400"
             marginTop="16px"
-            color="#ffffff">
-            {description}
+            color="#FFFFFF">
+            {/* {subtitle} */}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
           </Div>
         </Div>
       </DesktopImage>
@@ -70,7 +83,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, .
           right="0"
           bottom="0"
           backgroundSize="cover"
-          backgroundImage={`url(${thumbnailUrl})`}
+          backgroundImage="url('https://cdn.herenow.city/assets/uploads/sites/9/2018/06/02175213/pado8-765x510.jpg')"
           backgroundPosition="center"
           borderRadius="8px"
         />
@@ -86,7 +99,7 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, .
           lineHeight="20px"
           fontWeight="700"
           color=" #080CCE">
-          {title}
+          Pater noster qui es in caelis
         </Div>
         <Div
           fontFamily={theme.fonts.futura}
@@ -95,7 +108,8 @@ const ArticleItem: FC<ArticleItemProps> = ({ title, description, thumbnailUrl, .
           fontWeight="400"
           marginTop="4px"
           color="#000000">
-          {description}
+          {/* {subtitle} */}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </Div>
       </Div>
     </Div>

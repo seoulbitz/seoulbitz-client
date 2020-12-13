@@ -1,11 +1,11 @@
 import React from 'react';
-import LocationItem from './location-item';
+import ContentItem from './content-item';
 import { theme } from '@/styles/theme';
 import { ThemeProvider } from 'emotion-theming';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 export default {
-  title: 'component/LocationItem',
-  component: LocationItem
+  title: 'component/ContentItem',
+  component: ContentItem
 };
 const DUMMY_DATA_LIST = [
   {
@@ -72,7 +72,7 @@ const Template = (args) => (
               key={index}
               width={[1, 1 / 2, 7 / 12]}
               marginBottom={['32px', '42px', '24px']}>
-              <LocationItem
+              <ContentItem
                 name={name}
                 nameKO={nameKO}
                 category={category}
