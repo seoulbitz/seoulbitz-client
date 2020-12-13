@@ -23,8 +23,6 @@ const FAQItem = () => {
         borderBottom={isOpen ? '0px' : '1px solid #000000'}
         padding="22px 0">
         <Div
-          display="flex"
-          alignItems="flex-end"
           fontFamily={theme.fonts.futura}
           fontSize={'16px'}
           lineHeight={'20px'}

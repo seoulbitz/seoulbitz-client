@@ -1,9 +1,9 @@
 import * as React from 'react';
-import SVG from '@/components/styled-system/svg/svg';
+import SVG, { SVGProps } from '@/components/styled-system/svg/svg';
 
 type HeartProps = {
   fillColor?: string;
-};
+} & SVGProps;
 
 const Heart: React.FC<HeartProps> = ({ fillColor = '#8288F9', ...rest }) => {
   return (
