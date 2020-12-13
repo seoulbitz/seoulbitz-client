@@ -24,6 +24,7 @@ import {
   ShadowProps
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
+import { whiteSpace, WhiteSpaceProps } from '@/services/styled-system';
 
 export type SpanProps = SpaceProps &
   ColorProps &
@@ -35,10 +36,23 @@ export type SpanProps = SpaceProps &
   BorderProps &
   PositionProps &
   ShadowProps &
+  WhiteSpaceProps &
   React.HTMLAttributes<HTMLSpanElement>;
 
 const Span = styled('span', { shouldForwardProp })<SpanProps>(
-  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow)
+  compose(
+    space,
+    color,
+    typography,
+    layout,
+    flexbox,
+    grid,
+    background,
+    border,
+    position,
+    shadow,
+    whiteSpace
+  )
 );
 
 export default Span;

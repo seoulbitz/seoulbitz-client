@@ -1,11 +1,11 @@
 import React from 'react';
-import PlaceItem from './place-item';
+import ContentItem from './content-item';
 import { theme } from '@/styles/theme';
 import { ThemeProvider } from 'emotion-theming';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 export default {
-  title: 'component/PlaceItem',
-  component: PlaceItem
+  title: 'component/ContentItem',
+  component: ContentItem
 };
 const DUMMY_DATA_LIST = [
   {
@@ -55,10 +55,24 @@ const Template = (args) => (
   <ThemeProvider theme={theme}>
     <Grid>
       {DUMMY_DATA_LIST.map(
-        ({ name, nameKO, category, likes, distance, description, thumbnailUrl }, index) => {
+        (
+          {
+            name,
+            nameKO,
+            category,
+            likes,
+            distance,
+            description,
+            thumbnailUrl
+          },
+          index
+        ) => {
           return (
-            <Cell key={index} width={[1, 1 / 2, 7 / 12]} marginBottom={['32px', '42px', '24px']}>
-              <PlaceItem
+            <Cell
+              key={index}
+              width={[1, 1 / 2, 7 / 12]}
+              marginBottom={['32px', '42px', '24px']}>
+              <ContentItem
                 name={name}
                 nameKO={nameKO}
                 category={category}

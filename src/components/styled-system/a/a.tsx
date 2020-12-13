@@ -24,6 +24,7 @@ import {
   ShadowProps
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
+import { textDecoration, TextDecorationProps } from '@/services/styled-system';
 
 export type AProps = SpaceProps &
   ColorProps &
@@ -35,10 +36,23 @@ export type AProps = SpaceProps &
   BorderProps &
   PositionProps &
   ShadowProps &
+  TextDecorationProps &
   React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const A = styled('a', { shouldForwardProp })<AProps>(
-  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow)
+  compose(
+    space,
+    color,
+    typography,
+    layout,
+    flexbox,
+    grid,
+    background,
+    border,
+    position,
+    shadow,
+    textDecoration
+  )
 );
 
 export default A;
