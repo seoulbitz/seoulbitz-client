@@ -1,28 +1,27 @@
-import * as Yup from 'Yup';
+import * as yup from 'yup';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
 import { ThemeProvider } from 'emotion-theming';
 import React from 'react';
-import { CurrentPasswordInput, NewPasswordInput } from './account-settings-item';
 import StyledButton from '../../button/button';
 import Button from '../../styled-system/button/button';
 import Header from '@/components/styled-system/header/header';
 import Main from '@/components/styled-system/main/main';
 import Aside from '@/components/styled-system/aside/aside';
 import ArrowLeft from '@/components/icons/arrow-left/arrow-left';
-import Span from '@/components/styled-system/span/span';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Input from '@/components/styled-system/input/input';
 import Label from '@/components/styled-system/label/label';
 import P from '@/components/styled-system/p/p';
 
 // TODO: Github's password rule message => Password is too short (minimum is 8 characters), needs at least 1 number, and is in a list of passwords commonly used on other websites
-const passwordSchema = Yup.object().shape({
-  newPassword: Yup.string()
+const passwordSchema = yup.object().shape({
+  newPassword: yup
+    .string()
     .min(8, 'Password is too short (minimum is 8 characters).')
     .required('Please fill in.'),
-  currentPassword: Yup.string().required('Please fill in.')
+  currentPassword: yup.string().required('Please fill in.')
 });
 
 const AccountSettingsContent = () => {
@@ -63,7 +62,11 @@ const AccountSettingsContent = () => {
         display="flex"
         flexDirection="row"
         justifyContent="center">
-        <Div fontFamily={theme.fonts.futura} fontSize="28px" lineHeight="34px" fontWeight="700">
+        <Div
+          fontFamily={theme.fonts.futura}
+          fontSize="28px"
+          lineHeight="34px"
+          fontWeight="700">
           Account settings
         </Div>
       </Cell>
@@ -72,7 +75,11 @@ const AccountSettingsContent = () => {
         display="flex"
         justifyContent="center"
         marginTop={['56px', null, '64px']}>
-        <Div fontFamily={theme.fonts.futura} fontSize="20px" lineHeight="24px" fontWeight="700">
+        <Div
+          fontFamily={theme.fonts.futura}
+          fontSize="20px"
+          lineHeight="24px"
+          fontWeight="700">
           Change password
         </Div>
       </Cell>
@@ -196,7 +203,11 @@ const AccountSettingsContent = () => {
         justifyContent="center"
         width={[1, 1 / 2]}
         marginTop={['56px', null, '64px']}>
-        <Div fontFamily={theme.fonts.futura} fontSize="20px" lineHeight="24px" fontWeight="700">
+        <Div
+          fontFamily={theme.fonts.futura}
+          fontSize="20px"
+          lineHeight="24px"
+          fontWeight="700">
           Delete account
         </Div>
       </Cell>
@@ -207,8 +218,8 @@ const AccountSettingsContent = () => {
           lineHeight="20px"
           fontWeight="400"
           color="#000000">
-          Deleting your account is permanent. All your data will be wiped out immediately and you
-          won't be able to get it back. Requires password.
+          Deleting your account is permanent. All your data will be wiped out
+          immediately and you won't be able to get it back. Requires password.
         </P>
       </Cell>
       <Cell width={[1, 1 / 2]} marginTop="24px">
@@ -247,7 +258,13 @@ const AccountSettings = () => {
         <Div display="flex">
           {/* Sidebar */}
           <Div display={['none', null, 'block']} minWidth="392px">
-            <Aside position="fixed" top={0} left={0} bottom={0} width="392px" display="flex">
+            <Aside
+              position="fixed"
+              top={0}
+              left={0}
+              bottom={0}
+              width="392px"
+              display="flex">
               <Div width="100%" overflowY="auto">
                 <SideBar />
               </Div>
@@ -287,7 +304,11 @@ const DesktopHeader = () => {
       padding="0 24px">
       <Div width="240px" height="48px" borderBottom="1px solid #0511F2"></Div>
       <Div display="flex">
-        <Div width="108px" height="48px" border="1px solid #0511F2" marginRight="16px"></Div>
+        <Div
+          width="108px"
+          height="48px"
+          border="1px solid #0511F2"
+          marginRight="16px"></Div>
         <Div width="67px" height="48px" border="1px solid #000000"></Div>
       </Div>
     </Div>
@@ -301,7 +322,10 @@ const SideBar = () => {
       <Div height="80px" backgroundColor="#ffffff"></Div>
       <Div height="196px" backgroundColor="#080CCE"></Div>
       <Div height="208px" backgroundColor="#EBEDED"></Div>
-      <Div height="168px" backgroundColor="#ffffff" borderBottom="1px solid #000000"></Div>
+      <Div
+        height="168px"
+        backgroundColor="#ffffff"
+        borderBottom="1px solid #000000"></Div>
       <Div height="80px" backgroundColor="#ffffff"></Div>
       <Div
         height="56px"

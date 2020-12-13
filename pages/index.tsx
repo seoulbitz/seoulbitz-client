@@ -1,1 +1,1 @@
-export { default } from '@/components/pages/places/places';
+export { default } from '@/components/pages/location-list/location-list';
