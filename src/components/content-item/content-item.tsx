@@ -18,24 +18,25 @@ const DesktopImage = styled(Div)`
   }
 `;
 
-type LocationItemProps = {
+type ContentItemProps = {
+  kind: 'location' | 'article';
   title: string;
-  titleKo: string;
-  slug: string;
+  titleKo?: string;
   subtitle: string;
   images: SanityImageSource[];
-  likes: number;
+  likes?: number;
 };
 
-const LocationItem: FC<LocationItemProps> = ({
+const ContentItem: FC<ContentItemProps> = ({
+  kind,
   title,
   titleKo,
-  slug,
   subtitle,
   images,
-  likes,
-  ...rest
+  likes
 }) => {
+  const isLocation = kind === 'location';
+
   return (
     <Div>
       {/* For desktop view */}
@@ -49,18 +50,20 @@ const LocationItem: FC<LocationItemProps> = ({
         <Div
           display="flex"
           flexDirection="column"
-          justifyContent="space-between"
+          justifyContent={isLocation ? 'space-between' : 'center'}
           padding="24px"
           alignItems="center"
           height="100%">
-          <Div
-            fontFamily={theme.fonts.futura}
-            fontSize="16px"
-            lineHeight="20px"
-            fontWeight="500"
-            color="#ffffff">
-            Shopping / Ittaewon
-          </Div>
+          {isLocation && (
+            <Div
+              fontFamily={theme.fonts.futura}
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight="500"
+              color="#ffffff">
+              Shopping / Ittaewon
+            </Div>
+          )}
           <Div>
             <Div
               display="flex"
@@ -72,17 +75,20 @@ const LocationItem: FC<LocationItemProps> = ({
                 fontSize="24px"
                 lineHeight="32px"
                 fontWeight="800"
+                textAlign="center"
                 color="#ffffff">
                 {title}
               </Div>
-              <Div
-                fontFamily={theme.fonts.nanumSquare}
-                fontSize="24px"
-                lineHeight="32px"
-                fontWeight="700"
-                color="#ffffff">
-                {titleKo}
-              </Div>
+              {isLocation && (
+                <Div
+                  fontFamily={theme.fonts.nanumSquare}
+                  fontSize="24px"
+                  lineHeight="32px"
+                  fontWeight="700"
+                  color="#ffffff">
+                  {titleKo}
+                </Div>
+              )}
             </Div>
             <Div
               marginTop="16px"
@@ -96,14 +102,16 @@ const LocationItem: FC<LocationItemProps> = ({
               {subtitle}
             </Div>
           </Div>
-          <Div
-            fontFamily={theme.fonts.futura}
-            fontSize="16px"
-            lineHeight="20px"
-            fontWeight="500"
-            color="#ffffff">
-            {likes} likes / 3 km far
-          </Div>
+          {isLocation && (
+            <Div
+              fontFamily={theme.fonts.futura}
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight="500"
+              color="#ffffff">
+              {likes} likes / 3 km far
+            </Div>
+          )}
         </Div>
       </DesktopImage>
 
@@ -126,27 +134,32 @@ const LocationItem: FC<LocationItemProps> = ({
       </Div>
 
       <Div
+        width="100%"
         display={['flex', null, 'none']}
         flexDirection="row"
         alignItems="flex-start"
         paddingTop="16px">
         <Span
+          width="100%"
           fontFamily={theme.fonts.futura}
           fontSize="16px"
           lineHeight="20px"
           fontWeight="800"
           color=" #080CCE">
-          {title},
+          {title}
+          {isLocation && ','}
         </Span>
-        <Span
-          fontFamily={theme.fonts.nanumSquare}
-          fontWeight="700"
-          marginLeft="4px"
-          fontSize="16px"
-          lineHeight="20px"
-          color=" #080CCE">
-          {titleKo}
-        </Span>
+        {isLocation && (
+          <Span
+            fontFamily={theme.fonts.nanumSquare}
+            fontWeight="700"
+            marginLeft="4px"
+            fontSize="16px"
+            lineHeight="20px"
+            color=" #080CCE">
+            {titleKo}
+          </Span>
+        )}
       </Div>
       <Div
         display={[null, null, 'none']}
@@ -157,41 +170,43 @@ const LocationItem: FC<LocationItemProps> = ({
         lineHeight="20px">
         {subtitle}
       </Div>
-      <Div
-        display={['flex', null, 'none']}
-        flexDirection="row"
-        alignItems="flex-start"
-        marginTop="8px"
-        whiteSpace="nowrap">
-        <Span
-          fontFamily={theme.fonts.futura}
-          fontSize="14px"
-          lineHeight="18px"
-          fontWeight="500"
-          color="#777777">
-          Shoppint / Ittaewon,
-        </Span>
-        <Span
-          fontFamily={theme.fonts.futura}
-          marginLeft="4px"
-          fontSize="14px"
-          lineHeight="18px"
-          fontWeight="500"
-          color="#777777">
-          {likes} likes
-        </Span>
-        <Span
-          fontFamily={theme.fonts.futura}
-          marginLeft="4px"
-          fontSize="14px"
-          lineHeight="18px"
-          fontWeight="500"
-          color="#777777">
-          , 3 km far
-        </Span>
-      </Div>
+      {isLocation && (
+        <Div
+          display={['flex', null, 'none']}
+          flexDirection="row"
+          alignItems="flex-start"
+          marginTop="8px"
+          whiteSpace="nowrap">
+          <Span
+            fontFamily={theme.fonts.futura}
+            fontSize="14px"
+            lineHeight="18px"
+            fontWeight="500"
+            color="#777777">
+            Shoppint / Ittaewon,
+          </Span>
+          <Span
+            fontFamily={theme.fonts.futura}
+            marginLeft="4px"
+            fontSize="14px"
+            lineHeight="18px"
+            fontWeight="500"
+            color="#777777">
+            {likes} likes
+          </Span>
+          <Span
+            fontFamily={theme.fonts.futura}
+            marginLeft="4px"
+            fontSize="14px"
+            lineHeight="18px"
+            fontWeight="500"
+            color="#777777">
+            , 3 km far
+          </Span>
+        </Div>
+      )}
     </Div>
   );
 };
 
-export default LocationItem;
+export default ContentItem;

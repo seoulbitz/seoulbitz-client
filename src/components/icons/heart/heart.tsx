@@ -1,4 +1,5 @@
 import * as React from 'react';
+import SVG from '@/components/styled-system/svg/svg';
 
 type HeartProps = {
   fillColor?: string;
@@ -6,7 +7,7 @@ type HeartProps = {
 
 const Heart: React.FC<HeartProps> = ({ fillColor = '#8288F9', ...rest }) => {
   return (
-    <svg
+    <SVG
       width={24}
       height={24}
       viewBox="0 0 24 24"
@@ -31,7 +32,7 @@ const Heart: React.FC<HeartProps> = ({ fillColor = '#8288F9', ...rest }) => {
           />
         </clipPath>
       </defs>
-    </svg>
+    </SVG>
   );
 };
 

@@ -6,14 +6,20 @@ import Share from '../icons/share/share';
 import Button from '../styled-system/button/button';
 import Div from '../styled-system/div/div';
 
-type PostInteractionButtonsProps = {
+type ContentInteractionButtonsProps = {
   likes?: number;
 };
 
-const PostInteractionButtons: FC<PostInteractionButtonsProps> = ({ likes }) => {
+const ContentInteractionButtons: FC<ContentInteractionButtonsProps> = ({
+  likes
+}) => {
   return (
     <Div display="flex" flexDirection="row">
-      <Div marginRight="8px" display="flex" justifyContent="center" alignItems="center">
+      <Div
+        marginRight="8px"
+        display="flex"
+        justifyContent="center"
+        alignItems="center">
         <Button
           outline="none"
           display="inline-block"
@@ -65,4 +71,4 @@ const PostInteractionButtons: FC<PostInteractionButtonsProps> = ({ likes }) => {
   );
 };
 
-export default PostInteractionButtons;
+export default ContentInteractionButtons;

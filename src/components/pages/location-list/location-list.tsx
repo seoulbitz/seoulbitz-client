@@ -2,12 +2,12 @@ import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Div from '@/components/styled-system/div/div';
 import React from 'react';
 import Link from 'next/link';
-import LocationsToggle from './locations-toggle';
 import Layout from '@/components/layout/layout';
-import LocationItem from '@/components/location-item/location-item';
+import ContentItem from '@/components/content-item/content-item';
 import A from '@/components/styled-system/a/a';
+import ContentListToggle from '@/components/content-list-toggle/content-list-toggle';
 
-const LocationsContent = () => {
+const LocationListContent = () => {
   const contents = [];
   for (let i = 0; i < 1000; i += 1) {
     const remainder = i % 4;
@@ -18,10 +18,10 @@ const LocationsContent = () => {
         marginBottom={['40px', null, '24px']}>
         <Link href="/locations/blablabl" passHref>
           <A textDecoration="initial" color="initial">
-            <LocationItem
+            <ContentItem
+              kind="location"
               title="Padosikmul"
               titleKo="파도식물"
-              slug="/padosikmul"
               subtitle="Pater noster qui es in caelis sanctificetur nomen tuum adveniat regnum tuum"
               images={[]}
               likes={4}
@@ -34,7 +34,7 @@ const LocationsContent = () => {
   return <Grid paddingTop={['40px', '40px', '48px']}>{contents}</Grid>;
 };
 
-const Locations = () => {
+const LocationList = () => {
   return (
     <Layout>
       <Grid>
@@ -44,13 +44,13 @@ const Locations = () => {
           alignItems="center"
           width={[1]}>
           <Div>
-            <LocationsToggle />
+            <ContentListToggle />
           </Div>
         </Cell>
       </Grid>
-      <LocationsContent />
+      <LocationListContent />
     </Layout>
   );
 };
 
-export default Locations;
+export default LocationList;
