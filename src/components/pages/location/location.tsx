@@ -7,7 +7,7 @@ import Span from '@/components/styled-system/span/span';
 import Layout from '@/components/layout/layout';
 import LocationTitle from './location-title';
 import LocationSubtitle from './location-subtitle';
-import PostInteractionButtons from '@/components/post-interaction-buttons/post-interaction-buttons';
+import ContentInteractionButtons from '@/components/content-interaction-buttons/content-interaction-buttons';
 import LocationSlider from './location-slider';
 import LocationBody from './location-body';
 import LocationMap from './location-map';
@@ -46,7 +46,7 @@ const Location: FC<{ location: LocationDocument }> = (props) => {
           </Span>
         </Cell>
         <Cell width={1} marginTop={['24px', null, '32px']}>
-          <PostInteractionButtons likes={likes} />
+          <ContentInteractionButtons likes={likes} />
         </Cell>
         <Cell width={1} marginTop={['24px', null, '32px']}>
           <LocationSlider images={images} />
