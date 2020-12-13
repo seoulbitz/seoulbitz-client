@@ -1,9 +1,50 @@
+import { globalUIState } from '@/services/recoil';
 import React from 'react';
+import { useSetRecoilState } from 'recoil';
 import Div from '../styled-system/div/div';
 import Header from '../styled-system/header/header';
 
 const MenuBar = () => {
-  return <Div height="56px" backgroundColor="#ffffff"></Div>;
+  const setGlobalUIState = useSetRecoilState(globalUIState);
+
+  return (
+    <Div height="56px" backgroundColor="#ffffff">
+      <button
+        onClick={() => {
+          setGlobalUIState((state) => {
+            return {
+              ...state,
+              openedModal: 'signInModal'
+            };
+          });
+        }}>
+        Open Sign In Modal
+      </button>
+      <button
+        onClick={() => {
+          setGlobalUIState((state) => {
+            return {
+              ...state,
+              openedModal: 'signUpModal'
+            };
+          });
+        }}>
+        Open Sign Up Modal
+      </button>
+      <button
+        onClick={() => {
+          setGlobalUIState((state) => {
+            return {
+              ...state,
+              openedModal: 'forgotPasswordModal'
+            };
+          });
+        }}>
+        Open Forgot Password Modal
+      </button>
+      <button>Open Menu</button>
+    </Div>
+  );
 };
 
 const FlowBar = () => {

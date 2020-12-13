@@ -23,6 +23,10 @@ export const textDecoration = system({
   textDecoration: true
 });
 
+export const transform = system({
+  transform: true
+});
+
 export interface CursorProps<
   ThemeType extends Theme = RequiredTheme,
   TVal = CSS.Property.Left<TLengthStyledSystem>
@@ -49,4 +53,11 @@ export interface TextDecorationProps<
   TVal = CSS.Property.Left<TLengthStyledSystem>
 > {
   textDecoration?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface TransformProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  transform?: ResponsiveValue<TVal, ThemeType>;
 }
