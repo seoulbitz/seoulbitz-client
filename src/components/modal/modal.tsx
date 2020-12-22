@@ -2,6 +2,7 @@ import { globalUIState } from '@/services/recoil';
 import React, { FC } from 'react';
 import { useSetRecoilState } from 'recoil';
 import ClientPortal from '../client-portal/client-portal';
+import Close from '../icons/close/close';
 import Button from '../styled-system/button/button';
 import Div from '../styled-system/div/div';
 
@@ -42,7 +43,15 @@ const Modal: FC = ({ children }) => {
             flexDirection="column"
             width={[null, '360px', '400px']}>
             <Div position="absolute" top="0" right="0">
-              <Button onClick={handleClose}>X</Button>
+              <Button
+                onClick={handleClose}
+                boxShadow="none"
+                marginTop="25px"
+                marginRight="21px"
+                backgroundColor="#ffffff"
+                border="none">
+                <Close />
+              </Button>
             </Div>
             {children}
           </Div>
