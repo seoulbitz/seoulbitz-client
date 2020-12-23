@@ -46,8 +46,8 @@ const Modal: FC = ({ children }) => {
               <Button
                 onClick={handleClose}
                 boxShadow="none"
-                marginTop="25px"
-                marginRight="21px"
+                marginTop={['24px', null, '40px']}
+                marginRight={['20px', null, '40px']}
                 backgroundColor="#ffffff"
                 border="none">
                 <Close />

@@ -40,7 +40,7 @@ const SignUpModal = () => {
         width={1}
         flexDirection="column"
         alignItems="center"
-        marginTop={['59px', null, '75px']}
+        marginTop={['72px', null, '88px']}
         marginBottom={['90px', '64px']}>
         <Div
           textAlign="center"
