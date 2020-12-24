@@ -39,8 +39,8 @@ const ForgotPasswordModal: FC = () => {
             marginTop="16px"
             textAlign="center"
             fontFamily={theme.fonts.futura}
-            fontSize={['14px', null, '16px']}
-            lineHeight={['18px', null, '20px']}
+            fontSize="16px"
+            lineHeight="20px"
             fontWeight="500"
             color="#000000">
             Enter your email address and we will email you a link to reset your
@@ -50,8 +50,8 @@ const ForgotPasswordModal: FC = () => {
             marginTop="16px"
             textAlign="center"
             fontFamily={theme.fonts.futura}
-            fontSize={['14px', null, '16px']}
-            lineHeight={['18px', null, '20px']}
+            fontSize="16px"
+            lineHeight="20px"
             fontWeight="500"
             color="#000000">
             The email might end up in your spam folder, so please check there as
@@ -66,56 +66,46 @@ const ForgotPasswordModal: FC = () => {
                 setSubmitting(false);
               }}>
               <Form>
-                <Label
-                  fontFamily={theme.fonts.futura}
-                  fontSize={['14px', null, '16px']}
-                  lineHeight={['18px', null, '20px']}
-                  fontWeight="500"
-                  htmlFor="userEmail">
-                  <Span
-                    fontFamily={theme.fonts.futura}
-                    fontSize={['14px', null, '16px']}
-                    lineHeight={['18px', null, '20px']}
-                    fontWeight="500"
-                    color="#000000">
-                    Email
-                  </Span>
-                  <Span
-                    fontFamily={theme.fonts.futura}
-                    fontSize={['14px', null, '16px']}
-                    lineHeight={['18px', null, '20px']}
-                    fontWeight="500"
-                    color="#080CCE">
-                    *
-                  </Span>
-                </Label>
+                <Div width={1} marginTop="24px" flexDirection="row">
+                  <Label
+                    htmlFor="email"
+                    display="flex"
+                    justifyContent="space-between">
+                    <Span
+                      fontFamily={theme.fonts.futura}
+                      fontSize="16px"
+                      lineHeight="20px"
+                      fontWeight="500">
+                      Email
+                      <Span color="#080CCE">*</Span>
+                    </Span>
+                  </Label>
+                </Div>
                 <Field
                   id="email"
                   name="email"
                   component={({ field, ...props }) => {
                     return (
                       <Input
-                        width={1}
-                        display="flex"
-                        flexDirection="column"
+                        width="100%"
                         marginTop="8px"
                         height="48px"
-                        backgroundColor="#FAFAFA"
                         border="1px solid #0511F2"
                         paddingLeft="16px"
                         fontFamily={theme.fonts.futura}
-                        fontSize={['14px', null, '16px']}
-                        lineHeight={['18px', null, '20px']}
+                        fontSize="16px"
+                        lineHeight="20px"
                         fontWeight="500"
+                        color="#000000"
+                        placeholder=""
                         type="email"
-                        placeholder="patricia@gmail.com"
                         {...field}
                         {...props}
                       />
                     );
                   }}></Field>
                 <ErrorMessage
-                  name="userEmail"
+                  name="email"
                   component={(props) => {
                     return (
                       <Div
@@ -140,8 +130,8 @@ const ForgotPasswordModal: FC = () => {
                     <A
                       color="#000000"
                       fontFamily={theme.fonts.futura}
-                      fontSize={['14px', null, '16px']}
-                      lineHeight={['18px', null, '20px']}
+                      fontSize="16px"
+                      lineHeight="20px"
                       fontWeight="500">
                       Back to login
                     </A>
