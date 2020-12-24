@@ -1,4 +1,4 @@
-import { globalUIState } from '@/services/recoil';
+import { globalUIState } from '@/services/recoil/atoms';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import DeleteAccountConfirmModal from '../delete-account-confirm-modal/delete-account-confirm-modal';

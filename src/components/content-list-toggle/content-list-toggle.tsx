@@ -6,28 +6,40 @@ import Span from '@/components/styled-system/span/span';
 import { theme } from '@/styles/theme';
 import React, { FC, useState } from 'react';
 
-enum ToggleValues {
-  latest = 'latest',
-  likes = 'likes',
-  distance = 'distance'
-}
-
 type ContentListToggleProps = {
   items?: {
     distance: boolean;
     latest: boolean;
     likes: boolean;
   };
+  onChange?: (value: 'distance' | 'latest' | 'likes') => void;
 };
 
+// TODO: Refactor to get selected value through props instead of managing its own state
 const ContentListToggle: FC<ContentListToggleProps> = ({
-  items = { distance: true, latest: true, likes: true }
+  items = { distance: true, latest: true, likes: true },
+  onChange
 }) => {
-  const [state, setState] = useState<ToggleValues>(ToggleValues.latest);
+  const [state, setState] = useState<'distance' | 'latest' | 'likes'>('latest');
 
-  const handleLatestClick = () => setState(ToggleValues.latest);
-  const handleLikesClick = () => setState(ToggleValues.likes);
-  const handleDistanceClick = () => setState(ToggleValues.distance);
+  const handleLatestClick = () => {
+    setState('latest');
+    if (onChange) {
+      onChange('latest');
+    }
+  };
+  const handleLikesClick = () => {
+    setState('likes');
+    if (onChange) {
+      onChange('likes');
+    }
+  };
+  const handleDistanceClick = () => {
+    setState('distance');
+    if (onChange) {
+      onChange('distance');
+    }
+  };
 
   const { distance, latest, likes } = items;
 

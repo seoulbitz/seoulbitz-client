@@ -11,6 +11,8 @@ export type LocationDocument = SanityDocument<{
     current: string;
   };
   subtitle: string;
+  category: any;
+  area: any;
   images: SanityImageSource[];
   location: {
     _type: 'geopoint';
@@ -34,11 +36,60 @@ export const createLocationService = (client: SanityClient) => {
     return location;
   };
 
+  const find = async ({
+    order
+  }: {
+    order: { likes?: 'asc' | 'desc'; _createdAt?: 'asc' | 'desc' };
+  }) => {
+    const getOrderQuery = (order: {
+      likes?: 'asc' | 'desc';
+      _createdAt?: 'asc' | 'desc';
+    }) => {
+      if (Object.keys(order).length === 0) {
+        return '';
+      }
+
+      const query = Object.entries(order).reduce((acc, [key, value]) => {
+        const pair = `${key} ${value}`;
+
+        if (acc) {
+          return `${acc}, ${pair}`;
+        }
+
+        return pair;
+      }, '');
+
+      return ` | order(${query})`;
+    };
+
+    const orderQuery = getOrderQuery(order);
+
+    const query = `*[_type == "location"] {
+      _id,
+      _rev,
+      _type,
+      _createdAt,
+      _updatedAt,
+      title,
+      slug,
+      subtitle,
+      category->,
+      area->,
+      images,
+      location,
+      body,
+      likes,
+      recommendedLocations}${orderQuery}`;
+    const locations = await client.fetch<LocationDocument[]>(query);
+    return locations;
+  };
+
   const patch = () => {
     return null;
   };
 
   return {
+    find,
     findOneBySlug,
     patch
   };
