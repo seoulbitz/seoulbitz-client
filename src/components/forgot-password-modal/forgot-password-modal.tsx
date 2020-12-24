@@ -108,6 +108,7 @@ const ForgotPasswordModal: FC = () => {
                         lineHeight={['18px', null, '20px']}
                         fontWeight="500"
                         type="email"
+                        placeholder="patricia@gmail.com"
                         {...field}
                         {...props}
                       />

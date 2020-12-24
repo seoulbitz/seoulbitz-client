@@ -9,32 +9,9 @@ import Label from '../styled-system/label/label';
 import Span from '../styled-system/span/span';
 import * as Yup from 'yup';
 import Input from '../styled-system/input/input';
-import Button from '@/components/button/button';
-import styled from '@emotion/styled';
-import H2 from '../styled-system/h2/h2';
-import FacebookIcon from '../icons/facebook-icon/facebook-icon';
-import GoogleIcon from '../icons/google-icon/google-icon';
-import KakaoIcon from '../icons/kakao-icon/kakao-icon';
-
-const LeftSpan = styled(Span)`
-  float: left;
-`;
-
-const RightSpan = styled(Span)`
-  float: right;
-`;
-
-const LeftDiv = styled(Div)`
-  float: left;
-`;
-
-const RightDiv = styled(Div)`
-  float: right;
-`;
-
-const CenterDiv = styled(Div)`
-  float: middle;
-`;
+import StyledButton from '@/components/button/button';
+import Button from '../styled-system/button/button';
+import Img from '../styled-system/img/img';
 
 const signinSchema = Yup.object().shape({
   email: Yup.string().required('Required'),
@@ -67,8 +44,8 @@ const SignInModal: FC = () => {
           textAlign="center"
           marginTop="16px"
           fontFamily={theme.fonts.futura}
-          fontSize={['14px', null, '16px']}
-          lineHeight={['18px', null, '20px']}
+          fontSize="16px"
+          lineHeight="20px"
           fontWeight="500"
           color="#000000">
           Log into your account.
@@ -76,8 +53,8 @@ const SignInModal: FC = () => {
         <Div textAlign="center">
           <Span
             fontFamily={theme.fonts.futura}
-            fontSize={['14px', null, '16px']}
-            lineHeight={['18px', null, '20px']}
+            fontSize="16px"
+            lineHeight="20px"
             fontWeight="500"
             color="#000000">
             Don’t have an account?
@@ -86,8 +63,8 @@ const SignInModal: FC = () => {
             <A
               marginLeft="6px"
               fontFamily={theme.fonts.futura}
-              fontSize={['14px', null, '16px']}
-              lineHeight={['18px', null, '20px']}
+              fontSize="16px"
+              lineHeight="20px"
               fontWeight="500"
               color="#080CCE">
               Sign up for free
@@ -102,38 +79,39 @@ const SignInModal: FC = () => {
               setSubmitting(false);
             }}>
             <Form>
-              <Label htmlFor="email">
-                <Span
-                  fontFamily={theme.fonts.futura}
-                  fontSize={['14px', null, '16px']}
-                  lineHeight={['18px', null, '20px']}
-                  fontWeight="500">
-                  Email
-                </Span>
-                <Span
-                  fontFamily={theme.fonts.futura}
-                  fontSize={['14px', null, '16px']}
-                  lineHeight={['18px', null, '20px']}
-                  fontWeight="500"
-                  color="#080CCE">
-                  *
-                </Span>
-              </Label>
+              <Div width={1} marginTop="24px" flexDirection="row">
+                <Label
+                  htmlFor="email"
+                  display="flex"
+                  justifyContent="space-between">
+                  <Span
+                    fontFamily={theme.fonts.futura}
+                    fontSize="16px"
+                    lineHeight="20px"
+                    fontWeight="500">
+                    Email
+                    <Span color="#080CCE">*</Span>
+                  </Span>
+                </Label>
+              </Div>
               <Field
                 id="email"
                 name="email"
                 component={({ field, ...props }) => {
                   return (
                     <Input
-                      width={1}
+                      width="100%"
                       marginTop="8px"
                       height="48px"
+                      border="1px solid #0511F2"
                       paddingLeft="16px"
                       fontFamily={theme.fonts.futura}
-                      fontSize={['14px', null, '16px']}
-                      lineHeight={['18px', null, '20px']}
+                      fontSize="16px"
+                      lineHeight="20px"
                       fontWeight="500"
-                      type="email"
+                      color="#000000"
+                      placeholder=""
+                      type="password"
                       {...field}
                       {...props}
                     />
@@ -155,37 +133,27 @@ const SignInModal: FC = () => {
                 }}
               />
               <Div width={1} marginTop="24px" flexDirection="row">
-                <Label htmlFor="password">
-                  <LeftSpan>
-                    <Span
-                      fontFamily={theme.fonts.futura}
-                      fontSize={['14px', null, '16px']}
-                      lineHeight={['18px', null, '20px']}
-                      fontWeight="500">
-                      Password
-                    </Span>
-                    <Span
-                      fontFamily={theme.fonts.futura}
-                      fontSize={['14px', null, '16px']}
-                      lineHeight={['18px', null, '20px']}
-                      fontWeight="500"
-                      color="#080CCE">
-                      *
-                    </Span>
-                  </LeftSpan>
-
-                  <RightSpan>
-                    <Link href="/" passHref>
-                      <A
-                        color="#777777"
-                        fontFamily={theme.fonts.futura}
-                        fontSize="16px"
-                        fontWeight="500"
-                        lineHeight="20px">
-                        Forgot password?
-                      </A>
-                    </Link>
-                  </RightSpan>
+                <Label
+                  htmlFor="password"
+                  display="flex"
+                  justifyContent="space-between">
+                  <Span
+                    fontFamily={theme.fonts.futura}
+                    fontSize="16px"
+                    lineHeight="20px"
+                    fontWeight="500">
+                    Password
+                    <Span color="#080CCE">*</Span>
+                  </Span>
+                  <A
+                    textDecoration="underline"
+                    color="#777777"
+                    fontFamily={theme.fonts.futura}
+                    fontSize="16px"
+                    lineHeight="20px"
+                    fontWeight="500">
+                    Forgot password?
+                  </A>
                 </Label>
                 <Field
                   id="password"
@@ -193,20 +161,24 @@ const SignInModal: FC = () => {
                   component={({ field, ...props }) => {
                     return (
                       <Input
-                        width={1}
+                        width="100%"
                         marginTop="8px"
                         height="48px"
+                        border="1px solid #0511F2"
                         paddingLeft="16px"
                         fontFamily={theme.fonts.futura}
-                        fontSize={['14px', null, '16px']}
-                        lineHeight={['18px', null, '20px']}
+                        fontSize="16px"
+                        lineHeight="20px"
                         fontWeight="500"
+                        color="#000000"
+                        placeholder=""
                         type="password"
                         {...field}
                         {...props}
                       />
                     );
-                  }}></Field>
+                  }}
+                />
                 <ErrorMessage
                   name="password"
                   component={(props) => {
@@ -223,7 +195,7 @@ const SignInModal: FC = () => {
                   }}
                 />
               </Div>
-              <Button
+              <StyledButton
                 marginTop="32px"
                 height="48px"
                 variant="mixed"
@@ -231,105 +203,132 @@ const SignInModal: FC = () => {
                 fontSize="16px"
                 lineHeight="22px">
                 SIGN IN
-              </Button>
+              </StyledButton>
             </Form>
           </Formik>
+
           <Div
-            width={1}
-            textAlign="center"
-            borderBottom="1px solid #AAAAAA"
-            margin="10px 0px 20px">
-            <Span background="#ffffff" padding="0px 10px">
+            marginTop="24px"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            cursor="default">
+            <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
+            <Div
+              fontFamily={theme.fonts.futura}
+              color="#777777"
+              fontSize="12px"
+              lineHeight="16px"
+              margin="0px 16px">
               or
-            </Span>
+            </Div>
+            <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
           </Div>
 
-          <Div
+          <Button
+            padding="0px"
+            position="relative"
             width={1}
             height="48px"
             marginTop="32px"
-            padding="12px 0px"
-            border="1px solid #080CCE">
-            <Div display="inline">
-              <LeftDiv
-                alignItems="center"
-                justifyContent="center"
-                verticalAlign="middle"
-                paddingLeft="16px"
+            border="1px solid #080CCE"
+            backgroundColor="#FFFFFF"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            cursor="pointer">
+            <Div
+              position="absolute"
+              top="50%"
+              left={16}
+              transform="translateY(-50%)">
+              <Img
+                width="24px"
                 height="24px"
-                width="24px">
-                <FacebookIcon />
-              </LeftDiv>
-              <Div
-                fontFamily={theme.fonts.futura}
-                justifyContent="center"
-                textAlign="center"
-                fontSize="16px"
-                lineHeight="20px"
-                fontWeight="500"
-                color="#000000">
-                Continue with Facebook
-              </Div>
+                src="/images/facebook-social-icon.png"
+                verticalAlign="middle"
+              />
             </Div>
-          </Div>
+            <Div
+              width="100%"
+              fontFamily={theme.fonts.futura}
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight="500"
+              color="#000000">
+              Continue with Facebook
+            </Div>
+          </Button>
 
-          <Div
+          <Button
+            padding="0px"
+            position="relative"
             width={1}
             height="48px"
             marginTop="32px"
-            padding="12px 0px"
-            border="1px solid #080CCE">
-            <Div display="inline">
-              <LeftDiv
-                alignItems="center"
-                justifyContent="center"
-                verticalAlign="middle"
-                paddingLeft="16px"
+            border="1px solid #080CCE"
+            backgroundColor="#FFFFFF"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            cursor="pointer">
+            <Div
+              position="absolute"
+              top="50%"
+              left={16}
+              transform="translateY(-50%)">
+              <Img
+                width="24px"
                 height="24px"
-                width="24px">
-                <GoogleIcon />
-              </LeftDiv>
-              <Div
-                fontFamily={theme.fonts.futura}
-                justifyContent="center"
-                textAlign="center"
-                fontSize="16px"
-                lineHeight="20px"
-                fontWeight="500"
-                color="#000000">
-                Continue with Google
-              </Div>
+                src="/images/google-social-icon.png"
+                verticalAlign="middle"
+              />
             </Div>
-          </Div>
+            <Div
+              width="100%"
+              fontFamily={theme.fonts.futura}
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight="500"
+              color="#000000">
+              Continue with Google
+            </Div>
+          </Button>
 
-          <Div
+          <Button
+            padding="0px"
+            position="relative"
             width={1}
             height="48px"
             marginTop="32px"
-            padding="12px 0px"
-            border="1px solid #080CCE">
-            <Div display="inline">
-              <LeftDiv
-                alignItems="center"
-                justifyContent="center"
-                verticalAlign="middle"
-                paddingLeft="16px"
+            border="1px solid #080CCE"
+            backgroundColor="#FFFFFF"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            cursor="pointer">
+            <Div
+              position="absolute"
+              top="50%"
+              left={16}
+              transform="translateY(-50%)">
+              <Img
+                width="24px"
                 height="24px"
-                width="24px">
-                <KakaoIcon />
-              </LeftDiv>
-              <Div
-                fontFamily={theme.fonts.futura}
-                justifyContent="center"
-                textAlign="center"
-                fontSize="16px"
-                lineHeight="20px"
-                fontWeight="500"
-                color="#000000">
-                Continue with Kakao
-              </Div>
+                src="/images/kakao-social-icon.png"
+                verticalAlign="middle"
+              />
             </Div>
-          </Div>
+            <Div
+              width="100%"
+              fontFamily={theme.fonts.futura}
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight="500"
+              color="#000000">
+              Continue with Kakao
+            </Div>
+          </Button>
         </Div>
       </Div>
     </Modal>
