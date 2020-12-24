@@ -1,4 +1,4 @@
-import { globalUIState } from '@/services/recoil';
+import { globalUIState } from '@/services/recoil/atoms';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import Div from '../styled-system/div/div';

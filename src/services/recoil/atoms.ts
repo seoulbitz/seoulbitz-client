@@ -13,3 +13,11 @@ export const globalUIState = atom({
     isDrawerOpen: false
   }
 });
+
+export const locationListState = atom({
+  key: 'locationListState',
+  default: {
+    sortBy: 'latest', // 'likes', 'distance'
+    locations: []
+  }
+});

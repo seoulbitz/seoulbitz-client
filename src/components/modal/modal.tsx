@@ -1,4 +1,4 @@
-import { globalUIState } from '@/services/recoil';
+import { globalUIState } from '@/services/recoil/atoms';
 import React, { FC } from 'react';
 import { useSetRecoilState } from 'recoil';
 import ClientPortal from '../client-portal/client-portal';
