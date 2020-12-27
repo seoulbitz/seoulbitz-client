@@ -17,7 +17,6 @@ const Modal: FC = ({ children }) => {
       };
     });
   };
-
   return (
     <ClientPortal selector="#surface-root">
       <Div
@@ -27,30 +26,34 @@ const Modal: FC = ({ children }) => {
         left={0}
         bottom={0}
         zIndex={100}
-        backgroundColor="rgba(0, 0, 0, 0.6)">
+        backgroundColor="rgba(0, 0, 0, 0.6)"
+        display="flex"
+        justifyContent="center"
+        alignItems="flex-start"
+        overflowY="scroll">
         <Div
-          position="fixed"
-          top={[0, '50%']}
-          right={[0, 'initial']}
-          bottom={[0, 'initial']}
-          left={[0, '50%']}
           zIndex={101}
           backgroundColor="#FFFFFF"
-          transform={[null, 'translate(-50%, -50%)']}>
+          width={['100%', 'initial']}
+          margin={[null, '88px']}
+          minHeight={['100vh', 'initial']}>
           <Div
             position="relative"
             display="flex"
             flexDirection="column"
             width={[null, '360px', '400px']}>
-            <Div position="absolute" top="0" right="0">
+            <Div
+              position="absolute"
+              top={['24px', null, '40px']}
+              right={['20px', null, '40px']}>
               <Button
+                display="block"
                 onClick={handleClose}
                 boxShadow="none"
-                marginTop={['24px', null, '40px']}
-                marginRight={['20px', null, '40px']}
                 backgroundColor="#ffffff"
+                padding={0}
                 border="none">
-                <Close />
+                <Close display="block" />
               </Button>
             </Div>
             {children}

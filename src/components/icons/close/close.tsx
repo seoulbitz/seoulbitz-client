@@ -1,7 +1,7 @@
-import SVG from '@/components/styled-system/svg/svg';
+import SVG, { SVGProps } from '@/components/styled-system/svg/svg';
 import * as React from 'react';
 
-const Close: React.FC = (props) => {
+const Close: React.FC<SVGProps> = (props) => {
   return (
     <SVG
       width={16}
