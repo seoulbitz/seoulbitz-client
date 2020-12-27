@@ -7,12 +7,14 @@ import Div from '../styled-system/div/div';
 const DeleteAccountConfirmModal = () => {
   return (
     <Modal>
-      <Div width={1} marginTop="32px" padding="0px 20px 288px 20px">
+      <Div
+        width={1}
+        padding={['72px 20px 48px 20px', null, '88px 40px 64px 40px']}>
         <Div
           textAlign="center"
           fontFamily={theme.fonts.futura}
-          fontSize="24px"
-          lineHeight="30px"
+          fontSize="28px"
+          lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
           Are you sure?
@@ -21,8 +23,8 @@ const DeleteAccountConfirmModal = () => {
           marginTop="16px"
           textAlign="center"
           fontFamily={theme.fonts.futura}
-          fontSize="14px"
-          lineHeight="18px"
+          fontSize="16px"
+          lineHeight="20px"
           fontWeight="500"
           color="#000000">
           Your account will no longer be available and all your personal
