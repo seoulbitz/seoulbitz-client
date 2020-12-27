@@ -1,3 +1,5 @@
+import { theme } from '@/styles/theme';
+import { ThemeProvider } from 'emotion-theming';
 import { globalUIState } from '@/services/recoil/atoms';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
@@ -10,27 +12,29 @@ import SignUpModal from '../sign-up-modal/sign-up-modal';
 const SurfaceRoot = () => {
   const { openedModal, isDrawerOpen } = useRecoilValue(globalUIState);
 
+  let content = null;
+
   if (openedModal === 'signInModal') {
-    return <SignInModal />;
+    content = <SignInModal />;
   }
 
   if (openedModal === 'signUpModal') {
-    return <SignUpModal />;
+    content = <SignUpModal />;
   }
 
   if (openedModal === 'forgotPasswordModal') {
-    return <ForgotPasswordModal />;
+    content = <ForgotPasswordModal />;
   }
 
   if (openedModal === 'deleteAccountConfirmModal') {
-    return <DeleteAccountConfirmModal />;
+    content = <DeleteAccountConfirmModal />;
   }
 
   if (isDrawerOpen) {
-    return <Drawer />;
+    content = <Drawer />;
   }
 
-  return null;
+  return <ThemeProvider theme={theme}>{content}</ThemeProvider>;
 };
 
 export default SurfaceRoot;
