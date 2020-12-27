@@ -4,6 +4,7 @@ import Span from '../styled-system/span/span';
 import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import sanity from '@/services/sanity';
 
 const DesktopImage = styled(Div)`
   > div {
@@ -25,6 +26,8 @@ type ContentItemProps = {
   subtitle: string;
   images: SanityImageSource[];
   likes?: number;
+  category: string;
+  area: string;
 };
 
 const ContentItem: FC<ContentItemProps> = ({
@@ -33,9 +36,13 @@ const ContentItem: FC<ContentItemProps> = ({
   titleKo,
   subtitle,
   images,
-  likes
+  likes,
+  category,
+  area
 }) => {
   const isLocation = kind === 'location';
+
+  const thumbnailImageUrl = sanity.image.getUrl(images[0]);
 
   return (
     <Div>
@@ -44,7 +51,8 @@ const ContentItem: FC<ContentItemProps> = ({
         display={['none', null, 'block']}
         width="100%"
         height="288px"
-        backgroundImage="url('https://cdn.herenow.city/assets/uploads/sites/9/2018/06/02175213/pado8-765x510.jpg')"
+        // TODO: Use <Image /> component to render to optimize rendering performance
+        backgroundImage={`url('${thumbnailImageUrl}')`}
         backgroundPosition="center"
         backgroundSize="cover">
         <Div
@@ -61,7 +69,7 @@ const ContentItem: FC<ContentItemProps> = ({
               lineHeight="20px"
               fontWeight="500"
               color="#ffffff">
-              Shopping / Ittaewon
+              {category} / {area}
             </Div>
           )}
           <Div>
@@ -127,7 +135,8 @@ const ContentItem: FC<ContentItemProps> = ({
           right="0"
           bottom="0"
           backgroundSize="cover"
-          backgroundImage="url('https://cdn.herenow.city/assets/uploads/sites/9/2018/06/02175213/pado8-765x510.jpg')"
+          // TODO: Use <Image /> component to render to optimize rendering performance
+          backgroundImage={`url('${thumbnailImageUrl}')`}
           backgroundPosition="center"
           borderRadius="8px"
         />
@@ -183,7 +192,7 @@ const ContentItem: FC<ContentItemProps> = ({
             lineHeight="18px"
             fontWeight="500"
             color="#777777">
-            Shoppint / Ittaewon,
+            {category} / {area}
           </Span>
           <Span
             fontFamily={theme.fonts.futura}
