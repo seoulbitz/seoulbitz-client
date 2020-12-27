@@ -5,7 +5,7 @@ import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import ArrowLeft from '@/components/icons/arrow-left/arrow-left';
 import Button from '@/components/styled-system/button/button';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from 'Yup';
+import * as Yup from 'yup';
 import Label from '@/components/styled-system/label/label';
 import Input from '@/components/styled-system/input/input';
 import A from '@/components/styled-system/a/a';
