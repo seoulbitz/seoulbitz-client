@@ -43,6 +43,19 @@ const MenuBar = () => {
         Open Forgot Password Modal
       </button>
       <button>Open Menu</button>
+
+      <button
+        onClick={() => {
+          setGlobalUIState((state) => {
+            return {
+              ...state,
+              openedModal: 'deleteAccountConfirmModal'
+            };
+          });
+        }}>
+        Delete Account confirm modal
+      </button>
+      {/* <button>Delete confirm modal</button> */}
     </Div>
   );
 };
