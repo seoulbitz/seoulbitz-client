@@ -24,10 +24,10 @@ type ContentItemProps = {
   title: string;
   titleKo?: string;
   subtitle: string;
-  images: SanityImageSource[];
+  images?: SanityImageSource[];
   likes?: number;
-  category: string;
-  area: string;
+  category?: string;
+  area?: string;
 };
 
 const ContentItem: FC<ContentItemProps> = ({
