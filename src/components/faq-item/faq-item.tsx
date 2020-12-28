@@ -1,11 +1,17 @@
 import { theme } from '@/styles/theme';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import Minus from '../icons/minus/minus';
 import Plus from '../icons/plus/plus';
 import Div from '../styled-system/div/div';
 import P from '../styled-system/p/p';
+import BlockContent from '@/services/sanity/block-content';
 
-const FAQItem = () => {
+type FAQItemProps = {
+  question: string;
+  answer: any[];
+};
+
+const FAQItem: FC<FAQItemProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -28,7 +34,7 @@ const FAQItem = () => {
           lineHeight={'20px'}
           fontWeight="500"
           color={isOpen ? '#0511F2' : '#000000'}>
-          Pater noster qui es in caelis
+          {question}
         </Div>
         <Div display="flex" alignItems="flex-end" verticalAlign="text-top">
           {isOpen ? <Minus /> : <Plus />}
@@ -36,7 +42,8 @@ const FAQItem = () => {
       </Div>
       {isOpen && (
         <Div paddingBottom={['24px', null, '32px']} borderBottom="1px solid">
-          <P
+          <BlockContent blocks={answer} />
+          {/* <P
             margin="0px"
             fontFamily={theme.fonts.adelle}
             fontSize="16px"
@@ -46,7 +53,7 @@ const FAQItem = () => {
             eiusmod tempor incididunt ut labore et dolore magna. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna.
-          </P>
+          </P> */}
         </Div>
       )}
     </>

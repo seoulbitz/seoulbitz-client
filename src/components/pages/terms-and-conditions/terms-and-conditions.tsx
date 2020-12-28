@@ -2,15 +2,14 @@ import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
 import React, { FC } from 'react';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
-import Img from '@/components/styled-system/img/img';
-import FAQItem from '@/components/faq-item/faq-item';
 import Layout from '@/components/layout/layout';
 import sanity from '@/services/sanity';
-import { FAQPageDocument } from '@/services/sanity/api/page';
+import { TermsAndConditionsPageDocument } from '@/services/sanity/api/page';
+import BlockContent from '@/services/sanity/block-content';
 
-const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
-  const url = sanity.image.getUrl(faqPage.image);
-
+const TermsAndConditions: FC<{
+  termsAndConditionsPage: TermsAndConditionsPageDocument;
+}> = ({ termsAndConditionsPage }) => {
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -25,19 +24,10 @@ const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
             lineHeight="34px"
             fontWeight="700"
             color="#000000">
-            {faqPage.title}
+            {termsAndConditionsPage.title}
           </Div>
-          <Div
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            marginTop="32px">
-            <Img width="150px" src={url} />
-          </Div>
-          <Div marginTop={['40px', null, '48px']}>
-            {faqPage.faqItems.map(({ _id, question, answer }) => {
-              return <FAQItem key={_id} question={question} answer={answer} />;
-            })}
+          <Div marginTop="32px">
+            <BlockContent blocks={termsAndConditionsPage.body} />
           </Div>
         </Cell>
       </Grid>
@@ -45,14 +35,14 @@ const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
   );
 };
 
-export default FAQ;
+export default TermsAndConditions;
 
 export const getServerSideProps = async (context) => {
-  const faqPage = await sanity.api.page.getFAQPage();
+  const termsAndConditionsPage = await sanity.api.page.getTermsAndConditionsPage();
 
   return {
     props: {
-      faqPage
+      termsAndConditionsPage
     }
   };
 };
