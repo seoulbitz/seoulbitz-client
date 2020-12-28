@@ -48,7 +48,7 @@ const ContentItem: FC<ContentItemProps> = ({
     <Div>
       {/* For desktop view */}
       <DesktopImage
-        display={['none', null, 'block']}
+        display={['none', null, 'inline-flex']}
         width="100%"
         height="288px"
         // TODO: Use <Image /> component to render to optimize rendering performance
@@ -144,9 +144,8 @@ const ContentItem: FC<ContentItemProps> = ({
 
       <Div
         width="100%"
-        display={['flex', null, 'none']}
+        display={['block', null, 'none']}
         flexDirection="row"
-        alignItems="flex-start"
         paddingTop="16px">
         <Span
           width="100%"
