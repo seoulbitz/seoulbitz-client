@@ -1,5 +1,6 @@
 import { SanityClient, SanityDocument } from '@sanity/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { getOrderQuery } from './utils';
 
 export type LocationDocument = SanityDocument<{
   title: {
@@ -41,27 +42,6 @@ export const createLocationService = (client: SanityClient) => {
   }: {
     order: { likes?: 'asc' | 'desc'; _createdAt?: 'asc' | 'desc' };
   }) => {
-    const getOrderQuery = (order: {
-      likes?: 'asc' | 'desc';
-      _createdAt?: 'asc' | 'desc';
-    }) => {
-      if (Object.keys(order).length === 0) {
-        return '';
-      }
-
-      const query = Object.entries(order).reduce((acc, [key, value]) => {
-        const pair = `${key} ${value}`;
-
-        if (acc) {
-          return `${acc}, ${pair}`;
-        }
-
-        return pair;
-      }, '');
-
-      return ` | order(${query})`;
-    };
-
     const orderQuery = getOrderQuery(order);
 
     const query = `*[_type == "location"] {

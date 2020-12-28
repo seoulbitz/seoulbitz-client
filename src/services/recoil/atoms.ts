@@ -17,7 +17,15 @@ export const globalUIState = atom({
 export const locationListState = atom({
   key: 'locationListState',
   default: {
-    sortBy: 'latest', // 'likes', 'distance'
+    sortBy: 'latest', // 'latest' | 'likes' | 'distance'
     locations: []
+  }
+});
+
+export const articleListState = atom({
+  key: 'articleListState',
+  default: {
+    sortBy: 'latest', // 'latest' | 'likes'
+    articles: []
   }
 });

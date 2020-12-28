@@ -1,38 +1,82 @@
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Div from '@/components/styled-system/div/div';
-import React from 'react';
+import React, { FC, useEffect } from 'react';
 import Layout from '@/components/layout/layout';
 import A from '@/components/styled-system/a/a';
 import ContentItem from '@/components/content-item/content-item';
 import Link from 'next/link';
 import ContentListToggle from '@/components/content-list-toggle/content-list-toggle';
+import sanity from '@/services/sanity';
+import { ArticleDocument } from '@/services/sanity/api/article';
+import { useRecoilState } from 'recoil';
+import { articleListState } from '@/services/recoil/atoms';
+import { useDidUpdateEffect } from '@/services/react/hooks';
+import { isServer } from '@/services/next';
 
-const ArticleListContent = () => {
-  const contents = [];
-  for (let i = 0; i < 1000; i += 1) {
-    const remainder = i % 4;
-    contents.push(
-      <Cell
-        key={i}
-        width={[1, 1 / 2, remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12]}
-        marginBottom={['40px', null, '24px']}>
-        <Link href="/locations/blablabl" passHref>
-          <A textDecoration="initial" color="initial">
-            <ContentItem
-              kind="article"
-              title="Top Korean bands of 2020"
-              subtitle="Pater noster qui es in caelis sanctificetur nomen tuum adveniat regnum tuum"
-              images={[]}
-            />
-          </A>
-        </Link>
-      </Cell>
-    );
-  }
-  return <Grid paddingTop={['40px', '40px', '48px']}>{contents}</Grid>;
-};
+const ArticleList: FC<{ articles: ArticleDocument[] }> = (props) => {
+  const [articleList, setArticleList] = useRecoilState(articleListState);
 
-const ArticleList = () => {
+  // To manage articles data with recoil state after initial rendering.
+  useEffect(() => {
+    setArticleList((state) => {
+      return {
+        ...state,
+        articles: props.articles
+      };
+    });
+  }, [props.articles, setArticleList]);
+
+  // To fetch new articles when sort by option changes
+  useDidUpdateEffect(() => {
+    const fetch = async () => {
+      setArticleList((state) => {
+        return {
+          ...state,
+          articles: []
+        };
+      });
+
+      let order = {};
+      switch (articleList.sortBy) {
+        case 'latest': {
+          order = { _createdAt: 'desc' };
+          break;
+        }
+        case 'likes': {
+          order = { likes: 'desc' };
+          break;
+        }
+      }
+
+      const articles = await sanity.api.article.find({
+        order
+      });
+
+      setArticleList((state) => {
+        return {
+          ...state,
+          articles
+        };
+      });
+    };
+
+    fetch();
+
+    return () => {};
+  }, [articleList.sortBy, setArticleList]);
+
+  const handleToggleChange = (value: 'latest' | 'likes') => {
+    setArticleList((state) => {
+      return {
+        ...state,
+        sortBy: value
+      };
+    });
+  };
+
+  // To show hydrated contents on the first page hit
+  const articlesToRender = isServer ? props.articles : articleList.articles;
+
   return (
     <Layout>
       <Grid>
@@ -48,13 +92,56 @@ const ArticleList = () => {
                 latest: true,
                 likes: true
               }}
+              onChange={handleToggleChange}
             />
           </Div>
         </Cell>
       </Grid>
-      <ArticleListContent />
+      <Grid paddingTop={['40px', '40px', '48px']}>
+        {articlesToRender.map((article, i) => {
+          const { _id, title, slug, thumbnailImage, subtitle, likes } = article;
+          const remainder = i % 4;
+
+          const href = `/articles/${slug.current}`;
+
+          return (
+            <Cell
+              key={_id}
+              width={[
+                1,
+                1 / 2,
+                remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
+              ]}
+              marginBottom={['40px', null, '24px']}>
+              <Link href={href} passHref>
+                <A textDecoration="initial" color="initial">
+                  <ContentItem
+                    kind="article"
+                    title={title}
+                    subtitle={subtitle}
+                    images={[thumbnailImage]}
+                    likes={likes}
+                  />
+                </A>
+              </Link>
+            </Cell>
+          );
+        })}
+      </Grid>
     </Layout>
   );
 };
 
 export default ArticleList;
+
+export const getServerSideProps = async (context) => {
+  const articles = await sanity.api.article.find({
+    order: { _createdAt: 'desc' }
+  });
+
+  return {
+    props: {
+      articles
+    }
+  };
+};
