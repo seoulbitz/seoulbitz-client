@@ -41,7 +41,6 @@ const ContentItem: FC<ContentItemProps> = ({
   area
 }) => {
   const isLocation = kind === 'location';
-
   const thumbnailImageUrl = sanity.image.getUrl(images[0]);
 
   return (
