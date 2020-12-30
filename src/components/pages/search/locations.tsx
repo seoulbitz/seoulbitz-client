@@ -1,13 +1,12 @@
-import Button from '@/components/button/button';
 import ContentItem from '@/components/content-item/content-item';
+import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Layout from '@/components/layout/layout';
+import A from '@/components/styled-system/a/a';
 import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
-import React, { FC } from 'react';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import Link from 'next/link';
-import A from '@/components/styled-system/a/a';
-import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
+import React, { FC } from 'react';
 
 type ContentItemProps = {
   kind: 'location' | 'article';
@@ -101,15 +100,9 @@ const LOCATION_DUMMY_DATA_LIST = {
       likes: 4,
       category: 'family',
       area: 'Wangsimni'
-    }
-  ]
-};
-
-// kind: articles
-const ARTICLE_DUMMY_DATA_LIST = {
-  items: [
+    },
     {
-      kind: 'article',
+      kind: 'location',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -129,7 +122,7 @@ const ARTICLE_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'article',
+      kind: 'location',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -149,7 +142,7 @@ const ARTICLE_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'article',
+      kind: 'location',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -169,7 +162,7 @@ const ARTICLE_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'article',
+      kind: 'location',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -191,7 +184,7 @@ const ARTICLE_DUMMY_DATA_LIST = {
   ]
 };
 
-const Search: FC<ContentItemProps> = (props) => {
+const Locations: FC<ContentItemProps> = (props) => {
   return (
     <Layout>
       <Grid>
@@ -257,74 +250,9 @@ const Search: FC<ContentItemProps> = (props) => {
             </Cell>
           );
         })}
-        <Div
-          display={['flex', 'block']}
-          marginLeft={['none', 'auto']}
-          marginRight={['none', 'auto']}
-          width={[1, '228px', '264px']}>
-          <Button variant="black">SEE ALL LOCATIONS</Button>
-        </Div>
-      </Grid>
-      {/* DeskTop version일때 줄이 content item 과 같아야함 */}
-      <Div marginTop="40px" border="1px solid #F2F2F2"></Div>
-
-      <Grid paddingBottom={['202px', '104px', '60px']}>
-        <Cell
-          display="inline"
-          textAlign="center"
-          alignItems="center"
-          width="100%"
-          paddingTop="32px">
-          <Div
-            paddingTop="40px"
-            paddingBottom="32px"
-            fontFamily={theme.fonts.futura}
-            fontSize="24px"
-            lineHeight="32px"
-            fontWeight="500">
-            Articles
-          </Div>
-        </Cell>
-
-        {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => {
-          const remainder = index % 4;
-
-          return (
-            <Cell
-              key={index}
-              width={[
-                1,
-                1 / 2,
-                remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
-              ]}
-              marginBottom="32px">
-              <Link href="/" passHref>
-                <A textDecoration="initial" color="initial">
-                  <ContentItem
-                    kind="article"
-                    title={item.title}
-                    titleKo={item.titleKo}
-                    subtitle={item.subtitle}
-                    images={item.images}
-                    likes={item.likes}
-                    category={item.category}
-                    area={item.area}
-                  />
-                </A>
-              </Link>
-            </Cell>
-          );
-        })}
-        <Div
-          display={['flex', 'block']}
-          marginLeft={['none', 'auto']}
-          marginRight={['none', 'auto']}
-          width={[1, '228px', '264px']}>
-          <Button variant="black">SEE ALL ARTICLES</Button>
-        </Div>
       </Grid>
     </Layout>
   );
 };
 
-export default Search;
+export default Locations;
