@@ -188,13 +188,9 @@ const SearchResultsLocationList: FC<ContentItemProps> = (props) => {
   return (
     <Layout>
       <Grid>
-        <Cell
-          display="inline"
-          textAlign="center"
-          alignItems="center"
-          width="100%">
+        <Cell textAlign="center" width="100%">
           <Div
-            paddingTop="48px"
+            marginTop={['48px', null, '88px']}
             fontFamily={theme.fonts.futura}
             fontSize="28px"
             lineHeight="34px"
@@ -212,6 +208,7 @@ const SearchResultsLocationList: FC<ContentItemProps> = (props) => {
 
           <Cell marginTop="40px">
             <Div
+              marginTop={['56px', null, '64px']}
               fontFamily={theme.fonts.futura}
               fontSize="24px"
               lineHeight="32px"
@@ -221,9 +218,7 @@ const SearchResultsLocationList: FC<ContentItemProps> = (props) => {
           </Cell>
         </Cell>
       </Grid>
-      <Grid
-        paddingTop={['32px', '32px']}
-        paddingBottom={['68px', '74px', '135px']}>
+      <Grid marginTop={['40px', null, '48px']}>
         {LOCATION_DUMMY_DATA_LIST.items.map((item, index) => {
           const remainder = index % 4;
 
@@ -235,7 +230,7 @@ const SearchResultsLocationList: FC<ContentItemProps> = (props) => {
                 1 / 2,
                 remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
               ]}
-              marginBottom="32px">
+              marginBottom={['40px', null, '24px']}>
               <Link href="/" passHref>
                 <A textDecoration="initial" color="initial">
                   <ContentItem

@@ -195,13 +195,9 @@ const Search: FC<ContentItemProps> = (props) => {
   return (
     <Layout>
       <Grid>
-        <Cell
-          display="inline"
-          textAlign="center"
-          alignItems="center"
-          width="100%">
+        <Cell textAlign="center" width="100%">
           <Div
-            paddingTop="48px"
+            marginTop={['48px', null, '88px']}
             fontFamily={theme.fonts.futura}
             fontSize="28px"
             lineHeight="34px"
@@ -217,8 +213,7 @@ const Search: FC<ContentItemProps> = (props) => {
             “Lorem ipsum dolor sit am”
           </Div>
           <Div
-            paddingTop="40px"
-            paddingBottom="32px"
+            marginTop={['56px', null, '64px']}
             fontFamily={theme.fonts.futura}
             fontSize="24px"
             lineHeight="32px"
@@ -227,7 +222,9 @@ const Search: FC<ContentItemProps> = (props) => {
           </Div>
         </Cell>
       </Grid>
-      <Grid paddingTop="32px">
+
+      {/* Locations list */}
+      <Grid marginTop={['40px', null, '48px']}>
         {LOCATION_DUMMY_DATA_LIST.items.map((item, index) => {
           const remainder = index % 4;
 
@@ -239,7 +236,7 @@ const Search: FC<ContentItemProps> = (props) => {
                 1 / 2,
                 remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
               ]}
-              marginBottom="32px">
+              marginBottom={['40px', null, '24px']}>
               <Link href="/" passHref>
                 <A textDecoration="initial" color="initial">
                   <ContentItem
@@ -257,34 +254,38 @@ const Search: FC<ContentItemProps> = (props) => {
             </Cell>
           );
         })}
-        <Div
-          display={['flex', 'block']}
-          marginLeft={['none', 'auto']}
-          marginRight={['none', 'auto']}
-          width={[1, '228px', '264px']}>
-          <Button variant="black">SEE ALL LOCATIONS</Button>
-        </Div>
+        <Cell
+          width={1}
+          display="flex"
+          marginTop={[null, null, '16px']}
+          justifyContent="center">
+          <Link href="/search/locations" passHref>
+            <A width={[1, 'initial']} textDecoration="initial" display="inline">
+              <Button variant="black">SEE ALL LOCATIONS</Button>
+            </A>
+          </Link>
+        </Cell>
       </Grid>
 
       {/* Vertical line */}
-      <Cell display="flex" justifyContent="center" alignItems="center">
-        <Div
-          width={[1, null, '840px']}
-          height="1px"
-          background="#F2F2F2"
-          marginTop="40px"></Div>
-      </Cell>
-
-      {/* Articles list */}
-      <Grid paddingBottom={['202px', '104px', '60px']}>
+      <Grid
+        width={1}
+        padding={[0, null, '0 12px']}
+        marginTop={['56px', null, '64px']}>
         <Cell
-          display="inline"
-          textAlign="center"
-          alignItems="center"
-          width="100%">
+          padding={[0, null, '0 12px']}
+          width={1}
+          display="flex"
+          justifyContent="center"
+          alignItems="center">
+          <Div width={1} height="1px" background="#F2F2F2" />
+        </Cell>
+      </Grid>
+
+      <Grid>
+        <Cell textAlign="center" width="100%">
           <Div
-            paddingTop="40px"
-            paddingBottom="32px"
+            marginTop={['56px', null, '64px']}
             fontFamily={theme.fonts.futura}
             fontSize="24px"
             lineHeight="32px"
@@ -292,7 +293,10 @@ const Search: FC<ContentItemProps> = (props) => {
             Articles
           </Div>
         </Cell>
+      </Grid>
 
+      {/* Articles list */}
+      <Grid marginTop={['40px', null, '48px']}>
         {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => {
           const remainder = index % 4;
 
@@ -322,13 +326,17 @@ const Search: FC<ContentItemProps> = (props) => {
             </Cell>
           );
         })}
-        <Div
-          display={['flex', 'block']}
-          marginLeft={['none', 'auto']}
-          marginRight={['none', 'auto']}
-          width={[1, '228px', '264px']}>
-          <Button variant="black">SEE ALL ARTICLES</Button>
-        </Div>
+        <Cell
+          width={1}
+          display="flex"
+          marginTop={[null, null, '16px']}
+          justifyContent="center">
+          <Link href="/search/articles" passHref>
+            <A width={[1, 'initial']} textDecoration="initial" display="inline">
+              <Button variant="black">SEE ALL ARTICLES</Button>
+            </A>
+          </Link>
+        </Cell>
       </Grid>
     </Layout>
   );

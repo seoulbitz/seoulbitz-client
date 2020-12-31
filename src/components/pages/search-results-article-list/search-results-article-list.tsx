@@ -188,13 +188,9 @@ const SearchResultsArticleList: FC<ContentItemProps> = (props) => {
   return (
     <Layout>
       <Grid>
-        <Cell
-          display="inline"
-          textAlign="center"
-          alignItems="center"
-          width="100%">
+        <Cell textAlign="center" width="100%">
           <Div
-            paddingTop="48px"
+            marginTop={['48px', null, '88px']}
             fontFamily={theme.fonts.futura}
             fontSize="28px"
             lineHeight="34px"
@@ -210,7 +206,7 @@ const SearchResultsArticleList: FC<ContentItemProps> = (props) => {
             “Lorem ipsum dolor sit am”
           </Div>
           <Div
-            paddingTop="40px"
+            marginTop={['56px', null, '64px']}
             fontFamily={theme.fonts.futura}
             fontSize="24px"
             lineHeight="32px"
@@ -219,7 +215,7 @@ const SearchResultsArticleList: FC<ContentItemProps> = (props) => {
           </Div>
         </Cell>
       </Grid>
-      <Grid paddingTop={['32px', '32px']}>
+      <Grid marginTop={['40px', null, '48px']}>
         {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => {
           const remainder = index % 4;
 
@@ -231,7 +227,7 @@ const SearchResultsArticleList: FC<ContentItemProps> = (props) => {
                 1 / 2,
                 remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
               ]}
-              marginBottom="32px">
+              marginBottom={['40px', null, '24px']}>
               <Link href="/" passHref>
                 <A textDecoration="initial" color="initial">
                   <ContentItem
