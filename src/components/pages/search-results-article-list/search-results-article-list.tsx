@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import ContentItem from '@/components/content-item/content-item';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Layout from '@/components/layout/layout';
@@ -6,10 +7,9 @@ import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import Link from 'next/link';
-import React, { FC } from 'react';
 
 type ContentItemProps = {
-  kind: 'location' | 'article';
+  kind: 'article';
   title: string;
   titleKo?: string;
   subtitle: string;
@@ -19,10 +19,10 @@ type ContentItemProps = {
   area?: string;
 };
 
-const LOCATION_DUMMY_DATA_LIST = {
+const ARTICLE_DUMMY_DATA_LIST = {
   items: [
     {
-      kind: 'location',
+      kind: 'article',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -42,7 +42,7 @@ const LOCATION_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'location',
+      kind: 'article',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -62,7 +62,7 @@ const LOCATION_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'location',
+      kind: 'article',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -82,7 +82,7 @@ const LOCATION_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'location',
+      kind: 'article',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -102,7 +102,7 @@ const LOCATION_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'location',
+      kind: 'article',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -122,7 +122,7 @@ const LOCATION_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'location',
+      kind: 'article',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -142,7 +142,7 @@ const LOCATION_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'location',
+      kind: 'article',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -162,7 +162,7 @@ const LOCATION_DUMMY_DATA_LIST = {
       area: 'Wangsimni'
     },
     {
-      kind: 'location',
+      kind: 'article',
       title: 'Lorem ipsum',
       titleKo: '로렘입섬',
       images: [
@@ -184,7 +184,7 @@ const LOCATION_DUMMY_DATA_LIST = {
   ]
 };
 
-const Locations: FC<ContentItemProps> = (props) => {
+const SearchResultsArticleList: FC<ContentItemProps> = (props) => {
   return (
     <Layout>
       <Grid>
@@ -209,22 +209,18 @@ const Locations: FC<ContentItemProps> = (props) => {
             color="#080CCE">
             “Lorem ipsum dolor sit am”
           </Div>
-
-          <Cell marginTop="40px">
-            <Div
-              fontFamily={theme.fonts.futura}
-              fontSize="24px"
-              lineHeight="32px"
-              fontWeight="700">
-              Locations
-            </Div>
-          </Cell>
+          <Div
+            paddingTop="40px"
+            fontFamily={theme.fonts.futura}
+            fontSize="24px"
+            lineHeight="32px"
+            fontWeight="700">
+            Articles
+          </Div>
         </Cell>
       </Grid>
-      <Grid
-        paddingTop={['32px', '32px']}
-        paddingBottom={['68px', '74px', '135px']}>
-        {LOCATION_DUMMY_DATA_LIST.items.map((item, index) => {
+      <Grid paddingTop={['32px', '32px']}>
+        {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => {
           const remainder = index % 4;
 
           return (
@@ -239,7 +235,7 @@ const Locations: FC<ContentItemProps> = (props) => {
               <Link href="/" passHref>
                 <A textDecoration="initial" color="initial">
                   <ContentItem
-                    kind="location"
+                    kind="article"
                     title={item.title}
                     titleKo={item.titleKo}
                     subtitle={item.subtitle}
@@ -258,4 +254,4 @@ const Locations: FC<ContentItemProps> = (props) => {
   );
 };
 
-export default Locations;
+export default SearchResultsArticleList;
