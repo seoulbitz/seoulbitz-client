@@ -55,7 +55,18 @@ const MenuBar = () => {
         }}>
         Delete Account confirm modal
       </button>
-      {/* <button>Delete confirm modal</button> */}
+
+      <button
+        onClick={() => {
+          setGlobalUIState((state) => {
+            return {
+              ...state,
+              openedModal: 'checkInboxModal'
+            };
+          });
+        }}>
+        check inbox modal
+      </button>
     </Div>
   );
 };

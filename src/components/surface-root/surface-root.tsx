@@ -8,6 +8,7 @@ import Drawer from '../drawer/drawer';
 import ForgotPasswordModal from '../forgot-password-modal/forgot-password-modal';
 import SignInModal from '../sign-in-modal/sign-in-modal';
 import SignUpModal from '../sign-up-modal/sign-up-modal';
+import CheckInboxModal from '../check-inbox-modal/check-inbox-modal';
 
 const SurfaceRoot = () => {
   const { openedModal, isDrawerOpen } = useRecoilValue(globalUIState);
@@ -28,6 +29,10 @@ const SurfaceRoot = () => {
 
   if (openedModal === 'deleteAccountConfirmModal') {
     content = <DeleteAccountConfirmModal />;
+  }
+
+  if (openedModal === 'checkInboxModal') {
+    content = <CheckInboxModal />;
   }
 
   if (isDrawerOpen) {
