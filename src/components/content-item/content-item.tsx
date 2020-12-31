@@ -76,7 +76,8 @@ const ContentItem: FC<ContentItemProps> = ({
               display="flex"
               flexDirection="column"
               justifyContent="center"
-              alignItems="center">
+              alignItems="center"
+              whiteSpace="nowrap">
               <Div
                 fontFamily={theme.fonts.futura}
                 fontSize="24px"
