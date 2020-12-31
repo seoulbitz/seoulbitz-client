@@ -41,7 +41,6 @@ const ContentItem: FC<ContentItemProps> = ({
   area
 }) => {
   const isLocation = kind === 'location';
-
   const thumbnailImageUrl = sanity.image.getUrl(images[0]);
 
   return (
@@ -77,7 +76,8 @@ const ContentItem: FC<ContentItemProps> = ({
               display="flex"
               flexDirection="column"
               justifyContent="center"
-              alignItems="center">
+              alignItems="center"
+              whiteSpace="nowrap">
               <Div
                 fontFamily={theme.fonts.futura}
                 fontSize="24px"
