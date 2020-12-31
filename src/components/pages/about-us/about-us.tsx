@@ -2,15 +2,14 @@ import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
 import React, { FC } from 'react';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
-import Img from '@/components/styled-system/img/img';
-import FAQItem from '@/components/faq-item/faq-item';
 import Layout from '@/components/layout/layout';
 import sanity from '@/services/sanity';
-import { FAQPageDocument } from '@/services/sanity/api/page';
+import { AboutUsPageDocument } from '@/services/sanity/api/page';
+import Img from '@/components/styled-system/img/img';
+import BlockContent from '@/services/sanity/block-content';
 
-const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
-  const url = sanity.image.getUrl(faqPage.image);
-
+const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
+  const url = sanity.image.getUrl(aboutUsPage.image);
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -25,34 +24,30 @@ const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
             lineHeight="34px"
             fontWeight="700"
             color="#000000">
-            {faqPage.title}
+            {aboutUsPage.title}
           </Div>
           <Div
             display="flex"
             justifyContent="center"
             alignItems="center"
             marginTop="32px">
-            <Img width="150px" src={url} />
+            <Img width="100%" src={url} />
           </Div>
-          <Div marginTop={['40px', null, '48px']}>
-            {faqPage.faqItems.map(({ _id, question, answer }) => {
-              return <FAQItem key={_id} question={question} answer={answer} />;
-            })}
-          </Div>
+          <BlockContent blocks={aboutUsPage.body} />
         </Cell>
       </Grid>
     </Layout>
   );
 };
 
-export default FAQ;
+export default AboutUs;
 
 export const getServerSideProps = async (context) => {
-  const faqPage = await sanity.api.page.getFAQPage();
+  const aboutUsPage = await sanity.api.page.getAboutUsPage();
 
   return {
     props: {
-      faqPage
+      aboutUsPage
     }
   };
 };
