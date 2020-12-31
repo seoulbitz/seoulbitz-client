@@ -26,6 +26,7 @@
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",
     "emotion-theming": "^10.0.27",
+    "firebase": "^8.2.1",
     "formik": "^2.2.5",
     "google-map-react": "^2.1.9",
     "next": "^10.0.2",
