@@ -222,7 +222,7 @@ const Search: FC<ContentItemProps> = (props) => {
             fontFamily={theme.fonts.futura}
             fontSize="24px"
             lineHeight="32px"
-            fontWeight="500">
+            fontWeight="700">
             Locations
           </Div>
         </Cell>
@@ -265,23 +265,30 @@ const Search: FC<ContentItemProps> = (props) => {
           <Button variant="black">SEE ALL LOCATIONS</Button>
         </Div>
       </Grid>
-      {/* DeskTop version일때 줄이 content item 과 같아야함 */}
-      <Div marginTop="40px" border="1px solid #F2F2F2"></Div>
 
+      {/* Vertical line */}
+      <Cell display="flex" justifyContent="center" alignItems="center">
+        <Div
+          width={[1, null, '840px']}
+          height="1px"
+          background="#F2F2F2"
+          marginTop="40px"></Div>
+      </Cell>
+
+      {/* Articles list */}
       <Grid paddingBottom={['202px', '104px', '60px']}>
         <Cell
           display="inline"
           textAlign="center"
           alignItems="center"
-          width="100%"
-          paddingTop="32px">
+          width="100%">
           <Div
             paddingTop="40px"
             paddingBottom="32px"
             fontFamily={theme.fonts.futura}
             fontSize="24px"
             lineHeight="32px"
-            fontWeight="500">
+            fontWeight="700">
             Articles
           </Div>
         </Cell>

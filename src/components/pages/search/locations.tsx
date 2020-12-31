@@ -209,18 +209,21 @@ const Locations: FC<ContentItemProps> = (props) => {
             color="#080CCE">
             “Lorem ipsum dolor sit am”
           </Div>
-          <Div
-            paddingTop="40px"
-            paddingBottom="32px"
-            fontFamily={theme.fonts.futura}
-            fontSize="24px"
-            lineHeight="32px"
-            fontWeight="500">
-            Locations
-          </Div>
+
+          <Cell marginTop="40px">
+            <Div
+              fontFamily={theme.fonts.futura}
+              fontSize="24px"
+              lineHeight="32px"
+              fontWeight="700">
+              Locations
+            </Div>
+          </Cell>
         </Cell>
       </Grid>
-      <Grid paddingTop="32px">
+      <Grid
+        paddingTop={['32px', '32px']}
+        paddingBottom={['68px', '74px', '135px']}>
         {LOCATION_DUMMY_DATA_LIST.items.map((item, index) => {
           const remainder = index % 4;
 
