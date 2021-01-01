@@ -16,9 +16,20 @@ export enum LogInResult {
   userEmailNotVerified = 'userEmailNotVerified'
 }
 
+export enum LogInWithGoogleResult {
+  success = 'success'
+}
+
 export enum ResendVerificationEmailResult {
   tooManyRequests = 'tooManyRequests'
 }
+
+export enum SendResetPasswordLinkEmail {
+  success = 'success',
+  userNotFound = 'userNotFound'
+}
+
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 const createAuthService = () => {
   const getVerifiedUser = () => {
@@ -75,27 +86,6 @@ const createAuthService = () => {
     }
   };
 
-  const resendVerificationEmail = async () => {
-    try {
-      const user = firebase.auth().currentUser;
-
-      if (!user) {
-        throw Error('Unexpected error. Please try again.');
-      }
-
-      await user.sendEmailVerification({
-        url: window.location.href
-      });
-      return user;
-    } catch (err) {
-      console.log(err);
-      if (err.code === 'auth/too-many-requests') {
-        return ResendVerificationEmailResult.tooManyRequests;
-      }
-      throw err;
-    }
-  };
-
   const logIn = async (email: string, password: string) => {
     try {
       await logOut();
@@ -136,6 +126,53 @@ const createAuthService = () => {
     }
   };
 
+  const logInWithGoogle = async () => {
+    try {
+      const userCredential = await firebase
+        .auth()
+        .signInWithPopup(googleAuthProvider);
+      return LogInWithGoogleResult.success;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
+  const resendVerificationEmail = async () => {
+    try {
+      const user = firebase.auth().currentUser;
+
+      if (!user) {
+        throw Error('Unexpected error. Please try again.');
+      }
+
+      await user.sendEmailVerification({
+        url: window.location.href
+      });
+      return user;
+    } catch (err) {
+      console.log(err);
+      if (err.code === 'auth/too-many-requests') {
+        return ResendVerificationEmailResult.tooManyRequests;
+      }
+      throw err;
+    }
+  };
+
+  const sendResetPasswordLinkEmail = async (email: string) => {
+    try {
+      await firebase.auth().sendPasswordResetEmail(email, {
+        url: window.location.href
+      });
+      return SendResetPasswordLinkEmail.success;
+    } catch (err) {
+      if (err.code === 'auth/user-not-found') {
+        return SendResetPasswordLinkEmail.userNotFound;
+      }
+      throw err;
+    }
+  };
+
   const logOut = async () => {
     await firebase.auth().signOut();
   };
@@ -145,8 +182,10 @@ const createAuthService = () => {
     getCurrentUser,
     signUp,
     logIn,
-    logOut,
-    resendVerificationEmail
+    logInWithGoogle,
+    resendVerificationEmail,
+    sendResetPasswordLinkEmail,
+    logOut
   };
 };
 
