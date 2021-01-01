@@ -1,15 +1,24 @@
+import sanity from '@/services/sanity';
 import { theme } from '@/styles/theme';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import React, { FC } from 'react';
 import Div from '../styled-system/div/div';
 import Span from '../styled-system/span/span';
 
-type RelatedPostItemProps = {
+type RelatedContentItemProps = {
+  thumbnailImage: SanityImageSource;
   title: string;
   koTitle?: string;
   subtitle: string;
 };
 
-const RelatedPostItem: FC<RelatedPostItemProps> = ({ title, koTitle, subtitle }) => {
+const RelatedContentItem: FC<RelatedContentItemProps> = ({
+  thumbnailImage,
+  title,
+  koTitle,
+  subtitle
+}) => {
+  const url = sanity.image.getUrl(thumbnailImage);
   return (
     <Div>
       <Div position="relative" paddingTop="75%">
@@ -20,7 +29,8 @@ const RelatedPostItem: FC<RelatedPostItemProps> = ({ title, koTitle, subtitle })
           right="0"
           bottom="0"
           backgroundSize="cover"
-          backgroundImage="url('https://scontent-ort2-1.cdninstagram.com/v/t51.2885-15/e35/57286270_114670046398227_2576349361528457787_n.jpg?_nc_ht=scontent-ort2-1.cdninstagram.com&_nc_cat=103&_nc_ohc=js3DIwAOIPkAX8dsjiC&tp=18&oh=76cb6bf0910fc3ef3ed12303dcb65cbe&oe=5FD47285')"
+          // TODO: Use <Image /> component to render to optimize rendering performance
+          backgroundImage={`url('${url}')`}
           backgroundPosition="center"
           borderRadius={['8px', null, '0px']}
         />
@@ -35,7 +45,11 @@ const RelatedPostItem: FC<RelatedPostItemProps> = ({ title, koTitle, subtitle })
             {koTitle},{' '}
           </Span>
         )}
-        <Span fontFamily={theme.fonts.futura} fontSize="16px" lineHeight="20px" fontWeight="700">
+        <Span
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="700">
           {title}
         </Span>
       </Div>
@@ -51,4 +65,4 @@ const RelatedPostItem: FC<RelatedPostItemProps> = ({ title, koTitle, subtitle })
   );
 };
 
-export default RelatedPostItem;
+export default RelatedContentItem;
