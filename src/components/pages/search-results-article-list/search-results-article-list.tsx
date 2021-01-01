@@ -5,19 +5,10 @@ import Layout from '@/components/layout/layout';
 import A from '@/components/styled-system/a/a';
 import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import Link from 'next/link';
-
-type ContentItemProps = {
-  kind: 'article';
-  title: string;
-  titleKo?: string;
-  subtitle: string;
-  images?: SanityImageSource[];
-  likes?: number;
-  category?: string;
-  area?: string;
-};
+import sanity from '@/services/sanity';
+import { ArticleDocument } from '@/services/sanity/api/article';
+import { useRouter } from 'next/dist/client/router';
 
 const ARTICLE_DUMMY_DATA_LIST = {
   items: [
@@ -184,7 +175,17 @@ const ARTICLE_DUMMY_DATA_LIST = {
   ]
 };
 
-const SearchResultsArticleList: FC<ContentItemProps> = (props) => {
+const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
+  props
+) => {
+  const router = useRouter();
+  const {
+    query: { query }
+  } = router;
+
+  const { articleResults } = props;
+  // 1. articleResults로 ContentItem 항목들 그려내기.
+
   return (
     <Layout>
       <Grid>
@@ -203,51 +204,81 @@ const SearchResultsArticleList: FC<ContentItemProps> = (props) => {
             lineHeight="34px"
             fontWeight="700"
             color="#080CCE">
-            “Lorem ipsum dolor sit am”
-          </Div>
-          <Div
-            marginTop={['56px', null, '64px']}
-            fontFamily={theme.fonts.futura}
-            fontSize="24px"
-            lineHeight="32px"
-            fontWeight="700">
-            Articles
+            “{query}”
           </Div>
         </Cell>
       </Grid>
-      <Grid marginTop={['40px', null, '48px']}>
-        {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => {
-          const remainder = index % 4;
-
-          return (
-            <Cell
-              key={index}
-              width={[
-                1,
-                1 / 2,
-                remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
-              ]}
-              marginBottom={['40px', null, '24px']}>
-              <Link href="/" passHref>
-                <A textDecoration="initial" color="initial">
-                  <ContentItem
-                    kind="article"
-                    title={item.title}
-                    titleKo={item.titleKo}
-                    subtitle={item.subtitle}
-                    images={item.images}
-                    likes={item.likes}
-                    category={item.category}
-                    area={item.area}
-                  />
-                </A>
-              </Link>
+      {articleResults.length > 0 && (
+        <>
+          <Grid marginTop={['56px', null, '64px']}>
+            <Cell>
+              <Div
+                fontFamily={theme.fonts.futura}
+                fontSize="24px"
+                lineHeight="32px"
+                fontWeight="700">
+                Articles
+              </Div>
             </Cell>
-          );
-        })}
-      </Grid>
+          </Grid>
+          <Grid marginTop={['40px', null, '48px']}>
+            {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => {
+              const remainder = index % 4;
+
+              return (
+                <Cell
+                  key={index}
+                  width={[
+                    1,
+                    1 / 2,
+                    remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
+                  ]}
+                  marginBottom={['40px', null, '24px']}>
+                  <Link href="/" passHref>
+                    <A textDecoration="initial" color="initial">
+                      <ContentItem
+                        kind="article"
+                        title={item.title}
+                        titleKo={item.titleKo}
+                        subtitle={item.subtitle}
+                        images={item.images}
+                        likes={item.likes}
+                        category={item.category}
+                        area={item.area}
+                      />
+                    </A>
+                  </Link>
+                </Cell>
+              );
+            })}
+          </Grid>
+        </>
+      )}
     </Layout>
   );
 };
 
 export default SearchResultsArticleList;
+
+export const getServerSideProps = async (context) => {
+  const {
+    query: { query }
+  } = context;
+
+  if (!query) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    };
+  }
+
+  const articleResults = await sanity.api.search.searchArticlesByKeyword(query);
+
+  return {
+    props: {
+      articleResults
+    }
+  };
+};

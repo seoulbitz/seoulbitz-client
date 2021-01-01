@@ -3,21 +3,12 @@ import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Layout from '@/components/layout/layout';
 import A from '@/components/styled-system/a/a';
 import Div from '@/components/styled-system/div/div';
+import sanity from '@/services/sanity';
+import { LocationDocument } from '@/services/sanity/api/location';
 import { theme } from '@/styles/theme';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import React, { FC } from 'react';
-
-type ContentItemProps = {
-  kind: 'location' | 'article';
-  title: string;
-  titleKo?: string;
-  subtitle: string;
-  images?: SanityImageSource[];
-  likes?: number;
-  category?: string;
-  area?: string;
-};
 
 const LOCATION_DUMMY_DATA_LIST = {
   items: [
@@ -184,7 +175,17 @@ const LOCATION_DUMMY_DATA_LIST = {
   ]
 };
 
-const SearchResultsLocationList: FC<ContentItemProps> = (props) => {
+const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
+  props
+) => {
+  const router = useRouter();
+  const {
+    query: { query }
+  } = router;
+
+  const { locationResults } = props;
+  // 1. locationResults ContentItem 항목들 그려내기.
+
   return (
     <Layout>
       <Grid>
@@ -203,54 +204,84 @@ const SearchResultsLocationList: FC<ContentItemProps> = (props) => {
             lineHeight="34px"
             fontWeight="700"
             color="#080CCE">
-            “Lorem ipsum dolor sit am”
+            “{query}”
           </Div>
-
-          <Cell marginTop="40px">
-            <Div
-              marginTop={['56px', null, '64px']}
-              fontFamily={theme.fonts.futura}
-              fontSize="24px"
-              lineHeight="32px"
-              fontWeight="700">
-              Locations
-            </Div>
-          </Cell>
         </Cell>
       </Grid>
-      <Grid marginTop={['40px', null, '48px']}>
-        {LOCATION_DUMMY_DATA_LIST.items.map((item, index) => {
-          const remainder = index % 4;
 
-          return (
-            <Cell
-              key={index}
-              width={[
-                1,
-                1 / 2,
-                remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
-              ]}
-              marginBottom={['40px', null, '24px']}>
-              <Link href="/" passHref>
-                <A textDecoration="initial" color="initial">
-                  <ContentItem
-                    kind="location"
-                    title={item.title}
-                    titleKo={item.titleKo}
-                    subtitle={item.subtitle}
-                    images={item.images}
-                    likes={item.likes}
-                    category={item.category}
-                    area={item.area}
-                  />
-                </A>
-              </Link>
+      {locationResults.length > 0 && (
+        <>
+          <Grid marginTop={['56px', null, '64px']}>
+            <Cell>
+              <Div
+                fontFamily={theme.fonts.futura}
+                fontSize="24px"
+                lineHeight="32px"
+                fontWeight="700">
+                Locations
+              </Div>
             </Cell>
-          );
-        })}
-      </Grid>
+          </Grid>
+          <Grid marginTop={['40px', null, '48px']}>
+            {LOCATION_DUMMY_DATA_LIST.items.map((item, index) => {
+              const remainder = index % 4;
+
+              return (
+                <Cell
+                  key={index}
+                  width={[
+                    1,
+                    1 / 2,
+                    remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
+                  ]}
+                  marginBottom={['40px', null, '24px']}>
+                  <Link href="/" passHref>
+                    <A textDecoration="initial" color="initial">
+                      <ContentItem
+                        kind="location"
+                        title={item.title}
+                        titleKo={item.titleKo}
+                        subtitle={item.subtitle}
+                        images={item.images}
+                        likes={item.likes}
+                        category={item.category}
+                        area={item.area}
+                      />
+                    </A>
+                  </Link>
+                </Cell>
+              );
+            })}
+          </Grid>
+        </>
+      )}
     </Layout>
   );
 };
 
 export default SearchResultsLocationList;
+
+export const getServerSideProps = async (context) => {
+  const {
+    query: { query }
+  } = context;
+
+  if (!query) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    };
+  }
+
+  const locationResults = await sanity.api.search.searchLocationsByKeyword(
+    query
+  );
+
+  return {
+    props: {
+      locationResults
+    }
+  };
+};
