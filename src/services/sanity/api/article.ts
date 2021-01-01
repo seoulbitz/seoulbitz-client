@@ -17,6 +17,28 @@ export type ArticleDocument = SanityDocument<{
 }>;
 
 export const createArticleService = (client: SanityClient) => {
+  const findOneBySlug = async (slug) => {
+    const query = `*[_type == "article" && slug.current == "${slug}"]{
+      ...,
+      author->,
+      body[]{
+        ...,
+        asset->{
+          ...,
+          "_key": _id
+        }
+      },
+      recommendedArticles[]->
+    }`;
+    const articles = await client.fetch<ArticleDocument[]>(query);
+    if (articles.length === 0) {
+      return null;
+    }
+
+    const [article] = articles;
+    return article;
+  };
+
   const find = async ({
     order
   }: {
@@ -25,23 +47,12 @@ export const createArticleService = (client: SanityClient) => {
     const orderQuery = getOrderQuery(order);
 
     const query = `*[_type == "article"] {
-      _id,
-      _rev,
-      _type,
-      _createdAt,
-      _updatedAt,
-      title,
-      slug,
-      subtitle,
-      thumbnailImage,
-      author->,
-      body,
-      likes,
-      recommendedArticles
+      ...,
+      author->
     }${orderQuery}`;
     const articles = await client.fetch<ArticleDocument[]>(query);
     return articles;
   };
 
-  return { find };
+  return { find, findOneBySlug };
 };

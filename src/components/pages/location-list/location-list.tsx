@@ -91,7 +91,14 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
           alignItems="center"
           width={[1]}>
           <Div>
-            <ContentListToggle onChange={handleToggleChange} />
+            <ContentListToggle
+              items={{
+                distance: false,
+                latest: true,
+                likes: true
+              }}
+              onChange={handleToggleChange}
+            />
           </Div>
         </Cell>
       </Grid>

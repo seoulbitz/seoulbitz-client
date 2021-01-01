@@ -7,13 +7,21 @@ import Button from '../styled-system/button/button';
 import Div from '../styled-system/div/div';
 import * as SwiperReact from 'swiper/react';
 import Swiper from 'swiper';
-import RelatedPostItem from '../related-post-item/related-post-item';
+import RelatedContentItem from '../related-content-item/related-content-item';
+import { LocationDocument } from '@/services/sanity/api/location';
+import { ArticleDocument } from '@/services/sanity/api/article';
+import Link from 'next/link';
+import A from '../styled-system/a/a';
 
-type RelatedPostsSlider = {
+type RelatedContentsSliderProps = {
   title: string;
+  relatedContents: (LocationDocument | ArticleDocument)[];
 };
 
-const RelatedPostsSlider: FC<RelatedPostsSlider> = ({ title }) => {
+const RelatedContentsSlider: FC<RelatedContentsSliderProps> = ({
+  title,
+  relatedContents
+}) => {
   const [swiper, setSwiper] = useState<Swiper>(null);
 
   const handleSlidePrev = () => {
@@ -33,7 +41,11 @@ const RelatedPostsSlider: FC<RelatedPostsSlider> = ({ title }) => {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center">
-        <Div fontFamily={theme.fonts.futura} fontSize="20px" lineHeight="24px" fontWeight="700">
+        <Div
+          fontFamily={theme.fonts.futura}
+          fontSize="20px"
+          lineHeight="24px"
+          fontWeight="700">
           {title}
         </Div>
         <Div display={['none', null, 'block']}>
@@ -102,48 +114,55 @@ const RelatedPostsSlider: FC<RelatedPostsSlider> = ({ title }) => {
                 allowTouchMove: false
               }
             }}>
-            <SwiperReact.SwiperSlide>
-              <RelatedPostItem
-                title="Of.one book stay"
-                subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-              />
-            </SwiperReact.SwiperSlide>
-            <SwiperReact.SwiperSlide>
-              <RelatedPostItem
-                title="Of.one book stay"
-                subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-              />
-            </SwiperReact.SwiperSlide>
-            <SwiperReact.SwiperSlide>
-              <RelatedPostItem
-                title="Of.one book stay"
-                subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-              />
-            </SwiperReact.SwiperSlide>
-            <SwiperReact.SwiperSlide>
-              <RelatedPostItem
-                title="Of.one book stay"
-                subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-              />
-            </SwiperReact.SwiperSlide>
-            <SwiperReact.SwiperSlide>
-              <RelatedPostItem
-                title="Of.one book stay"
-                subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-              />
-            </SwiperReact.SwiperSlide>
-            <SwiperReact.SwiperSlide>
-              <RelatedPostItem
-                title="Of.one book stay"
-                subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-              />
-            </SwiperReact.SwiperSlide>
-            <SwiperReact.SwiperSlide>
-              <RelatedPostItem
-                title="Of.one book stay"
-                subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-              />
-            </SwiperReact.SwiperSlide>
+            {relatedContents.map((content) => {
+              if (content._type === 'location') {
+                const {
+                  _id,
+                  slug,
+                  images,
+                  title,
+                  subtitle
+                } = content as LocationDocument;
+                return (
+                  <SwiperReact.SwiperSlide key={_id}>
+                    <Link href={`/locations/${slug.current}`} passHref>
+                      <A color="initial" textDecoration="initial">
+                        <RelatedContentItem
+                          thumbnailImage={images[0]}
+                          title={`${title.en}, ${title.ko}`}
+                          subtitle={subtitle}
+                        />
+                      </A>
+                    </Link>
+                  </SwiperReact.SwiperSlide>
+                );
+              }
+
+              if (content._type === 'article') {
+                const {
+                  _id,
+                  slug,
+                  thumbnailImage,
+                  title,
+                  subtitle
+                } = content as ArticleDocument;
+                return (
+                  <SwiperReact.SwiperSlide key={_id}>
+                    <Link href={`/articles/${slug.current}`} passHref>
+                      <A color="initial" textDecoration="initial">
+                        <RelatedContentItem
+                          thumbnailImage={thumbnailImage}
+                          title={title}
+                          subtitle={subtitle}
+                        />
+                      </A>
+                    </Link>
+                  </SwiperReact.SwiperSlide>
+                );
+              }
+
+              return null;
+            })}
           </SwiperReact.Swiper>
         </Wrapper>
       </Div>
@@ -151,7 +170,7 @@ const RelatedPostsSlider: FC<RelatedPostsSlider> = ({ title }) => {
   );
 };
 
-export default RelatedPostsSlider;
+export default RelatedContentsSlider;
 
 const Wrapper = styled(Div)`
   /**

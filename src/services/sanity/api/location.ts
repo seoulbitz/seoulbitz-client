@@ -22,12 +22,17 @@ export type LocationDocument = SanityDocument<{
   };
   body: any[];
   likes: number;
-  recommendedLocations: LocationDocument[];
+  recommendedLocations?: LocationDocument[];
 }>;
 
 export const createLocationService = (client: SanityClient) => {
   const findOneBySlug = async (slug) => {
-    const query = `*[_type == "location" && slug.current == "${slug}"]`;
+    const query = `*[_type == "location" && slug.current == "${slug}"]{
+      ...,
+      category->,
+      area->,
+      recommendedLocations[]->
+    }`;
     const locations = await client.fetch<LocationDocument[]>(query);
     if (locations.length === 0) {
       return null;
@@ -45,21 +50,11 @@ export const createLocationService = (client: SanityClient) => {
     const orderQuery = getOrderQuery(order);
 
     const query = `*[_type == "location"] {
-      _id,
-      _rev,
-      _type,
-      _createdAt,
-      _updatedAt,
-      title,
-      slug,
-      subtitle,
+      ...,
       category->,
       area->,
-      images,
-      location,
-      body,
-      likes,
-      recommendedLocations}${orderQuery}`;
+      recommendedLocations[]->
+    }${orderQuery}`;
     const locations = await client.fetch<LocationDocument[]>(query);
     return locations;
   };
