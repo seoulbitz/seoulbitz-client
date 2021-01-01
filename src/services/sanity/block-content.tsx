@@ -3,11 +3,14 @@ import A from '@/components/styled-system/a/a';
 import H1 from '@/components/styled-system/h1/h1';
 import H2 from '@/components/styled-system/h2/h2';
 import H3 from '@/components/styled-system/h3/h3';
+import Img from '@/components/styled-system/img/img';
 import P from '@/components/styled-system/p/p';
 import Strong from '@/components/styled-system/strong/strong';
 import { theme } from '@/styles/theme';
 import SanityBlockContent from '@sanity/block-content-to-react';
 import { FC } from 'react';
+import sanity from '.';
+import Figure from '@/components/styled-system/figure/figure';
 
 const serializers = {
   marks: {
@@ -23,6 +26,24 @@ const serializers = {
     }
   },
   types: {
+    image: (props) => {
+      // REF: https://github.com/sanity-io/block-content-to-hyperscript/blob/master/src/serializers.js#L92
+      if (!props.node.asset) {
+        return null;
+      }
+
+      const url = sanity.image.getUrl(props.node.asset);
+
+      if (props.isInline) {
+        return <Img width="100%" src={url} />;
+      }
+
+      return (
+        <Figure margin="0px">
+          <Img width="100%" src={url} />
+        </Figure>
+      );
+    },
     block: (props) => {
       const { style } = props.node;
       switch (style) {
@@ -65,7 +86,6 @@ const serializers = {
             </H3>
           );
         }
-
         case 'normal': {
           return (
             <P
@@ -88,7 +108,13 @@ const serializers = {
 const BlockContent: FC<{
   blocks?: any;
 }> = ({ blocks }) => {
-  return <SanityBlockContent blocks={blocks} serializers={serializers} />;
+  return (
+    <SanityBlockContent
+      blocks={blocks}
+      serializers={serializers}
+      imageOptions={{ w: 320, h: 240, fit: 'max' }}
+    />
+  );
 };
 
 export default BlockContent;

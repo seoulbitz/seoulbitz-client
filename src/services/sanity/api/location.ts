@@ -28,20 +28,9 @@ export type LocationDocument = SanityDocument<{
 export const createLocationService = (client: SanityClient) => {
   const findOneBySlug = async (slug) => {
     const query = `*[_type == "location" && slug.current == "${slug}"]{
-      _id,
-      _rev,
-      _type,
-      _createdAt,
-      _updatedAt,
-      title,
-      slug,
-      subtitle,
+      ...,
       category->,
       area->,
-      images,
-      location,
-      body,
-      likes,
       recommendedLocations[]->
     }`;
     const locations = await client.fetch<LocationDocument[]>(query);
@@ -61,20 +50,9 @@ export const createLocationService = (client: SanityClient) => {
     const orderQuery = getOrderQuery(order);
 
     const query = `*[_type == "location"] {
-      _id,
-      _rev,
-      _type,
-      _createdAt,
-      _updatedAt,
-      title,
-      slug,
-      subtitle,
+      ...,
       category->,
       area->,
-      images,
-      location,
-      body,
-      likes,
       recommendedLocations[]->
     }${orderQuery}`;
     const locations = await client.fetch<LocationDocument[]>(query);
