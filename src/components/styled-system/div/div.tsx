@@ -31,7 +31,11 @@ import {
   cursor,
   CursorProps,
   transform,
-  TransformProps
+  TransformProps,
+  userSelect,
+  UserSelectProps,
+  transformOrigin,
+  TransformOriginProps
 } from '@/services/styled-system';
 
 export type DivProps = SpaceProps &
@@ -47,6 +51,8 @@ export type DivProps = SpaceProps &
   WhiteSpaceProps &
   CursorProps &
   TransformProps &
+  UserSelectProps &
+  TransformOriginProps &
   React.HTMLAttributes<HTMLDivElement>;
 
 const Div = styled('div', { shouldForwardProp })<DivProps>(
@@ -63,7 +69,9 @@ const Div = styled('div', { shouldForwardProp })<DivProps>(
     shadow,
     whiteSpace,
     cursor,
-    transform
+    transform,
+    userSelect,
+    transformOrigin
   )
 );
 

@@ -27,6 +27,14 @@ export const transform = system({
   transform: true
 });
 
+export const userSelect = system({
+  userSelect: true
+});
+
+export const transformOrigin = system({
+  transformOrigin: true
+});
+
 export interface CursorProps<
   ThemeType extends Theme = RequiredTheme,
   TVal = CSS.Property.Left<TLengthStyledSystem>
@@ -60,4 +68,18 @@ export interface TransformProps<
   TVal = CSS.Property.Left<TLengthStyledSystem>
 > {
   transform?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface UserSelectProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  userSelect?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface TransformOriginProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  transformOrigin?: ResponsiveValue<TVal, ThemeType>;
 }

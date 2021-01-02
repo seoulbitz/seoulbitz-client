@@ -1,8 +1,12 @@
+import { motion } from 'framer-motion';
 import { globalUIState } from '@/services/recoil/atoms';
-import React from 'react';
+import styled from '@emotion/styled';
+import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import Div from '../styled-system/div/div';
 import Header from '../styled-system/header/header';
+import Span from '../styled-system/span/span';
+import { theme } from '@/styles/theme';
 
 const MenuBar = () => {
   const setGlobalUIState = useSetRecoilState(globalUIState);
@@ -71,8 +75,87 @@ const MenuBar = () => {
   );
 };
 
-const FlowBar = () => {
-  return <Div height="28px" backgroundColor="#000000"></Div>;
+const MarqueeBar = () => {
+  const texts = [];
+  for (let i = 0; i < 8; i += 1) {
+    texts.push(
+      <>
+        <Div
+          display="inline-block"
+          marginRight="24px"
+          fontFamily={theme.fonts.futura}
+          fontSize="14px"
+          fontWeight="700"
+          lineHeight="18px"
+          color="#ffffff"
+          userSelect="none">
+          SEOUL IS COOL
+        </Div>
+        <Div
+          display="inline-block"
+          marginRight="24px"
+          fontFamily={theme.fonts.nanumSquare}
+          fontSize="14px"
+          fontWeight="800"
+          lineHeight="18px"
+          color="#ffffff"
+          userSelect="none">
+          서울은 참 멋져
+        </Div>
+      </>
+    );
+  }
+
+  return (
+    <Div height="28px" backgroundColor="#000000" position="relative">
+      {/* Marquee group 1 */}
+      <Div
+        position="absolute"
+        left="0"
+        top="50%"
+        transform="translateY(-50%)"
+        whiteSpace="nowrap"
+        overflow="hidden">
+        <motion.div
+          initial={{
+            transform: 'translate(0%, 0%)'
+          }}
+          transition={{
+            duration: 40,
+            ease: 'linear',
+            repeat: Infinity
+          }}
+          animate={{
+            transform: 'translate(100%, 0%)'
+          }}>
+          {texts}
+        </motion.div>
+      </Div>
+      {/* Marquee group 2 */}
+      <Div
+        position="absolute"
+        left="0"
+        top="50%"
+        transform="translateY(-50%)"
+        whiteSpace="nowrap"
+        overflow="hidden">
+        <motion.div
+          initial={{
+            transform: 'translate(-100%, 0%)'
+          }}
+          transition={{
+            duration: 40,
+            ease: 'linear',
+            repeat: Infinity
+          }}
+          animate={{
+            transform: 'translate(0%, 0%)'
+          }}>
+          {texts}
+        </motion.div>
+      </Div>
+    </Div>
+  );
 };
 
 const LayoutMobileHeader = () => {
@@ -80,7 +163,7 @@ const LayoutMobileHeader = () => {
     <Div display={[null, null, 'none']}>
       <Header position="fixed" top="0" height="84px" width="100%" zIndex={10}>
         <MenuBar />
-        <FlowBar />
+        <MarqueeBar />
       </Header>
     </Div>
   );
