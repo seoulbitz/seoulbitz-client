@@ -67,6 +67,18 @@ const MenuBar = () => {
         }}>
         check inbox modal
       </button>
+
+      <button
+        onClick={() => {
+          setGlobalUIState((state) => {
+            return {
+              ...state,
+              openedModal: 'resetPasswordModal'
+            };
+          });
+        }}>
+        reset password
+      </button>
     </Div>
   );
 };
