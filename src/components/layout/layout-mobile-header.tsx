@@ -77,11 +77,11 @@ const MenuBar = () => {
           setGlobalUIState((state) => {
             return {
               ...state,
-              openedModal: 'surveyModal'
+              openedModal: 'resetPasswordLinkSentModal'
             };
           });
         }}>
-        survey modal
+        reset password
       </button>
     </Div>
   );

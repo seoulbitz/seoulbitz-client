@@ -9,7 +9,9 @@ import ForgotPasswordModal from '../forgot-password-modal/forgot-password-modal'
 import SignInModal from '../sign-in-modal/sign-in-modal';
 import SignUpModal from '../sign-up-modal/sign-up-modal';
 import CheckInboxModal from '../check-inbox-modal/check-inbox-modal';
+import ResetPasswordLinkSentModal from '../reset-password-link-sent-modal/reset-password-link-sent-modal';
 import SurveyModal from '../survey-modal/survey-modal';
+
 
 const SurfaceRoot = () => {
   const { openedModal, isDrawerOpen } = useRecoilValue(globalUIState);
@@ -35,6 +37,9 @@ const SurfaceRoot = () => {
   if (openedModal === 'checkInboxModal') {
     content = <CheckInboxModal />;
   }
+
+  if (openedModal === 'resetPasswordLinkSentModal') {
+    content = <ResetPasswordLinkSentModal />;
 
   if (openedModal === 'surveyModal') {
     content = <SurveyModal />;
