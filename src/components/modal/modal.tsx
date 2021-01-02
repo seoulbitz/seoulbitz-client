@@ -6,7 +6,11 @@ import Close from '../icons/close/close';
 import Button from '../styled-system/button/button';
 import Div from '../styled-system/div/div';
 
-const Modal: FC = ({ children }) => {
+type ModalProps = {
+  closeable?: boolean;
+};
+
+const Modal: FC<ModalProps> = ({ closeable = true, children }) => {
   const setGlobalUIState = useSetRecoilState(globalUIState);
 
   const handleClose = () => {
@@ -42,20 +46,23 @@ const Modal: FC = ({ children }) => {
             display="flex"
             flexDirection="column"
             width={[null, '360px', '400px']}>
-            <Div
-              position="absolute"
-              top={['24px', null, '40px']}
-              right={['20px', null, '40px']}>
-              <Button
-                display="block"
-                onClick={handleClose}
-                boxShadow="none"
-                backgroundColor="#ffffff"
-                padding={0}
-                border="none">
-                <Close display="block" />
-              </Button>
-            </Div>
+            {closeable && (
+              <Div
+                position="absolute"
+                top={['24px', null, '40px']}
+                right={['20px', null, '40px']}>
+                <Button
+                  display="block"
+                  onClick={handleClose}
+                  boxShadow="none"
+                  backgroundColor="#ffffff"
+                  padding={0}
+                  border="none">
+                  <Close display="block" />
+                </Button>
+              </Div>
+            )}
+
             {children}
           </Div>
         </Div>
