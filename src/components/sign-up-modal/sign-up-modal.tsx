@@ -15,8 +15,8 @@ import Img from '../styled-system/img/img';
 import Checkbox from '../checkbox/checkbox';
 
 const signupSchema = Yup.object().shape({
-  username: Yup.string().required('Required'),
-  email: Yup.string().required('Required'),
+  username: Yup.string().required('Please fill in.'),
+  email: Yup.string().required('Please fill in.'),
   password: Yup.string()
     .required('No password provided.')
     .min(8, 'Password is too short - should be 8 chars minimum.')

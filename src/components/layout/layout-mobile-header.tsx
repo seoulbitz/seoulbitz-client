@@ -91,7 +91,7 @@ const MarqueeBar = () => {
   const texts = [];
   for (let i = 0; i < 8; i += 1) {
     texts.push(
-      <>
+      <React.Fragment key={i}>
         <Div
           display="inline-block"
           marginRight="24px"
@@ -114,7 +114,7 @@ const MarqueeBar = () => {
           userSelect="none">
           서울은 참 멋져
         </Div>
-      </>
+      </React.Fragment>
     );
   }
 

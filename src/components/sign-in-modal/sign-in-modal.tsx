@@ -14,7 +14,7 @@ import Button from '../styled-system/button/button';
 import Img from '../styled-system/img/img';
 
 const signinSchema = Yup.object().shape({
-  email: Yup.string().required('Required'),
+  email: Yup.string().required('Please fill in.'),
   password: Yup.string()
     .required('No password provided.')
     .min(8, 'Password is too short - should be 8 chars minimum.')

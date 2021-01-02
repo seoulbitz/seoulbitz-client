@@ -1,10 +1,41 @@
+import firebase from '@/services/firebase';
+import { SendResetPasswordLinkEmail } from '@/services/firebase/auth';
 import { theme } from '@/styles/theme';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../button/button';
 import Modal from '../modal/modal';
 import Div from '../styled-system/div/div';
 
 const ResetPasswordLinkSentModal = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const user = await firebase.auth.getVerifiedUser();
+      if (user) {
+        setUser(user);
+        return;
+      }
+    };
+
+    fetch();
+  }, []);
+
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+
+  const handleResendEmailButton = async () => {
+    setIsButtonLoading(true);
+    const result = await firebase.auth.sendResetPasswordLinkEmail(user.email);
+
+    switch (result) {
+      case SendResetPasswordLinkEmail.success: {
+        alert(`We sent an email to ${user.email}.`);
+        break;
+      }
+    }
+    setIsButtonLoading(false);
+  };
+
   return (
     <Modal>
       <Div
@@ -34,7 +65,9 @@ const ResetPasswordLinkSentModal = () => {
           marginTop="24px"
           fontFamily={theme.fonts.futura}
           fontSize="16px"
-          lineHeight="22px">
+          lineHeight="22px"
+          disabled={isButtonLoading}
+          onClick={handleResendEmailButton}>
           RESEND EMAIL
         </Button>
       </Div>
