@@ -73,7 +73,7 @@ const MenuBar = () => {
           setGlobalUIState((state) => {
             return {
               ...state,
-              openedModal: 'resetPasswordModal'
+              openedModal: 'resetPasswordLinkSentModal'
             };
           });
         }}>
