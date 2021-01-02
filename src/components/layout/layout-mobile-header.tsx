@@ -71,6 +71,18 @@ const MenuBar = () => {
         }}>
         check inbox modal
       </button>
+
+      <button
+        onClick={() => {
+          setGlobalUIState((state) => {
+            return {
+              ...state,
+              openedModal: 'surveyModal'
+            };
+          });
+        }}>
+        survey modal
+      </button>
     </Div>
   );
 };
