@@ -7,6 +7,7 @@ import Div from '../styled-system/div/div';
 const RadioContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
+  padding: 2px;
 `;
 
 // Hide checkbox visually but remain accessible to screen readers.
@@ -29,7 +30,6 @@ const StyledRadio = styled.div<any>`
   height: 16px;
   border: 1px solid #0511f2;
   border-radius: 16px;
-  margin-right: 8px;
 
   display: flex;
   justify-content: center;
@@ -40,11 +40,11 @@ const StyledRadio = styled.div<any>`
   }
 `;
 
-const Radio: FC<any> = ({ className, value, ...props }) => {
+const Radio: FC<any> = ({ className, ...props }) => {
   return (
     <RadioContainer className={className}>
-      <HiddenRadio type="radio" checked={value} {...props} />
-      <StyledRadio checked={value}>
+      <HiddenRadio type="radio" {...props} />
+      <StyledRadio checked={props.checked}>
         <Div
           width="10px"
           height="10px"

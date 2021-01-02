@@ -1,21 +1,461 @@
+import * as yup from 'yup';
 import { theme } from '@/styles/theme';
-import { Field, Form, Formik } from 'formik';
-import Link from 'next/link';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
 import Button from '../button/button';
-import { Cell, Grid } from '../content/layout-grid/layout-grid';
 import Modal from '../modal/modal';
-import ModalWithoutClose from '../modal/modal-without-close';
 import Radio from '../radio/radio';
-import A from '../styled-system/a/a';
 import Div from '../styled-system/div/div';
-import Input from '../styled-system/input/input';
 import Label from '../styled-system/label/label';
 import Span from '../styled-system/span/span';
 
-const SurveyModal = () => {
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const Q1 = () => {
+  return (
+    <Div width={1} flexDirection="row">
+      <Div>
+        <Span
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="500">
+          I am
+          <Span color="#080CCE">*</Span>
+        </Span>
+      </Div>
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q1"
+          value="q1a1"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          A foreign student in South Korea (student visa){' '}
+        </Span>
+      </Label>
 
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q1"
+          value="q1a2"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          A long-term resident in South Korea (working/permanent residence visa){' '}
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q1"
+          value="q1a3"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          A traveler in South Korea (tourist visa)
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q1"
+          value="q1a4"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          A Korean citizen
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q1"
+          value="q1a5"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Planning to live in South Korea in the near future{' '}
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q1"
+          value="q1a6"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Not living in South Korea
+        </Span>
+      </Label>
+      <ErrorMessage
+        name="q1"
+        component={(props) => {
+          return (
+            <Div
+              marginTop="24px"
+              fontSize="16px"
+              lineHeight="20px"
+              fontFamily={theme.fonts.futura}
+              fontWeight="400"
+              color="#F43333"
+              {...props}
+            />
+          );
+        }}
+      />
+    </Div>
+  );
+};
+
+const Q2 = () => {
+  return (
+    <Div width={1} flexDirection="row" marginTop="40px">
+      <Div>
+        <Span
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="500">
+          I’m mainly interested in <Span color="#080CCE">*</Span>
+        </Span>
+      </Div>
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q2"
+          value="q2a1"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Pop culture
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q2"
+          value="q2a2"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Underground culture
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q2"
+          value="q2a3"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Food
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q2"
+          value="q2a4"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Nature & Travel ideas
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q2"
+          value="q2a5"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Cinema & Art
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q2"
+          value="q2a6"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Fashion & Trends
+        </Span>
+      </Label>
+      <ErrorMessage
+        name="q2"
+        component={(props) => {
+          return (
+            <Div
+              marginTop="24px"
+              fontSize="16px"
+              lineHeight="20px"
+              fontFamily={theme.fonts.futura}
+              fontWeight="400"
+              color="#F43333"
+              {...props}
+            />
+          );
+        }}
+      />
+    </Div>
+  );
+};
+
+const Q3 = () => {
+  return (
+    <Div width={1} flexDirection="row" marginTop="40px">
+      <Div>
+        <Span
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="500">
+          I’d like Seoulbitz to
+          <Span color="#080CCE">*</Span>
+        </Span>
+      </Div>
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q3"
+          value="q3a1"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Help me live more authentic experiences in Seoul/South Korea
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q3"
+          value="q3a2"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Make me daily life in South Korea easier
+        </Span>
+      </Label>
+
+      <Label
+        marginTop="24px"
+        display="flex"
+        justifyContent="flex-start"
+        alignItems="flex-start">
+        <Field
+          type="radio"
+          name="q3"
+          value="q3a3"
+          component={({ field, ...props }) => {
+            return <Radio {...field} {...props} />;
+          }}
+        />
+        <Span
+          marginLeft="8px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="400">
+          Help me better understand local cuture
+        </Span>
+      </Label>
+      <ErrorMessage
+        name="q3"
+        component={(props) => {
+          return (
+            <Div
+              marginTop="24px"
+              fontSize="16px"
+              lineHeight="20px"
+              fontFamily={theme.fonts.futura}
+              fontWeight="400"
+              color="#F43333"
+              {...props}
+            />
+          );
+        }}
+      />
+    </Div>
+  );
+};
+
+const schema = yup.object().shape({
+  q1: yup.string().required('Please select an option.'),
+  q2: yup.string().required('Please select an option.'),
+  q3: yup.string().required('Please select an option.')
+});
+
+const SurveyModal = () => {
   return (
     <Modal closeable={false}>
       <Div
@@ -41,333 +481,26 @@ const SurveyModal = () => {
         </Div>
       </Div>
 
-      <Div margin="24px 20px 64px 20px">
+      <Div margin={['24px 20px 64px 20px', null, '24px 40px 64px 40px']}>
         {/* formik input sample need field component */}
         <Formik
           initialValues={{
-            checked: ''
+            q1: '',
+            q2: '',
+            q3: ''
           }}
-          onSubmit={async (values) => {
-            await sleep(500);
+          validationSchema={schema}
+          onSubmit={(values) => {
             console.log(values);
           }}>
           {({ values }) => (
             <Form>
-              <Div
-                width={1}
-                flexDirection="row"
-                marginTop="24px"
-                id="i-am-radio-group">
-                <Span
-                  fontFamily={theme.fonts.futura}
-                  fontSize="16px"
-                  lineHeight="20px"
-                  fontWeight="500">
-                  I am
-                </Span>
-                <Span
-                  fontFamily={theme.fonts.futura}
-                  fontSize="16px"
-                  lineHeight="20px"
-                  fontWeight="500"
-                  color="#080CCE">
-                  *
-                </Span>
-                <Div
-                  role="group"
-                  aria-labelledby="i-am-radio-group"
-                  marginTop="24px">
-                  <Label
-                    marginTop="24px"
-                    htmlFor="one"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="one"
-                      name="one"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    A foreign student in South Korea (student visa)
-                  </Label>
-
-                  <Label
-                    marginTop="24px"
-                    htmlFor="two"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="two"
-                      name="two"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    A long-term resident in South Korea (working/permanent
-                    residence visa)
-                  </Label>
-
-                  <Label
-                    marginTop="24px"
-                    htmlFor="three"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="three"
-                      name="three"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    A traveler in South Korea (tourist visa)
-                  </Label>
-
-                  <Label
-                    marginTop="24px"
-                    htmlFor="four"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="four"
-                      name="four"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    A Korean citizen
-                  </Label>
-
-                  <Label
-                    marginTop="24px"
-                    htmlFor="five"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="five"
-                      name="five"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    Planning to live in South Korea in the near future
-                  </Label>
-
-                  <Label
-                    marginTop="24px"
-                    htmlFor="six"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="six"
-                      name="six"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    Not living in South Korea
-                  </Label>
-                </Div>
-              </Div>
-
-              {/* secound group */}
-              <Div
-                width={1}
-                flexDirection="row"
-                marginTop="40px"
-                id="intersest-radio-group">
-                <Span
-                  fontFamily={theme.fonts.futura}
-                  fontSize="16px"
-                  lineHeight="20px"
-                  fontWeight="500">
-                  I’m mainly interested in
-                </Span>
-                <Span
-                  fontFamily={theme.fonts.futura}
-                  fontSize="16px"
-                  lineHeight="20px"
-                  fontWeight="500"
-                  color="#080CCE">
-                  *
-                </Span>
-
-                <Label
-                  marginTop="24px"
-                  htmlFor="interestone"
-                  display="flex"
-                  justifyContent="flex-start"
-                  alignItems="center">
-                  <Field
-                    id="interestone"
-                    name="interestone"
-                    component={({ field, ...props }) => {
-                      return <Radio {...field} {...props} />;
-                    }}
-                  />
-                  Pop culture
-                </Label>
-
-                <Label
-                  marginTop="24px"
-                  htmlFor="interesttwo"
-                  display="flex"
-                  justifyContent="flex-start"
-                  alignItems="center">
-                  <Field
-                    id="interesttwo"
-                    name="interesttwo"
-                    component={({ field, ...props }) => {
-                      return <Radio {...field} {...props} />;
-                    }}
-                  />
-                  Underground culture
-                </Label>
-
-                <Label
-                  marginTop="24px"
-                  htmlFor="interestthree"
-                  display="flex"
-                  justifyContent="flex-start"
-                  alignItems="center">
-                  <Field
-                    id="interestthree"
-                    name="interestthree"
-                    component={({ field, ...props }) => {
-                      return <Radio {...field} {...props} />;
-                    }}
-                  />
-                  Food
-                </Label>
-
-                <Label
-                  marginTop="24px"
-                  htmlFor="interestfour"
-                  display="flex"
-                  justifyContent="flex-start"
-                  alignItems="center">
-                  <Field
-                    id="interestfour"
-                    name="interestfour"
-                    component={({ field, ...props }) => {
-                      return <Radio {...field} {...props} />;
-                    }}
-                  />
-                  Nature & Travel ideas
-                </Label>
-
-                <Label
-                  marginTop="24px"
-                  htmlFor="interestfive"
-                  display="flex"
-                  justifyContent="flex-start"
-                  alignItems="center">
-                  <Field
-                    id="interestfive"
-                    name="interestfive"
-                    component={({ field, ...props }) => {
-                      return <Radio {...field} {...props} />;
-                    }}
-                  />
-                  Cinema & Art
-                </Label>
-
-                <Label
-                  marginTop="24px"
-                  htmlFor="interestsix"
-                  display="flex"
-                  justifyContent="flex-start"
-                  alignItems="center">
-                  <Field
-                    id="interestsix"
-                    name="interestsix"
-                    component={({ field, ...props }) => {
-                      return <Radio {...field} {...props} />;
-                    }}
-                  />
-                  Fashion & Trends
-                </Label>
-
-                {/* third group */}
-                <Div
-                  width={1}
-                  flexDirection="row"
-                  marginTop="40px"
-                  id="help-radio-group">
-                  <Span
-                    fontFamily={theme.fonts.futura}
-                    fontSize="16px"
-                    lineHeight="20px"
-                    fontWeight="500">
-                    I’d like Seoulbitz to
-                  </Span>
-                  <Span
-                    fontFamily={theme.fonts.futura}
-                    fontSize="16px"
-                    lineHeight="20px"
-                    fontWeight="500"
-                    color="#080CCE">
-                    *
-                  </Span>
-
-                  <Label
-                    marginTop="24px"
-                    htmlFor="helpone"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="helpone"
-                      name="helpone"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    Help me live more authentic experiences in Seoul/South Korea
-                  </Label>
-
-                  <Label
-                    marginTop="24px"
-                    htmlFor="helptwo"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="helptwo"
-                      name="helptwo"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    Make me daily life in South Korea easier
-                  </Label>
-
-                  <Label
-                    marginTop="24px"
-                    htmlFor="helpthree"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Field
-                      id="helpthree"
-                      name="helpthree"
-                      component={({ field, ...props }) => {
-                        return <Radio {...field} {...props} />;
-                      }}
-                    />
-                    Help me better understand local cuture
-                  </Label>
-                </Div>
-                <Button marginTop="40px" variant="mixed">
-                  DONE
-                </Button>
-              </Div>
+              <Q1 />
+              <Q2 />
+              <Q3 />
+              <Button marginTop="40px" variant="mixed">
+                DONE
+              </Button>
             </Form>
           )}
         </Formik>

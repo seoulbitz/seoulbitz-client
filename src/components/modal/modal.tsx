@@ -46,18 +46,6 @@ const Modal: FC<ModalProps> = ({ closeable = true, children }) => {
             display="flex"
             flexDirection="column"
             width={[null, '360px', '400px']}>
-            {/* <Div
-              position="absolute"
-              top={['24px', null, '40px']}
-              right={['20px', null, '40px']}>
-              <Button
-                display="block"
-                onClick={handleClose}
-                boxShadow="none"
-                backgroundColor="#ffffff"
-                padding={0}
-                border="none"> */}
-            {/* <Close display="block" /> */}
             {closeable && (
               <Div
                 position="absolute"
@@ -74,8 +62,7 @@ const Modal: FC<ModalProps> = ({ closeable = true, children }) => {
                 </Button>
               </Div>
             )}
-            {/* </Button>
-            </Div> */}
+
             {children}
           </Div>
         </Div>
