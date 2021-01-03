@@ -12,7 +12,7 @@ import A from '../styled-system/a/a';
 import Link from 'next/link';
 
 const forgotpasswordSchema = Yup.object().shape({
-  email: Yup.string().required('Required')
+  email: Yup.string().required('Please fill in.')
 });
 
 const ForgotPasswordModal: FC = () => {

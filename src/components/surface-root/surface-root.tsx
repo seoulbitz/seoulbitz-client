@@ -11,37 +11,38 @@ import SignUpModal from '../sign-up-modal/sign-up-modal';
 import CheckInboxModal from '../check-inbox-modal/check-inbox-modal';
 import ResetPasswordLinkSentModal from '../reset-password-link-sent-modal/reset-password-link-sent-modal';
 import SurveyModal from '../survey-modal/survey-modal';
-
+import { ModalType } from 'types';
 
 const SurfaceRoot = () => {
   const { openedModal, isDrawerOpen } = useRecoilValue(globalUIState);
 
   let content = null;
 
-  if (openedModal === 'signInModal') {
+  if (openedModal === ModalType.signInModal) {
     content = <SignInModal />;
   }
 
-  if (openedModal === 'signUpModal') {
+  if (openedModal === ModalType.signUpModal) {
     content = <SignUpModal />;
   }
 
-  if (openedModal === 'forgotPasswordModal') {
+  if (openedModal === ModalType.forgotPasswordModal) {
     content = <ForgotPasswordModal />;
   }
 
-  if (openedModal === 'deleteAccountConfirmModal') {
+  if (openedModal === ModalType.deleteAccountConfirmModal) {
     content = <DeleteAccountConfirmModal />;
   }
 
-  if (openedModal === 'checkInboxModal') {
+  if (openedModal === ModalType.checkInboxModal) {
     content = <CheckInboxModal />;
   }
 
-  if (openedModal === 'resetPasswordLinkSentModal') {
+  if (openedModal === ModalType.resetPasswordLinkSentModal) {
     content = <ResetPasswordLinkSentModal />;
+  }
 
-  if (openedModal === 'surveyModal') {
+  if (openedModal === ModalType.surveyModal) {
     content = <SurveyModal />;
   }
 

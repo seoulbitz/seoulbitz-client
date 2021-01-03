@@ -24,7 +24,14 @@ import {
   ShadowProps
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
-import { whiteSpace, WhiteSpaceProps } from '@/services/styled-system';
+import {
+  cursor,
+  CursorProps,
+  textDecoration,
+  TextDecorationProps,
+  whiteSpace,
+  WhiteSpaceProps
+} from '@/services/styled-system';
 
 export type SpanProps = SpaceProps &
   ColorProps &
@@ -37,6 +44,8 @@ export type SpanProps = SpaceProps &
   PositionProps &
   ShadowProps &
   WhiteSpaceProps &
+  CursorProps &
+  TextDecorationProps &
   React.HTMLAttributes<HTMLSpanElement>;
 
 const Span = styled('span', { shouldForwardProp })<SpanProps>(
@@ -51,7 +60,9 @@ const Span = styled('span', { shouldForwardProp })<SpanProps>(
     border,
     position,
     shadow,
-    whiteSpace
+    whiteSpace,
+    cursor,
+    textDecoration
   )
 );
 

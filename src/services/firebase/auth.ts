@@ -29,6 +29,20 @@ export enum SendResetPasswordLinkEmail {
   userNotFound = 'userNotFound'
 }
 
+export enum UpdateUsernameResult {
+  success = 'success'
+}
+
+export enum UpdatePasswordResult {
+  success = 'success',
+  weakPassword = 'weakPassword'
+}
+
+export enum DeleteAccountResult {
+  success = 'success',
+  requiresRecentLogin = 'requiresRecentLogin'
+}
+
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 const createAuthService = () => {
@@ -177,6 +191,31 @@ const createAuthService = () => {
     await firebase.auth().signOut();
   };
 
+  const updateUsername = async (username: string) => {
+    try {
+      const user = await getCurrentUser();
+      await user.updateProfile({ displayName: username });
+      return UpdateUsernameResult.success;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
+  const deleteAccount = async () => {
+    try {
+      const user = await getCurrentUser();
+      await user.delete();
+      return DeleteAccountResult.success;
+    } catch (err) {
+      console.log(err);
+      if (err.code === 'auth/requires-recent-login') {
+        return DeleteAccountResult.requiresRecentLogin;
+      }
+      throw err;
+    }
+  };
+
   return {
     getVerifiedUser,
     getCurrentUser,
@@ -185,7 +224,9 @@ const createAuthService = () => {
     logInWithGoogle,
     resendVerificationEmail,
     sendResetPasswordLinkEmail,
-    logOut
+    logOut,
+    updateUsername,
+    deleteAccount
   };
 };
 

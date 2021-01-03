@@ -52,6 +52,7 @@ const Modal: FC<ModalProps> = ({ closeable = true, children }) => {
                 top={['24px', null, '40px']}
                 right={['20px', null, '40px']}>
                 <Button
+                  cursor="pointer"
                   display="block"
                   onClick={handleClose}
                   boxShadow="none"

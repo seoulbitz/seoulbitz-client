@@ -53,10 +53,10 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         width="100%"
         fontSize="16px"
         lineHeight="22px"
-        color="##D1D1D1"
+        color="#D1D1D1"
         padding="12px 22px"
         backgroundColor="unset"
-        border="1px solid ##D1D1D1"
+        border="1px solid #D1D1D1"
         fontFamily={theme.fonts.futura}
         fontWeight="700"
         {...rest}
