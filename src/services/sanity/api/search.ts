@@ -5,7 +5,7 @@ import { LocationDocument } from './location';
 export const createSearchService = (client: SanityClient) => {
   const searchAllByKeyword = async (keyword: string) => {
     const keywordQuery = `"${keyword}*"`;
-    const locationsQuery = `*[_type == "location" && (title.en match ${keywordQuery} || title.ko match ${keywordQuery} || subtitle match ${keywordQuery})][0...4]`;
+    const locationsQuery = `*[_type == "location" && (title.en match ${keywordQuery} || title.ko match ${keywordQuery} || subtitle match ${keywordQuery})][0...4]{..., category->, area->}`;
     const articlesQuery = `*[_type == "article" && (title match ${keywordQuery} || subtitle match ${keywordQuery})][0...4]`;
 
     const [locationResults, articleResults] = await Promise.all([
@@ -18,7 +18,7 @@ export const createSearchService = (client: SanityClient) => {
 
   const searchLocationsByKeyword = async (keyword: string) => {
     const keywordQuery = `"${keyword}*"`;
-    const query = `*[_type == "location" && (title.en match ${keywordQuery} || title.ko match ${keywordQuery} || subtitle match ${keywordQuery})]`;
+    const query = `*[_type == "location" && (title.en match ${keywordQuery} || title.ko match ${keywordQuery} || subtitle match ${keywordQuery})]{..., category->, area->}`;
     const locationResults = await client.fetch<LocationDocument>(query);
     return locationResults;
   };

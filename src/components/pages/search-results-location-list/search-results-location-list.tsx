@@ -223,12 +223,22 @@ const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
             </Cell>
           </Grid>
           <Grid marginTop={['40px', null, '48px']}>
-            {LOCATION_DUMMY_DATA_LIST.items.map((item, index) => {
-              const remainder = index % 4;
+            {locationResults.map((location, i) => {
+              const remainder = i % 4;
+              const {
+                _id,
+                slug,
+                title,
+                subtitle,
+                images,
+                likes,
+                category,
+                area
+              } = location;
 
               return (
                 <Cell
-                  key={index}
+                  key={_id}
                   width={[
                     1,
                     1 / 2,
@@ -239,13 +249,13 @@ const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
                     <A textDecoration="initial" color="initial">
                       <ContentItem
                         kind="location"
-                        title={item.title}
-                        titleKo={item.titleKo}
-                        subtitle={item.subtitle}
-                        images={item.images}
-                        likes={item.likes}
-                        category={item.category}
-                        area={item.area}
+                        title={title.en}
+                        titleKo={title.ko}
+                        subtitle={subtitle}
+                        images={images}
+                        likes={likes}
+                        category={category.name}
+                        area={area.name}
                       />
                     </A>
                   </Link>

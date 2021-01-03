@@ -9,6 +9,7 @@ import Link from 'next/link';
 import sanity from '@/services/sanity';
 import { ArticleDocument } from '@/services/sanity/api/article';
 import { useRouter } from 'next/dist/client/router';
+import { useRecoilState } from 'recoil';
 
 const ARTICLE_DUMMY_DATA_LIST = {
   items: [
@@ -222,12 +223,21 @@ const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
             </Cell>
           </Grid>
           <Grid marginTop={['40px', null, '48px']}>
-            {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => {
-              const remainder = index % 4;
+            {/* {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => { */}
+            {articleResults.map((article, i) => {
+              const remainder = i % 4;
+              const {
+                _id,
+                slug,
+                title,
+                subtitle,
+                thumbnailImage,
+                likes
+              } = article;
 
               return (
                 <Cell
-                  key={index}
+                  key={_id}
                   width={[
                     1,
                     1 / 2,
@@ -238,13 +248,10 @@ const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
                     <A textDecoration="initial" color="initial">
                       <ContentItem
                         kind="article"
-                        title={item.title}
-                        titleKo={item.titleKo}
-                        subtitle={item.subtitle}
-                        images={item.images}
-                        likes={item.likes}
-                        category={item.category}
-                        area={item.area}
+                        title={title}
+                        subtitle={subtitle}
+                        images={[thumbnailImage]}
+                        likes={likes}
                       />
                     </A>
                   </Link>

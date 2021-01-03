@@ -222,10 +222,12 @@ const Search: FC<{
           </Div>
         </Cell>
       </Grid>
-
       {locationResults.length > 0 && (
         <>
-          <Grid marginTop={['56px', null, '64px']}>
+          <Grid
+            display="flex"
+            justifyContent="center"
+            marginTop={['56px', null, '64px']}>
             <Cell>
               <Div
                 fontFamily={theme.fonts.futura}
@@ -237,12 +239,24 @@ const Search: FC<{
             </Cell>
           </Grid>
           <Grid marginTop={['40px', null, '48px']}>
-            {LOCATION_DUMMY_DATA_LIST.items.map((item, index) => {
-              const remainder = index % 4;
+            {locationResults.map((location, i) => {
+              const remainder = i % 4;
+              const {
+                _id,
+                slug,
+                title,
+                subtitle,
+                images,
+                likes,
+                category,
+                area
+              } = location;
+
+              console.log(location);
 
               return (
                 <Cell
-                  key={index}
+                  key={_id}
                   width={[
                     1,
                     1 / 2,
@@ -253,13 +267,13 @@ const Search: FC<{
                     <A textDecoration="initial" color="initial">
                       <ContentItem
                         kind="location"
-                        title={item.title}
-                        titleKo={item.titleKo}
-                        subtitle={item.subtitle}
-                        images={item.images}
-                        likes={item.likes}
-                        category={item.category}
-                        area={item.area}
+                        title={title.en}
+                        titleKo={title.ko}
+                        subtitle={subtitle}
+                        images={images}
+                        likes={likes}
+                        category={category.name}
+                        area={area.name}
                       />
                     </A>
                   </Link>
@@ -283,7 +297,6 @@ const Search: FC<{
           </Grid>
         </>
       )}
-
       {locationResults.length > 0 && articleResults.length > 0 && (
         <Grid
           width={1}
@@ -299,7 +312,6 @@ const Search: FC<{
           </Cell>
         </Grid>
       )}
-
       {articleResults.length > 0 && (
         <>
           <Grid>
@@ -316,12 +328,19 @@ const Search: FC<{
           </Grid>
 
           <Grid marginTop={['40px', null, '48px']}>
-            {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => {
-              const remainder = index % 4;
-
+            {articleResults.map((article, i) => {
+              const remainder = i % 4;
+              const {
+                _id,
+                slug,
+                title,
+                subtitle,
+                thumbnailImage,
+                likes
+              } = article;
               return (
                 <Cell
-                  key={index}
+                  key={_id}
                   width={[
                     1,
                     1 / 2,
@@ -332,13 +351,10 @@ const Search: FC<{
                     <A textDecoration="initial" color="initial">
                       <ContentItem
                         kind="article"
-                        title={item.title}
-                        titleKo={item.titleKo}
-                        subtitle={item.subtitle}
-                        images={item.images}
-                        likes={item.likes}
-                        category={item.category}
-                        area={item.area}
+                        title={title}
+                        subtitle={subtitle}
+                        images={[thumbnailImage]}
+                        likes={likes}
                       />
                     </A>
                   </Link>
