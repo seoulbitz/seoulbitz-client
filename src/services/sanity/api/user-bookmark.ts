@@ -13,6 +13,11 @@ export enum UnmarkResult {
   userNotFound = 'userNotFound'
 }
 
+export enum GetBookmarksResult {
+  success = 'success',
+  userNotFound = 'userNotFound'
+}
+
 export const createUserBookmarkService = (client: SanityClient) => {
   const mark = async (content: LocationDocument | ArticleDocument) => {
     try {
@@ -68,8 +73,33 @@ export const createUserBookmarkService = (client: SanityClient) => {
     }
   };
 
+  const getBookmarks = async () => {
+    try {
+      const user = await firebase.auth.getVerifiedUser();
+      if (!user) {
+        return GetBookmarksResult.userNotFound;
+      }
+      const query = `*[_type == "userBookmark" && userId == "${user.uid}"]{
+        ...,
+        content-> {
+          ...,
+          category->,
+          area->,
+          author->,
+          "userLikes": *[_type == 'userLike' && references(^._id)]
+        }
+      } | order(_createdAt desc)`;
+      const bookmarks = await client.fetch(query);
+      return bookmarks;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
   return {
     mark,
-    unmark
+    unmark,
+    getBookmarks
   };
 };

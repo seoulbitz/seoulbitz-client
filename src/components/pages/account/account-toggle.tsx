@@ -1,75 +1,27 @@
 import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
-const DefaultLocations = () => {
-  return (
-    <Div
-      padding="13px 15px"
-      fontFamily={theme.fonts.futura}
-      fontSize="14px"
-      lineHeight="18px"
-      fontWeight="500"
-      color="#0511F2">
-      Locations
-    </Div>
-  );
+type AccountToggleProps = {
+  onChange?: (value: 'locations' | 'articles') => void;
 };
 
-const ClickedLocations = () => {
-  return (
-    <Div
-      margin="2px"
-      borderRadius="100px"
-      backgroundColor="#0511F2"
-      padding="11px"
-      fontFamily={theme.fonts.futura}
-      fontSize="14px"
-      lineHeight="18px"
-      fontWeight="500"
-      color="#ffffff">
-      Locations
-    </Div>
-  );
-};
-
-const DefaultArticles = () => {
-  return (
-    <Div
-      padding="13px 15px"
-      fontFamily={theme.fonts.futura}
-      fontSize="14px"
-      lineHeight="18px"
-      fontWeight="500"
-      color="#0511F2">
-      Articles
-    </Div>
-  );
-};
-
-const ClickedArticles = () => {
-  return (
-    <Div
-      margin="2px"
-      borderRadius="100px"
-      backgroundColor="#0511F2"
-      padding="11px"
-      fontFamily={theme.fonts.futura}
-      fontSize="14px"
-      lineHeight="18px"
-      fontWeight="500"
-      color="#ffffff">
-      Articles
-    </Div>
-  );
-};
-
-export const AccountToggle = () => {
+export const AccountToggle: FC<AccountToggleProps> = ({ onChange }) => {
   const [state, setState] = useState<'locations' | 'articles'>('locations');
 
-  const handleLocationsClick = () => setState('locations');
+  const handleLocationsClick = () => {
+    setState('locations');
+    if (onChange) {
+      onChange('locations');
+    }
+  };
 
-  const handleArticlesClick = () => setState('articles');
+  const handleArticlesClick = () => {
+    setState('articles');
+    if (onChange) {
+      onChange('articles');
+    }
+  };
 
   return (
     <Div

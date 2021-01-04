@@ -25,20 +25,15 @@ const ContentInteractionButtons: FC<ContentInteractionButtonsProps> = ({
   const globalUIState = useGlobalUIState();
   const [user, setUser] = useState(null);
 
-  console.log(content);
-
   // likes
   const originalLikes = content.userLikes.length;
   const [likes, setLikes] = useState(originalLikes);
-  const [isLikedByUser, setIsLikedByUser] = useState(undefined);
-  const [originalIsLikedByUser, setOriginalIsLikedByUser] = useState(undefined);
+  const [isLikedByUser, setIsLikedByUser] = useState(null);
+  const [originalIsLikedByUser, setOriginalIsLikedByUser] = useState(null);
   const [debouncedIsLikedByUser] = useDebounce(isLikedByUser, 1000);
 
   // bookmarks
-  const [isBookmarkedByUser, setIsBookmarkedByUser] = useState(undefined);
-  const [originalIsBookmarkedByUser, setOriginalIsBookmarkedByUser] = useState(
-    undefined
-  );
+  const [isBookmarkedByUser, setIsBookmarkedByUser] = useState(null);
   const [debouncedIsBookmarkedByUser] = useDebounce(isBookmarkedByUser, 1000);
 
   // Get user on mount
@@ -73,7 +68,6 @@ const ContentInteractionButtons: FC<ContentInteractionButtonsProps> = ({
         (userBookmark) => userBookmark.userId === user.uid
       );
       setIsBookmarkedByUser(isBookmarkedByUser);
-      setOriginalIsBookmarkedByUser(isBookmarkedByUser);
     }
   }, [user, content.userBookmarks]);
 
@@ -152,7 +146,7 @@ const ContentInteractionButtons: FC<ContentInteractionButtonsProps> = ({
 
   return (
     <Div display="flex" flexDirection="row">
-      {isLikedByUser !== undefined && (
+      {isLikedByUser !== null && (
         <Div marginRight="8px">
           <Button
             onClick={handleHeartButtonClick}
@@ -185,7 +179,7 @@ const ContentInteractionButtons: FC<ContentInteractionButtonsProps> = ({
         </Div>
       )}
 
-      {isBookmarkedByUser !== undefined && (
+      {isBookmarkedByUser !== null && (
         <Div marginRight="8px">
           <Button
             onClick={handleBookmarkButtonClick}
