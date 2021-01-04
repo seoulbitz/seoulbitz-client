@@ -11,171 +11,6 @@ import { ArticleDocument } from '@/services/sanity/api/article';
 import { useRouter } from 'next/dist/client/router';
 import { useRecoilState } from 'recoil';
 
-const ARTICLE_DUMMY_DATA_LIST = {
-  items: [
-    {
-      kind: 'article',
-      title: 'Lorem ipsum',
-      titleKo: '로렘입섬',
-      images: [
-        {
-          _key: '922dbab46e7d',
-          _type: 'image',
-          asset: {
-            _ref: 'image-ac60f85a9488828ea285cd4b8ca974e939757cbc-1080x720-jpg',
-            _type: 'reference'
-          }
-        }
-      ],
-      subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
-      likes: 4,
-      category: 'family',
-      area: 'Wangsimni'
-    },
-    {
-      kind: 'article',
-      title: 'Lorem ipsum',
-      titleKo: '로렘입섬',
-      images: [
-        {
-          _key: '922dbab46e7d',
-          _type: 'image',
-          asset: {
-            _ref: 'image-ac60f85a9488828ea285cd4b8ca974e939757cbc-1080x720-jpg',
-            _type: 'reference'
-          }
-        }
-      ],
-      subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
-      likes: 4,
-      category: 'family',
-      area: 'Wangsimni'
-    },
-    {
-      kind: 'article',
-      title: 'Lorem ipsum',
-      titleKo: '로렘입섬',
-      images: [
-        {
-          _key: '922dbab46e7d',
-          _type: 'image',
-          asset: {
-            _ref: 'image-ac60f85a9488828ea285cd4b8ca974e939757cbc-1080x720-jpg',
-            _type: 'reference'
-          }
-        }
-      ],
-      subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
-      likes: 4,
-      category: 'family',
-      area: 'Wangsimni'
-    },
-    {
-      kind: 'article',
-      title: 'Lorem ipsum',
-      titleKo: '로렘입섬',
-      images: [
-        {
-          _key: '922dbab46e7d',
-          _type: 'image',
-          asset: {
-            _ref: 'image-ac60f85a9488828ea285cd4b8ca974e939757cbc-1080x720-jpg',
-            _type: 'reference'
-          }
-        }
-      ],
-      subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
-      likes: 4,
-      category: 'family',
-      area: 'Wangsimni'
-    },
-    {
-      kind: 'article',
-      title: 'Lorem ipsum',
-      titleKo: '로렘입섬',
-      images: [
-        {
-          _key: '922dbab46e7d',
-          _type: 'image',
-          asset: {
-            _ref: 'image-ac60f85a9488828ea285cd4b8ca974e939757cbc-1080x720-jpg',
-            _type: 'reference'
-          }
-        }
-      ],
-      subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
-      likes: 4,
-      category: 'family',
-      area: 'Wangsimni'
-    },
-    {
-      kind: 'article',
-      title: 'Lorem ipsum',
-      titleKo: '로렘입섬',
-      images: [
-        {
-          _key: '922dbab46e7d',
-          _type: 'image',
-          asset: {
-            _ref: 'image-ac60f85a9488828ea285cd4b8ca974e939757cbc-1080x720-jpg',
-            _type: 'reference'
-          }
-        }
-      ],
-      subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
-      likes: 4,
-      category: 'family',
-      area: 'Wangsimni'
-    },
-    {
-      kind: 'article',
-      title: 'Lorem ipsum',
-      titleKo: '로렘입섬',
-      images: [
-        {
-          _key: '922dbab46e7d',
-          _type: 'image',
-          asset: {
-            _ref: 'image-ac60f85a9488828ea285cd4b8ca974e939757cbc-1080x720-jpg',
-            _type: 'reference'
-          }
-        }
-      ],
-      subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
-      likes: 4,
-      category: 'family',
-      area: 'Wangsimni'
-    },
-    {
-      kind: 'article',
-      title: 'Lorem ipsum',
-      titleKo: '로렘입섬',
-      images: [
-        {
-          _key: '922dbab46e7d',
-          _type: 'image',
-          asset: {
-            _ref: 'image-ac60f85a9488828ea285cd4b8ca974e939757cbc-1080x720-jpg',
-            _type: 'reference'
-          }
-        }
-      ],
-      subtitle:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
-      likes: 4,
-      category: 'family',
-      area: 'Wangsimni'
-    }
-  ]
-};
-
 const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
   props
 ) => {
@@ -185,7 +20,6 @@ const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
   } = router;
 
   const { articleResults } = props;
-  // 1. articleResults로 ContentItem 항목들 그려내기.
 
   return (
     <Layout>
@@ -223,7 +57,6 @@ const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
             </Cell>
           </Grid>
           <Grid marginTop={['40px', null, '48px']}>
-            {/* {ARTICLE_DUMMY_DATA_LIST.items.map((item, index) => { */}
             {articleResults.map((article, i) => {
               const remainder = i % 4;
               const {
