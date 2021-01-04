@@ -2,16 +2,19 @@ import client from '../client';
 import { createLocationService } from './location';
 import { createArticleService } from './article';
 import { createPageService } from './page';
+import { createSearchService } from './search';
 
 const createAPIService = () => {
-  const locationModel = createLocationService(client);
-  const articleModel = createArticleService(client);
-  const pageModel = createPageService(client);
+  const locationService = createLocationService(client);
+  const articleService = createArticleService(client);
+  const pageService = createPageService(client);
+  const searchService = createSearchService(client);
 
   return {
-    location: locationModel,
-    article: articleModel,
-    page: pageModel
+    location: locationService,
+    article: articleService,
+    page: pageService,
+    search: searchService
   };
 };
 
