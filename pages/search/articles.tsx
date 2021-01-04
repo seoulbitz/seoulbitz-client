@@ -1,1 +1,4 @@
-export { default } from '@/components/pages/search-results-article-list/search-results-article-list';
+export {
+  default,
+  getServerSideProps
+} from '@/components/pages/search-results-article-list/search-results-article-list';
