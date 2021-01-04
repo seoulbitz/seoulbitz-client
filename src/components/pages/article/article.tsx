@@ -21,7 +21,6 @@ const Location: FC<{
     subtitle,
     author,
     body,
-    likes,
     recommendedArticles
   } = props.article;
 
@@ -49,7 +48,7 @@ const Location: FC<{
           </Span>
         </Cell>
         <Cell width={1} marginTop={['24px', null, '32px']}>
-          <ContentInteractionButtons likes={likes} />
+          <ContentInteractionButtons content={props.article} />
         </Cell>
         <Cell width={1} marginBottom={['40px']}>
           <LocationBody blocks={body} />

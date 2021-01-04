@@ -21,7 +21,6 @@ const Location: FC<{
   const {
     title: { en: enTitle, ko: koTitle },
     subtitle,
-    likes,
     images,
     body,
     location,
@@ -55,7 +54,7 @@ const Location: FC<{
           </Span>
         </Cell>
         <Cell width={1} marginTop={['24px', null, '32px']}>
-          <ContentInteractionButtons likes={likes} />
+          <ContentInteractionButtons content={props.location} />
         </Cell>
         <Cell width={1} marginTop={['24px', null, '32px']}>
           <LocationSlider images={images} />

@@ -13,6 +13,8 @@ export type ArticleDocument = SanityDocument<{
   thumbnailImage: SanityImageSource;
   body: any;
   likes: number;
+  userLikes: any[];
+  userBookmarks?: any[];
   recommendedArticles: ArticleDocument[];
 }>;
 
@@ -28,7 +30,9 @@ export const createArticleService = (client: SanityClient) => {
           "_key": _id
         }
       },
-      recommendedArticles[]->
+      recommendedArticles[]->,
+      "userLikes": *[_type == 'userLike' && references(^._id)],
+      "userBookmarks": *[_type == 'userBookmark' && references(^._id)]
     }`;
     const articles = await client.fetch<ArticleDocument[]>(query);
     if (articles.length === 0) {
@@ -48,7 +52,8 @@ export const createArticleService = (client: SanityClient) => {
 
     const query = `*[_type == "article"] {
       ...,
-      author->
+      author->,
+      "userLikes": *[_type == 'userLike' && references(^._id)]
     }${orderQuery}`;
     const articles = await client.fetch<ArticleDocument[]>(query);
     return articles;

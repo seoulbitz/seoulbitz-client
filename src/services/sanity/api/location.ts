@@ -22,6 +22,8 @@ export type LocationDocument = SanityDocument<{
   };
   body: any[];
   likes: number;
+  userLikes: any[];
+  userBookmarks?: any[];
   recommendedLocations?: LocationDocument[];
 }>;
 
@@ -31,7 +33,9 @@ export const createLocationService = (client: SanityClient) => {
       ...,
       category->,
       area->,
-      recommendedLocations[]->
+      recommendedLocations[]->,
+      "userLikes": *[_type == 'userLike' && references(^._id)],
+      "userBookmarks": *[_type == 'userBookmark' && references(^._id)]
     }`;
     const locations = await client.fetch<LocationDocument[]>(query);
     if (locations.length === 0) {
@@ -53,7 +57,7 @@ export const createLocationService = (client: SanityClient) => {
       ...,
       category->,
       area->,
-      recommendedLocations[]->
+      "userLikes": *[_type == 'userLike' && references(^._id)]
     }${orderQuery}`;
     const locations = await client.fetch<LocationDocument[]>(query);
     return locations;

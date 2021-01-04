@@ -38,6 +38,7 @@
     "reflexbox": "^4.0.6",
     "styled-system": "^5.1.5",
     "swiper": "^6.3.5",
+    "use-debounce": "^5.2.0",
     "yup": "^0.31.0"
   },
   "devDependencies": {
