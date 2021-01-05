@@ -6,11 +6,16 @@ import { atom } from 'recoil';
 // forgotPasswordModal
 // deleteAccountConfirmModal
 
-export const globalUIState = atom({
+export const globalUIState = atom<{
+  openedModal: any;
+  isDrawerOpen: boolean;
+  data: { [key: string]: any };
+}>({
   key: 'globalUIState',
   default: {
     openedModal: null,
-    isDrawerOpen: false
+    isDrawerOpen: false,
+    data: {}
   }
 });
 

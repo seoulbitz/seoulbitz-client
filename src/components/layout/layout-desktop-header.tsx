@@ -1,8 +1,34 @@
-import React from 'react';
+import firebase from '@/services/firebase';
+import { useGlobalUIState } from '@/services/react/hooks';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { ModalType } from 'types';
+import Button from '../button/button';
+import A from '../styled-system/a/a';
 import Div from '../styled-system/div/div';
 import Header from '../styled-system/header/header';
 
 const DesktopHeader = () => {
+  const globalUIState = useGlobalUIState();
+
+  const [user, setUser] = useState(null);
+  // Get user on mount
+  useEffect(() => {
+    const fetch = async () => {
+      const user = await firebase.auth.getVerifiedUser();
+      if (user) {
+        setUser(user);
+        return;
+      }
+    };
+
+    fetch();
+  }, []);
+
+  const handleLogInClick = () => {
+    globalUIState.openModal(ModalType.logInModal);
+  };
+
   return (
     <Div
       height="100%"
@@ -11,9 +37,31 @@ const DesktopHeader = () => {
       justifyContent="space-between"
       padding="0 24px">
       <Div width="240px" height="48px" borderBottom="1px solid #0511F2"></Div>
-      <Div display="flex">
-        <Div width="108px" height="48px" border="1px solid #0511F2" marginRight="16px"></Div>
-        <Div width="67px" height="48px" border="1px solid #000000"></Div>
+      <Div display="flex" flexDirection="row">
+        {user ? (
+          <>
+            <Link href="/account" passHref>
+              <A textDecoration="none">
+                <Button variant="blue" width="initial">
+                  MY ACCOUNT
+                </Button>
+              </A>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Button
+              variant="blue"
+              marginRight="16px"
+              width="initial"
+              onClick={handleLogInClick}>
+              LOG IN
+            </Button>
+            <Button variant="black" marginRight="16px" width="initial">
+              EN
+            </Button>
+          </>
+        )}
       </Div>
     </Div>
   );

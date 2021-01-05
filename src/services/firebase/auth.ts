@@ -193,7 +193,7 @@ const createAuthService = () => {
 
   const updateUsername = async (username: string) => {
     try {
-      const user = await getCurrentUser();
+      const user = await getVerifiedUser();
       await user.updateProfile({ displayName: username });
       return UpdateUsernameResult.success;
     } catch (err) {
@@ -204,7 +204,7 @@ const createAuthService = () => {
 
   const deleteAccount = async () => {
     try {
-      const user = await getCurrentUser();
+      const user = await getVerifiedUser();
       await user.delete();
       return DeleteAccountResult.success;
     } catch (err) {

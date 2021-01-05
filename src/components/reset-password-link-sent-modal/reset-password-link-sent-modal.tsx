@@ -1,35 +1,25 @@
 import firebase from '@/services/firebase';
 import { SendResetPasswordLinkEmail } from '@/services/firebase/auth';
+import { useGlobalUIState } from '@/services/react/hooks';
 import { theme } from '@/styles/theme';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../button/button';
 import Modal from '../modal/modal';
 import Div from '../styled-system/div/div';
 
 const ResetPasswordLinkSentModal = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetch = async () => {
-      const user = await firebase.auth.getVerifiedUser();
-      if (user) {
-        setUser(user);
-        return;
-      }
-    };
-
-    fetch();
-  }, []);
+  const globalUIState = useGlobalUIState();
+  const { email } = globalUIState.data;
 
   const [isButtonLoading, setIsButtonLoading] = useState(false);
 
   const handleResendEmailButton = async () => {
     setIsButtonLoading(true);
-    const result = await firebase.auth.sendResetPasswordLinkEmail(user.email);
+    const result = await firebase.auth.sendResetPasswordLinkEmail(email);
 
     switch (result) {
       case SendResetPasswordLinkEmail.success: {
-        alert(`We sent an email to ${user.email}.`);
+        alert(`We sent an email to ${email}.`);
         break;
       }
     }

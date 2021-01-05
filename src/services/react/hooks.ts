@@ -15,11 +15,12 @@ export const useDidUpdateEffect = (fn, inputs) => {
 export const useGlobalUIState = () => {
   const [state, setState] = useRecoilState(globalUIState);
 
-  const openModal = (type: ModalType) => {
+  const openModal = (type: ModalType, data?) => {
     setState((prevState) => {
       return {
         ...prevState,
-        openedModal: type
+        openedModal: type,
+        data: data ? data : {}
       };
     });
   };
@@ -28,13 +29,14 @@ export const useGlobalUIState = () => {
     setState((prevState) => {
       return {
         ...prevState,
-        openedModal: null
+        openedModal: null,
+        data: {}
       };
     });
   };
 
   return {
-    globalUIState: state,
+    ...state,
     openModal,
     closeModal
   };

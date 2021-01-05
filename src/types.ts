@@ -1,5 +1,5 @@
 export enum ModalType {
-  signInModal = 'signInModal',
+  logInModal = 'logInModal',
   signUpModal = 'signUpModal',
   forgotPasswordModal = 'forgotPasswordModal',
   deleteAccountConfirmModal = 'deleteAccountConfirmModal',

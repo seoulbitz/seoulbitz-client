@@ -1,10 +1,33 @@
+import { useGlobalUIState } from '@/services/react/hooks';
+import firebase from '@/services/firebase';
 import { theme } from '@/styles/theme';
 import React from 'react';
 import Button from '../button/button';
 import Modal from '../modal/modal';
 import Div from '../styled-system/div/div';
+import { ResendVerificationEmailResult } from '@/services/firebase/auth';
 
 const CheckInboxModal = () => {
+  const globalUIState = useGlobalUIState();
+
+  const handleResendButtonClick = async () => {
+    const result = await firebase.auth.resendVerificationEmail();
+
+    switch (result) {
+      case ResendVerificationEmailResult.tooManyRequests: {
+        alert(
+          "The email can't be sent right now. Please wait for a moment and try again."
+        );
+        break;
+      }
+      default: {
+        const user = result;
+        alert(`We sent an email to ${user.email}.`);
+        break;
+      }
+    }
+  };
+
   return (
     <Modal>
       <Div
@@ -26,15 +49,18 @@ const CheckInboxModal = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="500">
-          We sent an email to alextester201230@yopmail.com. Verify your email
-          address and complete signing up.
+          {globalUIState.data.email &&
+            `We sent an email to ${globalUIState.data.email}.`}
+          <br />
+          Verify your email address and complete signing up.
         </Div>
         <Button
           variant="mixed"
           marginTop="24px"
           fontFamily={theme.fonts.futura}
           fontSize="16px"
-          lineHeight="22px">
+          lineHeight="22px"
+          onClick={handleResendButtonClick}>
           RESEND EMAIL
         </Button>
       </Div>
