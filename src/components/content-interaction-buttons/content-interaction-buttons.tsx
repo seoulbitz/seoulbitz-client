@@ -96,7 +96,7 @@ const ContentInteractionButtons: FC<ContentInteractionButtonsProps> = ({
   }, [debouncedIsBookmarkedByUser, content]);
 
   const guideUserToLogin = () => {
-    globalUIState.openModal(ModalType.signInModal);
+    globalUIState.openModal(ModalType.logInModal);
     alert('Please log in to continue.');
   };
 

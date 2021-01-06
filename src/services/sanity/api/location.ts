@@ -63,13 +63,8 @@ export const createLocationService = (client: SanityClient) => {
     return locations;
   };
 
-  const patch = () => {
-    return null;
-  };
-
   return {
     find,
-    findOneBySlug,
-    patch
+    findOneBySlug
   };
 };

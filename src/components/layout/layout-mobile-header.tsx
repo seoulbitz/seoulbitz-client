@@ -1,11 +1,9 @@
 import { motion } from 'framer-motion';
 import { globalUIState } from '@/services/recoil/atoms';
-import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import Div from '../styled-system/div/div';
 import Header from '../styled-system/header/header';
-import Span from '../styled-system/span/span';
 import { theme } from '@/styles/theme';
 
 const MenuBar = () => {
@@ -18,7 +16,7 @@ const MenuBar = () => {
           setGlobalUIState((state) => {
             return {
               ...state,
-              openedModal: 'signInModal'
+              openedModal: 'logInModal'
             };
           });
         }}>

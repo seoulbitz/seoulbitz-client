@@ -1,56 +1,71 @@
-import { theme } from '@/styles/theme';
 import firebase from '@/services/firebase';
-import Link from 'next/link';
-import React from 'react';
+import { theme } from '@/styles/theme';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import React, { FC } from 'react';
 import Modal from '../modal/modal';
 import A from '../styled-system/a/a';
 import Div from '../styled-system/div/div';
+import Label from '../styled-system/label/label';
 import Span from '../styled-system/span/span';
 import * as Yup from 'yup';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import Label from '../styled-system/label/label';
 import Input from '../styled-system/input/input';
-import StyledButton from '../button/button';
+import StyledButton from '@/components/button/button';
 import Button from '../styled-system/button/button';
 import Img from '../styled-system/img/img';
-import Checkbox from '../checkbox/checkbox';
-import { ModalType } from 'types';
+import {
+  LogInResult,
+  ResendVerificationEmailResult,
+  LogInWithGoogleResult
+} from '@/services/firebase/auth';
 import { useGlobalUIState } from '@/services/react/hooks';
-import { LogInWithGoogleResult, SignUpResult } from '@/services/firebase/auth';
+import { ModalType } from 'types';
 
-const signUpSchema = Yup.object().shape({
-  username: Yup.string().required('Please fill in.'),
-  email: Yup.string().required('Please fill in.'),
-  password: Yup.string()
-    .required('No password provided.')
-    .min(8, 'Password is too short - should be 8 chars minimum.')
-    .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
-  acceptedTerms: Yup.boolean()
-    .required()
-    .oneOf([true], 'You must accept the terms and conditions.')
+const logInSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Email address is not valid.')
+    .required('Please fill in.'),
+  password: Yup.string().required('Please fill in.')
 });
 
-const SignUpModal = () => {
+const LogInModal: FC = () => {
   const globalUIState = useGlobalUIState();
 
-  const handleLogInClick = () => {
-    globalUIState.openModal(ModalType.logInModal);
-  };
-
-  const handleSignUpFormSubmit = async (
+  const handleEmailPasswordFormSubmit = async (
     values,
     { setSubmitting, setErrors }
   ) => {
-    const { username, email, password } = values;
-    const result = await firebase.auth.signUp(username, email, password);
+    const { email, password } = values;
+    const result = await firebase.auth.logIn(email, password);
 
     switch (result) {
-      case SignUpResult.success: {
-        globalUIState.openModal(ModalType.checkInboxModal, { email });
+      case LogInResult.userNotFound: {
+        setErrors({ email: 'Email address not found.' });
         break;
       }
-      case SignUpResult.emailAlreadyInUse: {
-        setErrors({ email: 'This email is taken. Please try another one.' });
+      case LogInResult.wrongPassword: {
+        setErrors({ password: 'Incorrect password.' });
+        break;
+      }
+
+      case LogInResult.userEmailNotVerified: {
+        const result = await firebase.auth.resendVerificationEmail();
+        switch (result) {
+          case ResendVerificationEmailResult.tooManyRequests: {
+            alert(
+              "The email can't be sent right now. Please wait for a moment and try again."
+            );
+            break;
+          }
+          default: {
+            globalUIState.openModal(ModalType.checkInboxModal, { email });
+            break;
+          }
+        }
+
+        break;
+      }
+      case LogInResult.success: {
+        window.location.reload();
         break;
       }
     }
@@ -68,6 +83,14 @@ const SignUpModal = () => {
     }
   };
 
+  const handleSignUpClick = () => {
+    globalUIState.openModal(ModalType.signUpModal);
+  };
+
+  const handleForgotPasswordClick = () => {
+    globalUIState.openModal(ModalType.forgotPasswordModal);
+  };
+
   return (
     <Modal>
       <Div
@@ -82,98 +105,41 @@ const SignUpModal = () => {
           lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
-          Sign up
+          Log in
         </Div>
-
-        <Div display="block" textAlign="center" marginTop="16px">
-          <Span
+        <Div
+          display="block"
+          textAlign="center"
+          marginTop="16px"
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="20px"
+          fontWeight="500"
+          color="#000000">
+          Log into your account.
+          <br />
+          Don’t have an account?
+          <A
+            cursor="pointer"
+            textDecoration="underline"
+            marginLeft="6px"
             fontFamily={theme.fonts.futura}
             fontSize="16px"
             lineHeight="20px"
             fontWeight="500"
-            color="#000000">
-            Create your free account or
-            <A
-              cursor="pointer"
-              textDecoration="underline"
-              marginLeft="6px"
-              fontFamily={theme.fonts.futura}
-              fontSize="16px"
-              lineHeight="20px"
-              fontWeight="500"
-              color="#080CCE"
-              onClick={handleLogInClick}>
-              Log in
-            </A>
-            .
-          </Span>
+            color="#080CCE"
+            onClick={handleSignUpClick}>
+            Sign up
+          </A>{' '}
+          for free.
         </Div>
-
         <Formik
-          initialValues={{
-            username: '',
-            email: '',
-            password: '',
-            acceptedTerms: false
-          }}
-          validationSchema={signUpSchema}
-          onSubmit={handleSignUpFormSubmit}>
+          initialValues={{ email: '', password: '' }}
+          validationSchema={logInSchema}
+          onSubmit={handleEmailPasswordFormSubmit}>
           {({ isSubmitting }) => {
             return (
               <Form>
-                <Div width={1} marginTop="24px" flexDirection="row">
-                  <Label
-                    htmlFor="username"
-                    display="flex"
-                    justifyContent="space-between">
-                    <Span
-                      fontFamily={theme.fonts.futura}
-                      fontSize="16px"
-                      lineHeight="20px"
-                      fontWeight="500">
-                      Username
-                      <Span color="#080CCE">*</Span>
-                    </Span>
-                  </Label>
-                  <Field id="username" name="username">
-                    {({ field, ...props }) => {
-                      return (
-                        <Input
-                          width="100%"
-                          marginTop="8px"
-                          height="48px"
-                          border="1px solid #0511F2"
-                          paddingLeft="16px"
-                          fontFamily={theme.fonts.futura}
-                          fontSize="16px"
-                          lineHeight="20px"
-                          fontWeight="500"
-                          color="#000000"
-                          placeholder=""
-                          type="username"
-                          {...field}
-                          {...props}
-                        />
-                      );
-                    }}
-                  </Field>
-                  <ErrorMessage
-                    name="username"
-                    component={(props) => {
-                      return (
-                        <Div
-                          marginTop="8px"
-                          fontSize="16px"
-                          lineHeight="20px"
-                          fontFamily={theme.fonts.futura}
-                          fontWeight="400"
-                          color="#F43333"
-                          {...props}></Div>
-                      );
-                    }}
-                  />
-                </Div>
-
                 <Div width={1} marginTop="24px" flexDirection="row">
                   <Label
                     htmlFor="email"
@@ -203,7 +169,6 @@ const SignUpModal = () => {
                           fontWeight="500"
                           color="#000000"
                           placeholder=""
-                          type="email"
                           {...field}
                           {...props}
                         />
@@ -226,7 +191,6 @@ const SignUpModal = () => {
                     }}
                   />
                 </Div>
-
                 <Div width={1} marginTop="24px" flexDirection="row">
                   <Label
                     htmlFor="password"
@@ -240,6 +204,18 @@ const SignUpModal = () => {
                       Password
                       <Span color="#080CCE">*</Span>
                     </Span>
+                    <A
+                      cursor="pointer"
+                      textDecoration="underline"
+                      // textDecoration="underline"
+                      color="#777777"
+                      fontFamily={theme.fonts.futura}
+                      fontSize="16px"
+                      lineHeight="20px"
+                      fontWeight="500"
+                      onClick={handleForgotPasswordClick}>
+                      Forgot password?
+                    </A>
                   </Label>
                   <Field id="password" name="password">
                     {({ field, ...props }) => {
@@ -279,62 +255,16 @@ const SignUpModal = () => {
                     }}
                   />
                 </Div>
-
-                <Div width={1} marginTop="24px" flexDirection="row">
-                  <Label
-                    htmlFor="acceptedTerms"
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    cursor="pointer">
-                    <Field
-                      id="acceptedTerms"
-                      name="acceptedTerms"
-                      component={({ field, ...props }) => {
-                        return <Checkbox {...field} {...props} />;
-                      }}
-                    />
-                    <Span
-                      marginLeft="8px"
-                      fontFamily={theme.fonts.futura}
-                      fontSize="16px"
-                      lineHeight="20px"
-                      fontWeight="500">
-                      I agree to the{' '}
-                      <Link href="/terms-and-conditions" passHref>
-                        <A
-                          color="#080CCE"
-                          onClick={() => {
-                            globalUIState.closeModal();
-                          }}>
-                          Terms and Conditions
-                        </A>
-                      </Link>
-                    </Span>
-                  </Label>
-                  <ErrorMessage
-                    name="acceptedTerms"
-                    component={(props) => {
-                      return (
-                        <Div
-                          marginTop="8px"
-                          fontSize="16px"
-                          lineHeight="20px"
-                          fontFamily={theme.fonts.futura}
-                          fontWeight="400"
-                          color="#F43333"
-                          {...props}></Div>
-                      );
-                    }}
-                  />
-                </Div>
-
                 <StyledButton
                   type="submit"
                   disabled={isSubmitting}
-                  marginTop="24px"
-                  variant="mixed">
-                  SIGN UP
+                  marginTop="32px"
+                  height="48px"
+                  variant="mixed"
+                  fontFamily={theme.fonts.futura}
+                  fontSize="16px"
+                  lineHeight="22px">
+                  SIGN IN
                 </StyledButton>
               </Form>
             );
@@ -391,7 +321,7 @@ const SignUpModal = () => {
             lineHeight="20px"
             fontWeight="500"
             color="#000000">
-            Sign up with Facebook
+            Continue with Facebook
           </Div>
         </Button> */}
 
@@ -427,7 +357,7 @@ const SignUpModal = () => {
             lineHeight="20px"
             fontWeight="500"
             color="#000000">
-            Sign up with Google
+            Continue with Google
           </Div>
         </Button>
 
@@ -463,7 +393,7 @@ const SignUpModal = () => {
             lineHeight="20px"
             fontWeight="500"
             color="#000000">
-            Sign up with Kakao
+            Continue with Kakao
           </Div>
         </Button> */}
       </Div>
@@ -471,4 +401,4 @@ const SignUpModal = () => {
   );
 };
 
-export default SignUpModal;
+export default LogInModal;

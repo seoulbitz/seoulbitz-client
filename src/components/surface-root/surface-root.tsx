@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 import DeleteAccountConfirmModal from '../delete-account-confirm-modal/delete-account-confirm-modal';
 import Drawer from '../drawer/drawer';
 import ForgotPasswordModal from '../forgot-password-modal/forgot-password-modal';
-import SignInModal from '../sign-in-modal/sign-in-modal';
+import LogInModal from '../log-in-modal/log-in-modal';
 import SignUpModal from '../sign-up-modal/sign-up-modal';
 import CheckInboxModal from '../check-inbox-modal/check-inbox-modal';
 import ResetPasswordLinkSentModal from '../reset-password-link-sent-modal/reset-password-link-sent-modal';
@@ -18,8 +18,8 @@ const SurfaceRoot = () => {
 
   let content = null;
 
-  if (openedModal === ModalType.signInModal) {
-    content = <SignInModal />;
+  if (openedModal === ModalType.logInModal) {
+    content = <LogInModal />;
   }
 
   if (openedModal === ModalType.signUpModal) {

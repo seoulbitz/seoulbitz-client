@@ -280,7 +280,7 @@ const CheckEmailModal: FC<any> = ({ onClose }) => {
             switch (result) {
               case ResendVerificationEmailResult.tooManyRequests: {
                 alert(
-                  "The email can't be send right now. Please wait for a moment."
+                  "The email can't be sent right now. Please wait for a moment and try again."
                 );
                 break;
               }

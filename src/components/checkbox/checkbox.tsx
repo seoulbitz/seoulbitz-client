@@ -28,7 +28,6 @@ const StyledCheckbox = styled.div<any>`
   width: 16px;
   height: 16px;
   border: 1px solid #0511f2;
-  border-radius: 16px;
 
   display: flex;
   justify-content: center;
@@ -44,12 +43,7 @@ const Checkbox: FC<any> = ({ className, value, ...props }) => {
     <CheckboxContainer className={className}>
       <HiddenCheckbox type="checkbox" checked={value} {...props} />
       <StyledCheckbox checked={value}>
-        <Div
-          width="10px"
-          height="10px"
-          borderRadius="10px"
-          background="#0511f2"
-        />
+        <Div width="10px" height="10px" background="#0511f2" />
       </StyledCheckbox>
     </CheckboxContainer>
   );

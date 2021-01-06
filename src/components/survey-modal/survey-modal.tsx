@@ -8,6 +8,9 @@ import Radio from '../radio/radio';
 import Div from '../styled-system/div/div';
 import Label from '../styled-system/label/label';
 import Span from '../styled-system/span/span';
+import sanity from '@/services/sanity';
+import { SurveySubmitResult } from '@/services/sanity/api/user-survey';
+import { useGlobalUIState } from '@/services/react/hooks';
 
 const Q1 = () => {
   return (
@@ -456,6 +459,21 @@ const schema = yup.object().shape({
 });
 
 const SurveyModal = () => {
+  const globalUIState = useGlobalUIState();
+
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    const { q1, q2, q3 } = values;
+    const result = await sanity.api.userSurvey.submit({ q1, q2, q3 });
+
+    switch (result) {
+      case SurveySubmitResult.success: {
+        globalUIState.closeModal();
+        break;
+      }
+    }
+    setSubmitting(false);
+  };
+
   return (
     <Modal closeable={false}>
       <Div
@@ -490,15 +508,17 @@ const SurveyModal = () => {
             q3: ''
           }}
           validationSchema={schema}
-          onSubmit={(values) => {
-            console.log(values);
-          }}>
-          {({ values }) => (
+          onSubmit={handleSubmit}>
+          {({ isSubmitting }) => (
             <Form>
               <Q1 />
               <Q2 />
               <Q3 />
-              <Button marginTop="40px" variant="mixed">
+              <Button
+                type="submit"
+                marginTop="40px"
+                variant="mixed"
+                disabled={isSubmitting}>
                 DONE
               </Button>
             </Form>
