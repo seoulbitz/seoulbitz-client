@@ -15,24 +15,24 @@ import sanity from '@/services/sanity';
 import { ArticleDocument } from '@/services/sanity/api/article';
 import { LocationDocument } from '@/services/sanity/api/location';
 import ContentItem from '@/components/content-item/content-item';
-import MapMarker from '@/components/icons/map-marker/map-marker';
+import MapMarkerLarge from '@/components/icons/map-marker/map-marker-large';
+import MapMarkerSmall from '@/components/icons/map-marker/map-marker-small';
 import AccountNoItemsPanel from './account-no-items-panel';
 
-const Marker: FC<any> = (props) => {
-  return (
-    <MapMarker
-      width="32px"
-      height="32px"
-      marginLeft="-16px"
-      marginTop="-32px"
-    />
-  );
+const LocationMarker = (props: any) => {
+  return <Div {...props} />;
+};
+
+const MarkerContainer = (props: any) => {
+  return <Div {...props} />;
 };
 
 const Account = () => {
   const router = useRouter();
 
   const [user, setUser] = useState(null);
+
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
     const fetch = async () => {
@@ -225,21 +225,152 @@ const Account = () => {
                                 key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
                               }}
                               defaultCenter={{
-                                lat: (locationBookmarks[0]
-                                  .content as LocationDocument).location.lat,
-                                lng: (locationBookmarks[0]
-                                  .content as LocationDocument).location.lng
+                                lat: 37.5384,
+                                lng: 126.9654
                               }}
-                              defaultZoom={18}>
+                              onClick={() => {
+                                setSelectedLocation(null);
+                              }}
+                              defaultZoom={11}>
                               {locationBookmarks.map(({ content }) => {
                                 const location = content as LocationDocument;
                                 const { lat, lng } = location.location;
+                                if (
+                                  selectedLocation &&
+                                  selectedLocation._id === content._id
+                                ) {
+                                  return (
+                                    <MarkerContainer
+                                      className="hey"
+                                      transform="translateY(-148px)"
+                                      lat={lat}
+                                      lng={lng}
+                                      position="relative"
+                                      style={{
+                                        zIndex: 2
+                                      }}>
+                                      <Div
+                                        position="absolute"
+                                        bottom="0"
+                                        backgroundColor="#ffffff"
+                                        width="24px"
+                                        height="24px"
+                                        margin="0 auto"
+                                        transform="translate(-50%,-47px) rotate(45deg)"
+                                      />
+                                      <LocationMarker
+                                        transform="translateX(-50%)"
+                                        marginBottom="18px"
+                                        backgroundColor="#ffffff"
+                                        width="304px"
+                                        height="98px"
+                                        borderRadius="8px"
+                                        // boxShadow="0px 4px 4px rgba(0, 0, 0, 0.08)"
+                                        onClick={(ev) => {
+                                          ev.stopPropagation();
+                                        }}>
+                                        <Link
+                                          href={`/locations/${selectedLocation.slug.current}`}
+                                          passHref>
+                                          <A textDecoration="initial">
+                                            <Div
+                                              display="flex"
+                                              flexDirection="row"
+                                              padding="8px">
+                                              <Div
+                                                flex="1"
+                                                padding="8px"
+                                                paddingRight="16px">
+                                                <Div>
+                                                  <Span
+                                                    fontFamily={
+                                                      theme.fonts.futura
+                                                    }
+                                                    fontSize="16px"
+                                                    lineHeight="20px"
+                                                    fontWeight="800"
+                                                    color=" #080CCE">
+                                                    {selectedLocation.title.en},
+                                                  </Span>
+                                                  <Span
+                                                    fontFamily={
+                                                      theme.fonts.nanumSquare
+                                                    }
+                                                    fontWeight="800"
+                                                    marginLeft="4px"
+                                                    fontSize="16px"
+                                                    lineHeight="20px"
+                                                    color=" #080CCE">
+                                                    {selectedLocation.title.ko}
+                                                  </Span>
+                                                </Div>
+                                                <Div marginTop="8px">
+                                                  <Span
+                                                    fontFamily={
+                                                      theme.fonts.futura
+                                                    }
+                                                    fontSize="14px"
+                                                    lineHeight="18px"
+                                                    fontWeight="500"
+                                                    color="#777777">
+                                                    {
+                                                      selectedLocation.category
+                                                        .name
+                                                    }{' '}
+                                                    /{' '}
+                                                    {selectedLocation.area.name}
+                                                  </Span>
+                                                </Div>
+                                              </Div>
+
+                                              <Div
+                                                width="96px"
+                                                height="82px"
+                                                position="relative">
+                                                <Div
+                                                  position="absolute"
+                                                  top="0"
+                                                  left="0"
+                                                  right="0"
+                                                  bottom="0"
+                                                  backgroundSize="cover"
+                                                  backgroundImage={`url('${sanity.image.getUrl(
+                                                    selectedLocation
+                                                      .thumbnailImage.asset
+                                                  )}')`}
+                                                  backgroundPosition="center"
+                                                  borderRadius="8px"
+                                                />
+                                              </Div>
+                                            </Div>
+                                          </A>
+                                        </Link>
+                                      </LocationMarker>
+
+                                      <MapMarkerLarge
+                                        style={{
+                                          transform: 'translateX(-50%)'
+                                        }}
+                                        key={content._id}
+                                      />
+                                    </MarkerContainer>
+                                  );
+                                }
+
                                 return (
-                                  <Marker
-                                    key={location._id}
+                                  <MarkerContainer
+                                    key={content._id}
                                     lat={lat}
                                     lng={lng}
-                                  />
+                                    onClick={() => {
+                                      setSelectedLocation(content);
+                                    }}>
+                                    <MapMarkerSmall
+                                      style={{
+                                        zIndex: 0,
+                                        transform: 'translate(-50%,-100%)'
+                                      }}></MapMarkerSmall>
+                                  </MarkerContainer>
                                 );
                               })}
                             </GoogleMapReact>
