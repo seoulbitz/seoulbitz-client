@@ -44,7 +44,18 @@ const MenuBar = () => {
         }}>
         Open Forgot Password Modal
       </button>
-      <button>Open Menu</button>
+      <button
+        onClick={() => {
+          setGlobalUIState((state) => {
+            return {
+              ...state,
+              openedModal: null,
+              isDrawerOpen: true
+            };
+          });
+        }}>
+        Open Menu
+      </button>
 
       <button
         onClick={() => {
@@ -168,7 +179,7 @@ const MarqueeBar = () => {
   );
 };
 
-const LayoutMobileHeader = () => {
+const HeaderMobile = () => {
   return (
     <Div display={[null, null, 'none']}>
       <Header position="fixed" top="0" height="84px" width="100%" zIndex={10}>
@@ -179,4 +190,4 @@ const LayoutMobileHeader = () => {
   );
 };
 
-export default LayoutMobileHeader;
+export default HeaderMobile;

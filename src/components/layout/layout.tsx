@@ -7,10 +7,9 @@ import React, { FC, useEffect } from 'react';
 import { ModalType } from 'types';
 import Div from '../styled-system/div/div';
 import Main from '../styled-system/main/main';
-import LayoutDesktopHeader from './layout-desktop-header';
-import LayoutMobileHeader from './layout-mobile-header';
-import LayoutSidebar from './layout-sidebar';
 import { CheckUserSurveySubmissionResult } from '@/services/sanity/api/user-survey';
+import Header from '../header/header';
+import Sidebar from '../sidebar/sidebar';
 
 const Layout: FC = ({ children }) => {
   const globalUIState = useGlobalUIState();
@@ -41,15 +40,10 @@ const Layout: FC = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <Div display="flex" flexDirection="column" minHeight="100%">
-        {/* Mobile Header */}
-        <LayoutMobileHeader />
-
-        {/* Desktop Header */}
-        <LayoutDesktopHeader />
+        <Header />
 
         <Div display="flex">
-          {/* Sidebar */}
-          <LayoutSidebar />
+          <Sidebar />
 
           {/* Content */}
           <Div width="100%" marginTop={['84px', null, '88px']}>

@@ -67,7 +67,7 @@ const DesktopHeader = () => {
   );
 };
 
-const LayoutDesktopHeader = () => {
+const HeaderDesktop = () => {
   return (
     <Div display={['none', null, 'block']}>
       <Header
@@ -85,4 +85,4 @@ const LayoutDesktopHeader = () => {
   );
 };
 
-export default LayoutDesktopHeader;
+export default HeaderDesktop;
