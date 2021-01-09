@@ -1,21 +1,9 @@
+import { theme } from '@/styles/theme';
 import { motion } from 'framer-motion';
 import React from 'react';
 import Div from '../styled-system/div/div';
-import Aside from '../styled-system/aside/aside';
-import { theme } from '@/styles/theme';
 
-const SideBar = () => {
-  return (
-    <Div width="360px" overflowY="auto">
-      <Div height="88px" backgroundColor="#F4F2EF"></Div>
-      <Div height="96px" backgroundColor="#ffffff"></Div>
-      <Div height="614px" backgroundColor="#fafafa"></Div>
-      <Div height="532px" padding="24px 0 48px 0" backgroundColor="#ffffff" />
-    </Div>
-  );
-};
-
-const MarqueeBar = () => {
+const SidebarMarquee = () => {
   const texts = [];
   for (let i = 0; i < 8; i += 1) {
     texts.push(
@@ -103,21 +91,4 @@ const MarqueeBar = () => {
   );
 };
 
-const LayoutSidebar = () => {
-  return (
-    <Div display={['none', null, 'block']} minWidth="392px" zIndex={20}>
-      <Aside
-        position="fixed"
-        top="0"
-        left="0"
-        bottom="0"
-        width="392px"
-        display="flex">
-        <SideBar />
-        <MarqueeBar />
-      </Aside>
-    </Div>
-  );
-};
-
-export default LayoutSidebar;
+export default SidebarMarquee;

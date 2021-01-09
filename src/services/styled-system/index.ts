@@ -35,6 +35,10 @@ export const transformOrigin = system({
   transformOrigin: true
 });
 
+export const listStyle = system({
+  listStyle: true
+});
+
 export interface CursorProps<
   ThemeType extends Theme = RequiredTheme,
   TVal = CSS.Property.Left<TLengthStyledSystem>
@@ -82,4 +86,11 @@ export interface TransformOriginProps<
   TVal = CSS.Property.Left<TLengthStyledSystem>
 > {
   transformOrigin?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface ListStyleProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  listStyle?: ResponsiveValue<TVal, ThemeType>;
 }

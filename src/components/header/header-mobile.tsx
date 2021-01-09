@@ -1,86 +1,43 @@
 import { motion } from 'framer-motion';
-import { globalUIState } from '@/services/recoil/atoms';
 import React from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useGlobalUIState } from '@/services/react/hooks';
 import Div from '../styled-system/div/div';
 import Header from '../styled-system/header/header';
 import { theme } from '@/styles/theme';
+import Hamburger from '../icons/hamburger/hamburger';
+import SeoulbitzLogo from '../icons/seoulbitz-logo/seoulbitz-logo';
+import Button from '../styled-system/button/button';
+import Link from 'next/link';
+import A from '../styled-system/a/a';
 
 const MenuBar = () => {
-  const setGlobalUIState = useSetRecoilState(globalUIState);
+  const globalUIState = useGlobalUIState();
 
   return (
-    <Div height="56px" backgroundColor="#ffffff">
-      <button
-        onClick={() => {
-          setGlobalUIState((state) => {
-            return {
-              ...state,
-              openedModal: 'logInModal'
-            };
-          });
-        }}>
-        Open Sign In Modal
-      </button>
-      <button
-        onClick={() => {
-          setGlobalUIState((state) => {
-            return {
-              ...state,
-              openedModal: 'signUpModal'
-            };
-          });
-        }}>
-        Open Sign Up Modal
-      </button>
-      <button
-        onClick={() => {
-          setGlobalUIState((state) => {
-            return {
-              ...state,
-              openedModal: 'forgotPasswordModal'
-            };
-          });
-        }}>
-        Open Forgot Password Modal
-      </button>
-      <button>Open Menu</button>
-
-      <button
-        onClick={() => {
-          setGlobalUIState((state) => {
-            return {
-              ...state,
-              openedModal: 'deleteAccountConfirmModal'
-            };
-          });
-        }}>
-        Delete Account confirm modal
-      </button>
-
-      <button
-        onClick={() => {
-          setGlobalUIState((state) => {
-            return {
-              ...state,
-              openedModal: 'checkInboxModal'
-            };
-          });
-        }}>
-        check inbox modal
-      </button>
-
-      <button
-        onClick={() => {
-          setGlobalUIState((state) => {
-            return {
-              ...state,
-              openedModal: 'resetPasswordLinkSentModal'
-            };
-          });
-        }}>
-        reset password
-      </button>
+    <Div
+      height="56px"
+      backgroundColor="#ffffff"
+      display="flex"
+      flexDirection="row"
+      alignItems="center"
+      justifyContent="space-between"
+      padding="0px 20px">
+      <Link href="/" passHref>
+        <A>
+          <SeoulbitzLogo width="94.5px" height="18px" />
+        </A>
+      </Link>
+      <Div>
+        <Button
+          padding="initial"
+          border="initial"
+          background="initial"
+          onClick={() => {
+            globalUIState.openDrawer();
+          }}>
+          <Hamburger display="block" />
+        </Button>
+      </Div>
     </Div>
   );
 };
@@ -168,7 +125,7 @@ const MarqueeBar = () => {
   );
 };
 
-const LayoutMobileHeader = () => {
+const HeaderMobile = () => {
   return (
     <Div display={[null, null, 'none']}>
       <Header position="fixed" top="0" height="84px" width="100%" zIndex={10}>
@@ -179,4 +136,4 @@ const LayoutMobileHeader = () => {
   );
 };
 
-export default LayoutMobileHeader;
+export default HeaderMobile;

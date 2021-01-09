@@ -20,7 +20,8 @@ export const useGlobalUIState = () => {
       return {
         ...prevState,
         openedModal: type,
-        data: data ? data : {}
+        data: data ? data : {},
+        isDrawerOpen: false
       };
     });
   };
@@ -30,7 +31,30 @@ export const useGlobalUIState = () => {
       return {
         ...prevState,
         openedModal: null,
-        data: {}
+        data: {},
+        isDrawerOpen: false
+      };
+    });
+  };
+
+  const openDrawer = () => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        openedModal: null,
+        data: {},
+        isDrawerOpen: true
+      };
+    });
+  };
+
+  const closeDrawer = () => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        openedModal: null,
+        data: {},
+        isDrawerOpen: false
       };
     });
   };
@@ -38,6 +62,8 @@ export const useGlobalUIState = () => {
   return {
     ...state,
     openModal,
-    closeModal
+    closeModal,
+    openDrawer,
+    closeDrawer
   };
 };
