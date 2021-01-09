@@ -24,6 +24,7 @@ import {
   ShadowProps
 } from 'styled-system';
 import shouldForwardProp from '@styled-system/should-forward-prop';
+import { listStyle, ListStyleProps } from '@/services/styled-system';
 
 export type UlProps = SpaceProps &
   ColorProps &
@@ -35,10 +36,23 @@ export type UlProps = SpaceProps &
   BorderProps &
   PositionProps &
   ShadowProps &
+  ListStyleProps &
   React.HTMLAttributes<HTMLUListElement>;
 
 const Ul = styled('ul', { shouldForwardProp })<UlProps>(
-  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow)
+  compose(
+    space,
+    color,
+    typography,
+    layout,
+    flexbox,
+    grid,
+    background,
+    border,
+    position,
+    shadow,
+    listStyle
+  )
 );
 
 export default Ul;

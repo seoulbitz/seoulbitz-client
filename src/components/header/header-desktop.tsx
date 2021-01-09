@@ -1,15 +1,18 @@
 import firebase from '@/services/firebase';
 import { useGlobalUIState } from '@/services/react/hooks';
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { ModalType } from 'types';
 import Button from '../button/button';
+import SearchBox from '../search-box/search-box';
 import A from '../styled-system/a/a';
 import Div from '../styled-system/div/div';
 import Header from '../styled-system/header/header';
 
 const DesktopHeader = () => {
   const globalUIState = useGlobalUIState();
+  const router = useRouter();
 
   const [user, setUser] = useState(null);
   // Get user on mount
@@ -36,17 +39,27 @@ const DesktopHeader = () => {
       alignItems="center"
       justifyContent="space-between"
       padding="0 24px">
-      <Div width="240px" height="48px" borderBottom="1px solid #0511F2"></Div>
+      <Div width="240px">
+        <SearchBox
+          onSearch={async (keyword) => {
+            await router.push(`/search?query=${keyword}`);
+            globalUIState.closeDrawer();
+          }}
+        />
+      </Div>
       <Div display="flex" flexDirection="row">
         {user ? (
           <>
             <Link href="/account" passHref>
               <A textDecoration="none">
-                <Button variant="blue" width="initial">
+                <Button variant="blue" width="initial" marginRight="16px">
                   MY ACCOUNT
                 </Button>
               </A>
             </Link>
+            <Button variant="black" width="initial">
+              EN
+            </Button>
           </>
         ) : (
           <>
@@ -57,7 +70,7 @@ const DesktopHeader = () => {
               onClick={handleLogInClick}>
               LOG IN
             </Button>
-            <Button variant="black" marginRight="16px" width="initial">
+            <Button variant="black" width="initial">
               EN
             </Button>
           </>

@@ -10,9 +10,12 @@ import Main from '../styled-system/main/main';
 import { CheckUserSurveySubmissionResult } from '@/services/sanity/api/user-survey';
 import Header from '../header/header';
 import Sidebar from '../sidebar/sidebar';
+import { useRouter } from 'next/dist/client/router';
 
 const Layout: FC = ({ children }) => {
   const globalUIState = useGlobalUIState();
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetch = async () => {
@@ -36,6 +39,10 @@ const Layout: FC = ({ children }) => {
 
     fetch();
   }, []);
+
+  useEffect(() => {
+    globalUIState.closeDrawer();
+  }, [router.asPath]);
 
   return (
     <ThemeProvider theme={theme}>
