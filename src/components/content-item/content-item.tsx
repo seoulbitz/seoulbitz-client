@@ -160,7 +160,7 @@ const ContentItem: FC<ContentItemProps> = ({
         {isLocation && (
           <Span
             fontFamily={theme.fonts.nanumSquare}
-            fontWeight="700"
+            fontWeight="800"
             marginLeft="4px"
             fontSize="16px"
             lineHeight="20px"
