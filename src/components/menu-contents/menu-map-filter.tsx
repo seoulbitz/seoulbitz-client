@@ -1,90 +1,89 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../styled-system/button/button';
 import StyledButton from '../button/button';
 import Div from '../styled-system/div/div';
 import MenuMapGraphics from './menu-map-graphics';
 import Span from '../styled-system/span/span';
 import { theme } from '@/styles/theme';
-
-const CATEGORY_ITEMS = [
-  {
-    label: 'Coffee',
-    value: 'coffee'
-  },
-  {
-    label: 'Shops',
-    value: 'shops'
-  },
-  {
-    label: 'Rooms',
-    value: 'rooms'
-  },
-  {
-    label: 'Nature',
-    value: 'nature'
-  },
-  {
-    label: 'Landmarks',
-    value: 'landmarks'
-  },
-  {
-    label: 'Food',
-    value: 'food'
-  },
-  {
-    label: 'Nightlife',
-    value: 'nightlife'
-  },
-  {
-    label: 'Sports',
-    value: 'sports'
-  },
-  {
-    label: 'Culture',
-    value: 'culture'
-  },
-  {
-    label: 'Classes',
-    value: 'classes'
-  },
-  {
-    label: 'Family',
-    value: 'family'
-  },
-  {
-    label: 'Wellness',
-    value: 'wellness'
-  }
-];
-
-const ZONE_ITEMS = {
-  'north-west': {
-    areas: ['Pater', 'Noster', 'Qui']
-  },
-  center: {
-    areas: ['Pater1', 'Noster1', 'Qui1']
-  },
-  'north-east': {
-    areas: ['Pater2', 'Noster2', 'Qui2']
-  },
-  'south-west': {
-    areas: ['Pater3', 'Noster3', 'Qui3']
-  },
-  'south-east': {
-    areas: ['Pater4', 'Noster4', 'Qui4']
-  }
-};
+import sanity from '@/services/sanity';
+import { useRecoilState } from 'recoil';
+import { locationListState } from '@/services/recoil/atoms';
 
 const MenuMapFilter = () => {
-  const [selectedCategories, setSelectedCategories] = useState([]); // ['sports', 'shops']
-  const [selectedZones, setSelectedZones] = useState([]); // ['center', 'north-west']
+  const [locationList, setLocationList] = useRecoilState(locationListState);
+  const [categories, setCategories] = useState([]);
+  const [zones, setZones] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const [categories, zones] = await Promise.all([
+        sanity.api.locationCategory.find(),
+        sanity.api.locationZone.find()
+      ]);
+      setCategories(categories);
+      setZones(zones);
+    };
+
+    fetch();
+  }, []);
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedZones, setSelectedZones] = useState([]);
 
   let selectedAreas = [];
-  Object.keys(ZONE_ITEMS).forEach((key) => {
-    if (selectedZones.includes(key)) {
-      selectedAreas = [...selectedAreas, ...ZONE_ITEMS[key].areas];
+  zones.forEach((zone) => {
+    if (selectedZones.includes(zone.name)) {
+      const areas = zone.areas.map((area) => {
+        return area.name;
+      });
+      selectedAreas = [...selectedAreas, ...areas];
     }
   });
+
+  if (categories.length === 0 && zones.length === 0) {
+    return null;
+  }
+
+  const handleSearch = async () => {
+    setIsSearching(true);
+    let order = {};
+    switch (locationList.sortBy) {
+      case 'latest': {
+        order = { _createdAt: 'desc' };
+        break;
+      }
+      case 'likes': {
+        order = { likes: 'desc' };
+        break;
+      }
+      // TODO: Replace with order by distance
+      case 'distance': {
+        order = { likes: 'desc' };
+        break;
+      }
+    }
+    setLocationList((state) => {
+      return {
+        ...state,
+        locations: []
+      };
+    });
+
+    const locations = await sanity.api.location.findByFilters({
+      categories: selectedCategories,
+      areas: selectedAreas,
+      order
+    });
+
+    setLocationList((state) => {
+      return {
+        ...state,
+        locations
+      };
+    });
+    setIsSearching(false);
+  };
 
   return (
     <Div
@@ -112,11 +111,11 @@ const MenuMapFilter = () => {
         gridRowGap="8px"
         gridTemplateRows="repeat(4, auto)"
         gridTemplateColumns="repeat(3, auto)">
-        {CATEGORY_ITEMS.map(({ label, value }) => {
-          const isSelected = selectedCategories.includes(value);
-
+        {categories.map((category) => {
+          const { _id, name } = category;
+          const isSelected = selectedCategories.includes(name);
           return (
-            <Div key={value}>
+            <Div key={_id}>
               <Button
                 style={{
                   outline: 'none'
@@ -136,14 +135,13 @@ const MenuMapFilter = () => {
                   setSelectedCategories((prevSelectedCategories) => {
                     if (isSelected) {
                       return prevSelectedCategories.filter((category) => {
-                        return category !== value;
+                        return category !== name;
                       });
-                    } else {
-                      return [...prevSelectedCategories, value];
                     }
+                    return [...prevSelectedCategories, name];
                   });
                 }}>
-                {label}
+                {name}
               </Button>
             </Div>
           );
@@ -182,9 +180,7 @@ const MenuMapFilter = () => {
         <StyledButton
           variant="black"
           marginRight="10px"
-          disabled={
-            selectedCategories.length === 0 && selectedZones.length === 0
-          }
+          disabled={isSearching}
           onClick={() => {
             setSelectedCategories([]);
             setSelectedZones([]);
@@ -194,9 +190,8 @@ const MenuMapFilter = () => {
         <StyledButton
           variant="blue"
           marginLeft="10px"
-          disabled={
-            selectedCategories.length === 0 && selectedZones.length === 0
-          }>
+          disabled={isSearching}
+          onClick={handleSearch}>
           SEARCH
         </StyledButton>
       </Div>

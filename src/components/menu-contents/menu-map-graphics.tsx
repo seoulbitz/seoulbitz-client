@@ -1,14 +1,6 @@
 import SVG, { SVGProps } from '@/components/styled-system/svg/svg';
 import React, { FC } from 'react';
 
-// type ZoneValue = {
-//   'north-west': boolean;
-//   center: boolean;
-//   'north-east': boolean;
-//   'south-west': boolean;
-//   'south-east': boolean;
-// };
-
 type MenuMapGraphicsProps = {
   selectedZones: string[];
   onSelect: (selectedZones: string[]) => void;
@@ -19,11 +11,11 @@ const MenuMapGraphics: FC<MenuMapGraphicsProps> = ({
   onSelect,
   ...rest
 }) => {
-  const isNorthWestSelected = selectedZones.includes('north-west');
-  const isCenterSelected = selectedZones.includes('center');
-  const isNorthEastSelected = selectedZones.includes('north-east');
-  const isSouthWestSelected = selectedZones.includes('south-west');
-  const isSouthEastSelected = selectedZones.includes('south-east');
+  const isNorthWestSelected = selectedZones.includes('North West');
+  const isCenterSelected = selectedZones.includes('Central');
+  const isNorthEastSelected = selectedZones.includes('North East');
+  const isSouthWestSelected = selectedZones.includes('South West');
+  const isSouthEastSelected = selectedZones.includes('South East');
 
   const handleZoneClick = (zone: string) => () => {
     if (selectedZones.includes(zone)) {
@@ -126,7 +118,7 @@ const MenuMapGraphics: FC<MenuMapGraphicsProps> = ({
         stroke="#fff"
         strokeWidth={3}
         strokeMiterlimit={10}
-        onClick={handleZoneClick('center')}
+        onClick={handleZoneClick('Central')}
       />
       <path
         id="north-west-zone"
@@ -135,7 +127,7 @@ const MenuMapGraphics: FC<MenuMapGraphicsProps> = ({
         stroke="#fff"
         strokeWidth={3}
         strokeMiterlimit={10}
-        onClick={handleZoneClick('north-west')}
+        onClick={handleZoneClick('North West')}
       />
       <path
         d="M152.493 140.355l14.359.734c1.264.064 2.469.479 3.43 1.18v0a6.182 6.182 0 002.131.985 6.772 6.772 0 002.417.16l2.814-.319a6.664 6.664 0 013.755.66l3.193 1.63M100.208 108.029l15.579 10.44c.469.315.908.661 1.313 1.035l12.557 11.62c2.344 2.17 5.461 3.626 8.872 4.143l5.934.901c1.719.262 3.488.124 5.122-.397l1.452-.463"
@@ -162,7 +154,7 @@ const MenuMapGraphics: FC<MenuMapGraphicsProps> = ({
         stroke="#fff"
         strokeWidth={3}
         strokeMiterlimit={10}
-        onClick={handleZoneClick('south-east')}
+        onClick={handleZoneClick('South East')}
       />
       <path
         d="M222.099 164.144v11.488c0 .612.151 1.216.445 1.774a4.446 4.446 0 001.257 1.465l6.219 4.732c.937.713 2.15 1.107 3.407 1.107h5.937c1.021 0 2.019.26 2.865.748.846.487 1.5 1.178 1.88 1.984v0c.444.947 1.266 1.73 2.321 2.214l2.095.959c.812.372 1.491.925 1.964 1.599a3.87 3.87 0 01.723 2.229v1.558c0 .85.293 1.681.843 2.391l6.974 9.005M184.591 160.786l3.101 6.029c.233.452.353.941.353 1.435v4.42c0 .602.178 1.195.519 1.724.34.528.832.975 1.43 1.299l1.43.773a3.885 3.885 0 011.473 1.364c.342.557.506 1.181.475 1.808l-.299 6.107a3.121 3.121 0 00.409 1.695c.297.529.742.987 1.295 1.335l8.445 5.31c.719.451 1.25 1.086 1.517 1.812l3.369 9.172c.315.857.997 1.582 1.911 2.032.914.45 1.993.591 3.023.396l3.292-.622c1.163-.22 2.181-.814 2.842-1.657l1.667-2.128a4.047 4.047 0 011.517-1.171 4.82 4.82 0 011.988-.425h4.389c1.116.001 2.185.377 2.975 1.047v0c.787.672 1.23 1.582 1.23 2.53v2.141c0 .567.158 1.126.461 1.631a3.82 3.82 0 001.283 1.273l7.629 4.803"
@@ -177,7 +169,7 @@ const MenuMapGraphics: FC<MenuMapGraphicsProps> = ({
         stroke="#fff"
         strokeWidth={3}
         strokeMiterlimit={10}
-        onClick={handleZoneClick('south-west')}
+        onClick={handleZoneClick('South West')}
       />
       <path
         d="M90.45 191.29l11.341.873a3.44 3.44 0 001.274-.141 3.072 3.072 0 001.085-.587l.381-.324c.275-.233.601-.419.961-.545a3.404 3.404 0 011.133-.192c.389 0 .774.065 1.133.192.359.126.686.312.96.545v0c.275.234.602.42.961.546.359.127.744.192 1.133.192h.718a3.3 3.3 0 011.816.531l2.564 1.696c.337.223.614.505.81.828.197.322.309.677.33 1.04l.848 15.144c.023.409.163.807.408 1.16.245.353.588.65.998.865l3.675 1.919c.43.225.786.54 1.033.916.246.375.376.798.376 1.228v2.37M164.683 197.282l-1.511.369a4.87 4.87 0 00-.569.174l-2.094.792a5.055 5.055 0 01-2.036.312 4.904 4.904 0 01-1.976-.522l-3.563-1.818a4.106 4.106 0 01-1.448-1.208 3.357 3.357 0 01-.65-1.635l-.518-4.85c-.08-.74-.418-1.443-.973-2.017-.554-.574-1.299-.993-2.137-1.203l-4.811-1.204a5.11 5.11 0 00-1.501-.143l-12.789.68a4.908 4.908 0 00-1.959.515 4.128 4.128 0 00-1.465 1.22v0a4.142 4.142 0 01-1.581 1.278 4.96 4.96 0 01-2.111.466h-1.208c-1.154.001-2.261.392-3.077 1.086l-3.165 1.852.37-3.878c.037-.47.233-.92.566-1.297a2.867 2.867 0 011.306-.823l2.225-.688a6.437 6.437 0 002.496-1.425l1.715-1.604c1.402-1.311 2.178-3.02 2.178-4.793v-2.847c0-1.001.341-1.98.983-2.819l2.997-3.925c1.583-2.073 3.892-3.67 6.601-4.565l4.717-1.561"
@@ -204,7 +196,7 @@ const MenuMapGraphics: FC<MenuMapGraphicsProps> = ({
         stroke="#fff"
         strokeWidth={3}
         strokeMiterlimit={10}
-        onClick={handleZoneClick('north-east')}
+        onClick={handleZoneClick('North East')}
       />
       <path
         d="M215.681 157.977l1.613-5.83a5.553 5.553 0 011.355-2.346l3.883-4.065c.994-1.042 1.538-2.342 1.538-3.684v-4.156c0-.872.23-1.734.673-2.52l2.888-5.138c.56-.994 1.438-1.833 2.534-2.421a7.779 7.779 0 013.662-.9v0c1.663 0 3.27-.514 4.522-1.445l.064-.048c1.252-.931 2.859-1.445 4.522-1.445h4.631"

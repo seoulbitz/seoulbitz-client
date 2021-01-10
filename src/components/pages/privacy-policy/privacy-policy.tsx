@@ -38,7 +38,7 @@ const PrivacyPolicy: FC<{ privacyPolicyPage: PrivacyPolicyPageDocument }> = ({
 export default PrivacyPolicy;
 
 export const getServerSideProps = async (context) => {
-  const privacyPolicyPage = await sanity.api.page.getPrivacyPolicyPage();
+  const privacyPolicyPage = await sanity.api.page.findPrivacyPolicyPage();
 
   return {
     props: {
