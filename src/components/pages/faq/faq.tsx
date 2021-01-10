@@ -48,7 +48,7 @@ const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
 export default FAQ;
 
 export const getServerSideProps = async (context) => {
-  const faqPage = await sanity.api.page.getFAQPage();
+  const faqPage = await sanity.api.page.findFAQPage();
 
   return {
     props: {

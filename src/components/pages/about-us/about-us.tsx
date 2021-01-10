@@ -43,7 +43,7 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
 export default AboutUs;
 
 export const getServerSideProps = async (context) => {
-  const aboutUsPage = await sanity.api.page.getAboutUsPage();
+  const aboutUsPage = await sanity.api.page.findAboutUsPage();
 
   return {
     props: {

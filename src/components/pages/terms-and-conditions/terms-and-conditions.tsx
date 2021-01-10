@@ -38,7 +38,7 @@ const TermsAndConditions: FC<{
 export default TermsAndConditions;
 
 export const getServerSideProps = async (context) => {
-  const termsAndConditionsPage = await sanity.api.page.getTermsAndConditionsPage();
+  const termsAndConditionsPage = await sanity.api.page.findTermsAndConditionsPage();
 
   return {
     props: {

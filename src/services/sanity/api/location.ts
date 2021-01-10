@@ -46,6 +46,39 @@ export const createLocationService = (client: SanityClient) => {
     return location;
   };
 
+  const findByFilters = async ({ categories, areas, order }) => {
+    console.log({
+      categories,
+      areas,
+      order
+    });
+
+    const categoriesConstraint =
+      categories.length > 0
+        ? `&& category._ref in *[_type == "locationCategory" && name in [
+          ${categories.map((category) => `"${category}"`).join(', ')}
+        ]]._id`
+        : '';
+
+    const areasConstraint =
+      areas.length > 0
+        ? `&& area._ref in *[_type == "locationArea" && name in [
+        ${areas.map((area) => `"${area}"`).join(', ')}]]._id`
+        : '';
+
+    const orderQuery = getOrderQuery(order);
+
+    const query = `
+    *[_type == "location" ${areasConstraint} ${categoriesConstraint}] {
+      ...,
+      category->,
+      area->,
+      "userLikes": *[_type == 'userLike' && references(^._id)]
+    }${orderQuery}`;
+    const locations = await client.fetch<LocationDocument[]>(query);
+    return locations;
+  };
+
   const find = async ({
     order
   }: {
@@ -65,6 +98,7 @@ export const createLocationService = (client: SanityClient) => {
 
   return {
     find,
+    findByFilters,
     findOneBySlug
   };
 };
