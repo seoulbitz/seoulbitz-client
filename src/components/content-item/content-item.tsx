@@ -26,6 +26,7 @@ type ContentItemProps = {
   subtitle: string;
   images?: SanityImageSource[];
   likes?: number;
+  author?: any;
   category?: string;
   area?: string;
 };
@@ -37,6 +38,7 @@ const ContentItem: FC<ContentItemProps> = ({
   subtitle,
   images,
   likes,
+  author,
   category,
   area
 }) => {
@@ -57,11 +59,12 @@ const ContentItem: FC<ContentItemProps> = ({
         <Div
           display="flex"
           flexDirection="column"
-          justifyContent={isLocation ? 'space-between' : 'center'}
+          // justifyContent={isLocation ? 'space-between' : 'center'}
+          justifyContent="space-between"
           padding="24px"
           alignItems="center"
           height="100%">
-          {isLocation && (
+          {isLocation ? (
             <Div
               fontFamily={theme.fonts.futura}
               fontSize="16px"
@@ -69,6 +72,15 @@ const ContentItem: FC<ContentItemProps> = ({
               fontWeight="500"
               color="#ffffff">
               {category} / {area}
+            </Div>
+          ) : (
+            <Div
+              fontFamily={theme.fonts.futura}
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight="500"
+              color="#ffffff">
+              {author.name}
             </Div>
           )}
           <Div>
@@ -110,16 +122,15 @@ const ContentItem: FC<ContentItemProps> = ({
               {subtitle}
             </Div>
           </Div>
-          {isLocation && (
-            <Div
-              fontFamily={theme.fonts.futura}
-              fontSize="16px"
-              lineHeight="20px"
-              fontWeight="500"
-              color="#ffffff">
-              {likes} likes / 3 km far
-            </Div>
-          )}
+          <Div
+            fontFamily={theme.fonts.futura}
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight="500"
+            color="#ffffff">
+            {likes > 0 ? `${likes} likes` : ' '}
+            {/* / 3 km far */}
+          </Div>
         </Div>
       </DesktopImage>
 
@@ -178,7 +189,7 @@ const ContentItem: FC<ContentItemProps> = ({
         lineHeight="20px">
         {subtitle}
       </Div>
-      {isLocation && (
+      {isLocation ? (
         <Div
           display={['flex', null, 'none']}
           flexDirection="row"
@@ -193,24 +204,60 @@ const ContentItem: FC<ContentItemProps> = ({
             color="#777777">
             {category} / {area}
           </Span>
-          <Span
+          {likes > 0 && (
+            <>
+              ,
+              <Span
+                fontFamily={theme.fonts.futura}
+                marginLeft="4px"
+                fontSize="14px"
+                lineHeight="18px"
+                fontWeight="500"
+                color="#777777">
+                {likes} likes
+              </Span>
+            </>
+          )}
+
+          {/* <Span
             fontFamily={theme.fonts.futura}
             marginLeft="4px"
             fontSize="14px"
             lineHeight="18px"
             fontWeight="500"
             color="#777777">
-            {likes} likes
-          </Span>
+            3 km far
+          </Span> */}
+        </Div>
+      ) : (
+        <Div
+          display={['flex', null, 'none']}
+          flexDirection="row"
+          alignItems="flex-start"
+          marginTop="8px"
+          whiteSpace="nowrap">
           <Span
             fontFamily={theme.fonts.futura}
-            marginLeft="4px"
             fontSize="14px"
             lineHeight="18px"
             fontWeight="500"
             color="#777777">
-            , 3 km far
+            {author.name}
           </Span>
+          {likes > 0 && (
+            <>
+              ,
+              <Span
+                fontFamily={theme.fonts.futura}
+                marginLeft="4px"
+                fontSize="14px"
+                lineHeight="18px"
+                fontWeight="500"
+                color="#777777">
+                {likes} likes
+              </Span>
+            </>
+          )}
         </Div>
       )}
     </Div>

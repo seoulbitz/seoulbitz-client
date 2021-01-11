@@ -99,7 +99,15 @@ const ArticleList: FC<{ articles: ArticleDocument[] }> = (props) => {
       </Grid>
       <Grid paddingTop={['40px', '40px', '48px']}>
         {articlesToRender.map((article, i) => {
-          const { _id, title, slug, thumbnailImage, subtitle, likes } = article;
+          const {
+            _id,
+            title,
+            slug,
+            author,
+            thumbnailImage,
+            subtitle,
+            userLikes
+          } = article;
           const remainder = i % 4;
 
           const href = `/articles/${slug.current}`;
@@ -120,7 +128,8 @@ const ArticleList: FC<{ articles: ArticleDocument[] }> = (props) => {
                     title={title}
                     subtitle={subtitle}
                     images={[thumbnailImage]}
-                    likes={likes}
+                    likes={userLikes.length}
+                    author={author}
                   />
                 </A>
               </Link>

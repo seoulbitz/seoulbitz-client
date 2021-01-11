@@ -14,6 +14,7 @@ export type LocationDocument = SanityDocument<{
   subtitle: string;
   category: any;
   area: any;
+  thumbnailImage: SanityImageSource;
   images: SanityImageSource[];
   location: {
     _type: 'geopoint';

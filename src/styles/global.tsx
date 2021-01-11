@@ -9,6 +9,7 @@ export const globalStyles = (
     styles={css`
       * {
         box-sizing: border-box;
+        outline: none;
       }
 
       html,
