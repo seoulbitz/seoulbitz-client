@@ -110,7 +110,7 @@ const MenuMapFilter = () => {
         gridColumnGap="20px"
         gridRowGap="8px"
         gridTemplateRows="repeat(4, auto)"
-        gridTemplateColumns="repeat(3, auto)">
+        gridTemplateColumns="repeat(3, 1fr)">
         {categories.map((category) => {
           const { _id, name } = category;
           const isSelected = selectedCategories.includes(name);

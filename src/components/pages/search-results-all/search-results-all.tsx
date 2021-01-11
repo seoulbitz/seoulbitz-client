@@ -73,13 +73,13 @@ const Search: FC<{
                 slug,
                 title,
                 subtitle,
-                images,
-                likes,
+                thumbnailImage,
+                userLikes,
                 category,
                 area
               } = location;
 
-              console.log(location);
+              const href = `/locations/${slug.current}`;
 
               return (
                 <Cell
@@ -90,15 +90,15 @@ const Search: FC<{
                     remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
                   ]}
                   marginBottom={['40px', null, '24px']}>
-                  <Link href="/" passHref>
+                  <Link href={href} passHref>
                     <A textDecoration="initial" color="initial">
                       <ContentItem
                         kind="location"
                         title={title.en}
                         titleKo={title.ko}
                         subtitle={subtitle}
-                        images={images}
-                        likes={likes}
+                        images={[thumbnailImage]}
+                        likes={userLikes.length}
                         category={category.name}
                         area={area.name}
                       />
@@ -160,11 +160,15 @@ const Search: FC<{
               const {
                 _id,
                 slug,
+                author,
                 title,
                 subtitle,
                 thumbnailImage,
-                likes
+                userLikes
               } = article;
+
+              const href = `/articles/${slug.current}`;
+
               return (
                 <Cell
                   key={_id}
@@ -174,14 +178,15 @@ const Search: FC<{
                     remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
                   ]}
                   marginBottom="32px">
-                  <Link href="/" passHref>
+                  <Link href={href} passHref>
                     <A textDecoration="initial" color="initial">
                       <ContentItem
                         kind="article"
                         title={title}
                         subtitle={subtitle}
                         images={[thumbnailImage]}
-                        likes={likes}
+                        likes={userLikes.length}
+                        author={author}
                       />
                     </A>
                   </Link>

@@ -9,7 +9,6 @@ import Link from 'next/link';
 import sanity from '@/services/sanity';
 import { ArticleDocument } from '@/services/sanity/api/article';
 import { useRouter } from 'next/dist/client/router';
-import { useRecoilState } from 'recoil';
 
 const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
   props
@@ -63,10 +62,13 @@ const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
                 _id,
                 slug,
                 title,
+                author,
                 subtitle,
                 thumbnailImage,
-                likes
+                userLikes
               } = article;
+
+              const href = `/articles/${slug.current}`;
 
               return (
                 <Cell
@@ -77,14 +79,15 @@ const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
                     remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
                   ]}
                   marginBottom={['40px', null, '24px']}>
-                  <Link href="/" passHref>
+                  <Link href={href} passHref>
                     <A textDecoration="initial" color="initial">
                       <ContentItem
                         kind="article"
                         title={title}
                         subtitle={subtitle}
                         images={[thumbnailImage]}
-                        likes={likes}
+                        likes={userLikes.length}
+                        author={author}
                       />
                     </A>
                   </Link>

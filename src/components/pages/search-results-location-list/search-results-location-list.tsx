@@ -64,11 +64,13 @@ const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
                 slug,
                 title,
                 subtitle,
-                images,
-                likes,
+                thumbnailImage,
+                userLikes,
                 category,
                 area
               } = location;
+
+              const href = `/locations/${slug.current}`;
 
               return (
                 <Cell
@@ -79,15 +81,15 @@ const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
                     remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
                   ]}
                   marginBottom={['40px', null, '24px']}>
-                  <Link href="/" passHref>
+                  <Link href={href} passHref>
                     <A textDecoration="initial" color="initial">
                       <ContentItem
                         kind="location"
                         title={title.en}
                         titleKo={title.ko}
                         subtitle={subtitle}
-                        images={images}
-                        likes={likes}
+                        images={[thumbnailImage]}
+                        likes={userLikes.length}
                         category={category.name}
                         area={area.name}
                       />

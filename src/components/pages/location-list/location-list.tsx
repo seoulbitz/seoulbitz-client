@@ -110,9 +110,10 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
             title,
             subtitle,
             images,
-            likes,
+            thumbnailImage,
             category,
-            area
+            area,
+            userLikes
           } = location;
           const remainder = i % 4;
 
@@ -134,8 +135,8 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
                     title={title.en}
                     titleKo={title.ko}
                     subtitle={subtitle}
-                    images={images}
-                    likes={likes}
+                    images={[thumbnailImage]}
+                    likes={userLikes.length}
                     category={category.name}
                     area={area.name}
                   />

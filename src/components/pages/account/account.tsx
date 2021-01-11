@@ -385,8 +385,8 @@ const Account = () => {
                           slug,
                           title,
                           subtitle,
-                          images,
-                          likes,
+                          thumbnailImage,
+                          userLikes,
                           category,
                           area
                         } = location;
@@ -412,8 +412,8 @@ const Account = () => {
                                   title={title.en}
                                   titleKo={title.ko}
                                   subtitle={subtitle}
-                                  images={images}
-                                  likes={likes}
+                                  images={[thumbnailImage]}
+                                  likes={userLikes.length}
                                   category={category.name}
                                   area={area.name}
                                 />
@@ -448,9 +448,10 @@ const Account = () => {
                           _id,
                           title,
                           slug,
+                          author,
                           thumbnailImage,
                           subtitle,
-                          likes
+                          userLikes
                         } = article;
                         const remainder = i % 4;
 
@@ -474,7 +475,8 @@ const Account = () => {
                                   title={title}
                                   subtitle={subtitle}
                                   images={[thumbnailImage]}
-                                  likes={likes}
+                                  likes={userLikes.length}
+                                  author={author}
                                 />
                               </A>
                             </Link>
