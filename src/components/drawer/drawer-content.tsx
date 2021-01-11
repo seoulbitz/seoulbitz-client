@@ -61,28 +61,34 @@ const DrawerContent = () => {
             <>
               <Link href="/account" passHref>
                 <A flex="3" textDecoration="none">
-                  <StyledButton variant="blue" marginRight="10px">
+                  <StyledButton
+                    variant="blue"
+                    // marginRight="10px" TODO: Add internalization
+                  >
                     MY ACCOUNT
                   </StyledButton>
                 </A>
               </Link>
-              <StyledButton flex="1" variant="black" marginLeft="10px">
+              {/* TODO: Add internalization */}
+              {/* <StyledButton flex="1" variant="black" marginLeft="10px">
                 EN
-              </StyledButton>
+              </StyledButton> */}
             </>
           ) : (
             <>
               <StyledButton
                 variant="blue"
-                marginRight="10px"
+                // marginRight="10px" TODO: Add internalization
                 onClick={() => {
                   globalUIState.openModal(ModalType.logInModal);
                 }}>
                 LOG IN
               </StyledButton>
-              <StyledButton variant="black" marginLeft="10px">
+              {/* TODO: Add internalization */}
+
+              {/* <StyledButton variant="black" marginLeft="10px">
                 EN
-              </StyledButton>
+              </StyledButton> */}
             </>
           )}
         </Div>

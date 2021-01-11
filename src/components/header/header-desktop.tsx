@@ -52,27 +52,33 @@ const DesktopHeader = () => {
           <>
             <Link href="/account" passHref>
               <A textDecoration="none">
-                <Button variant="blue" width="initial" marginRight="16px">
+                <Button
+                  variant="blue"
+                  width="initial"
+                  // marginRight="16px" TODO: Add internalization
+                >
                   MY ACCOUNT
                 </Button>
               </A>
             </Link>
-            <Button variant="black" width="initial">
+            {/* TODO: Add internalization */}
+            {/* <Button variant="black" width="initial">
               EN
-            </Button>
+            </Button> */}
           </>
         ) : (
           <>
             <Button
               variant="blue"
-              marginRight="16px"
+              // marginRight="16px" TODO: Add internalization
               width="initial"
               onClick={handleLogInClick}>
               LOG IN
             </Button>
-            <Button variant="black" width="initial">
+            {/* TODO: Add internalization */}
+            {/* <Button variant="black" width="initial">
               EN
-            </Button>
+            </Button> */}
           </>
         )}
       </Div>
