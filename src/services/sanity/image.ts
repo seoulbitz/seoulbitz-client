@@ -1,9 +1,9 @@
 import sanityImage from '@sanity/image-url';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
-import client from './client';
+import { readClient } from './client';
 
 const createImageService = () => {
-  const imageBuilder = sanityImage(client);
+  const imageBuilder = sanityImage(readClient);
 
   const getUrl = (source: SanityImageSource) => {
     return imageBuilder.image(source).url();

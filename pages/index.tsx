@@ -1,1 +1,4 @@
-export { default } from '@/components/pages/location-list/location-list';
+export {
+  default,
+  getServerSideProps
+} from '@/components/pages/location-list/location-list';

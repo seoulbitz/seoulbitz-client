@@ -4,6 +4,7 @@ import Span from '../styled-system/span/span';
 import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import sanity from '@/services/sanity';
 
 const DesktopImage = styled(Div)`
   > div {
@@ -23,8 +24,11 @@ type ContentItemProps = {
   title: string;
   titleKo?: string;
   subtitle: string;
-  images: SanityImageSource[];
+  images?: SanityImageSource[];
   likes?: number;
+  author?: any;
+  category?: string;
+  area?: string;
 };
 
 const ContentItem: FC<ContentItemProps> = ({
@@ -33,35 +37,50 @@ const ContentItem: FC<ContentItemProps> = ({
   titleKo,
   subtitle,
   images,
-  likes
+  likes,
+  author,
+  category,
+  area
 }) => {
   const isLocation = kind === 'location';
+  const thumbnailImageUrl = sanity.image.getUrl(images[0]);
 
   return (
     <Div>
       {/* For desktop view */}
       <DesktopImage
-        display={['none', null, 'block']}
+        display={['none', null, 'inline-flex']}
         width="100%"
         height="288px"
-        backgroundImage="url('https://cdn.herenow.city/assets/uploads/sites/9/2018/06/02175213/pado8-765x510.jpg')"
+        // TODO: Use <Image /> component to render to optimize rendering performance
+        backgroundImage={`url('${thumbnailImageUrl}')`}
         backgroundPosition="center"
         backgroundSize="cover">
         <Div
           display="flex"
           flexDirection="column"
-          justifyContent={isLocation ? 'space-between' : 'center'}
+          // justifyContent={isLocation ? 'space-between' : 'center'}
+          justifyContent="space-between"
           padding="24px"
           alignItems="center"
           height="100%">
-          {isLocation && (
+          {isLocation ? (
             <Div
               fontFamily={theme.fonts.futura}
               fontSize="16px"
               lineHeight="20px"
               fontWeight="500"
               color="#ffffff">
-              Shopping / Ittaewon
+              {category} / {area}
+            </Div>
+          ) : (
+            <Div
+              fontFamily={theme.fonts.futura}
+              fontSize="16px"
+              lineHeight="20px"
+              fontWeight="500"
+              color="#ffffff">
+              {author.name}
             </Div>
           )}
           <Div>
@@ -69,7 +88,8 @@ const ContentItem: FC<ContentItemProps> = ({
               display="flex"
               flexDirection="column"
               justifyContent="center"
-              alignItems="center">
+              alignItems="center"
+              whiteSpace="nowrap">
               <Div
                 fontFamily={theme.fonts.futura}
                 fontSize="24px"
@@ -102,16 +122,15 @@ const ContentItem: FC<ContentItemProps> = ({
               {subtitle}
             </Div>
           </Div>
-          {isLocation && (
-            <Div
-              fontFamily={theme.fonts.futura}
-              fontSize="16px"
-              lineHeight="20px"
-              fontWeight="500"
-              color="#ffffff">
-              {likes} likes / 3 km far
-            </Div>
-          )}
+          <Div
+            fontFamily={theme.fonts.futura}
+            fontSize="16px"
+            lineHeight="20px"
+            fontWeight="500"
+            color="#ffffff">
+            {likes > 0 ? `${likes} likes` : ' '}
+            {/* / 3 km far */}
+          </Div>
         </Div>
       </DesktopImage>
 
@@ -127,7 +146,8 @@ const ContentItem: FC<ContentItemProps> = ({
           right="0"
           bottom="0"
           backgroundSize="cover"
-          backgroundImage="url('https://cdn.herenow.city/assets/uploads/sites/9/2018/06/02175213/pado8-765x510.jpg')"
+          // TODO: Use <Image /> component to render to optimize rendering performance
+          backgroundImage={`url('${thumbnailImageUrl}')`}
           backgroundPosition="center"
           borderRadius="8px"
         />
@@ -135,9 +155,8 @@ const ContentItem: FC<ContentItemProps> = ({
 
       <Div
         width="100%"
-        display={['flex', null, 'none']}
+        display={['block', null, 'none']}
         flexDirection="row"
-        alignItems="flex-start"
         paddingTop="16px">
         <Span
           width="100%"
@@ -152,7 +171,7 @@ const ContentItem: FC<ContentItemProps> = ({
         {isLocation && (
           <Span
             fontFamily={theme.fonts.nanumSquare}
-            fontWeight="700"
+            fontWeight="800"
             marginLeft="4px"
             fontSize="16px"
             lineHeight="20px"
@@ -170,7 +189,7 @@ const ContentItem: FC<ContentItemProps> = ({
         lineHeight="20px">
         {subtitle}
       </Div>
-      {isLocation && (
+      {isLocation ? (
         <Div
           display={['flex', null, 'none']}
           flexDirection="row"
@@ -183,26 +202,62 @@ const ContentItem: FC<ContentItemProps> = ({
             lineHeight="18px"
             fontWeight="500"
             color="#777777">
-            Shoppint / Ittaewon,
+            {category} / {area}
           </Span>
-          <Span
+          {likes > 0 && (
+            <>
+              ,
+              <Span
+                fontFamily={theme.fonts.futura}
+                marginLeft="4px"
+                fontSize="14px"
+                lineHeight="18px"
+                fontWeight="500"
+                color="#777777">
+                {likes} likes
+              </Span>
+            </>
+          )}
+
+          {/* <Span
             fontFamily={theme.fonts.futura}
             marginLeft="4px"
             fontSize="14px"
             lineHeight="18px"
             fontWeight="500"
             color="#777777">
-            {likes} likes
-          </Span>
+            3 km far
+          </Span> */}
+        </Div>
+      ) : (
+        <Div
+          display={['flex', null, 'none']}
+          flexDirection="row"
+          alignItems="flex-start"
+          marginTop="8px"
+          whiteSpace="nowrap">
           <Span
             fontFamily={theme.fonts.futura}
-            marginLeft="4px"
             fontSize="14px"
             lineHeight="18px"
             fontWeight="500"
             color="#777777">
-            , 3 km far
+            {author.name}
           </Span>
+          {likes > 0 && (
+            <>
+              ,
+              <Span
+                fontFamily={theme.fonts.futura}
+                marginLeft="4px"
+                fontSize="14px"
+                lineHeight="18px"
+                fontWeight="500"
+                color="#777777">
+                {likes} likes
+              </Span>
+            </>
+          )}
         </Div>
       )}
     </Div>

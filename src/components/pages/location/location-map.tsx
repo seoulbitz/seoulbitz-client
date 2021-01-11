@@ -4,7 +4,14 @@ import GoogleMapReact from 'google-map-react';
 import MapMarker from '@/components/icons/map-marker/map-marker';
 
 const Marker: FC<any> = (props) => {
-  return <MapMarker width="32px" height="32px" marginLeft="-16px" marginTop="-32px" />;
+  return (
+    <MapMarker
+      width="32px"
+      height="32px"
+      marginLeft="-16px"
+      marginTop="-32px"
+    />
+  );
 };
 
 type LocationMapProps = {
@@ -23,7 +30,9 @@ const LocationMap: FC<LocationMapProps> = ({ lat, lng }) => {
         right="0"
         bottom="0">
         <GoogleMapReact
-          bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
+          bootstrapURLKeys={{
+            key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+          }}
           defaultCenter={{
             lat: lat,
             lng: lng

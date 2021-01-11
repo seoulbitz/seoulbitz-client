@@ -1,11 +1,17 @@
 import sanityClient from '@sanity/client';
 
-const options = {
-  dataset: 'production',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+const dataset = 'production';
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+
+export const readClient = sanityClient({
+  dataset,
+  projectId,
   useCdn: process.env.NODE_ENV === 'production'
-};
+});
 
-const client = sanityClient(options);
-
-export default client;
+export const writeClient = sanityClient({
+  dataset,
+  projectId,
+  token: process.env.NEXT_PUBLIC_SANITY_TOKEN,
+  useCdn: false
+});

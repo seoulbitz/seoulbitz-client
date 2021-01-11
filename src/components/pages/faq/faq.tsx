@@ -5,8 +5,12 @@ import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Img from '@/components/styled-system/img/img';
 import FAQItem from '@/components/faq-item/faq-item';
 import Layout from '@/components/layout/layout';
+import sanity from '@/services/sanity';
+import { FAQPageDocument } from '@/services/sanity/api/page';
 
-const FAQ: FC = () => {
+const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
+  const url = sanity.image.getUrl(faqPage.image);
+
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -21,23 +25,19 @@ const FAQ: FC = () => {
             lineHeight="34px"
             fontWeight="700"
             color="#000000">
-            FAQ
+            {faqPage.title}
           </Div>
           <Div
             display="flex"
             justifyContent="center"
             alignItems="center"
             marginTop="32px">
-            <Img width="150px" src="https://via.placeholder.com/300x188" />
+            <Img width="150px" src={url} />
           </Div>
           <Div marginTop={['40px', null, '48px']}>
-            <FAQItem />
-            <FAQItem />
-            <FAQItem />
-            <FAQItem />
-            <FAQItem />
-            <FAQItem />
-            <FAQItem />
+            {faqPage.faqItems.map(({ _id, question, answer }) => {
+              return <FAQItem key={_id} question={question} answer={answer} />;
+            })}
           </Div>
         </Cell>
       </Grid>
@@ -46,3 +46,13 @@ const FAQ: FC = () => {
 };
 
 export default FAQ;
+
+export const getServerSideProps = async (context) => {
+  const faqPage = await sanity.api.page.findFAQPage();
+
+  return {
+    props: {
+      faqPage
+    }
+  };
+};

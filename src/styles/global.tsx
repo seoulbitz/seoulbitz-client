@@ -9,6 +9,7 @@ export const globalStyles = (
     styles={css`
       * {
         box-sizing: border-box;
+        outline: none;
       }
 
       html,
@@ -17,6 +18,7 @@ export const globalStyles = (
         margin: 0 !important;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        overscroll-behavior: none; /* https://www.smashingmagazine.com/2018/08/scroll-bouncing-websites/ */
       }
 
       ${futura}

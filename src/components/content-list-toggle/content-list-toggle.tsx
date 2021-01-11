@@ -4,13 +4,50 @@ import Heart from '@/components/icons/heart/heart';
 import Div from '@/components/styled-system/div/div';
 import Span from '@/components/styled-system/span/span';
 import { theme } from '@/styles/theme';
+import styled from '@emotion/styled';
 import React, { FC, useState } from 'react';
 
-enum ToggleValues {
-  latest = 'latest',
-  likes = 'likes',
-  distance = 'distance'
-}
+const DistanceWhite = styled(Distance)`
+  path:nth-child(1) {
+    fill: #ffffff;
+  }
+
+  path:nth-child(2) {
+    stroke: #ffffff;
+  }
+
+  path:nth-child(3) {
+    fill: #ffffff;
+  }
+
+  path:nth-child(4) {
+    fill: #ffffff;
+  }
+
+  path:nth-child(5) {
+    stroke: #ffffff;
+  }
+`;
+const ClockWhite = styled(Clock)`
+  path:nth-child(1) {
+    stroke: #ffffff;
+  }
+
+  path:nth-child(2) {
+    stroke: #ffffff;
+  }
+`;
+
+const HeartNormal = styled(Heart)`
+  path:nth-child(1) {
+    stroke: rgb(130, 136, 249);
+  }
+`;
+const HeartWhite = styled(Heart)`
+  path:nth-child(1) {
+    stroke: #ffffff;
+  }
+`;
 
 type ContentListToggleProps = {
   items?: {
@@ -18,16 +55,34 @@ type ContentListToggleProps = {
     latest: boolean;
     likes: boolean;
   };
+  onChange?: (value: 'distance' | 'latest' | 'likes') => void;
 };
 
+// TODO: Refactor to get selected value through props instead of managing its own state
 const ContentListToggle: FC<ContentListToggleProps> = ({
-  items = { distance: true, latest: true, likes: true }
+  items = { distance: true, latest: true, likes: true },
+  onChange
 }) => {
-  const [state, setState] = useState<ToggleValues>(ToggleValues.latest);
+  const [state, setState] = useState<'distance' | 'latest' | 'likes'>('latest');
 
-  const handleLatestClick = () => setState(ToggleValues.latest);
-  const handleLikesClick = () => setState(ToggleValues.likes);
-  const handleDistanceClick = () => setState(ToggleValues.distance);
+  const handleLatestClick = () => {
+    setState('latest');
+    if (onChange) {
+      onChange('latest');
+    }
+  };
+  const handleLikesClick = () => {
+    setState('likes');
+    if (onChange) {
+      onChange('likes');
+    }
+  };
+  const handleDistanceClick = () => {
+    setState('distance');
+    if (onChange) {
+      onChange('distance');
+    }
+  };
 
   const { distance, latest, likes } = items;
 
@@ -110,9 +165,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             margin="2px"
             borderRadius="100px"
             backgroundColor={state === 'distance' ? '#0511F2' : 'initial'}>
-            <Distance
-              fillColor={state === 'distance' ? '#FFFFFF' : '#8288F9'}
-            />
+            {state === 'distance' ? <DistanceWhite /> : <Distance />}
           </Div>
         )}
         {latest && (
@@ -126,7 +179,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             margin="2px"
             borderRadius="100px"
             backgroundColor={state === 'latest' ? '#0511F2' : 'initial'}>
-            <Clock fillColor={state === 'latest' ? '#FFFFFF' : '#8288F9'} />
+            {state === 'latest' ? <ClockWhite /> : <Clock />}
           </Div>
         )}
         {likes && (
@@ -140,7 +193,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             margin="2px"
             borderRadius="100px"
             backgroundColor={state === 'likes' ? '#0511F2' : 'initial'}>
-            <Heart fillColor={state === 'likes' ? '#FFFFFF' : '#8288F9  '} />
+            {state === 'likes' ? <HeartWhite /> : <HeartNormal />}
           </Div>
         )}
       </Div>

@@ -23,6 +23,22 @@ export const textDecoration = system({
   textDecoration: true
 });
 
+export const transform = system({
+  transform: true
+});
+
+export const userSelect = system({
+  userSelect: true
+});
+
+export const transformOrigin = system({
+  transformOrigin: true
+});
+
+export const listStyle = system({
+  listStyle: true
+});
+
 export interface CursorProps<
   ThemeType extends Theme = RequiredTheme,
   TVal = CSS.Property.Left<TLengthStyledSystem>
@@ -49,4 +65,32 @@ export interface TextDecorationProps<
   TVal = CSS.Property.Left<TLengthStyledSystem>
 > {
   textDecoration?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface TransformProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  transform?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface UserSelectProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  userSelect?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface TransformOriginProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  transformOrigin?: ResponsiveValue<TVal, ThemeType>;
+}
+
+export interface ListStyleProps<
+  ThemeType extends Theme = RequiredTheme,
+  TVal = CSS.Property.Left<TLengthStyledSystem>
+> {
+  listStyle?: ResponsiveValue<TVal, ThemeType>;
 }
