@@ -94,8 +94,8 @@ const MenuMapFilter = () => {
       marginLeft="-20px"
       paddingLeft="20px"
       paddingRight="20px"
-      borderTop="1px solid #F2F2F2"
-      borderBottom="1px solid #F2F2F2">
+      borderTop="1px solid #FAFAFA"
+      borderBottom="1px solid #FAFAFA">
       <Div
         fontFamily={theme.fonts.futura}
         fontSize="20px"
