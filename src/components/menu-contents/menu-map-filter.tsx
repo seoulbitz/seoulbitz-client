@@ -87,8 +87,8 @@ const MenuMapFilter = () => {
 
   return (
     <Div
-      paddingTop="16px"
-      paddingBottom="16px"
+      paddingTop="32px"
+      paddingBottom="32px"
       backgroundColor="#FAFAFA"
       width="calc(100% + 40px)"
       marginLeft="-20px"
@@ -98,14 +98,14 @@ const MenuMapFilter = () => {
       borderBottom="1px solid #FAFAFA">
       <Div
         fontFamily={theme.fonts.futura}
-        fontSize="20px"
-        lineHeight="24px"
+        fontSize="18px"
+        lineHeight="22px"
         fontWeight="700">
         Select one or more categories and/or neighbourhoods to filter search
         results
       </Div>
       <Div
-        marginTop="16px"
+        marginTop="32px"
         display="grid"
         gridColumnGap="20px"
         gridRowGap="8px"
@@ -147,7 +147,7 @@ const MenuMapFilter = () => {
           );
         })}
       </Div>
-      <Div marginTop="16px">
+      <Div marginTop="32px">
         <MenuMapGraphics
           display="block"
           selectedZones={selectedZones}
@@ -176,7 +176,7 @@ const MenuMapFilter = () => {
           })}
         </Div>
       )}
-      <Div display="flex" flexDirection="row" marginTop="16px">
+      <Div display="flex" flexDirection="row" marginTop="32px">
         <StyledButton
           variant="black"
           marginRight="10px"
