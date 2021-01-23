@@ -67,7 +67,7 @@ const DesktopHeader = () => {
             </Button> */}
           </>
         ) : (
-          <>
+          <Div whiteSpace="nowrap">
             <Button
               variant="blue"
               // marginRight="16px" TODO: Add internalization
@@ -79,7 +79,7 @@ const DesktopHeader = () => {
             {/* <Button variant="black" width="initial">
               EN
             </Button> */}
-          </>
+          </Div>
         )}
       </Div>
     </Div>

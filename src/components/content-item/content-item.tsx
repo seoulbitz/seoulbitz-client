@@ -123,6 +123,7 @@ const ContentItem: FC<ContentItemProps> = ({
             </Div>
           </Div>
           <Div
+            whiteSpace="nowrap"
             fontFamily={theme.fonts.futura}
             fontSize="16px"
             lineHeight="20px"

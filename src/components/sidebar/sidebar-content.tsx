@@ -9,8 +9,8 @@ const SidebarContent = () => {
   return (
     <Div width="360px" overflowY="auto">
       <Div
-        height="88px"
-        backgroundSize="contain"
+        height="96px"
+        backgroundSize="cover"
         backgroundImage="url('https://cdn.sanity.io/images/duesb6xh/production/5d167f567b9445326e5299b68313b1d9c81e0db0-1440x352.png')"
       />
 
