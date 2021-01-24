@@ -76,7 +76,7 @@ const SearchBox: FC<SearchBoxProps> = ({ onSearch }) => {
         border="0px"
         backgroundColor="initial"
         onClick={handleButtonClick}>
-        <Search display="block" width="20px" height="20px" />
+        <Search display="block" width="18px" height="18px" />
       </Button>
     </Div>
   );
