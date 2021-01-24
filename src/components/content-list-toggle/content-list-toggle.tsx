@@ -89,7 +89,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
   const buttonCount = Object.keys(items).filter((key) => {
     return items[key];
   }).length;
-  const containerWidth = 48 * buttonCount + 4 * buttonCount + 4;
+  const containerWidth = 40 * buttonCount + 4 * buttonCount + 4;
   const labelMarginLeft = `${containerWidth / 2 - 48}px`;
 
   return (
@@ -149,19 +149,19 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
         display="flex"
         justifyContent="center"
         alignItems="center"
-        border="2px solid #0511F2"
+        border="1px solid #000000"
         borderRadius="29px"
         marginTop="16px"
         width={containerWidth}
-        height="56px">
+        height="48px">
         {distance && (
           <Div
             display="flex"
             justifyContent="center"
             alignItems="center"
             onClick={handleDistanceClick}
-            width="48px"
-            height="48px"
+            width="40px"
+            height="40px"
             margin="2px"
             borderRadius="100px"
             backgroundColor={state === 'distance' ? '#0511F2' : 'initial'}>
@@ -174,8 +174,8 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             justifyContent="center"
             alignItems="center"
             onClick={handleLatestClick}
-            width="48px"
-            height="48px"
+            width="40px"
+            height="40px"
             margin="2px"
             borderRadius="100px"
             backgroundColor={state === 'latest' ? '#0511F2' : 'initial'}>
@@ -188,8 +188,8 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             justifyContent="center"
             alignItems="center"
             onClick={handleLikesClick}
-            width="48px"
-            height="48px"
+            width="40px"
+            height="40px"
             margin="2px"
             borderRadius="100px"
             backgroundColor={state === 'likes' ? '#0511F2' : 'initial'}>
