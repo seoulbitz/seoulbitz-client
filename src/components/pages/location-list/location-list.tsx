@@ -102,7 +102,7 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
           </Div>
         </Cell>
       </Grid>
-      <Grid paddingTop={['40px', '40px', '48px']}>
+      <Grid paddingTop={['40px', '40px', '48px']} maxWidth="initial">
         {locationsToRender.map((location, i) => {
           const {
             _id,

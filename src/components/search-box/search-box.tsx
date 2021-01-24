@@ -60,8 +60,8 @@ const SearchBox: FC<SearchBoxProps> = ({ onSearch }) => {
         border="0px"
         placeholder="Search"
         fontFamily={theme.fonts.futura}
-        fontSize="18px"
-        lineHeight="22px"
+        fontSize="16px"
+        lineHeight="20px"
         fontWeight="400"
         color="#777777"
         onKeyDown={handleInputKeyDown}
@@ -76,7 +76,7 @@ const SearchBox: FC<SearchBoxProps> = ({ onSearch }) => {
         border="0px"
         backgroundColor="initial"
         onClick={handleButtonClick}>
-        <Search display="block" />
+        <Search display="block" width="20px" height="20px" />
       </Button>
     </Div>
   );

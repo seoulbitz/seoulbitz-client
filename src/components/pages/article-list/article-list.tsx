@@ -97,7 +97,7 @@ const ArticleList: FC<{ articles: ArticleDocument[] }> = (props) => {
           </Div>
         </Cell>
       </Grid>
-      <Grid paddingTop={['40px', '40px', '48px']}>
+      <Grid paddingTop={['40px', '40px', '48px']} maxWidth="initial">
         {articlesToRender.map((article, i) => {
           const {
             _id,

@@ -15,6 +15,7 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
       <Grid width="100%" justifyContent="center">
         <Cell width={['100%', null, 10 / 12]}>
           <Div
+            whiteSpace="nowrap"
             display="flex"
             alignItems="center"
             justifyContent="center"
@@ -26,13 +27,18 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
             color="#000000">
             {aboutUsPage.title}
           </Div>
+        </Cell>
+        <Cell width={['100%', null, 8 / 12]}>
           <Div
+            width="100%"
             display="flex"
             justifyContent="center"
             alignItems="center"
             marginTop="32px">
             <Img width="100%" src={url} />
           </Div>
+        </Cell>
+        <Cell width={['100%', null, 10 / 12]}>
           <BlockContent blocks={aboutUsPage.body} />
         </Cell>
       </Grid>
