@@ -13,7 +13,8 @@ const DesktopImage = styled(Div)`
   &:hover {
     > div {
       visibility: visible;
-      background-color: rgba(5, 18, 242, 0.5)
+      background-color: rgba(5, 18, 242, 0.5);
+      width: 100%;
       }
     }
   }
