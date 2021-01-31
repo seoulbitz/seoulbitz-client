@@ -11,6 +11,8 @@ import { FAQPageDocument } from '@/services/sanity/api/page';
 const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
   const url = sanity.image.getUrl(faqPage.image);
 
+  console.log(faqPage.faqItems);
+
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -36,7 +38,15 @@ const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
           </Div>
           <Div marginTop={['40px', null, '48px']}>
             {faqPage.faqItems.map(({ _id, question, answer }) => {
-              return <FAQItem key={_id} question={question} answer={answer} />;
+              const language = 'en'; // 'kr'
+
+              return (
+                <FAQItem
+                  key={_id}
+                  question={language === 'en' ? question.en : question.ko}
+                  answer={language === 'en' ? answer.en : answer.ko}
+                />
+              );
             })}
           </Div>
         </Cell>

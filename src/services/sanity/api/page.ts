@@ -2,8 +2,8 @@ import { SanityClient, SanityDocument } from '@sanity/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 export type FAQDocument = SanityDocument<{
-  question: string;
-  answer: any[];
+  question: { en: string; ko: string };
+  answer: { en: any[]; ko: any[] };
 }>;
 
 export type FAQPageDocument = SanityDocument<{
