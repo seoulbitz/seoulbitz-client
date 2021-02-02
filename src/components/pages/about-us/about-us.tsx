@@ -7,9 +7,11 @@ import sanity from '@/services/sanity';
 import { AboutUsPageDocument } from '@/services/sanity/api/page';
 import Img from '@/components/styled-system/img/img';
 import BlockContent from '@/services/sanity/block-content';
+import { title } from 'process';
 
 const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
   const url = sanity.image.getUrl(aboutUsPage.image);
+  const language = 'en';
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -25,7 +27,8 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
             lineHeight="34px"
             fontWeight="700"
             color="#000000">
-            {aboutUsPage.title}
+            {language === 'en' ? aboutUsPage.title.en : aboutUsPage.title.ko}
+            {/* {aboutUsPage.title.en} */}
           </Div>
         </Cell>
         <Cell width={['100%', null, 8 / 12]}>
@@ -39,7 +42,12 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
           </Div>
         </Cell>
         <Cell width={['100%', null, 10 / 12]}>
-          <BlockContent blocks={aboutUsPage.body} />
+          {/* <BlockContent blocks={aboutUsPage.body} /> */}
+          <BlockContent
+            blocks={
+              language === 'en' ? aboutUsPage.body.en : aboutUsPage.body.ko
+            }
+          />
         </Cell>
       </Grid>
     </Layout>
