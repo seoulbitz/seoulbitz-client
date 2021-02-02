@@ -23,7 +23,11 @@ export const locationListState = atom({
   key: 'locationListState',
   default: {
     sortBy: 'latest', // 'latest' | 'likes' | 'distance'
-    locations: []
+    locations: [],
+    userCoordinates: {
+      latitude: null,
+      longitude: null
+    }
   }
 });
 

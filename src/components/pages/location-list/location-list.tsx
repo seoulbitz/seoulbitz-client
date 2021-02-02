@@ -1,6 +1,7 @@
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Div from '@/components/styled-system/div/div';
-import React, { FC, useEffect } from 'react';
+import { getDistance } from 'geolib';
+import React, { FC, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import Layout from '@/components/layout/layout';
 import ContentItem from '@/components/content-item/content-item';
@@ -15,6 +16,72 @@ import { isServer } from '@/services/next';
 
 const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
   const [locationList, setLocationList] = useRecoilState(locationListState);
+
+  const setDistanceOnLocations = useCallback(() => {
+    const { latitude, longitude } = locationList.userCoordinates;
+
+    if (!latitude || !longitude) {
+      return;
+    }
+
+    setLocationList((state) => {
+      const locationsWithDistance = state.locations.map((location) => {
+        const locationCoordinates = {
+          latitude: location.location.lat,
+          longitude: location.location.lng
+        };
+        const userCoordinates = { latitude, longitude };
+        const distanceInMeters = getDistance(
+          locationCoordinates,
+          userCoordinates
+        );
+        const distanceInKM =
+          Math.round((distanceInMeters / 1000 + Number.EPSILON) * 10) / 10;
+        return {
+          ...location,
+          distance: distanceInKM
+        };
+      });
+
+      return {
+        ...state,
+        locations: locationsWithDistance
+      };
+    });
+  }, [locationList.userCoordinates, setLocationList]);
+
+  // Ask the user for permission to access their geolocation on page mount
+  useEffect(() => {
+    if (!window.navigator.geolocation) {
+      return;
+    }
+
+    window.navigator.geolocation.getCurrentPosition(
+      (location) => {
+        const {
+          coords: { latitude, longitude }
+        } = location;
+        setLocationList((state) => ({
+          ...state,
+          userCoordinates: { latitude, longitude }
+        }));
+      },
+      () => {}
+    );
+
+    navigator.permissions
+      .query({ name: 'geolocation' })
+      .then((permissionStatus) => {
+        permissionStatus.onchange = () => {
+          window.location.reload();
+        };
+      });
+  }, []);
+
+  // Set distance on locations when the coordinates are ready
+  useEffect(() => {
+    setDistanceOnLocations();
+  }, [locationList.userCoordinates, setDistanceOnLocations]);
 
   // To manage locations data with recoil state after initial rendering.
   useEffect(() => {
@@ -46,11 +113,6 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
           order = { likes: 'desc' };
           break;
         }
-        // TODO: Replace with order by distance
-        case 'distance': {
-          order = { likes: 'desc' };
-          break;
-        }
       }
 
       const locations = await sanity.api.location.find({
@@ -63,11 +125,23 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
           locations
         };
       });
+
+      setDistanceOnLocations();
     };
 
-    fetch();
+    if (locationList.sortBy === 'distance') {
+      setLocationList((state) => {
+        return {
+          ...state,
+          locations: [...state.locations].sort((a, b) => {
+            return a.distance - b.distance;
+          })
+        };
+      });
+      return;
+    }
 
-    return () => {};
+    fetch();
   }, [locationList.sortBy, setLocationList]);
 
   const handleToggleChange = (value: 'distance' | 'latest' | 'likes') => {
@@ -93,10 +167,13 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
           <Div>
             <ContentListToggle
               items={{
-                distance: false,
+                distance:
+                  locationList.userCoordinates.latitude &&
+                  locationList.userCoordinates.longitude,
                 latest: true,
                 likes: true
               }}
+              value={locationList.sortBy}
               onChange={handleToggleChange}
             />
           </Div>
@@ -113,7 +190,8 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
             thumbnailImage,
             category,
             area,
-            userLikes
+            userLikes,
+            distance
           } = location;
           const remainder = i % 4;
 
@@ -139,6 +217,7 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
                     likes={userLikes.length}
                     category={category.name}
                     area={area.name}
+                    distance={distance}
                   />
                 </A>
               </Link>

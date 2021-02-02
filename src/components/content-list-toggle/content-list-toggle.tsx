@@ -5,7 +5,7 @@ import Div from '@/components/styled-system/div/div';
 import Span from '@/components/styled-system/span/span';
 import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 
 const DistanceWhite = styled(Distance)`
   path:nth-child(1) {
@@ -55,30 +55,27 @@ type ContentListToggleProps = {
     latest: boolean;
     likes: boolean;
   };
+  value: string;
   onChange?: (value: 'distance' | 'latest' | 'likes') => void;
 };
 
 // TODO: Refactor to get selected value through props instead of managing its own state
 const ContentListToggle: FC<ContentListToggleProps> = ({
   items = { distance: true, latest: true, likes: true },
+  value,
   onChange
 }) => {
-  const [state, setState] = useState<'distance' | 'latest' | 'likes'>('latest');
-
   const handleLatestClick = () => {
-    setState('latest');
     if (onChange) {
       onChange('latest');
     }
   };
   const handleLikesClick = () => {
-    setState('likes');
     if (onChange) {
       onChange('likes');
     }
   };
   const handleDistanceClick = () => {
-    setState('distance');
     if (onChange) {
       onChange('distance');
     }
@@ -108,7 +105,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           whiteSpace="nowrap">
           Sort by
         </Span>
-        {state === 'distance' && (
+        {value === 'distance' && (
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
@@ -120,7 +117,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             distance
           </Span>
         )}
-        {state === 'latest' && (
+        {value === 'latest' && (
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
@@ -132,7 +129,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             latest
           </Span>
         )}
-        {state === 'likes' && (
+        {value === 'likes' && (
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
@@ -164,8 +161,8 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             height="40px"
             margin="2px"
             borderRadius="100px"
-            backgroundColor={state === 'distance' ? '#0511F2' : 'initial'}>
-            {state === 'distance' ? <DistanceWhite /> : <Distance />}
+            backgroundColor={value === 'distance' ? '#0511F2' : 'initial'}>
+            {value === 'distance' ? <DistanceWhite /> : <Distance />}
           </Div>
         )}
         {latest && (
@@ -178,8 +175,8 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             height="40px"
             margin="2px"
             borderRadius="100px"
-            backgroundColor={state === 'latest' ? '#0511F2' : 'initial'}>
-            {state === 'latest' ? <ClockWhite /> : <Clock />}
+            backgroundColor={value === 'latest' ? '#0511F2' : 'initial'}>
+            {value === 'latest' ? <ClockWhite /> : <Clock />}
           </Div>
         )}
         {likes && (
@@ -192,8 +189,8 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             height="40px"
             margin="2px"
             borderRadius="100px"
-            backgroundColor={state === 'likes' ? '#0511F2' : 'initial'}>
-            {state === 'likes' ? <HeartWhite /> : <HeartNormal />}
+            backgroundColor={value === 'likes' ? '#0511F2' : 'initial'}>
+            {value === 'likes' ? <HeartWhite /> : <HeartNormal />}
           </Div>
         )}
       </Div>
