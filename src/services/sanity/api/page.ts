@@ -13,19 +13,19 @@ export type FAQPageDocument = SanityDocument<{
 }>;
 
 export type PrivacyPolicyPageDocument = SanityDocument<{
-  title: string;
-  body: any[];
+  title: { en: string; ko: string };
+  body: { en: any[]; ko: any[] };
 }>;
 
 export type TermsAndConditionsPageDocument = SanityDocument<{
-  title: string;
-  body: any[];
+  title: { en: string; ko: string };
+  body: { en: any[]; ko: any[] };
 }>;
 
 export type AboutUsPageDocument = SanityDocument<{
-  title: string;
+  title: { en: string; ko: string };
   image: SanityImageSource;
-  body: any[];
+  body: { en: any[]; ko: any[] };
 }>;
 
 export const createPageService = (client: SanityClient) => {
