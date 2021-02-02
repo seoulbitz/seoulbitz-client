@@ -26,6 +26,7 @@ export type LocationDocument = SanityDocument<{
   userLikes: any[];
   userBookmarks?: any[];
   recommendedLocations?: LocationDocument[];
+  distance?: number;
 }>;
 
 export const createLocationService = (client: SanityClient) => {

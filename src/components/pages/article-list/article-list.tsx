@@ -92,6 +92,7 @@ const ArticleList: FC<{ articles: ArticleDocument[] }> = (props) => {
                 latest: true,
                 likes: true
               }}
+              value={articleList.sortBy}
               onChange={handleToggleChange}
             />
           </Div>

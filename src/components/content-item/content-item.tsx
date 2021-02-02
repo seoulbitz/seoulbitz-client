@@ -30,6 +30,7 @@ type ContentItemProps = {
   author?: any;
   category?: string;
   area?: string;
+  distance?: number;
 };
 
 const ContentItem: FC<ContentItemProps> = ({
@@ -41,7 +42,8 @@ const ContentItem: FC<ContentItemProps> = ({
   likes,
   author,
   category,
-  area
+  area,
+  distance
 }) => {
   const isLocation = kind === 'location';
   const thumbnailImageUrl = sanity.image.getUrl(images[0]);
@@ -130,8 +132,9 @@ const ContentItem: FC<ContentItemProps> = ({
             lineHeight="20px"
             fontWeight="500"
             color="#ffffff">
-            {likes > 0 ? `${likes} likes` : ' '}
-            {/* / 3 km far */}
+            {[likes > 0 && `${likes} likes`, distance && `${distance} km far`]
+              .filter(Boolean)
+              .join(', ')}
           </Div>
         </Div>
       </DesktopImage>
@@ -220,16 +223,20 @@ const ContentItem: FC<ContentItemProps> = ({
               </Span>
             </>
           )}
-
-          {/* <Span
-            fontFamily={theme.fonts.futura}
-            marginLeft="4px"
-            fontSize="14px"
-            lineHeight="18px"
-            fontWeight="500"
-            color="#777777">
-            3 km far
-          </Span> */}
+          {distance && (
+            <>
+              ,
+              <Span
+                fontFamily={theme.fonts.futura}
+                marginLeft="4px"
+                fontSize="14px"
+                lineHeight="18px"
+                fontWeight="500"
+                color="#777777">
+                {distance} km far
+              </Span>
+            </>
+          )}
         </Div>
       ) : (
         <Div
