@@ -7,7 +7,6 @@ import sanity from '@/services/sanity';
 import { AboutUsPageDocument } from '@/services/sanity/api/page';
 import Img from '@/components/styled-system/img/img';
 import BlockContent from '@/services/sanity/block-content';
-import { title } from 'process';
 
 const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
   const url = sanity.image.getUrl(aboutUsPage.image);
@@ -28,7 +27,6 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
             fontWeight="700"
             color="#000000">
             {language === 'en' ? aboutUsPage.title.en : aboutUsPage.title.ko}
-            {/* {aboutUsPage.title.en} */}
           </Div>
         </Cell>
         <Cell width={['100%', null, 8 / 12]}>
@@ -42,7 +40,6 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
           </Div>
         </Cell>
         <Cell width={['100%', null, 10 / 12]}>
-          {/* <BlockContent blocks={aboutUsPage.body} /> */}
           <BlockContent
             blocks={
               language === 'en' ? aboutUsPage.body.en : aboutUsPage.body.ko
