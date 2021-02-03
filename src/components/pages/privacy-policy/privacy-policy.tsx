@@ -10,6 +10,7 @@ import BlockContent from '@/services/sanity/block-content';
 const PrivacyPolicy: FC<{ privacyPolicyPage: PrivacyPolicyPageDocument }> = ({
   privacyPolicyPage
 }) => {
+  const language = 'en';
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -23,11 +24,20 @@ const PrivacyPolicy: FC<{ privacyPolicyPage: PrivacyPolicyPageDocument }> = ({
             fontSize="28px"
             lineHeight="34px"
             fontWeight="700"
-            color="#000000">
-            {privacyPolicyPage.title}
+            color="#000000"
+            whiteSpace="nowrap">
+            {language === 'en'
+              ? privacyPolicyPage.title.en
+              : privacyPolicyPage.title.ko}
           </Div>
           <Div marginTop="32px">
-            <BlockContent blocks={privacyPolicyPage.body} />
+            <BlockContent
+              blocks={
+                language === 'en'
+                  ? privacyPolicyPage.body.en
+                  : privacyPolicyPage.body.ko
+              }
+            />
           </Div>
         </Cell>
       </Grid>

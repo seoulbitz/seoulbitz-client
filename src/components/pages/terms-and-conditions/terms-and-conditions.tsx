@@ -10,6 +10,7 @@ import BlockContent from '@/services/sanity/block-content';
 const TermsAndConditions: FC<{
   termsAndConditionsPage: TermsAndConditionsPageDocument;
 }> = ({ termsAndConditionsPage }) => {
+  const language = 'en';
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -24,10 +25,18 @@ const TermsAndConditions: FC<{
             lineHeight="34px"
             fontWeight="700"
             color="#000000">
-            {termsAndConditionsPage.title}
+            {language === 'en'
+              ? termsAndConditionsPage.title.en
+              : termsAndConditionsPage.title.ko}
           </Div>
           <Div marginTop="32px">
-            <BlockContent blocks={termsAndConditionsPage.body} />
+            <BlockContent
+              blocks={
+                language === 'en'
+                  ? termsAndConditionsPage.body.en
+                  : termsAndConditionsPage.body.ko
+              }
+            />
           </Div>
         </Cell>
       </Grid>
