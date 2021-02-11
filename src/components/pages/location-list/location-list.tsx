@@ -78,6 +78,10 @@ const LocationList: FC<LocationListProps> = (props) => {
       () => {}
     );
 
+    if (!navigator.permissions || !navigator.permissions.query) {
+      return;
+    }
+
     navigator.permissions
       .query({ name: 'geolocation' })
       .then((permissionStatus) => {
