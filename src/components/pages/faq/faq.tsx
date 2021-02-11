@@ -7,51 +7,53 @@ import FAQItem from '@/components/faq-item/faq-item';
 import Layout from '@/components/layout/layout';
 import sanity from '@/services/sanity';
 import { FAQPageDocument } from '@/services/sanity/api/page';
+import Meta from '@/components/meta/Meta';
 
 const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
   const url = sanity.image.getUrl(faqPage.image);
 
-  console.log(faqPage.faqItems);
-
   return (
-    <Layout>
-      <Grid width="100%" justifyContent="center">
-        <Cell width={['100%', null, 10 / 12]}>
-          <Div
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            marginTop={['48px', null, '88px']}
-            fontFamily={theme.fonts.futura}
-            fontSize="28px"
-            lineHeight="34px"
-            fontWeight="700"
-            color="#000000">
-            {faqPage.title}
-          </Div>
-          <Div
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            marginTop="32px">
-            <Img width="150px" src={url} />
-          </Div>
-          <Div marginTop={['40px', null, '48px']}>
-            {faqPage.faqItems.map(({ _id, question, answer }) => {
-              const language = 'en'; // 'kr'
+    <>
+      <Meta meta={faqPage.meta} />
+      <Layout>
+        <Grid width="100%" justifyContent="center">
+          <Cell width={['100%', null, 10 / 12]}>
+            <Div
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              marginTop={['48px', null, '88px']}
+              fontFamily={theme.fonts.futura}
+              fontSize="28px"
+              lineHeight="34px"
+              fontWeight="700"
+              color="#000000">
+              {faqPage.title}
+            </Div>
+            <Div
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginTop="32px">
+              <Img width="150px" src={url} />
+            </Div>
+            <Div marginTop={['40px', null, '48px']}>
+              {faqPage.faqItems.map(({ _id, question, answer }) => {
+                const language = 'en'; // 'kr'
 
-              return (
-                <FAQItem
-                  key={_id}
-                  question={language === 'en' ? question.en : question.ko}
-                  answer={language === 'en' ? answer.en : answer.ko}
-                />
-              );
-            })}
-          </Div>
-        </Cell>
-      </Grid>
-    </Layout>
+                return (
+                  <FAQItem
+                    key={_id}
+                    question={language === 'en' ? question.en : question.ko}
+                    answer={language === 'en' ? answer.en : answer.ko}
+                  />
+                );
+              })}
+            </Div>
+          </Cell>
+        </Grid>
+      </Layout>
+    </>
   );
 };
 

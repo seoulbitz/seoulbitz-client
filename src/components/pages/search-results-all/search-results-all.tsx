@@ -11,6 +11,7 @@ import sanity from '@/services/sanity';
 import { LocationDocument } from '@/services/sanity/api/location';
 import { ArticleDocument } from '@/services/sanity/api/article';
 import { useRouter } from 'next/dist/client/router';
+import Meta from '@/components/meta/Meta';
 
 const Search: FC<{
   locationResults: LocationDocument[];
@@ -28,189 +29,207 @@ const Search: FC<{
     locationResults.length === 0 && articleResults.length === 0;
 
   return (
-    <Layout>
-      <Grid>
-        <Cell textAlign="center" width="100%">
-          <Div
-            marginTop={['48px', null, '88px']}
-            fontFamily={theme.fonts.futura}
-            fontSize="28px"
-            lineHeight="34px"
-            fontWeight="700">
-            {isResultsEmpty ? 'No matches found for' : 'Search results for'}
-          </Div>
-          <Div
-            fontFamily={theme.fonts.futura}
-            fontSize="28px"
-            lineHeight="34px"
-            fontWeight="700"
-            color="#080CCE">
-            “{query}”
-          </Div>
-        </Cell>
-      </Grid>
-      {locationResults.length > 0 && (
-        <>
-          <Grid
-            display="flex"
-            justifyContent="center"
-            marginTop={['56px', null, '64px']}>
-            <Cell>
-              <Div
-                fontFamily={theme.fonts.futura}
-                fontSize="24px"
-                lineHeight="32px"
-                fontWeight="700">
-                Locations
-              </Div>
-            </Cell>
-          </Grid>
-          <Grid marginTop={['40px', null, '48px']}>
-            {locationResults.map((location, i) => {
-              const remainder = i % 4;
-              const {
-                _id,
-                slug,
-                title,
-                subtitle,
-                thumbnailImage,
-                userLikes,
-                category,
-                area
-              } = location;
-
-              const href = `/locations/${slug.current}`;
-
-              return (
-                <Cell
-                  key={_id}
-                  width={[
-                    1,
-                    1 / 2,
-                    remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
-                  ]}
-                  marginBottom={['40px', null, '24px']}>
-                  <Link href={href} passHref>
-                    <A textDecoration="initial" color="initial">
-                      <ContentItem
-                        kind="location"
-                        title={title.en}
-                        titleKo={title.ko}
-                        subtitle={subtitle}
-                        images={[thumbnailImage]}
-                        likes={userLikes.length}
-                        category={category.name}
-                        area={area.name}
-                      />
-                    </A>
-                  </Link>
-                </Cell>
-              );
-            })}
-            <Cell
-              width={1}
-              display="flex"
-              marginTop={[null, null, '16px']}
-              justifyContent="center">
-              <Link href={`/search/locations?query=${queryInURI}`} passHref>
-                <A
-                  width={[1, 'initial']}
-                  textDecoration="initial"
-                  display="inline">
-                  <Button variant="black">SEE ALL LOCATIONS</Button>
-                </A>
-              </Link>
-            </Cell>
-          </Grid>
-        </>
-      )}
-      {locationResults.length > 0 && articleResults.length > 0 && (
-        <Grid
-          width={1}
-          padding={[0, null, '0 12px']}
-          marginTop={['56px', null, '64px']}>
-          <Cell
-            padding={[0, null, '0 12px']}
-            width={1}
-            display="flex"
-            justifyContent="center"
-            alignItems="center">
-            <Div width={1} height="1px" background="#F2F2F2" />
+    <>
+      <Meta
+        meta={{
+          title: `${query} | Search | Seoulbitz`,
+          description: '',
+          keywords: '',
+          ogTitle: `${query} | Search | Seoulbitz`,
+          ogDescription: '',
+          ogSiteName: 'Seoulbitz',
+          ogImage: ''
+        }}
+      />
+      <Layout>
+        <Grid>
+          <Cell textAlign="center" width="100%">
+            <Div
+              marginTop={['48px', null, '88px']}
+              fontFamily={theme.fonts.futura}
+              fontSize="28px"
+              lineHeight="34px"
+              fontWeight="700">
+              {isResultsEmpty ? 'No matches found for' : 'Search results for'}
+            </Div>
+            <Div
+              fontFamily={theme.fonts.futura}
+              fontSize="28px"
+              lineHeight="34px"
+              fontWeight="700"
+              color="#080CCE">
+              “{query}”
+            </Div>
           </Cell>
         </Grid>
-      )}
-      {articleResults.length > 0 && (
-        <>
-          <Grid>
-            <Cell textAlign="center" width="100%">
-              <Div
-                marginTop={['56px', null, '64px']}
-                fontFamily={theme.fonts.futura}
-                fontSize="24px"
-                lineHeight="32px"
-                fontWeight="700">
-                Articles
-              </Div>
-            </Cell>
-          </Grid>
+        {locationResults.length > 0 && (
+          <>
+            <Grid
+              display="flex"
+              justifyContent="center"
+              marginTop={['56px', null, '64px']}>
+              <Cell>
+                <Div
+                  fontFamily={theme.fonts.futura}
+                  fontSize="24px"
+                  lineHeight="32px"
+                  fontWeight="700">
+                  Locations
+                </Div>
+              </Cell>
+            </Grid>
+            <Grid
+              marginTop={['40px', null, '48px']}
+              maxWidth={[null, null, 'initial']}>
+              {locationResults.map((location, i) => {
+                const remainder = i % 4;
+                const {
+                  _id,
+                  slug,
+                  title,
+                  subtitle,
+                  thumbnailImage,
+                  userLikes,
+                  category,
+                  area
+                } = location;
 
-          <Grid marginTop={['40px', null, '48px']}>
-            {articleResults.map((article, i) => {
-              const remainder = i % 4;
-              const {
-                _id,
-                slug,
-                author,
-                title,
-                subtitle,
-                thumbnailImage,
-                userLikes
-              } = article;
+                const href = `/locations/${slug.current}`;
 
-              const href = `/articles/${slug.current}`;
-
-              return (
-                <Cell
-                  key={_id}
-                  width={[
-                    1,
-                    1 / 2,
-                    remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
-                  ]}
-                  marginBottom="32px">
-                  <Link href={href} passHref>
-                    <A textDecoration="initial" color="initial">
-                      <ContentItem
-                        kind="article"
-                        title={title}
-                        subtitle={subtitle}
-                        images={[thumbnailImage]}
-                        likes={userLikes.length}
-                        author={author}
-                      />
-                    </A>
-                  </Link>
-                </Cell>
-              );
-            })}
+                return (
+                  <Cell
+                    key={_id}
+                    width={[
+                      1,
+                      1 / 2,
+                      remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
+                    ]}
+                    marginBottom={['40px', null, '24px']}>
+                    <Link href={href} passHref>
+                      <A textDecoration="initial" color="initial">
+                        <ContentItem
+                          kind="location"
+                          title={title.en}
+                          titleKo={title.ko}
+                          subtitle={subtitle}
+                          images={[thumbnailImage]}
+                          likes={userLikes.length}
+                          category={category.name}
+                          area={area.name}
+                        />
+                      </A>
+                    </Link>
+                  </Cell>
+                );
+              })}
+              <Cell
+                width={1}
+                display="flex"
+                marginTop={[null, null, '16px']}
+                justifyContent="center">
+                <Link href={`/search/locations?query=${queryInURI}`} passHref>
+                  <A
+                    width={[1, 'initial']}
+                    textDecoration="initial"
+                    display="inline">
+                    <Button variant="black">SEE ALL LOCATIONS</Button>
+                  </A>
+                </Link>
+              </Cell>
+            </Grid>
+          </>
+        )}
+        {locationResults.length > 0 && articleResults.length > 0 && (
+          <Grid
+            width={1}
+            padding={[0, null, '0 12px']}
+            marginTop={['56px', null, '64px']}
+            maxWidth={[null, null, 'initial']}>
             <Cell
+              padding={[0, null, '0 12px']}
               width={1}
               display="flex"
-              marginTop={[null, null, '16px']}
-              justifyContent="center">
-              <Link href={`/search/articles?query=${queryInURI}`} passHref>
-                <A
-                  width={[1, 'initial']}
-                  textDecoration="initial"
-                  display="inline">
-                  <Button variant="black">SEE ALL ARTICLES</Button>
-                </A>
-              </Link>
+              justifyContent="center"
+              alignItems="center">
+              <Div width={1} height="1px" background="#F2F2F2" />
             </Cell>
           </Grid>
-        </>
-      )}
-    </Layout>
+        )}
+        {articleResults.length > 0 && (
+          <>
+            <Grid>
+              <Cell textAlign="center" width="100%">
+                <Div
+                  marginTop={['56px', null, '64px']}
+                  fontFamily={theme.fonts.futura}
+                  fontSize="24px"
+                  lineHeight="32px"
+                  fontWeight="700">
+                  Articles
+                </Div>
+              </Cell>
+            </Grid>
+
+            <Grid
+              marginTop={['40px', null, '48px']}
+              maxWidth={[null, null, 'initial']}>
+              {articleResults.map((article, i) => {
+                const remainder = i % 4;
+                const {
+                  _id,
+                  slug,
+                  author,
+                  title,
+                  subtitle,
+                  thumbnailImage,
+                  userLikes
+                } = article;
+
+                const href = `/articles/${slug.current}`;
+
+                return (
+                  <Cell
+                    key={_id}
+                    width={[
+                      1,
+                      1 / 2,
+                      remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
+                    ]}
+                    marginBottom="32px">
+                    <Link href={href} passHref>
+                      <A textDecoration="initial" color="initial">
+                        <ContentItem
+                          kind="article"
+                          title={title}
+                          subtitle={subtitle}
+                          images={[thumbnailImage]}
+                          likes={userLikes.length}
+                          author={author}
+                        />
+                      </A>
+                    </Link>
+                  </Cell>
+                );
+              })}
+              <Cell
+                width={1}
+                display="flex"
+                marginTop={[null, null, '16px']}
+                justifyContent="center">
+                <Link href={`/search/articles?query=${queryInURI}`} passHref>
+                  <A
+                    width={[1, 'initial']}
+                    textDecoration="initial"
+                    display="inline">
+                    <Button variant="black">SEE ALL ARTICLES</Button>
+                  </A>
+                </Link>
+              </Cell>
+            </Grid>
+          </>
+        )}
+      </Layout>
+    </>
   );
 };
 
