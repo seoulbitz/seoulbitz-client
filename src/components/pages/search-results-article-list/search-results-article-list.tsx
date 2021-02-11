@@ -68,7 +68,9 @@ const SearchResultsArticleList: FC<{ articleResults: ArticleDocument[] }> = (
                 </Div>
               </Cell>
             </Grid>
-            <Grid marginTop={['40px', null, '48px']}>
+            <Grid
+              marginTop={['40px', null, '48px']}
+              maxWidth={[null, null, 'initial']}>
               {articleResults.map((article, i) => {
                 const remainder = i % 4;
                 const {

@@ -78,7 +78,9 @@ const Search: FC<{
                 </Div>
               </Cell>
             </Grid>
-            <Grid marginTop={['40px', null, '48px']}>
+            <Grid
+              marginTop={['40px', null, '48px']}
+              maxWidth={[null, null, 'initial']}>
               {locationResults.map((location, i) => {
                 const remainder = i % 4;
                 const {
@@ -141,7 +143,8 @@ const Search: FC<{
           <Grid
             width={1}
             padding={[0, null, '0 12px']}
-            marginTop={['56px', null, '64px']}>
+            marginTop={['56px', null, '64px']}
+            maxWidth={[null, null, 'initial']}>
             <Cell
               padding={[0, null, '0 12px']}
               width={1}
@@ -167,7 +170,9 @@ const Search: FC<{
               </Cell>
             </Grid>
 
-            <Grid marginTop={['40px', null, '48px']}>
+            <Grid
+              marginTop={['40px', null, '48px']}
+              maxWidth={[null, null, 'initial']}>
               {articleResults.map((article, i) => {
                 const remainder = i % 4;
                 const {

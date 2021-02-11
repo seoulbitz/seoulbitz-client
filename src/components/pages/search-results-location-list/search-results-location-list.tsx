@@ -69,7 +69,9 @@ const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
                 </Div>
               </Cell>
             </Grid>
-            <Grid marginTop={['40px', null, '48px']}>
+            <Grid
+              marginTop={['40px', null, '48px']}
+              maxWidth={[null, null, 'initial']}>
               {locationResults.map((location, i) => {
                 const remainder = i % 4;
                 const {
