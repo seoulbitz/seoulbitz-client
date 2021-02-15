@@ -186,7 +186,7 @@ const Account = () => {
                   fontSize="16px"
                   lineHeight="20px"
                   fontWeight="500"
-                  color="#F43333"
+                  color="#ff1075"
                   onClick={handleLogOut}>
                   Log out
                 </Span>

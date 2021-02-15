@@ -137,7 +137,6 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"
@@ -149,7 +148,6 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"
@@ -161,7 +159,6 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"

@@ -34,14 +34,14 @@ const BlueButton = styled(BaseButton)`
 const MixedButton = styled(BaseButton)`
   &:hover {
     color: #ffffff;
-    background-color: #ff0e66;
+    background-color: #ff1075;
   }
 `;
 
 const WarningButton = styled(BaseButton)`
   &:hover {
     color: #ffffff;
-    background-color: #f43333;
+    background-color: #ff1075;
   }
 `;
 
@@ -107,7 +107,7 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         width="100%"
         fontSize="16px"
         lineHeight="22px"
-        color="#FF0E66"
+        color="#ff1075"
         padding="12px 22px"
         backgroundColor="unset"
         border="1px solid #0511F2"
@@ -125,10 +125,10 @@ const Button: FC<ButtonProps> = ({ variant = 'black', ...rest }) => {
         width="100%"
         fontSize="16px"
         lineHeight="22px"
-        color="#F43333"
+        color="#ff1075"
         padding="12px 22px"
         backgroundColor="unset"
-        border="1px solid #F43333"
+        border="1px solid #ff1075"
         fontFamily={theme.fonts.futura}
         fontWeight="700"
         {...rest}
