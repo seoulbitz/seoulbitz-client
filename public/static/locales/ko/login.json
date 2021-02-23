@@ -1,0 +1,13 @@
+{
+  "login": "로그인",
+  "account-exist": "기존 아이디로 로그인해주세요",
+  "no-account": "계정이 없으신가요?",
+  "sign-up": "가입하기",
+  "free": " ",
+  "email": "이메일",
+  "password": "비밀번호",
+  "forgot-password": "비밀번호를 잃어버렸나요?",
+  "sign-in": "로그인",
+  "or": "또는",
+  "google-login": "Google로 로그인"
+}

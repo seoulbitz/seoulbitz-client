@@ -12,6 +12,8 @@ import Li from '../styled-system/li/li';
 import Span from '../styled-system/span/span';
 import Ul from '../styled-system/ul/ul';
 import { theme } from '@/styles/theme';
+import { withTranslation } from '../../../i18n';
+import { TFunction } from 'next-i18next';
 
 const PAGE_LIST_ITEMS = [
   {
@@ -138,9 +140,9 @@ const SOCIAL_MEDIA_ITEMS = [
   }
 ];
 
-type MenuContentsProps = DivProps;
+type MenuContentsProps = { DivProps; readonly t: TFunction };
 
-const MenuContents: FC<MenuContentsProps> = (props) => {
+const MenuContents: FC<MenuContentsProps> = ({ t, ...props }) => {
   const router = useRouter();
 
   const isLocationList = router.pathname === '/';
@@ -219,7 +221,7 @@ const MenuContents: FC<MenuContentsProps> = (props) => {
           lineHeight="20px"
           fontWeight="500"
           color="#000000">
-          Get in touch with us
+          {t('menu-contents:contact')}
         </Div>
         <Div
           marginTop="4px"
@@ -239,7 +241,7 @@ const MenuContents: FC<MenuContentsProps> = (props) => {
           lineHeight="20px"
           fontWeight="500"
           color="#080CCE">
-          The best bits of Seoul
+          {t('menu-contents:discription')}
         </Div>
         <Div
           marginTop="8px"
@@ -248,8 +250,7 @@ const MenuContents: FC<MenuContentsProps> = (props) => {
           lineHeight="20px"
           fontWeight="400"
           color="#000000">
-          A wide exploration of Seoul and South Korea’s latest trends, hotspots,
-          not-to-miss events and more
+          {t('menu-contents:content-discription')}
         </Div>
       </Div>
       <Div marginTop="48px" marginBottom="48px">
@@ -266,4 +267,4 @@ const MenuContents: FC<MenuContentsProps> = (props) => {
   );
 };
 
-export default MenuContents;
+export default withTranslation('common')(MenuContents);

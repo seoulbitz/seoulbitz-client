@@ -6,11 +6,13 @@ import Layout from '@/components/layout/layout';
 import sanity from '@/services/sanity';
 import { TermsAndConditionsPageDocument } from '@/services/sanity/api/page';
 import BlockContent from '@/services/sanity/block-content';
+import { i18n } from '../../../../i18n';
 
 const TermsAndConditions: FC<{
   termsAndConditionsPage: TermsAndConditionsPageDocument;
 }> = ({ termsAndConditionsPage }) => {
-  const language = 'en';
+  const language = termsAndConditionsPage.body;
+
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -25,14 +27,14 @@ const TermsAndConditions: FC<{
             lineHeight="34px"
             fontWeight="700"
             color="#000000">
-            {language === 'en'
+            {i18n.language === 'en'
               ? termsAndConditionsPage.title.en
               : termsAndConditionsPage.title.ko}
           </Div>
           <Div marginTop="32px">
             <BlockContent
               blocks={
-                language === 'en'
+                i18n.language === 'en'
                   ? termsAndConditionsPage.body.en
                   : termsAndConditionsPage.body.ko
               }

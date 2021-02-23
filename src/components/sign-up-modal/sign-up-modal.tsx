@@ -1,7 +1,7 @@
 import { theme } from '@/styles/theme';
 import firebase from '@/services/firebase';
 import Link from 'next/link';
-import React from 'react';
+import React, { FC } from 'react';
 import Modal from '../modal/modal';
 import A from '../styled-system/a/a';
 import Div from '../styled-system/div/div';
@@ -17,6 +17,8 @@ import Checkbox from '../checkbox/checkbox';
 import { ModalType } from 'types';
 import { useGlobalUIState } from '@/services/react/hooks';
 import { LogInWithGoogleResult, SignUpResult } from '@/services/firebase/auth';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../i18n';
 
 const signUpSchema = Yup.object().shape({
   username: Yup.string().required('Please fill in.'),
@@ -30,7 +32,9 @@ const signUpSchema = Yup.object().shape({
     .oneOf([true], 'You must accept the terms and conditions.')
 });
 
-const SignUpModal = () => {
+type LogInModalProps = { readonly t: TFunction };
+
+const SignUpModal: FC<LogInModalProps> = ({ t }) => {
   const globalUIState = useGlobalUIState();
 
   const handleLogInClick = () => {
@@ -82,7 +86,7 @@ const SignUpModal = () => {
           lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
-          Sign up
+          {t('signup:sign-up')}
         </Div>
 
         <Div display="block" textAlign="center" marginTop="16px">
@@ -92,7 +96,7 @@ const SignUpModal = () => {
             lineHeight="20px"
             fontWeight="500"
             color="#000000">
-            Create your free account or
+            {t('signup:create-account')}
             <A
               cursor="pointer"
               textDecoration="underline"
@@ -103,7 +107,7 @@ const SignUpModal = () => {
               fontWeight="500"
               color="#080CCE"
               onClick={handleLogInClick}>
-              Log in
+              {t('signup:login')}
             </A>
             .
           </Span>
@@ -131,7 +135,7 @@ const SignUpModal = () => {
                       fontSize="16px"
                       lineHeight="20px"
                       fontWeight="500">
-                      Username
+                      {t('signup:username')}
                       <Span color="#080CCE">*</Span>
                     </Span>
                   </Label>
@@ -184,7 +188,7 @@ const SignUpModal = () => {
                       fontSize="16px"
                       lineHeight="20px"
                       fontWeight="500">
-                      Email
+                      {t('signup:email')}
                       <Span color="#080CCE">*</Span>
                     </Span>
                   </Label>
@@ -237,7 +241,7 @@ const SignUpModal = () => {
                       fontSize="16px"
                       lineHeight="20px"
                       fontWeight="500">
-                      Password
+                      {t('signup:password')}
                       <Span color="#080CCE">*</Span>
                     </Span>
                   </Label>
@@ -307,7 +311,7 @@ const SignUpModal = () => {
                           onClick={() => {
                             globalUIState.closeModal();
                           }}>
-                          Terms and Conditions
+                          {t('signup:terms-and-conditions')}
                         </A>
                       </Link>
                     </Span>
@@ -334,7 +338,7 @@ const SignUpModal = () => {
                   disabled={isSubmitting}
                   marginTop="24px"
                   variant="mixed">
-                  SIGN UP
+                  {t('signup:signup')}
                 </StyledButton>
               </Form>
             );
@@ -354,6 +358,7 @@ const SignUpModal = () => {
             fontSize="14px"
             lineHeight="16px"
             margin="0px 16px">
+            {/* {t('signup:or')} */}
             or
           </Div>
           <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
@@ -427,7 +432,7 @@ const SignUpModal = () => {
             lineHeight="20px"
             fontWeight="500"
             color="#000000">
-            Sign up with Google
+            {t('signup:google-login')}
           </Div>
         </Button>
 
@@ -471,4 +476,4 @@ const SignUpModal = () => {
   );
 };
 
-export default SignUpModal;
+export default withTranslation('common')(SignUpModal);

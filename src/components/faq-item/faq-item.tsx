@@ -5,6 +5,7 @@ import Plus from '../icons/plus/plus';
 import Div from '../styled-system/div/div';
 import P from '../styled-system/p/p';
 import BlockContent from '@/services/sanity/block-content';
+import { i18n } from '../../../i18n';
 
 type FAQItemProps = {
   question: string;

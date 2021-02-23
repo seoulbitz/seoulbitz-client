@@ -1,8 +1,12 @@
 import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
-import React from 'react';
+import React, { FC } from 'react';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../../i18n';
 
-const AccountNoItemsPanel = () => {
+type AccountNoItemsPanelProps = { readonly t: TFunction };
+
+const AccountNoItemsPanel: FC<AccountNoItemsPanelProps> = ({ t }) => {
   return (
     <Div
       width="100%"
@@ -17,9 +21,9 @@ const AccountNoItemsPanel = () => {
       fontWeight="400"
       color="#000000"
       borderRadius="8px">
-      You have no bookmarked items.
+      {t('account-no-item-panel:description')}
     </Div>
   );
 };
 
-export default AccountNoItemsPanel;
+export default withTranslation('common')(AccountNoItemsPanel);

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { FC } from 'react';
 import { useGlobalUIState } from '@/services/react/hooks';
 import Div from '../styled-system/div/div';
 import Header from '../styled-system/header/header';
@@ -9,8 +9,12 @@ import SeoulbitzLogo from '../icons/seoulbitz-logo/seoulbitz-logo';
 import Button from '../styled-system/button/button';
 import Link from 'next/link';
 import A from '../styled-system/a/a';
+import { TFunction } from 'next-i18next';
+import { i18n, withTranslation, useTranslation } from '../../../i18n';
 
-const MenuBar = () => {
+type MenuBarModalProps = { readonly t: TFunction };
+
+const MenuBar: FC<MenuBarModalProps> = ({ t }) => {
   const globalUIState = useGlobalUIState();
 
   return (
@@ -41,6 +45,7 @@ const MenuBar = () => {
     </Div>
   );
 };
+const MenuBarWithTranslation = withTranslation('common')(MenuBar);
 
 const MarqueeBar = () => {
   const texts = [];
@@ -129,7 +134,7 @@ const HeaderMobile = () => {
   return (
     <Div display={[null, null, 'none']}>
       <Header position="fixed" top="0" height="84px" width="100%" zIndex={10}>
-        <MenuBar />
+        <MenuBarWithTranslation />
         <MarqueeBar />
       </Header>
     </Div>

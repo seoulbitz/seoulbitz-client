@@ -1,0 +1,9 @@
+{
+  "title": "내 정보",
+  "username": "사용자 이름:",
+  "email": "이메일:",
+  "edit": "회원정보수정",
+  "account-settings": "계정설정",
+  "logout": "로그아웃",
+  "bookmarks": "내 즐겨찾기"
+}

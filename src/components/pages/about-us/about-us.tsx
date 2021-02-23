@@ -1,16 +1,18 @@
 import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Layout from '@/components/layout/layout';
 import sanity from '@/services/sanity';
 import { AboutUsPageDocument } from '@/services/sanity/api/page';
 import Img from '@/components/styled-system/img/img';
 import BlockContent from '@/services/sanity/block-content';
+import { I18nContext } from 'next-i18next';
 
 const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
   const url = sanity.image.getUrl(aboutUsPage.image);
-  const language = 'en';
+  const { i18n } = useContext(I18nContext);
+
   return (
     <Layout>
       <Grid width="100%" justifyContent="center">
@@ -26,7 +28,9 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
             lineHeight="34px"
             fontWeight="700"
             color="#000000">
-            {language === 'en' ? aboutUsPage.title.en : aboutUsPage.title.ko}
+            {i18n.language === 'en'
+              ? aboutUsPage.title.en
+              : aboutUsPage.title.ko}
           </Div>
         </Cell>
         <Cell width={['100%', null, 8 / 12]}>
@@ -42,7 +46,7 @@ const AboutUs: FC<{ aboutUsPage: AboutUsPageDocument }> = ({ aboutUsPage }) => {
         <Cell width={['100%', null, 10 / 12]}>
           <BlockContent
             blocks={
-              language === 'en' ? aboutUsPage.body.en : aboutUsPage.body.ko
+              i18n.language === 'en' ? aboutUsPage.body.en : aboutUsPage.body.ko
             }
           />
         </Cell>

@@ -3,12 +3,18 @@ import { DeleteAccountResult } from '@/services/firebase/auth';
 import { useGlobalUIState } from '@/services/react/hooks';
 import { theme } from '@/styles/theme';
 import { useRouter } from 'next/dist/client/router';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import Button from '../button/button';
 import Modal from '../modal/modal';
 import Div from '../styled-system/div/div';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../i18n';
 
-const DeleteAccountConfirmModal = () => {
+type DeleteAccountConfirmModalProps = { readonly t: TFunction };
+
+const DeleteAccountConfirmModal: FC<DeleteAccountConfirmModalProps> = ({
+  t
+}) => {
   const router = useRouter();
   const globalUIState = useGlobalUIState();
   const [isButtonLoading, setIsButtonLoading] = useState(false);
@@ -25,7 +31,7 @@ const DeleteAccountConfirmModal = () => {
           lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
-          Are you sure?
+          {t('delete-account:title')}
         </Div>
         <Div
           marginTop="16px"
@@ -35,9 +41,7 @@ const DeleteAccountConfirmModal = () => {
           lineHeight="20px"
           fontWeight="500"
           color="#000000">
-          Your account will no longer be available and all your personal
-          information will be permanently deleted. This process can’t be
-          reversed.
+          {t('delete-account:explaination')}
         </Div>
         <Button
           marginTop="32px"
@@ -66,11 +70,11 @@ const DeleteAccountConfirmModal = () => {
 
             setIsButtonLoading(false);
           }}>
-          YES. DELETE MY ACCOUNT
+          {t('delete-account:button-text')}
         </Button>
       </Div>
     </Modal>
   );
 };
 
-export default DeleteAccountConfirmModal;
+export default withTranslation('common')(DeleteAccountConfirmModal);

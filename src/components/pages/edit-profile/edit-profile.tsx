@@ -14,12 +14,16 @@ import BackButton from '@/components/back-button/back-button';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import { UpdateUsernameResult } from '@/services/firebase/auth';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../../i18n';
 
 const editprofileSchema = Yup.object().shape({
   username: Yup.string().required('Required')
 });
 
-const EditProfile: FC = () => {
+type EditProfileProps = { readonly t: TFunction };
+
+const EditProfile: FC<EditProfileProps> = ({ t }) => {
   const router = useRouter();
 
   const [user, setUser] = useState(null);
@@ -79,7 +83,7 @@ const EditProfile: FC = () => {
               fontSize="28px"
               fontWeight="700"
               lineHeight="34px">
-              Edit profile
+              {t('edit-profile:title')}
             </Div>
           </Cell>
           <Cell width={[1, 1 / 2]} marginTop="32px">
@@ -97,7 +101,7 @@ const EditProfile: FC = () => {
                         fontWeight="500"
                         lineHeight="20px"
                         htmlFor="email">
-                        Email
+                        {t('edit-profile:email')}
                       </Label>
                       <Field
                         id="email"
@@ -132,7 +136,7 @@ const EditProfile: FC = () => {
                         lineHeight="20px"
                         fontWeight="500"
                         htmlFor="username">
-                        Username
+                        {t('edit-profile:username')}
                       </Label>
                       <Field name="username">
                         {({ field, ...props }) => {
@@ -173,7 +177,7 @@ const EditProfile: FC = () => {
                       marginTop="32px"
                       variant="blue"
                       disabled={isSubmitting}>
-                      Save
+                      {t('edit-profile:save')}
                     </StyledButton>
                   </Form>
                 );
@@ -185,5 +189,4 @@ const EditProfile: FC = () => {
     </Layout>
   );
 };
-
-export default EditProfile;
+export default withTranslation('common')(EditProfile);

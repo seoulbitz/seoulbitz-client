@@ -1,12 +1,15 @@
 import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
 import React, { FC, useState } from 'react';
+import { TFunction } from 'next-i18next';
+import { i18n, withTranslation } from '../../../../i18n';
 
 type AccountToggleProps = {
   onChange?: (value: 'locations' | 'articles') => void;
+  readonly t: TFunction;
 };
 
-export const AccountToggle: FC<AccountToggleProps> = ({ onChange }) => {
+export const AccountToggle: FC<AccountToggleProps> = ({ onChange, t }) => {
   const [state, setState] = useState<'locations' | 'articles'>('locations');
 
   const handleLocationsClick = () => {
@@ -73,3 +76,5 @@ export const AccountToggle: FC<AccountToggleProps> = ({ onChange }) => {
     </Div>
   );
 };
+
+export default withTranslation('common')(AccountToggle);

@@ -1,0 +1,8 @@
+{
+  "title": "Account settings",
+  "change-password": "Change Password",
+  "send-link": "SEND RESET PASSWORD LINK",
+  "delete": "Delete account",
+  "delete-warning": " Deleting your account is permanent. All your data will be wiped out immediately and you won't be able to get it back. Requires password.",
+  "delete-button": "DELETE ACCOUNT"
+}

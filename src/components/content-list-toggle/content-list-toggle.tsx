@@ -6,6 +6,8 @@ import Span from '@/components/styled-system/span/span';
 import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 import React, { FC } from 'react';
+import { withTranslation } from '../../../i18n';
+import { TFunction } from 'next-i18next';
 
 const DistanceWhite = styled(Distance)`
   path:nth-child(1) {
@@ -50,6 +52,7 @@ const HeartWhite = styled(Heart)`
 `;
 
 type ContentListToggleProps = {
+  readonly t: TFunction;
   items?: {
     distance: boolean;
     latest: boolean;
@@ -63,7 +66,8 @@ type ContentListToggleProps = {
 const ContentListToggle: FC<ContentListToggleProps> = ({
   items = { distance: true, latest: true, likes: true },
   value,
-  onChange
+  onChange,
+  t
 }) => {
   const handleLatestClick = () => {
     if (onChange) {
@@ -103,7 +107,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           fontSize="16px"
           lineHeight="22px"
           whiteSpace="nowrap">
-          Sort by
+          {t('content-list-toggle:sort-english')}
         </Span>
         {value === 'distance' && (
           <Span
@@ -114,7 +118,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             lineHeight="22px"
             fontWeight="500"
             color="#0511F2">
-            distance
+            {t('content-list-toggle:distance')}
           </Span>
         )}
         {value === 'latest' && (
@@ -126,7 +130,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             lineHeight="22px"
             fontWeight="500"
             color="#0511F2">
-            latest
+            {t('content-list-toggle:latest')}
           </Span>
         )}
         {value === 'likes' && (
@@ -138,9 +142,17 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             lineHeight="22px"
             fontWeight="500"
             color="#0511F2">
-            likes
+            {t('content-list-toggle:likes')}
           </Span>
         )}
+        <Span
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="22px"
+          marginLeft="6px"
+          whiteSpace="nowrap">
+          {t('content-list-toggle:sort-korean')}
+        </Span>
       </Div>
       <Div
         display="flex"
@@ -198,4 +210,4 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
   );
 };
 
-export default ContentListToggle;
+export default withTranslation('common')(ContentListToggle);

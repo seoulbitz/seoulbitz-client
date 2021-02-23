@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Button from '../styled-system/button/button';
 import StyledButton from '../button/button';
 import Div from '../styled-system/div/div';
@@ -8,8 +8,12 @@ import { theme } from '@/styles/theme';
 import sanity from '@/services/sanity';
 import { useRecoilState } from 'recoil';
 import { locationListState } from '@/services/recoil/atoms';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../i18n';
 
-const MenuMapFilter = () => {
+type MenuMapFilterProps = { readonly t: TFunction };
+
+const MenuMapFilter: FC<MenuMapFilterProps> = ({ t }) => {
   const [locationList, setLocationList] = useRecoilState(locationListState);
   const [categories, setCategories] = useState([]);
   const [zones, setZones] = useState([]);
@@ -101,8 +105,7 @@ const MenuMapFilter = () => {
         fontSize="18px"
         lineHeight="22px"
         fontWeight="700">
-        Select one or more categories and/or neighbourhoods to filter search
-        results
+        {t('menu-map-filters:tag-instructions')}
       </Div>
       <Div
         marginTop="32px"
@@ -199,4 +202,4 @@ const MenuMapFilter = () => {
   );
 };
 
-export default MenuMapFilter;
+export default withTranslation('common')(MenuMapFilter);
