@@ -55,7 +55,7 @@ const CheckInboxModal = () => {
           Verify your email address and complete signing up.
         </Div>
         <Button
-          variant="mixed"
+          variant="blue"
           marginTop="24px"
           fontFamily={theme.fonts.futura}
           fontSize="16px"
