@@ -22,7 +22,6 @@ export type LocationDocument = SanityDocument<{
     lng: number;
   };
   body: any[];
-  likes: number;
   userLikes: any[];
   userBookmarks?: any[];
   recommendedLocations?: LocationDocument[];

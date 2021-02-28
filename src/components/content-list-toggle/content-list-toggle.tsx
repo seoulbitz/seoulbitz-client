@@ -9,6 +9,28 @@ import React, { FC } from 'react';
 import { withTranslation } from '../../../i18n';
 import { TFunction } from 'next-i18next';
 
+const DistanceNormal = styled(Distance)`
+  path:nth-child(1) {
+    fill: rgb(0 0 0 / 0.3);
+  }
+
+  path:nth-child(2) {
+    stroke: rgb(0 0 0 / 0.3);
+  }
+
+  path:nth-child(3) {
+    fill: rgb(0 0 0 / 0.3);
+  }
+
+  path:nth-child(4) {
+    fill: rgb(0 0 0 / 0.3);
+  }
+
+  path:nth-child(5) {
+    stroke: rgb(0 0 0 / 0.3);
+  }
+`;
+
 const DistanceWhite = styled(Distance)`
   path:nth-child(1) {
     fill: #ffffff;
@@ -30,6 +52,12 @@ const DistanceWhite = styled(Distance)`
     stroke: #ffffff;
   }
 `;
+
+const ClockNormal = styled(Clock)`
+  path:nth-child(1) {
+    stroke: rgb(0 0 0 / 0.3);
+  }
+`;
 const ClockWhite = styled(Clock)`
   path:nth-child(1) {
     stroke: #ffffff;
@@ -42,7 +70,7 @@ const ClockWhite = styled(Clock)`
 
 const HeartNormal = styled(Heart)`
   path:nth-child(1) {
-    stroke: rgb(130, 136, 249);
+    stroke: rgb(0 0 0 / 0.3);
   }
 `;
 const HeartWhite = styled(Heart)`
@@ -113,7 +141,6 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"
@@ -125,7 +152,6 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"
@@ -137,7 +163,6 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           <Span
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"
@@ -174,7 +199,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             margin="2px"
             borderRadius="100px"
             backgroundColor={value === 'distance' ? '#0511F2' : 'initial'}>
-            {value === 'distance' ? <DistanceWhite /> : <Distance />}
+            {value === 'distance' ? <DistanceWhite /> : <DistanceNormal />}
           </Div>
         )}
         {latest && (
@@ -188,7 +213,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             margin="2px"
             borderRadius="100px"
             backgroundColor={value === 'latest' ? '#0511F2' : 'initial'}>
-            {value === 'latest' ? <ClockWhite /> : <Clock />}
+            {value === 'latest' ? <ClockWhite /> : <ClockNormal />}
           </Div>
         )}
         {likes && (

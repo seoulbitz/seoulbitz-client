@@ -7,6 +7,7 @@ import sanity from '@/services/sanity';
 import { TermsAndConditionsPageDocument } from '@/services/sanity/api/page';
 import BlockContent from '@/services/sanity/block-content';
 import { i18n } from '../../../../i18n';
+import Meta from '@/components/meta/Meta';
 
 const TermsAndConditions: FC<{
   termsAndConditionsPage: TermsAndConditionsPageDocument;
@@ -14,7 +15,10 @@ const TermsAndConditions: FC<{
   const language = termsAndConditionsPage.body;
 
   return (
-    <Layout>
+
+    <>
+      <Meta meta={termsAndConditionsPage.meta} />
+      <Layout>
       <Grid width="100%" justifyContent="center">
         <Cell width={['100%', null, 10 / 12]}>
           <Div
@@ -43,6 +47,8 @@ const TermsAndConditions: FC<{
         </Cell>
       </Grid>
     </Layout>
+    </>
+>>>>>>> develop
   );
 };
 

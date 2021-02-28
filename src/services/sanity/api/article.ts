@@ -12,7 +12,6 @@ export type ArticleDocument = SanityDocument<{
   author: any;
   thumbnailImage: SanityImageSource;
   body: any;
-  likes: number;
   userLikes: any[];
   userBookmarks?: any[];
   recommendedArticles: ArticleDocument[];

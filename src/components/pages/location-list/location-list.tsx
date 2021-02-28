@@ -13,8 +13,17 @@ import { useRecoilState } from 'recoil';
 import { locationListState } from '@/services/recoil/atoms';
 import { useDidUpdateEffect } from '@/services/react/hooks';
 import { isServer } from '@/services/next';
+import { LocationListPageDocument } from '@/services/sanity/api/page';
+import Meta from '@/components/meta/Meta';
 
-const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
+type LocationListProps = {
+  locationListPage: LocationListPageDocument;
+  locations: LocationDocument[];
+};
+
+const LocationList: FC<LocationListProps> = (props) => {
+  const { meta } = props.locationListPage;
+
   const [locationList, setLocationList] = useRecoilState(locationListState);
 
   const setDistanceOnLocations = useCallback(() => {
@@ -68,6 +77,10 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
       },
       () => {}
     );
+
+    if (!navigator.permissions || !navigator.permissions.query) {
+      return;
+    }
 
     navigator.permissions
       .query({ name: 'geolocation' })
@@ -157,87 +170,94 @@ const LocationList: FC<{ locations: LocationDocument[] }> = (props) => {
   const locationsToRender = isServer ? props.locations : locationList.locations;
 
   return (
-    <Layout>
-      <Grid>
-        <Cell
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          width={[1]}>
-          <Div>
-            <ContentListToggle
-              items={{
-                distance:
-                  locationList.userCoordinates.latitude &&
-                  locationList.userCoordinates.longitude,
-                latest: true,
-                likes: true
-              }}
-              value={locationList.sortBy}
-              onChange={handleToggleChange}
-            />
-          </Div>
-        </Cell>
-      </Grid>
-      <Grid paddingTop={['40px', '40px', '48px']} maxWidth="initial">
-        {locationsToRender.map((location, i) => {
-          const {
-            _id,
-            slug,
-            title,
-            subtitle,
-            images,
-            thumbnailImage,
-            category,
-            area,
-            userLikes,
-            distance
-          } = location;
-          const remainder = i % 4;
+    <>
+      <Meta meta={meta} />
+      <Layout>
+        <Grid>
+          <Cell
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            width={[1]}>
+            <Div>
+              <ContentListToggle
+                items={{
+                  distance:
+                    locationList.userCoordinates.latitude &&
+                    locationList.userCoordinates.longitude,
+                  latest: true,
+                  likes: true
+                }}
+                value={locationList.sortBy}
+                onChange={handleToggleChange}
+              />
+            </Div>
+          </Cell>
+        </Grid>
+        <Grid paddingTop={['40px', '40px', '48px']} maxWidth="initial">
+          {locationsToRender.map((location, i) => {
+            const {
+              _id,
+              slug,
+              title,
+              subtitle,
+              images,
+              thumbnailImage,
+              category,
+              area,
+              userLikes,
+              distance
+            } = location;
+            const remainder = i % 4;
 
-          const href = `/locations/${slug.current}`;
+            const href = `/locations/${slug.current}`;
 
-          return (
-            <Cell
-              key={_id}
-              width={[
-                1,
-                1 / 2,
-                remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
-              ]}
-              marginBottom={['40px', null, '24px']}>
-              <Link href={href} passHref>
-                <A textDecoration="initial" color="initial">
-                  <ContentItem
-                    kind="location"
-                    title={title.en}
-                    titleKo={title.ko}
-                    subtitle={subtitle}
-                    images={[thumbnailImage]}
-                    likes={userLikes.length}
-                    category={category.name}
-                    area={area.name}
-                    distance={distance}
-                  />
-                </A>
-              </Link>
-            </Cell>
-          );
-        })}
-      </Grid>
-    </Layout>
+            return (
+              <Cell
+                key={_id}
+                width={[
+                  1,
+                  1 / 2,
+                  remainder === 1 || remainder === 2 ? 5 / 12 : 7 / 12
+                ]}
+                marginBottom={['40px', null, '24px']}>
+                <Link href={href} passHref>
+                  <A textDecoration="initial" color="initial">
+                    <ContentItem
+                      kind="location"
+                      title={title.en}
+                      titleKo={title.ko}
+                      subtitle={subtitle}
+                      images={[thumbnailImage]}
+                      likes={userLikes.length}
+                      category={category.name}
+                      area={area.name}
+                      distance={distance}
+                    />
+                  </A>
+                </Link>
+              </Cell>
+            );
+          })}
+        </Grid>
+      </Layout>
+    </>
   );
 };
 
 export default LocationList;
 
 export const getServerSideProps = async (context) => {
-  const locations = await sanity.api.location.find({
-    order: { _createdAt: 'desc' }
-  });
+  const [locationListPage, locations] = await Promise.all([
+    sanity.api.page.findLocationListPage(),
+    sanity.api.location.find({
+      order: { _createdAt: 'desc' }
+    })
+  ]);
 
   return {
     props: {
+      locationListPage,
       locations
     }
   };
