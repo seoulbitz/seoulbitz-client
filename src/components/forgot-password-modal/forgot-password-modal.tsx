@@ -149,7 +149,7 @@ const ForgotPasswordModal: FC = () => {
                 </Div>
                 <Button
                   type="submit"
-                  variant="mixed"
+                  variant="blue"
                   marginTop="32px"
                   fontFamily={theme.fonts.futura}
                   disabled={isSubmitting}>

@@ -333,7 +333,7 @@ const SignUpModal = () => {
                   type="submit"
                   disabled={isSubmitting}
                   marginTop="24px"
-                  variant="mixed">
+                  variant="blue">
                   SIGN UP
                 </StyledButton>
               </Form>
