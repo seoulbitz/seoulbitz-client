@@ -38,7 +38,18 @@ export type MainProps = SpaceProps &
   React.HTMLAttributes<HTMLElement>;
 
 const Main = styled('main', { shouldForwardProp })<MainProps>(
-  compose(space, color, typography, layout, flexbox, grid, background, border, position, shadow)
+  compose(
+    space,
+    color,
+    typography,
+    layout,
+    flexbox,
+    grid,
+    background,
+    border,
+    position,
+    shadow
+  )
 );
 
 export default Main;
