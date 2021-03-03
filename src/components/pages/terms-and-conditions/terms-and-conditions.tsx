@@ -15,40 +15,38 @@ const TermsAndConditions: FC<{
   const language = termsAndConditionsPage.body;
 
   return (
-
     <>
       <Meta meta={termsAndConditionsPage.meta} />
       <Layout>
-      <Grid width="100%" justifyContent="center">
-        <Cell width={['100%', null, 10 / 12]}>
-          <Div
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            marginTop={['48px', null, '88px']}
-            fontFamily={theme.fonts.futura}
-            fontSize="28px"
-            lineHeight="34px"
-            fontWeight="700"
-            color="#000000">
-            {i18n.language === 'en'
-              ? termsAndConditionsPage.title.en
-              : termsAndConditionsPage.title.ko}
-          </Div>
-          <Div marginTop="32px">
-            <BlockContent
-              blocks={
-                i18n.language === 'en'
-                  ? termsAndConditionsPage.body.en
-                  : termsAndConditionsPage.body.ko
-              }
-            />
-          </Div>
-        </Cell>
-      </Grid>
-    </Layout>
+        <Grid width="100%" justifyContent="center">
+          <Cell width={['100%', null, 10 / 12]}>
+            <Div
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              marginTop={['48px', null, '88px']}
+              fontFamily={theme.fonts.futura}
+              fontSize="28px"
+              lineHeight="34px"
+              fontWeight="700"
+              color="#000000">
+              {i18n.language === 'en'
+                ? termsAndConditionsPage.title.en
+                : termsAndConditionsPage.title.ko}
+            </Div>
+            <Div marginTop="32px">
+              <BlockContent
+                blocks={
+                  i18n.language === 'en'
+                    ? termsAndConditionsPage.body.en
+                    : termsAndConditionsPage.body.ko
+                }
+              />
+            </Div>
+          </Cell>
+        </Grid>
+      </Layout>
     </>
->>>>>>> develop
   );
 };
 

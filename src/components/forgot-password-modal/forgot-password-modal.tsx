@@ -171,7 +171,7 @@ const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({ t }) => {
             lineHeight="20px"
             fontWeight="500"
             onClick={handleLogInClick}>
-            {t('forgot-password:send-link')}
+            {t('forgot-password:back-to-login')}
           </A>
         </Div>
       </Div>

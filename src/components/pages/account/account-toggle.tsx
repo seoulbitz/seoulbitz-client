@@ -52,7 +52,7 @@ export const AccountToggle: FC<AccountToggleProps> = ({ onChange, t }) => {
         lineHeight="20px"
         fontWeight="500"
         color={state === 'locations' ? '#FFFFFF' : 'rgb(0 0 0 / 0.3)'}>
-        Locations
+        {i18n.language === 'en' ? 'Locations' : '로케이션'}
       </Div>
       <Div
         display="flex"
@@ -71,7 +71,7 @@ export const AccountToggle: FC<AccountToggleProps> = ({ onChange, t }) => {
         lineHeight="20px"
         fontWeight="500"
         color={state === 'articles' ? '#FFFFFF' : 'rgb(0 0 0 / 0.3)'}>
-        Articles
+        {i18n.language === 'en' ? 'Articles' : '아티클'}
       </Div>
     </Div>
   );

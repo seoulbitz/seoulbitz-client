@@ -14,7 +14,7 @@ import { SendResetPasswordLinkEmail } from '@/services/firebase/auth';
 import { useGlobalUIState } from '@/services/react/hooks';
 import { ModalType } from 'types';
 import { TFunction } from 'next-i18next';
-import { withTranslation } from '../../../../i18n';
+import { i18n, withTranslation } from '../../../../i18n';
 import Meta from '@/components/meta/Meta';
 
 type AccountSettingsProps = { readonly t: TFunction };
@@ -90,7 +90,9 @@ const AccountSettings: FC<AccountSettingsProps> = ({ t }) => {
             <Cell marginTop="40px" width={1}>
               <Link href="/account" passHref>
                 <A>
-                  <BackButton text="ACCOUNT" />
+                  <BackButton
+                    text={i18n.language === 'en' ? 'ACCOUNT' : '내 계정'}
+                  />
                 </A>
               </Link>
             </Cell>

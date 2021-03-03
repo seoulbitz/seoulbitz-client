@@ -284,11 +284,12 @@ const LogInModal: FC<LogInModalProps> = ({ t }) => {
           <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
           <Div
             fontFamily={theme.fonts.futura}
+            whiteSpace="nowrap"
             color="#777777"
             fontSize="14px"
             lineHeight="16px"
             margin="0px 16px">
-            {t('login: or')}
+            {t('login:or')}
           </Div>
           <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
         </Div>

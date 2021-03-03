@@ -15,7 +15,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import { UpdateUsernameResult } from '@/services/firebase/auth';
 import { TFunction } from 'next-i18next';
-import { withTranslation } from '../../../../i18n';
+import { withTranslation, i18n } from '../../../../i18n';
 import Meta from '@/components/meta/Meta';
 
 const editprofileSchema = Yup.object().shape({
@@ -81,7 +81,9 @@ const EditProfile: FC<EditProfileProps> = ({ t }) => {
             <Cell marginTop="40px" width={1}>
               <Link href="/account" passHref>
                 <A>
-                  <BackButton text="ACCOUNT" />
+                  <BackButton
+                    text={i18n.language === 'en' ? 'ACCOUNT' : '내 계정'}
+                  />
                 </A>
               </Link>
             </Cell>

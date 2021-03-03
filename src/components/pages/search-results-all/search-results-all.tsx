@@ -12,18 +12,23 @@ import { LocationDocument } from '@/services/sanity/api/location';
 import { ArticleDocument } from '@/services/sanity/api/article';
 import { useRouter } from 'next/dist/client/router';
 import Meta from '@/components/meta/Meta';
+import { TFunction } from 'next-i18next';
+import { i18n, withTranslation, useTranslation } from '../../../../i18n';
+
+type SearchProps = { readonly t: TFunction };
 
 const Search: FC<{
   locationResults: LocationDocument[];
   articleResults: ArticleDocument[];
-}> = (props) => {
+  SearchProps;
+}> = ({ t, ...props }) => {
   const router = useRouter();
   const {
     query: { query }
   } = router;
   const queryInURI = encodeURIComponent(query as string);
 
-  const { locationResults, articleResults } = props;
+  const { locationResults, articleResults } = { ...props };
 
   const isResultsEmpty =
     locationResults.length === 0 && articleResults.length === 0;
@@ -50,7 +55,13 @@ const Search: FC<{
               fontSize="28px"
               lineHeight="34px"
               fontWeight="700">
-              {isResultsEmpty ? 'No matches found for' : 'Search results for'}
+              {isResultsEmpty
+                ? i18n.language === 'en'
+                  ? 'No matches found for'
+                  : null
+                : i18n.language === 'en'
+                ? 'Search results for'
+                : null}
             </Div>
             <Div
               fontFamily={theme.fonts.futura}
@@ -59,6 +70,19 @@ const Search: FC<{
               fontWeight="700"
               color="#080CCE">
               “{query}”
+            </Div>
+            <Div
+              fontFamily={theme.fonts.futura}
+              fontSize="28px"
+              lineHeight="34px"
+              fontWeight="700">
+              {isResultsEmpty
+                ? i18n.language === 'en'
+                  ? null
+                  : '검색결과가 존재하지 않습니다'
+                : i18n.language === 'en'
+                ? null
+                : '에 대한 검색결과'}
             </Div>
           </Cell>
         </Grid>
@@ -74,7 +98,7 @@ const Search: FC<{
                   fontSize="24px"
                   lineHeight="32px"
                   fontWeight="700">
-                  Locations
+                  {t('search-results-all:locations')}
                 </Div>
               </Cell>
             </Grid>
@@ -132,7 +156,9 @@ const Search: FC<{
                     width={[1, 'initial']}
                     textDecoration="initial"
                     display="inline">
-                    <Button variant="black">SEE ALL LOCATIONS</Button>
+                    <Button variant="black">
+                      {t('search-results-all:more-locations')}
+                    </Button>
                   </A>
                 </Link>
               </Cell>
@@ -165,7 +191,7 @@ const Search: FC<{
                   fontSize="24px"
                   lineHeight="32px"
                   fontWeight="700">
-                  Articles
+                  {t('search-results-all:articles')}
                 </Div>
               </Cell>
             </Grid>
@@ -221,7 +247,9 @@ const Search: FC<{
                     width={[1, 'initial']}
                     textDecoration="initial"
                     display="inline">
-                    <Button variant="black">SEE ALL ARTICLES</Button>
+                    <Button variant="black">
+                      {t('search-results-all:more-articles')}
+                    </Button>
                   </A>
                 </Link>
               </Cell>
@@ -233,7 +261,7 @@ const Search: FC<{
   );
 };
 
-export default Search;
+export default withTranslation('common')(Search);
 
 export const getServerSideProps = async (context) => {
   const {

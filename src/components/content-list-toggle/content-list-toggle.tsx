@@ -135,10 +135,11 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           fontSize="16px"
           lineHeight="22px"
           whiteSpace="nowrap">
-          {t('content-list-toggle:sort-english')}
+          {t('content-list-toggle:sort-en')}
         </Span>
         {value === 'distance' && (
           <Span
+            whiteSpace="nowrap"
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
             fontSize="16px"
@@ -150,6 +151,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
         )}
         {value === 'latest' && (
           <Span
+            whiteSpace="nowrap"
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
             fontSize="16px"
@@ -161,6 +163,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
         )}
         {value === 'likes' && (
           <Span
+            whiteSpace="nowrap"
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
             fontSize="16px"
@@ -176,7 +179,7 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
           lineHeight="22px"
           marginLeft="6px"
           whiteSpace="nowrap">
-          {t('content-list-toggle:sort-korean')}
+          {t('content-list-toggle:sort-ko')}
         </Span>
       </Div>
       <Div

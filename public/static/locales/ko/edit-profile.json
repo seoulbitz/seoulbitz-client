@@ -1,6 +1,6 @@
 {
-  "title": "회원정보 수정",
+  "title": "프로필 편집",
   "email": "이메일",
-  "username": "사용자",
+  "username": "사용자 이름",
   "save": "저장"
 }

@@ -188,14 +188,14 @@ const MenuMapFilter: FC<MenuMapFilterProps> = ({ t }) => {
             setSelectedCategories([]);
             setSelectedZones([]);
           }}>
-          RESET
+          {t('menu-map-filter:reset')}
         </StyledButton>
         <StyledButton
           variant="blue"
           marginLeft="10px"
           disabled={isSearching}
           onClick={handleSearch}>
-          SEARCH
+          {t('menu-map-filter:search')}
         </StyledButton>
       </Div>
     </Div>

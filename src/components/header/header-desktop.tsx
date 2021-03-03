@@ -55,7 +55,7 @@ const DesktopHeader: FC<any> = ({ t }) => {
             <Link href="/account" passHref>
               <A textDecoration="none">
                 <Button variant="blue" width="initial" marginRight="16px">
-                  MY ACCOUNT
+                  {t('common:account-button')}
                 </Button>
               </A>
             </Link>

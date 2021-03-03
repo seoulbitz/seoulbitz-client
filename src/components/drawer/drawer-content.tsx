@@ -5,7 +5,7 @@ import Close from '../icons/close/close';
 import MenuContents from '../menu-contents/menu-contents';
 import StyledButton from '../button/button';
 import Button from '../styled-system/button/button';
-import Div from '../styled-system/div/div';
+import Div, { DivProps } from '../styled-system/div/div';
 import SearchBox from '../search-box/search-box';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ import { TFunction } from 'next-i18next';
 
 type DrawerContentProps = { DivProps; readonly t: TFunction };
 
-const DrawerContent: FC<DrawerContentProps> = ({ t }) => {
+const DrawerContent: FC<DrawerContentProps> = ({ t, ...rest }) => {
   const globalUIState = useGlobalUIState();
   const router = useRouter();
 
@@ -66,7 +66,7 @@ const DrawerContent: FC<DrawerContentProps> = ({ t }) => {
               <Link href="/account" passHref>
                 <A flex="3" textDecoration="none">
                   <StyledButton variant="blue" marginRight="10px">
-                    MY ACCOUNT
+                    {t('common:account-button')}
                   </StyledButton>
                 </A>
               </Link>

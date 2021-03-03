@@ -304,16 +304,25 @@ const SignUpModal: FC<LogInModalProps> = ({ t }) => {
                       fontSize="16px"
                       lineHeight="20px"
                       fontWeight="500">
-                      I agree to the{' '}
+                      {t('signup:agree-en')}{' '}
                       <Link href="/terms-and-conditions" passHref>
                         <A
                           color="#080CCE"
                           onClick={() => {
                             globalUIState.closeModal();
                           }}>
-                          {t('signup:terms-and-conditions')}
+                          {t('signup:terms-and-conditions-en')}
+                          {t('signup:terms-and-conditions-ko')}
                         </A>
                       </Link>
+                      <Span
+                        marginLeft="8px"
+                        fontFamily={theme.fonts.futura}
+                        fontSize="16px"
+                        lineHeight="20px"
+                        fontWeight="500">
+                        {t('signup:agree-ko')}
+                      </Span>
                     </Span>
                   </Label>
                   <ErrorMessage
@@ -338,7 +347,7 @@ const SignUpModal: FC<LogInModalProps> = ({ t }) => {
                   disabled={isSubmitting}
                   marginTop="24px"
                   variant="mixed">
-                  {t('signup:signup')}
+                  {t('signup:sign-up')}
                 </StyledButton>
               </Form>
             );
@@ -354,12 +363,12 @@ const SignUpModal: FC<LogInModalProps> = ({ t }) => {
           <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
           <Div
             fontFamily={theme.fonts.futura}
+            whiteSpace="nowrap"
             color="#777777"
             fontSize="14px"
             lineHeight="16px"
             margin="0px 16px">
-            {/* {t('signup:or')} */}
-            or
+            {t('signup:or')}
           </Div>
           <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
         </Div>

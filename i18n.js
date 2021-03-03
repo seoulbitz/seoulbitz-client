@@ -8,5 +8,17 @@ module.exports = new NextI18Next({
   defaultLanguage: 'en',
   otherLanguages: ['ko'],
   localeSubpaths,
-  localePath: path.resolve('./public/static/locales')
+  localePath: path.resolve('./public/static/locales'),
+  browserLanguageDetection: true,
+  serverLanguageDetection: true,
+  detection: {
+    cookieMinutes: 24 * 60 * 365, // 1 year
+    cookieSecure: true,
+    cookiePath: '/',
+    cookieSameSite: 'strict',
+    lookupCookie: 'language',
+    lookupQuerystring: 'language',
+    caches: ['cookie'],
+    order: ['querystring', 'cookie', 'header']
+  }
 });

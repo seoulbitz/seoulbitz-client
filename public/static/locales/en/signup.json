@@ -5,7 +5,10 @@
   "username": "Username",
   "email": "Email",
   "password": "Password",
-  "terms-and-conditions": "Terms and Conditions",
+  "agree-en": "I agree to the",
+  "terms-and-conditions-en": "Terms and Conditions",
+  "agree-ko": "",
+  "terms-and-conditions-ko": "",
   "or": "or",
   "google-login": "Sign up with Google"
 }
