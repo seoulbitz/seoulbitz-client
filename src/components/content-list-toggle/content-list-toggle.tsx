@@ -115,16 +115,15 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
     return items[key];
   }).length;
   const containerWidth = 40 * buttonCount + 4 * buttonCount + 4;
-  const labelMarginLeft = `${containerWidth / 2 - 48}px`;
 
   return (
     <>
       <Div
         display="flex"
         alignItems="center"
-        justifyContent="flex-start"
+        justifyContent="center"
         marginTop="40px"
-        marginLeft={labelMarginLeft}
+        textAlign="center"
         width="100%">
         <Span
           fontFamily={theme.fonts.futura}
