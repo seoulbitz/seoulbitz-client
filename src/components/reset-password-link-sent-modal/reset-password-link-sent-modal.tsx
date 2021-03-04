@@ -54,7 +54,7 @@ const ResetPasswordLinkSentModal: FC<ResetPasswordLinkSentProps> = ({ t }) => {
           {t('reset-password-link-sent:email-sent')}
         </Div>
         <Button
-          variant="mixed"
+          variant="blue"
           marginTop="24px"
           fontFamily={theme.fonts.futura}
           fontSize="16px"

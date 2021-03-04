@@ -341,12 +341,11 @@ const SignUpModal: FC<LogInModalProps> = ({ t }) => {
                     }}
                   />
                 </Div>
-
                 <StyledButton
                   type="submit"
                   disabled={isSubmitting}
                   marginTop="24px"
-                  variant="mixed">
+                  variant="blue">
                   {t('signup:sign-up')}
                 </StyledButton>
               </Form>

@@ -59,7 +59,7 @@ const CheckInboxModal: FC<CheckInboxModalProps> = ({ t }) => {
           {t('check-inbox:instructions')}
         </Div>
         <Button
-          variant="mixed"
+          variant="blue"
           marginTop="24px"
           fontFamily={theme.fonts.futura}
           fontSize="16px"

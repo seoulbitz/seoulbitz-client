@@ -264,7 +264,7 @@ const LogInModal: FC<LogInModalProps> = ({ t }) => {
                   disabled={isSubmitting}
                   marginTop="32px"
                   height="48px"
-                  variant="mixed"
+                  variant="blue"
                   fontFamily={theme.fonts.futura}
                   fontSize="16px"
                   lineHeight="22px">
