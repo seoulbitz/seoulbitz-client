@@ -15,13 +15,12 @@ import Meta from '@/components/meta/Meta';
 import { TFunction } from 'next-i18next';
 import { i18n, withTranslation, useTranslation } from '../../../../i18n';
 
-type SearchProps = { readonly t: TFunction };
-
-const Search: FC<{
+type SearchProps = {
   locationResults: LocationDocument[];
   articleResults: ArticleDocument[];
-  SearchProps;
-}> = ({ t, ...props }) => {
+} & { readonly t: TFunction };
+
+const Search: FC<SearchProps> = ({ t, ...props }) => {
   const router = useRouter();
   const {
     query: { query }

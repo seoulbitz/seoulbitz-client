@@ -144,7 +144,7 @@ const SOCIAL_MEDIA_ITEMS = [
   }
 ];
 
-type MenuContentsProps = { DivProps; readonly t: TFunction };
+type MenuContentsProps = { readonly t: TFunction } & DivProps;
 
 const MenuContents: FC<MenuContentsProps> = ({ t, children, ...props }) => {
   const router = useRouter();

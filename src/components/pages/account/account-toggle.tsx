@@ -6,10 +6,9 @@ import { i18n, withTranslation } from '../../../../i18n';
 
 type AccountToggleProps = {
   onChange?: (value: 'locations' | 'articles') => void;
-  readonly t: TFunction;
 };
 
-export const AccountToggle: FC<AccountToggleProps> = ({ onChange, t }) => {
+export const AccountToggle: FC<AccountToggleProps> = ({ onChange }) => {
   const [state, setState] = useState<'locations' | 'articles'>('locations');
 
   const handleLocationsClick = () => {
@@ -77,4 +76,4 @@ export const AccountToggle: FC<AccountToggleProps> = ({ onChange, t }) => {
   );
 };
 
-export default withTranslation('common')(AccountToggle);
+export default AccountToggle;

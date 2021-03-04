@@ -14,7 +14,7 @@ import { ModalType } from 'types';
 import { withTranslation, i18n } from '../../../i18n';
 import { TFunction } from 'next-i18next';
 
-type DrawerContentProps = { DivProps; readonly t: TFunction };
+type DrawerContentProps = { readonly t: TFunction } & DivProps;
 
 const DrawerContent: FC<DrawerContentProps> = ({ t, ...rest }) => {
   const globalUIState = useGlobalUIState();
