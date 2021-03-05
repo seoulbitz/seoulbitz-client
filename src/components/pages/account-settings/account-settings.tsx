@@ -2,7 +2,7 @@ import firebase from '@/services/firebase';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
 import Div from '@/components/styled-system/div/div';
 import { theme } from '@/styles/theme';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import StyledButton from '../../button/button';
 import P from '@/components/styled-system/p/p';
 import { useRouter } from 'next/dist/client/router';
@@ -13,9 +13,13 @@ import BackButton from '@/components/back-button/back-button';
 import { SendResetPasswordLinkEmail } from '@/services/firebase/auth';
 import { useGlobalUIState } from '@/services/react/hooks';
 import { ModalType } from 'types';
+import { TFunction } from 'next-i18next';
+import { i18n, withTranslation } from '../../../../i18n';
 import Meta from '@/components/meta/Meta';
 
-const AccountSettings = () => {
+type AccountSettingsProps = { readonly t: TFunction };
+
+const AccountSettings: FC<AccountSettingsProps> = ({ t }) => {
   const router = useRouter();
   const globalUIState = useGlobalUIState();
 
@@ -86,11 +90,12 @@ const AccountSettings = () => {
             <Cell marginTop="40px" width={1}>
               <Link href="/account" passHref>
                 <A>
-                  <BackButton text="ACCOUNT" />
+                  <BackButton
+                    text={i18n.language === 'en' ? 'ACCOUNT' : '내 계정'}
+                  />
                 </A>
               </Link>
             </Cell>
-
             <Cell
               marginTop={['40px', null, '56px']}
               width={[1, 1 / 2]}
@@ -102,7 +107,7 @@ const AccountSettings = () => {
                 fontSize="28px"
                 lineHeight="34px"
                 fontWeight="700">
-                Account settings
+                {t('account-settings:title')}
               </Div>
             </Cell>
             {isProviderPassword && (
@@ -117,7 +122,7 @@ const AccountSettings = () => {
                     fontSize="20px"
                     lineHeight="24px"
                     fontWeight="700">
-                    Change password
+                    {t('account-settings:change-password')}
                   </Div>
                 </Cell>
                 <Cell width={[1, 1 / 2]} marginTop="32px">
@@ -125,7 +130,7 @@ const AccountSettings = () => {
                     variant="blue"
                     disabled={isSendResetPasswordLinkButtonLoading}
                     onClick={handleSendResetPasswordLinkButtonClick}>
-                    SEND RESET PASSWORD LINK
+                    {t('account-settings:send-link')}
                   </StyledButton>
                 </Cell>
               </>
@@ -141,7 +146,7 @@ const AccountSettings = () => {
                 fontSize="20px"
                 lineHeight="24px"
                 fontWeight="700">
-                Delete account
+                {t('account-settings:delete')}
               </Div>
             </Cell>
             <Cell width={[1, 1 / 2]} marginTop="16px">
@@ -151,16 +156,14 @@ const AccountSettings = () => {
                 lineHeight="20px"
                 fontWeight="400"
                 color="#000000">
-                Deleting your account is permanent. All your data will be wiped
-                out immediately and you won't be able to get it back. Requires
-                password.
+                {t('account-settings:delete-warning')}
               </P>
             </Cell>
             <Cell width={[1, 1 / 2]} marginTop="24px">
               <StyledButton
                 variant="warning"
                 onClick={handleDeleteAccountButtonClick}>
-                DELETE ACCOUNT
+                {t('account-settings:delete-button')}
               </StyledButton>
             </Cell>
           </Grid>
@@ -170,4 +173,4 @@ const AccountSettings = () => {
   );
 };
 
-export default AccountSettings;
+export default withTranslation('common')(AccountSettings);

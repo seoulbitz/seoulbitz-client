@@ -1,13 +1,17 @@
 import { useGlobalUIState } from '@/services/react/hooks';
 import firebase from '@/services/firebase';
 import { theme } from '@/styles/theme';
-import React from 'react';
+import React, { FC } from 'react';
 import Button from '../button/button';
 import Modal from '../modal/modal';
 import Div from '../styled-system/div/div';
 import { ResendVerificationEmailResult } from '@/services/firebase/auth';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../i18n';
 
-const CheckInboxModal = () => {
+type CheckInboxModalProps = { readonly t: TFunction };
+
+const CheckInboxModal: FC<CheckInboxModalProps> = ({ t }) => {
   const globalUIState = useGlobalUIState();
 
   const handleResendButtonClick = async () => {
@@ -40,7 +44,7 @@ const CheckInboxModal = () => {
           lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
-          Check your inbox
+          {t('check-inbox:verify-email')}
         </Div>
         <Div
           marginTop="16px"
@@ -50,9 +54,9 @@ const CheckInboxModal = () => {
           lineHeight="20px"
           fontWeight="500">
           {globalUIState.data.email &&
-            `We sent an email to ${globalUIState.data.email}.`}
+            `${t('check-inbox:email-data')}${globalUIState.data.email}.`}
           <br />
-          Verify your email address and complete signing up.
+          {t('check-inbox:instructions')}
         </Div>
         <Button
           variant="blue"
@@ -61,11 +65,11 @@ const CheckInboxModal = () => {
           fontSize="16px"
           lineHeight="22px"
           onClick={handleResendButtonClick}>
-          RESEND EMAIL
+          {t('check-inbox:resend-button')}
         </Button>
       </Div>
     </Modal>
   );
 };
 
-export default CheckInboxModal;
+export default withTranslation('common')(CheckInboxModal);

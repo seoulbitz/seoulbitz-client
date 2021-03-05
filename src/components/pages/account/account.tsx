@@ -18,6 +18,8 @@ import ContentItem from '@/components/content-item/content-item';
 import MapMarkerLarge from '@/components/icons/map-marker/map-marker-large';
 import MapMarkerSmall from '@/components/icons/map-marker/map-marker-small';
 import AccountNoItemsPanel from './account-no-items-panel';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../../i18n';
 import Meta from '@/components/meta/Meta';
 
 const LocationMarker = (props: any) => {
@@ -28,7 +30,9 @@ const MarkerContainer = (props: any) => {
   return <Div {...props} />;
 };
 
-const Account = () => {
+type AccountProps = { readonly t: TFunction };
+
+const Account: FC<AccountProps> = ({ t }) => {
   const router = useRouter();
 
   const [user, setUser] = useState(null);
@@ -107,7 +111,7 @@ const Account = () => {
                   lineHeight="34px"
                   fontWeight="700"
                   color="#000000">
-                  My Profile
+                  {t('account:title')}
                 </Div>
               </Cell>
               <Cell
@@ -122,7 +126,7 @@ const Account = () => {
                   lineHeight="20px"
                   fontWeight="500"
                   color="#080CCE">
-                  Username: {user.displayName}
+                  {t('account:username')} {user.displayName}
                 </Div>
               </Cell>
               <Cell
@@ -137,7 +141,7 @@ const Account = () => {
                   lineHeight="20px"
                   fontWeight="500"
                   color="#080CCE">
-                  Email: {user.email}
+                  {t('account:email')} {user.email}
                 </Div>
               </Cell>
               <Cell
@@ -149,7 +153,7 @@ const Account = () => {
                 <Link href="/account/edit-profile" passHref>
                   <A textDecoration="initial">
                     <Button width="150px" variant="black">
-                      Edit
+                      {t('account:edit')}
                     </Button>
                   </A>
                 </Link>
@@ -168,7 +172,7 @@ const Account = () => {
                       lineHeight="20px"
                       fontWeight="500"
                       color="#000000">
-                      Account settings
+                      {t('account:account-settings')}
                     </Span>
                   </A>
                 </Link>
@@ -188,7 +192,7 @@ const Account = () => {
                   fontWeight="500"
                   color="#ff1075"
                   onClick={handleLogOut}>
-                  Log out
+                  {t('account:logout')}
                 </Span>
               </Cell>
             </Grid>
@@ -206,7 +210,7 @@ const Account = () => {
                       lineHeight="34px"
                       fontWeight="700"
                       color="#000000">
-                      Bookmarks
+                      {t('account:bookmarks')}
                     </Div>
                   </Cell>
                   <Cell
@@ -530,4 +534,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default withTranslation('common')(Account);

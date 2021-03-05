@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { theme } from '@/styles/theme';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { FC } from 'react';
 import Button from '../button/button';
 import Modal from '../modal/modal';
 import Radio from '../radio/radio';
@@ -11,8 +11,16 @@ import Span from '../styled-system/span/span';
 import sanity from '@/services/sanity';
 import { SurveySubmitResult } from '@/services/sanity/api/user-survey';
 import { useGlobalUIState } from '@/services/react/hooks';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../i18n';
 
-const Q1 = () => {
+type SurveyProps = { readonly t: TFunction };
+type Q1Props = { readonly t: TFunction };
+type Q2Props = { readonly t: TFunction };
+type Q3Props = { readonly t: TFunction };
+type Q4Props = { readonly t: TFunction };
+
+const Q1: FC<Q1Props> = ({ t }) => {
   return (
     <Div width={1} flexDirection="row">
       <Div>
@@ -21,7 +29,7 @@ const Q1 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="500">
-          I am
+          {t('survey:introduction')}
           <Span color="#080CCE">*</Span>
         </Span>
       </Div>
@@ -44,7 +52,7 @@ const Q1 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          A foreign student in South Korea (student visa){' '}
+          {t('survey:q1a1')}{' '}
         </Span>
       </Label>
 
@@ -67,7 +75,7 @@ const Q1 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          A long-term resident in South Korea (working/permanent residence visa){' '}
+          {t('survey:q1a2')}{' '}
         </Span>
       </Label>
 
@@ -90,7 +98,7 @@ const Q1 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          A traveler in South Korea (tourist visa)
+          {t('survey:q1a3')}
         </Span>
       </Label>
 
@@ -113,7 +121,7 @@ const Q1 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          A Korean citizen
+          {t('survey:q1a4')}
         </Span>
       </Label>
 
@@ -136,7 +144,7 @@ const Q1 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Planning to live in South Korea in the near future{' '}
+          {t('survey:q1a5')}{' '}
         </Span>
       </Label>
 
@@ -159,7 +167,7 @@ const Q1 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Not living in South Korea
+          {t('survey:q1a6')}
         </Span>
       </Label>
       <ErrorMessage
@@ -182,7 +190,9 @@ const Q1 = () => {
   );
 };
 
-const Q2 = () => {
+const Q1WithTranslation = withTranslation('common')(Q1);
+
+const Q2: FC<Q2Props> = ({ t }) => {
   return (
     <Div width={1} flexDirection="row" marginTop="40px">
       <Div>
@@ -191,7 +201,8 @@ const Q2 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="500">
-          I’m mainly interested in <Span color="#080CCE">*</Span>
+          {t('survey:q2-title')}
+          <Span color="#080CCE">*</Span>
         </Span>
       </Div>
       <Label
@@ -213,7 +224,7 @@ const Q2 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Pop culture
+          {t('survey:q2a1')}
         </Span>
       </Label>
 
@@ -236,7 +247,7 @@ const Q2 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Underground culture
+          {t('survey:q2a2')}
         </Span>
       </Label>
 
@@ -259,7 +270,7 @@ const Q2 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Food
+          {t('survey:q2a3')}
         </Span>
       </Label>
 
@@ -282,7 +293,7 @@ const Q2 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Nature & Travel ideas
+          {t('survey:q2a4')}
         </Span>
       </Label>
 
@@ -305,7 +316,7 @@ const Q2 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Cinema & Art
+          {t('survey:q2a5')}
         </Span>
       </Label>
 
@@ -328,7 +339,7 @@ const Q2 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Fashion & Trends
+          {t('survey:q2a6')}
         </Span>
       </Label>
       <ErrorMessage
@@ -350,8 +361,9 @@ const Q2 = () => {
     </Div>
   );
 };
+const Q2WithTranslation = withTranslation('common')(Q2);
 
-const Q3 = () => {
+const Q3: FC<Q3Props> = ({ t }) => {
   return (
     <Div width={1} flexDirection="row" marginTop="40px">
       <Div>
@@ -360,7 +372,7 @@ const Q3 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="500">
-          I’d like Seoulbitz to
+          {t('survey:q3-title')}
           <Span color="#080CCE">*</Span>
         </Span>
       </Div>
@@ -383,7 +395,7 @@ const Q3 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Help me live more authentic experiences in Seoul/South Korea
+          {t('survey:q3a1')}
         </Span>
       </Label>
 
@@ -406,7 +418,7 @@ const Q3 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Make me daily life in South Korea easier
+          {t('survey:q3a2')}
         </Span>
       </Label>
 
@@ -429,7 +441,7 @@ const Q3 = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="400">
-          Help me better understand local cuture
+          {t('survey:q3a3')}
         </Span>
       </Label>
       <ErrorMessage
@@ -451,6 +463,7 @@ const Q3 = () => {
     </Div>
   );
 };
+const Q3WithTranslation = withTranslation('common')(Q3);
 
 const schema = yup.object().shape({
   q1: yup.string().required('Please select an option.'),
@@ -458,7 +471,7 @@ const schema = yup.object().shape({
   q3: yup.string().required('Please select an option.')
 });
 
-const SurveyModal = () => {
+const SurveyModal: FC<SurveyProps> = ({ t }) => {
   const globalUIState = useGlobalUIState();
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
@@ -487,7 +500,7 @@ const SurveyModal = () => {
           lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
-          Tell us a bit about you
+          {t('survey:title')}
         </Div>
         <Div
           marginTop="16px"
@@ -495,7 +508,7 @@ const SurveyModal = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="700">
-          Your answers will help us tailor Seoulbitz to your needs.
+          {t('survey:subtitle')}
         </Div>
       </Div>
 
@@ -511,15 +524,15 @@ const SurveyModal = () => {
           onSubmit={handleSubmit}>
           {({ isSubmitting }) => (
             <Form>
-              <Q1 />
-              <Q2 />
-              <Q3 />
+              <Q1WithTranslation />
+              <Q2WithTranslation />
+              <Q3WithTranslation />
               <Button
                 type="submit"
                 marginTop="40px"
                 variant="mixed"
                 disabled={isSubmitting}>
-                DONE
+                {t('survey:done-button')}
               </Button>
             </Form>
           )}
@@ -529,4 +542,4 @@ const SurveyModal = () => {
   );
 };
 
-export default SurveyModal;
+export default withTranslation('common')(SurveyModal);

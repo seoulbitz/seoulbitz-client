@@ -7,6 +7,7 @@ import FAQItem from '@/components/faq-item/faq-item';
 import Layout from '@/components/layout/layout';
 import sanity from '@/services/sanity';
 import { FAQPageDocument } from '@/services/sanity/api/page';
+import { i18n } from '../../../../i18n';
 import Meta from '@/components/meta/Meta';
 
 const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
@@ -39,13 +40,16 @@ const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
             </Div>
             <Div marginTop={['40px', null, '48px']}>
               {faqPage.faqItems.map(({ _id, question, answer }) => {
-                const language = 'en'; // 'kr'
+                // const language = question.en;
 
                 return (
                   <FAQItem
                     key={_id}
-                    question={language === 'en' ? question.en : question.ko}
-                    answer={language === 'en' ? answer.en : answer.ko}
+                    // {i18n.language === 'en' ? question.en : question.ko}
+                    question={
+                      i18n.language === 'en' ? question.en : question.ko
+                    }
+                    answer={i18n.language === 'en' ? answer.en : answer.ko}
                   />
                 );
               })}

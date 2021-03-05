@@ -13,6 +13,8 @@ import A from '../styled-system/a/a';
 import { useGlobalUIState } from '@/services/react/hooks';
 import { ModalType } from 'types';
 import { SendResetPasswordLinkEmail } from '@/services/firebase/auth';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../i18n';
 
 const forgotpasswordSchema = Yup.object().shape({
   email: Yup.string()
@@ -20,7 +22,9 @@ const forgotpasswordSchema = Yup.object().shape({
     .required('Please fill in.')
 });
 
-const ForgotPasswordModal: FC = () => {
+type ForgotPasswordModalProps = { readonly t: TFunction };
+
+const ForgotPasswordModal: FC<ForgotPasswordModalProps> = ({ t }) => {
   const globalUIState = useGlobalUIState();
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
@@ -62,7 +66,7 @@ const ForgotPasswordModal: FC = () => {
           lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
-          Forgot password?
+          {t('forgot-password:forgot-password')}
         </Div>
 
         <Div
@@ -73,8 +77,7 @@ const ForgotPasswordModal: FC = () => {
           lineHeight="20px"
           fontWeight="500"
           color="#000000">
-          Enter your email address and we will email you a link to reset your
-          password!
+          {t('forgot-password:new-password-link')}
         </Div>
         <Div
           marginTop="16px"
@@ -84,8 +87,7 @@ const ForgotPasswordModal: FC = () => {
           lineHeight="20px"
           fontWeight="500"
           color="#000000">
-          The email might end up in your spam folder, so please check there as
-          well.
+          {t('forgot-password:check-spam')}
         </Div>
 
         <Formik
@@ -105,7 +107,7 @@ const ForgotPasswordModal: FC = () => {
                       fontSize="16px"
                       lineHeight="20px"
                       fontWeight="500">
-                      Email
+                      {t('forgot-password:email')}
                       <Span color="#080CCE">*</Span>
                     </Span>
                   </Label>
@@ -153,7 +155,7 @@ const ForgotPasswordModal: FC = () => {
                   marginTop="32px"
                   fontFamily={theme.fonts.futura}
                   disabled={isSubmitting}>
-                  SEND LINK
+                  {t('forgot-password:send-link')}
                 </Button>
               </Form>
             );
@@ -169,7 +171,7 @@ const ForgotPasswordModal: FC = () => {
             lineHeight="20px"
             fontWeight="500"
             onClick={handleLogInClick}>
-            Back to login
+            {t('forgot-password:back-to-login')}
           </A>
         </Div>
       </Div>
@@ -177,4 +179,4 @@ const ForgotPasswordModal: FC = () => {
   );
 };
 
-export default ForgotPasswordModal;
+export default withTranslation('common')(ForgotPasswordModal);

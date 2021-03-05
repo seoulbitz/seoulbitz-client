@@ -43,6 +43,12 @@ export type AboutUsPageDocument = SanityDocument<{
   body: { en: any[]; ko: any[] };
 }>;
 
+export type examplePageDocument = SanityDocument<{
+  title: { en: string; ko: string };
+  image: SanityImageSource;
+  body: { en: any[]; ko: any[] };
+}>;
+
 export const createPageService = (client: SanityClient) => {
   const findLocationListPage = async () => {
     const query = `*[_type == "locationListPage"]{

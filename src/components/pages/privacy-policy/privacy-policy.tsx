@@ -6,12 +6,12 @@ import Layout from '@/components/layout/layout';
 import sanity from '@/services/sanity';
 import { PrivacyPolicyPageDocument } from '@/services/sanity/api/page';
 import BlockContent from '@/services/sanity/block-content';
+import { i18n } from '../../../../i18n';
 import Meta from '@/components/meta/Meta';
 
 const PrivacyPolicy: FC<{ privacyPolicyPage: PrivacyPolicyPageDocument }> = ({
   privacyPolicyPage
 }) => {
-  const language = 'en';
   return (
     <>
       <Meta meta={privacyPolicyPage.meta} />
@@ -29,14 +29,14 @@ const PrivacyPolicy: FC<{ privacyPolicyPage: PrivacyPolicyPageDocument }> = ({
               fontWeight="700"
               color="#000000"
               whiteSpace="nowrap">
-              {language === 'en'
+              {i18n.language === 'en'
                 ? privacyPolicyPage.title.en
                 : privacyPolicyPage.title.ko}
             </Div>
             <Div marginTop="32px">
               <BlockContent
                 blocks={
-                  language === 'en'
+                  i18n.language === 'en'
                     ? privacyPolicyPage.body.en
                     : privacyPolicyPage.body.ko
                 }

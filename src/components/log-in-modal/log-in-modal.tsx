@@ -19,6 +19,8 @@ import {
 } from '@/services/firebase/auth';
 import { useGlobalUIState } from '@/services/react/hooks';
 import { ModalType } from 'types';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../i18n';
 
 const logInSchema = Yup.object().shape({
   email: Yup.string()
@@ -27,7 +29,9 @@ const logInSchema = Yup.object().shape({
   password: Yup.string().required('Please fill in.')
 });
 
-const LogInModal: FC = () => {
+type LogInModalProps = { readonly t: TFunction };
+
+const LogInModal: FC<LogInModalProps> = ({ t }) => {
   const globalUIState = useGlobalUIState();
 
   const handleEmailPasswordFormSubmit = async (
@@ -105,7 +109,7 @@ const LogInModal: FC = () => {
           lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
-          Log in
+          {t('login:login')}
         </Div>
         <Div
           display="block"
@@ -116,9 +120,9 @@ const LogInModal: FC = () => {
           lineHeight="20px"
           fontWeight="500"
           color="#000000">
-          Log into your account.
+          {t('login:account-exist')}
           <br />
-          Don’t have an account?
+          {t('login:no-account')}
           <A
             cursor="pointer"
             textDecoration="underline"
@@ -129,9 +133,9 @@ const LogInModal: FC = () => {
             fontWeight="500"
             color="#080CCE"
             onClick={handleSignUpClick}>
-            Sign up
+            {t('login:sign-up')}
           </A>{' '}
-          for free.
+          {t('login:free')}
         </Div>
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -150,7 +154,8 @@ const LogInModal: FC = () => {
                       fontSize="16px"
                       lineHeight="20px"
                       fontWeight="500">
-                      Email
+                      {t('login:email')}
+
                       <Span color="#080CCE">*</Span>
                     </Span>
                   </Label>
@@ -201,20 +206,19 @@ const LogInModal: FC = () => {
                       fontSize="16px"
                       lineHeight="20px"
                       fontWeight="500">
-                      Password
+                      {t('login:password')}
                       <Span color="#080CCE">*</Span>
                     </Span>
                     <A
                       cursor="pointer"
                       textDecoration="underline"
-                      // textDecoration="underline"
                       color="#777777"
                       fontFamily={theme.fonts.futura}
                       fontSize="16px"
                       lineHeight="20px"
                       fontWeight="500"
                       onClick={handleForgotPasswordClick}>
-                      Forgot password?
+                      {t('login:forgot-password')}
                     </A>
                   </Label>
                   <Field id="password" name="password">
@@ -264,7 +268,7 @@ const LogInModal: FC = () => {
                   fontFamily={theme.fonts.futura}
                   fontSize="16px"
                   lineHeight="22px">
-                  SIGN IN
+                  {t('login:sign-in')}
                 </StyledButton>
               </Form>
             );
@@ -280,11 +284,12 @@ const LogInModal: FC = () => {
           <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
           <Div
             fontFamily={theme.fonts.futura}
+            whiteSpace="nowrap"
             color="#777777"
             fontSize="14px"
             lineHeight="16px"
             margin="0px 16px">
-            or
+            {t('login:or')}
           </Div>
           <Div width="100%" height="1px" backgroundColor="#AAAAAA" />
         </Div>
@@ -357,7 +362,7 @@ const LogInModal: FC = () => {
             lineHeight="20px"
             fontWeight="500"
             color="#000000">
-            Continue with Google
+            {t('login:google-login')}
           </Div>
         </Button>
 
@@ -400,5 +405,4 @@ const LogInModal: FC = () => {
     </Modal>
   );
 };
-
-export default LogInModal;
+export default withTranslation('common')(LogInModal);

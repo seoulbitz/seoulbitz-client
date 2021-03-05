@@ -1,0 +1,10 @@
+{
+  "title": "내 프로필",
+  "username": "사용자 이름:",
+  "email": "이메일:",
+  "edit": "수정",
+  "account-settings": "계정 설정",
+  "logout": "로그아웃",
+  "bookmarks": "북마크",
+  "account-button": "내 계정"
+}

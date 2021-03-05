@@ -2,12 +2,16 @@ import firebase from '@/services/firebase';
 import { SendResetPasswordLinkEmail } from '@/services/firebase/auth';
 import { useGlobalUIState } from '@/services/react/hooks';
 import { theme } from '@/styles/theme';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import Button from '../button/button';
 import Modal from '../modal/modal';
 import Div from '../styled-system/div/div';
+import { TFunction } from 'next-i18next';
+import { withTranslation } from '../../../i18n';
 
-const ResetPasswordLinkSentModal = () => {
+type ResetPasswordLinkSentProps = { readonly t: TFunction };
+
+const ResetPasswordLinkSentModal: FC<ResetPasswordLinkSentProps> = ({ t }) => {
   const globalUIState = useGlobalUIState();
   const { email } = globalUIState.data;
 
@@ -38,7 +42,7 @@ const ResetPasswordLinkSentModal = () => {
           lineHeight="34px"
           fontWeight="700"
           color="#080CCE">
-          Reset password link sent
+          {t('reset-password-link-sent:reset-password-link')}
         </Div>
         <Div
           marginTop="16px"
@@ -47,8 +51,7 @@ const ResetPasswordLinkSentModal = () => {
           fontSize="16px"
           lineHeight="20px"
           fontWeight="500">
-          We just sent you an email with a link to reset your password to the
-          following email address. Please check your inbox.
+          {t('reset-password-link-sent:email-sent')}
         </Div>
         <Button
           variant="blue"
@@ -58,11 +61,11 @@ const ResetPasswordLinkSentModal = () => {
           lineHeight="22px"
           disabled={isButtonLoading}
           onClick={handleResendEmailButton}>
-          RESEND EMAIL
+          {t('reset-password-link-sent:resend-email')}
         </Button>
       </Div>
     </Modal>
   );
 };
 
-export default ResetPasswordLinkSentModal;
+export default withTranslation('common')(ResetPasswordLinkSentModal);

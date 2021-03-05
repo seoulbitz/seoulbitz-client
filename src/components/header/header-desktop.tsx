@@ -2,17 +2,19 @@ import firebase from '@/services/firebase';
 import { useGlobalUIState } from '@/services/react/hooks';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { ModalType } from 'types';
 import Button from '../button/button';
 import SearchBox from '../search-box/search-box';
 import A from '../styled-system/a/a';
 import Div from '../styled-system/div/div';
 import Header from '../styled-system/header/header';
+import { i18n, withTranslation } from '../../../i18n';
 
-const DesktopHeader = () => {
+const DesktopHeader: FC<any> = ({ t }) => {
   const globalUIState = useGlobalUIState();
   const router = useRouter();
+  // const { t } = useTranslation();
 
   const [user, setUser] = useState(null);
   // Get user on mount
@@ -52,39 +54,48 @@ const DesktopHeader = () => {
           <>
             <Link href="/account" passHref>
               <A textDecoration="none">
-                <Button
-                  variant="blue"
-                  width="initial"
-                  // marginRight="16px" TODO: Add internalization
-                >
-                  MY ACCOUNT
+                <Button variant="blue" width="initial" marginRight="16px">
+                  {t('common:account-button')}
                 </Button>
               </A>
             </Link>
-            {/* TODO: Add internalization */}
-            {/* <Button variant="black" width="initial">
-              EN
-            </Button> */}
+            <Button
+              variant="black"
+              width="initial"
+              type="button"
+              marginRight="24px"
+              onClick={() =>
+                i18n.changeLanguage(i18n.language === 'en' ? 'ko' : 'en')
+              }>
+              {t('common:language')}
+            </Button>
           </>
         ) : (
-          <Div whiteSpace="nowrap">
+          <Div whiteSpace="nowrap" display="flex" flexDirection="row">
             <Button
               variant="blue"
-              // marginRight="16px" TODO: Add internalization
+              marginRight="16px"
               width="initial"
               onClick={handleLogInClick}>
-              LOG IN
+              {t('common:login')}
             </Button>
-            {/* TODO: Add internalization */}
-            {/* <Button variant="black" width="initial">
-              EN
-            </Button> */}
+            <Button
+              variant="black"
+              width="initial"
+              type="button"
+              marginRight="24px"
+              onClick={() =>
+                i18n.changeLanguage(i18n.language === 'en' ? 'ko' : 'en')
+              }>
+              {t('common:language')}
+            </Button>
           </Div>
         )}
       </Div>
     </Div>
   );
 };
+const DesktopHeaderWithTranslation = withTranslation('common')(DesktopHeader);
 
 const HeaderDesktop = () => {
   return (
@@ -98,10 +109,9 @@ const HeaderDesktop = () => {
         width="100%"
         backgroundColor="#ffffff"
         zIndex={10}>
-        <DesktopHeader />
+        <DesktopHeaderWithTranslation />
       </Header>
     </Div>
   );
 };
-
 export default HeaderDesktop;
