@@ -363,7 +363,7 @@ const Q2: FC<Q2Props> = ({ t }) => {
 };
 const Q2WithTranslation = withTranslation('common')(Q2);
 
-const Q3: FC<Q1Props> = ({ t }) => {
+const Q3: FC<Q3Props> = ({ t }) => {
   return (
     <Div width={1} flexDirection="row" marginTop="40px">
       <Div>

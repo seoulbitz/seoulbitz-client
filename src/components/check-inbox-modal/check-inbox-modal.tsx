@@ -65,7 +65,7 @@ const CheckInboxModal: FC<CheckInboxModalProps> = ({ t }) => {
           fontSize="16px"
           lineHeight="22px"
           onClick={handleResendButtonClick}>
-          {t('check-inbox:resent-button')}
+          {t('check-inbox:resend-button')}
         </Button>
       </Div>
     </Modal>
