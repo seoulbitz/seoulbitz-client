@@ -11,10 +11,18 @@ type LocationTitle = {
 const LocationTitle: FC<LocationTitle> = ({ enTitle, koTitle }) => {
   return (
     <Div color="#080CCE">
-      <Span fontFamily={theme.fonts.nanumSquare} fontSize="28px" lineHeight="34px" fontWeight="800">
+      <Span
+        fontFamily={theme.fonts.nanumSquare}
+        fontSize="28px"
+        lineHeight="34px"
+        fontWeight="800">
         {koTitle},{' '}
       </Span>
-      <Span fontFamily={theme.fonts.futura} fontSize="28px" lineHeight="34px" fontWeight="700">
+      <Span
+        fontFamily={theme.fonts.futura}
+        fontSize="28px"
+        lineHeight="34px"
+        fontWeight="700">
         {enTitle}
       </Span>
     </Div>

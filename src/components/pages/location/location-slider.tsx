@@ -14,13 +14,22 @@ SwiperCore.use([Navigation, Pagination]);
 
 const LocationSlider: FC<LocationSliderProps> = ({ images }) => {
   return (
-    <Wrapper width={['100vw', null, '100%']} marginLeft={['-20px', '-24px', 'auto']}>
-      <Swiper spaceBetween={0} slidesPerView={1} navigation pagination={{ clickable: true }}>
+    <Wrapper
+      width={['100vw', null, '100%']}
+      marginLeft={['-20px', '-24px', 'auto']}>
+      <Swiper
+        spaceBetween={0}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}>
         {images.map((image) => {
           const url = sanity.image.getUrl(image);
           return (
             <SwiperSlide key={url}>
-              <Div display={['block', 'none']} position="relative" paddingTop="100%">
+              <Div
+                display={['block', 'none']}
+                position="relative"
+                paddingTop="100%">
                 <Div
                   position="absolute"
                   top="0"
@@ -226,13 +235,15 @@ const Wrapper = styled(Div)`
   .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev {
     transform: scale(0.66);
   }
-  .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev-prev {
+  .swiper-pagination-bullets-dynamic
+    .swiper-pagination-bullet-active-prev-prev {
     transform: scale(0.33);
   }
   .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next {
     transform: scale(0.66);
   }
-  .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next-next {
+  .swiper-pagination-bullets-dynamic
+    .swiper-pagination-bullet-active-next-next {
     transform: scale(0.33);
   }
   .swiper-pagination-bullet {
@@ -263,11 +274,14 @@ const Wrapper = styled(Div)`
     top: 50%;
     transform: translate3d(0px, -50%, 0);
   }
-  .swiper-container-vertical > .swiper-pagination-bullets .swiper-pagination-bullet {
+  .swiper-container-vertical
+    > .swiper-pagination-bullets
+    .swiper-pagination-bullet {
     margin: 6px 0;
     display: block;
   }
-  .swiper-container-vertical > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+  .swiper-container-vertical
+    > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
     top: 50%;
     transform: translateY(-50%);
     width: 8px;
@@ -278,10 +292,13 @@ const Wrapper = styled(Div)`
     display: inline-block;
     transition: 200ms transform, 200ms top;
   }
-  .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  .swiper-container-horizontal
+    > .swiper-pagination-bullets
+    .swiper-pagination-bullet {
     margin: 0 2px;
   }
-  .swiper-container-horizontal > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+  .swiper-container-horizontal
+    > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
