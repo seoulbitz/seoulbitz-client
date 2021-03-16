@@ -94,6 +94,7 @@ const EditProfile: FC<EditProfileProps> = ({ t }) => {
               flexDirection="row"
               justifyContent="center">
               <Div
+                whiteSpace="nowrap"
                 fontFamily={theme.fonts.futura}
                 fontSize="28px"
                 fontWeight="700"

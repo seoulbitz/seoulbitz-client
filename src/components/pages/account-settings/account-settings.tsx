@@ -103,6 +103,7 @@ const AccountSettings: FC<AccountSettingsProps> = ({ t }) => {
               flexDirection="row"
               justifyContent="center">
               <Div
+                whiteSpace="nowrap"
                 fontFamily={theme.fonts.futura}
                 fontSize="28px"
                 lineHeight="34px"
@@ -118,6 +119,7 @@ const AccountSettings: FC<AccountSettingsProps> = ({ t }) => {
                   justifyContent="center"
                   marginTop={['56px', null, '64px']}>
                   <Div
+                    whiteSpace="nowrap"
                     fontFamily={theme.fonts.futura}
                     fontSize="20px"
                     lineHeight="24px"
@@ -142,6 +144,7 @@ const AccountSettings: FC<AccountSettingsProps> = ({ t }) => {
               width={[1, 1 / 2]}
               marginTop={['56px', null, '64px']}>
               <Div
+                whiteSpace="nowrap"
                 fontFamily={theme.fonts.futura}
                 fontSize="20px"
                 lineHeight="24px"
