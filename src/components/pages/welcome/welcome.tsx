@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Div from '@/components/styled-system/div/div';
 import SeoulbitzLogo from '@/components/icons/seoulbitz-logo/seoulbitz-logo';
 import { Cell, Grid } from '@/components/content/layout-grid/layout-grid';
@@ -7,12 +7,18 @@ import { theme } from '@/styles/theme';
 import { ThemeProvider } from 'emotion-theming';
 import Button from '@/components/button/button';
 import Img from '@/components/styled-system/img/img';
+import { i18n } from '../../../../i18n';
 
 const Welcome: FC = () => {
   const router = useRouter();
 
-  const handleButtonClick = (language: 'en' | 'ko') => () => {
+  const [language, setLanguage] = useState('en');
+
+  const handleButtonClick = (language: 'en' | 'ko') => (e) => {
     // TODO: 클릭 시 클릭한 버튼의 언어 설정하기
+    setLanguage(e.target.value);
+    i18n.changeLanguage(e.target.value);
+
     localStorage.setItem('already-visited', 'true');
     const {
       query: { redirect }
@@ -104,6 +110,7 @@ const Welcome: FC = () => {
                 display="inline-block"
                 width="initial"
                 marginRight="8px"
+                value="en"
                 onClick={handleButtonClick('en')}>
                 English
               </Button>
@@ -112,6 +119,7 @@ const Welcome: FC = () => {
                 display="inline-block"
                 width="initial"
                 marginLeft="8px"
+                value="ko"
                 onClick={handleButtonClick('ko')}>
                 한국어
               </Button>
