@@ -166,6 +166,7 @@ const Account: FC<AccountProps> = ({ t }) => {
                 <Link href="/account/settings" passHref>
                   <A color="#000000">
                     <Span
+                      whiteSpace="nowrap"
                       textAlign="center"
                       fontFamily={theme.fonts.futura}
                       fontSize="16px"
@@ -183,6 +184,7 @@ const Account: FC<AccountProps> = ({ t }) => {
                 display="flex"
                 justifyContent="center">
                 <Span
+                  whiteSpace="nowrap"
                   textDecoration="underline"
                   cursor="pointer"
                   textAlign="center"

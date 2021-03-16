@@ -49,7 +49,7 @@ const DesktopHeader: FC<any> = ({ t }) => {
           }}
         />
       </Div>
-      <Div display="flex" flexDirection="row">
+      <Div display="flex" flexDirection="row" whiteSpace="nowrap">
         {user ? (
           <>
             <Link href="/account" passHref>
