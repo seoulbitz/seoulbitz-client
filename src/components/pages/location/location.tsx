@@ -14,6 +14,7 @@ import LocationMap from './location-map';
 import RelatedContentsSlider from '@/components/related-contents-slider/related-contents-slider';
 import { ArticleDocument } from '@/services/sanity/api/article';
 import Meta from '@/components/meta/Meta';
+import { i18n } from '../../../../i18n';
 
 const Location: FC<{
   location: LocationDocument;
@@ -21,10 +22,10 @@ const Location: FC<{
 }> = (props) => {
   const {
     title: { en: enTitle, ko: koTitle },
-    subtitle,
+    subtitle: { en: enSubtitle, ko: koSubtitle },
     thumbnailImage,
     images,
-    body,
+    body: { en: enBody, ko: koBody },
     location,
     area,
     category,
@@ -38,10 +39,10 @@ const Location: FC<{
       <Meta
         meta={{
           title: `${enTitle} | Seoulbitz`,
-          description: subtitle,
+          description: `${enSubtitle}`,
           keywords: '',
           ogTitle: enTitle,
-          ogDescription: subtitle,
+          ogDescription: `${enSubtitle}`,
           ogSiteName: 'Seoulbitz',
           ogImage: sanity.image.getUrl(thumbnailImage)
         }}
@@ -52,7 +53,9 @@ const Location: FC<{
             <LocationTitle enTitle={enTitle} koTitle={koTitle} />
           </Cell>
           <Cell width={1} marginTop={['16px', null, '24px']}>
-            <LocationSubtitle subtitle={subtitle} />
+            <LocationSubtitle
+              subtitle={i18n.language === 'en' ? enSubtitle : koSubtitle}
+            />
           </Cell>
           <Cell width={1} marginTop={['16px', null, '24px']}>
             <Span
@@ -74,7 +77,7 @@ const Location: FC<{
             <LocationSlider images={images} />
           </Cell>
           <Cell width={1}>
-            <LocationBody blocks={body} />
+            <LocationBody blocks={i18n.language === 'en' ? enBody : koBody} />
           </Cell>
           <Cell
             width={1}
