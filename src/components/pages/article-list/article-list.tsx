@@ -114,10 +114,10 @@ const ArticleList: FC<ArticleListProps> = (props) => {
             const {
               _id,
               title,
+              subtitle,
               slug,
               author,
               thumbnailImage,
-              subtitle,
               userLikes
             } = article;
             const remainder = i % 4;
@@ -137,7 +137,8 @@ const ArticleList: FC<ArticleListProps> = (props) => {
                   <A textDecoration="initial" color="initial">
                     <ContentItem
                       kind="article"
-                      title={title}
+                      title={title.en}
+                      titleKo={title.ko}
                       subtitle={subtitle}
                       images={[thumbnailImage]}
                       likes={userLikes.length}

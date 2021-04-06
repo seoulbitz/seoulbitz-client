@@ -12,16 +12,17 @@ import LocationBody from './article-body';
 import RelatedContentsSlider from '@/components/related-contents-slider/related-contents-slider';
 import { ArticleDocument } from '@/services/sanity/api/article';
 import Meta from '@/components/meta/Meta';
+import { i18n } from '../../../../i18n';
 
 const Location: FC<{
   article: ArticleDocument;
 }> = (props) => {
   const {
     _createdAt,
-    title,
-    subtitle,
+    title: { en: enTitle, ko: koTitle },
+    subtitle: { en: enSubtitle, ko: koSubtitle },
     author,
-    body,
+    body: { en: enBody, ko: koBody },
     thumbnailImage,
     recommendedArticles
   } = props.article;
@@ -32,11 +33,11 @@ const Location: FC<{
     <>
       <Meta
         meta={{
-          title: `${title} | Seoulbitz`,
-          description: subtitle,
+          title: `${enTitle} | Seoulbitz`,
+          description: `${enSubtitle}`,
           keywords: '',
-          ogTitle: title,
-          ogDescription: subtitle,
+          ogTitle: `${enTitle}`,
+          ogDescription: `${enSubtitle}`,
           ogSiteName: 'Seoulbitz',
           ogImage: sanity.image.getUrl(thumbnailImage)
         }}
@@ -44,10 +45,12 @@ const Location: FC<{
       <Layout>
         <Grid width={1} justifyContent="center">
           <Cell width={1} marginTop="40px">
-            <ArticleTitle title={title} />
+            <ArticleTitle enTitle={enTitle} koTitle={koTitle} />
           </Cell>
           <Cell width={1} marginTop={['16px', null, '24px']}>
-            <ArticleSubtitle subtitle={subtitle} />
+            <ArticleSubtitle
+              subtitle={i18n.language === 'en' ? enSubtitle : koSubtitle}
+            />
           </Cell>
           <Cell width={1} marginTop={['16px', null, '24px']}>
             <Span
@@ -65,7 +68,7 @@ const Location: FC<{
             <ContentInteractionButtons content={props.article} />
           </Cell>
           <Cell width={1} marginBottom={['40px']}>
-            <LocationBody blocks={body} />
+            <LocationBody blocks={i18n.language === 'en' ? enBody : koBody} />
           </Cell>
           {recommendedArticles && recommendedArticles.length > 0 && (
             <Cell width={1}>
