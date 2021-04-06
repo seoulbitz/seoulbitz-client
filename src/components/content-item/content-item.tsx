@@ -5,6 +5,7 @@ import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import sanity from '@/services/sanity';
+import { i18n } from '../../../i18n';
 
 const DesktopImage = styled(Div)`
   > div {
@@ -24,7 +25,7 @@ type ContentItemProps = {
   kind: 'location' | 'article';
   title: string;
   titleKo?: string;
-  subtitle: string;
+  subtitle: { en: string; ko: string };
   images?: SanityImageSource[];
   likes?: number;
   author?: any;
@@ -33,18 +34,21 @@ type ContentItemProps = {
   distance?: number;
 };
 
-const ContentItem: FC<ContentItemProps> = ({
-  kind,
-  title,
-  titleKo,
-  subtitle,
-  images,
-  likes,
-  author,
-  category,
-  area,
-  distance
-}) => {
+const ContentItem: FC<ContentItemProps> = (props) => {
+  console.log(props);
+  const {
+    kind,
+    title,
+    titleKo,
+    subtitle,
+    images,
+    likes,
+    author,
+    category,
+    area,
+    distance
+  } = props;
+
   const isLocation = kind === 'location';
   const thumbnailImageUrl = sanity.image.getUrl(images[0]);
 
@@ -122,7 +126,7 @@ const ContentItem: FC<ContentItemProps> = ({
               fontWeight="400"
               textAlign="center"
               color="#ffffff">
-              {subtitle}
+              {i18n.language === 'en' ? subtitle.en : subtitle.ko}
             </Div>
           </Div>
           <Div
@@ -192,7 +196,7 @@ const ContentItem: FC<ContentItemProps> = ({
         marginTop="8px"
         fontSize="16px"
         lineHeight="20px">
-        {subtitle}
+        {i18n.language === 'en' ? subtitle.en : subtitle.ko}
       </Div>
       {isLocation ? (
         <Div

@@ -40,12 +40,9 @@ const FAQ: FC<{ faqPage: FAQPageDocument }> = ({ faqPage }) => {
             </Div>
             <Div marginTop={['40px', null, '48px']}>
               {faqPage.faqItems.map(({ _id, question, answer }) => {
-                // const language = question.en;
-
                 return (
                   <FAQItem
                     key={_id}
-                    // {i18n.language === 'en' ? question.en : question.ko}
                     question={
                       i18n.language === 'en' ? question.en : question.ko
                     }
