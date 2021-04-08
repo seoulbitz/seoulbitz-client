@@ -2,20 +2,19 @@ import sanity from '@/services/sanity';
 import { theme } from '@/styles/theme';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import React, { FC } from 'react';
+import { i18n } from '../../../i18n';
 import Div from '../styled-system/div/div';
 import Span from '../styled-system/span/span';
 
 type RelatedContentItemProps = {
   thumbnailImage: SanityImageSource;
-  title: string;
-  koTitle?: string;
-  subtitle: string;
+  title: { en: string; ko: string };
+  subtitle: { en: string; ko: string };
 };
 
 const RelatedContentItem: FC<RelatedContentItemProps> = ({
   thumbnailImage,
   title,
-  koTitle,
   subtitle
 }) => {
   const url = sanity.image.getUrl(thumbnailImage);
@@ -36,21 +35,12 @@ const RelatedContentItem: FC<RelatedContentItemProps> = ({
         />
       </Div>
       <Div color="#080CCE" marginTop="16px">
-        {koTitle && (
-          <Span
-            fontFamily={theme.fonts.nanumSquare}
-            fontSize="16px"
-            lineHeight="20px"
-            fontWeight="800">
-            {koTitle},{' '}
-          </Span>
-        )}
         <Span
           fontFamily={theme.fonts.futura}
           fontSize="16px"
           lineHeight="20px"
           fontWeight="700">
-          {title}
+          {i18n.language === 'en' ? title.en : title.ko}
         </Span>
       </Div>
       <Div
@@ -59,7 +49,7 @@ const RelatedContentItem: FC<RelatedContentItemProps> = ({
         marginTop="8px"
         fontSize="16px"
         lineHeight="20px">
-        {subtitle}
+        {i18n.language === 'en' ? subtitle.en : subtitle.ko}
       </Div>
     </Div>
   );

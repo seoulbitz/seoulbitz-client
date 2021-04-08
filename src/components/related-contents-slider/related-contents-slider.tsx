@@ -129,7 +129,7 @@ const RelatedContentsSlider: FC<RelatedContentsSliderProps> = ({
                       <A color="initial" textDecoration="initial">
                         <RelatedContentItem
                           thumbnailImage={images[0]}
-                          title={`${title.en}, ${title.ko}`}
+                          title={title}
                           subtitle={subtitle}
                         />
                       </A>
