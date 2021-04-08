@@ -14,7 +14,7 @@ import LocationMap from './location-map';
 import RelatedContentsSlider from '@/components/related-contents-slider/related-contents-slider';
 import { ArticleDocument } from '@/services/sanity/api/article';
 import Meta from '@/components/meta/Meta';
-import { i18n } from '../../../../i18n';
+import { executionAsyncResource } from 'async_hooks';
 
 const Location: FC<{
   location: LocationDocument;
@@ -23,7 +23,6 @@ const Location: FC<{
   const {
     title: { en: enTitle, ko: koTitle },
     subtitle: { en: enSubtitle, ko: koSubtitle },
-    thumbnailImage,
     images,
     body: { en: enBody, ko: koBody },
     location,
@@ -33,77 +32,58 @@ const Location: FC<{
   } = props.location;
 
   const { trendingArticles } = props;
-
   return (
-    <>
-      <Meta
-        meta={{
-          title: `${enTitle} | Seoulbitz`,
-          description: `${enSubtitle}`,
-          keywords: '',
-          ogTitle: enTitle,
-          ogDescription: `${enSubtitle}`,
-          ogSiteName: 'Seoulbitz',
-          ogImage: sanity.image.getUrl(thumbnailImage)
-        }}
-      />
-      <Layout>
-        <Grid width={1} justifyContent="center">
-          <Cell width={1} marginTop="40px">
-            <LocationTitle enTitle={enTitle} koTitle={koTitle} />
-          </Cell>
-          <Cell width={1} marginTop={['16px', null, '24px']}>
-            <LocationSubtitle
-              subtitle={i18n.language === 'en' ? enSubtitle : koSubtitle}
+    <Layout>
+      <Grid width={1} justifyContent="center">
+        <Cell width={1} marginTop="40px">
+          <LocationTitle enTitle={enTitle} koTitle={koTitle} />
+        </Cell>
+        <Cell width={1} marginTop={['16px', null, '24px']}>
+          <LocationSubtitle subtitle={enSubtitle} />
+        </Cell>
+        <Cell width={1} marginTop={['16px', null, '24px']}>
+          <Span
+            fontFamily={theme.fonts.futura}
+            fontWeight="500"
+            fontSize="16px"
+            lineHeight="20px"
+            color="#777777">
+            {category.name} / {area.name}
+            {/* TODO: Add distance */}
+            {/* <br />
+            0.5km far */}
+          </Span>
+        </Cell>
+        <Cell width={1} marginTop={['24px', null, '32px']}>
+          <ContentInteractionButtons content={props.location} />
+        </Cell>
+        <Cell width={1} marginTop={['24px', null, '32px']}>
+          <LocationSlider images={images} />
+        </Cell>
+        <Cell width={1}>
+          <LocationBody blocks={enBody} />
+        </Cell>
+        <Cell width={1} marginTop={['24px', null, '32px']} marginBottom="40px">
+          <LocationMap lat={location.lat} lng={location.lng} />
+        </Cell>
+        {recommendedLocations && recommendedLocations.length > 0 && (
+          <Cell width={1}>
+            <RelatedContentsSlider
+              title="You might also want to checkout:"
+              relatedContents={recommendedLocations}
             />
           </Cell>
-          <Cell width={1} marginTop={['16px', null, '24px']}>
-            <Span
-              fontFamily={theme.fonts.futura}
-              fontWeight="500"
-              fontSize="16px"
-              lineHeight="20px"
-              color="#777777">
-              {category.name} / {area.name}
-              {/* TODO: Add distance */}
-              {/* <br />
-            0.5km far */}
-            </Span>
-          </Cell>
-          <Cell width={1} marginTop={['24px', null, '32px']}>
-            <ContentInteractionButtons content={props.location} />
-          </Cell>
-          <Cell width={1} marginTop={['24px', null, '32px']}>
-            <LocationSlider images={images} />
-          </Cell>
+        )}
+        {trendingArticles && trendingArticles.length > 0 && (
           <Cell width={1}>
-            <LocationBody blocks={i18n.language === 'en' ? enBody : koBody} />
+            <RelatedContentsSlider
+              title="Trending articles:"
+              relatedContents={trendingArticles}
+            />
           </Cell>
-          <Cell
-            width={1}
-            marginTop={['24px', null, '32px']}
-            marginBottom="40px">
-            <LocationMap lat={location.lat} lng={location.lng} />
-          </Cell>
-          {recommendedLocations && recommendedLocations.length > 0 && (
-            <Cell width={1}>
-              <RelatedContentsSlider
-                title="You might also want to checkout:"
-                relatedContents={recommendedLocations}
-              />
-            </Cell>
-          )}
-          {trendingArticles && trendingArticles.length > 0 && (
-            <Cell width={1}>
-              <RelatedContentsSlider
-                title="Trending articles:"
-                relatedContents={trendingArticles}
-              />
-            </Cell>
-          )}
-        </Grid>
-      </Layout>
-    </>
+        )}
+      </Grid>
+    </Layout>
   );
 };
 
