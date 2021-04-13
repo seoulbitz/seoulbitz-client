@@ -228,6 +228,7 @@ const LocationList: FC<LocationListProps> = (props) => {
                       title={title.en}
                       titleKo={title.ko}
                       subtitle={subtitle}
+                      subtitleKo={subtitle.ko}
                       images={[thumbnailImage]}
                       likes={userLikes.length}
                       category={category.name}

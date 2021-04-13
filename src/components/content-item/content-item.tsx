@@ -23,9 +23,10 @@ const DesktopImage = styled(Div)`
 
 type ContentItemProps = {
   kind: 'location' | 'article';
-  title: string;
+  title: { en: string; ko: string };
   titleKo?: string;
   subtitle: { en: string; ko: string };
+  subtitleKo?: string;
   images?: SanityImageSource[];
   likes?: number;
   author?: any;
@@ -41,6 +42,7 @@ const ContentItem: FC<ContentItemProps> = (props) => {
     title,
     titleKo,
     subtitle,
+    subtitleKo,
     images,
     likes,
     author,
@@ -50,6 +52,7 @@ const ContentItem: FC<ContentItemProps> = (props) => {
   } = props;
 
   const isLocation = kind === 'location';
+  const isArticle = kind === 'article';
   const thumbnailImageUrl = sanity.image.getUrl(images[0]);
 
   return (
@@ -104,7 +107,7 @@ const ContentItem: FC<ContentItemProps> = (props) => {
                 fontWeight="800"
                 textAlign="center"
                 color="#ffffff">
-                {title}
+                {i18n.language === 'en' ? title : null}
               </Div>
               {isLocation && (
                 <Div
@@ -113,7 +116,17 @@ const ContentItem: FC<ContentItemProps> = (props) => {
                   lineHeight="32px"
                   fontWeight="700"
                   color="#ffffff">
-                  {titleKo}
+                  {i18n.language === 'ko' ? titleKo : null}
+                </Div>
+              )}
+              {isArticle && (
+                <Div
+                  fontFamily={theme.fonts.nanumSquare}
+                  fontSize="24px"
+                  lineHeight="32px"
+                  fontWeight="700"
+                  color="#ffffff">
+                  {i18n.language === 'ko' ? titleKo : null}
                 </Div>
               )}
             </Div>
@@ -174,18 +187,27 @@ const ContentItem: FC<ContentItemProps> = (props) => {
           lineHeight="20px"
           fontWeight="800"
           color=" #080CCE">
-          {title}
-          {isLocation && ','}
+          {i18n.language === 'en' ? title : null}
+          {isLocation && ''}
         </Span>
         {isLocation && (
           <Span
             fontFamily={theme.fonts.nanumSquare}
             fontWeight="800"
-            marginLeft="4px"
             fontSize="16px"
             lineHeight="20px"
             color=" #080CCE">
-            {titleKo}
+            {i18n.language === 'ko' ? titleKo : null}
+          </Span>
+        )}
+        {isArticle && (
+          <Span
+            fontFamily={theme.fonts.nanumSquare}
+            fontWeight="800"
+            fontSize="16px"
+            lineHeight="20px"
+            color=" #080CCE">
+            {i18n.language === 'ko' ? titleKo : null}
           </Span>
         )}
       </Div>
@@ -196,7 +218,7 @@ const ContentItem: FC<ContentItemProps> = (props) => {
         marginTop="8px"
         fontSize="16px"
         lineHeight="20px">
-        {i18n.language === 'en' ? subtitle.en : subtitle.ko}
+        {i18n.language === 'en' ? subtitle.en : subtitleKo}
       </Div>
       {isLocation ? (
         <Div

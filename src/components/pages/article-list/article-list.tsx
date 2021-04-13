@@ -140,6 +140,7 @@ const ArticleList: FC<ArticleListProps> = (props) => {
                       title={title.en}
                       titleKo={title.ko}
                       subtitle={subtitle}
+                      subtitleKo={subtitle.ko}
                       images={[thumbnailImage]}
                       likes={userLikes.length}
                       author={author}

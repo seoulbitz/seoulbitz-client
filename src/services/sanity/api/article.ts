@@ -16,6 +16,7 @@ export type ArticleDocument = SanityDocument<{
   subtitle: { en: string; ko: string };
   author: any;
   thumbnailImage: SanityImageSource;
+  images: SanityImageSource[];
   body: { en: any[]; ko: any[] };
   userLikes: any[];
   userBookmarks?: any[];

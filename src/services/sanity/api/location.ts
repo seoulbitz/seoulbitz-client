@@ -13,7 +13,10 @@ export type LocationDocument = SanityDocument<{
     _type: 'slug';
     current: string;
   };
-  subtitle: { en: string; ko: string };
+  subtitle: {
+    en: string;
+    ko: string;
+  };
   category: any;
   area: any;
   thumbnailImage: SanityImageSource;
@@ -24,10 +27,10 @@ export type LocationDocument = SanityDocument<{
     lng: number;
   };
   body: { en: any[]; ko: any[] };
+  likes: number;
   userLikes: any[];
   userBookmarks?: any[];
   recommendedLocations?: LocationDocument[];
-  distance?: number;
 }>;
 
 export const createLocationService = (client: SanityClient) => {

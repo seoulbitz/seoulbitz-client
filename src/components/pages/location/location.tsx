@@ -15,6 +15,7 @@ import RelatedContentsSlider from '@/components/related-contents-slider/related-
 import { ArticleDocument } from '@/services/sanity/api/article';
 import Meta from '@/components/meta/Meta';
 import { executionAsyncResource } from 'async_hooks';
+import { i18n } from '../../../../i18n';
 
 const Location: FC<{
   location: LocationDocument;
@@ -36,10 +37,15 @@ const Location: FC<{
     <Layout>
       <Grid width={1} justifyContent="center">
         <Cell width={1} marginTop="40px">
-          <LocationTitle enTitle={enTitle} koTitle={koTitle} />
+          <LocationTitle
+            enTitle={i18n.language === 'en' && enTitle}
+            koTitle={i18n.language === 'ko' && koTitle}
+          />
         </Cell>
         <Cell width={1} marginTop={['16px', null, '24px']}>
-          <LocationSubtitle subtitle={enSubtitle} />
+          <LocationSubtitle
+            subtitle={i18n.language === 'en' ? enSubtitle : koSubtitle}
+          />
         </Cell>
         <Cell width={1} marginTop={['16px', null, '24px']}>
           <Span
@@ -61,7 +67,7 @@ const Location: FC<{
           <LocationSlider images={images} />
         </Cell>
         <Cell width={1}>
-          <LocationBody blocks={enBody} />
+          <LocationBody blocks={i18n.language === 'en' ? enBody : koBody} />
         </Cell>
         <Cell width={1} marginTop={['24px', null, '32px']} marginBottom="40px">
           <LocationMap lat={location.lat} lng={location.lng} />
