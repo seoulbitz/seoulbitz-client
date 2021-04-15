@@ -324,10 +324,7 @@ const Account: FC<AccountProps> = ({ t }) => {
                                                       fontSize="16px"
                                                       lineHeight="20px"
                                                       color=" #080CCE">
-                                                      {
-                                                        selectedLocation.titleKo
-                                                          .ko
-                                                      }
+                                                      {selectedLocation.title}
                                                     </Span>
                                                   </Div>
                                                   <Div marginTop="8px">
@@ -420,7 +417,6 @@ const Account: FC<AccountProps> = ({ t }) => {
                             area
                           } = location;
                           const remainder = i % 4;
-                          console.log(location);
 
                           const href = `/locations/${slug.current}`;
 
@@ -499,15 +495,14 @@ const Account: FC<AccountProps> = ({ t }) => {
                               marginBottom={['40px', null, '24px']}>
                               <Link href={href} passHref>
                                 <A textDecoration="initial" color="initial">
-                                  {/* <ContentItem
+                                  <ContentItem
                                     kind="article"
-                                    title={title.en}
-                                    titleKo={title.ko}
+                                    title={title}
                                     subtitle={subtitle}
                                     images={[thumbnailImage]}
                                     likes={userLikes.length}
                                     author={author}
-                                  /> */}
+                                  />
                                 </A>
                               </Link>
                             </Cell>

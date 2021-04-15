@@ -35,7 +35,6 @@ type ContentItemProps = {
 };
 
 const ContentItem: FC<ContentItemProps> = (props) => {
-  console.log(props);
   const {
     kind,
     title,
@@ -52,8 +51,6 @@ const ContentItem: FC<ContentItemProps> = (props) => {
   const isLocation = kind === 'location';
   const isArticle = kind === 'article';
   const thumbnailImageUrl = sanity.image.getUrl(images[0]);
-
-  console.log(i18n.language);
 
   return (
     <Div>
@@ -168,7 +165,6 @@ const ContentItem: FC<ContentItemProps> = (props) => {
           fontWeight="800"
           color=" #080CCE">
           {i18n.language === 'en' ? title.en : title.ko}
-          {isLocation && ''}
         </Span>
       </Div>
       <Div
