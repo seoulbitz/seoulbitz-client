@@ -83,10 +83,7 @@ export const createPageService = (client: SanityClient) => {
   };
 
   const findPrivacyPolicyPage = async () => {
-    const query = `*[_type == "privacyPolicyPage"]{
-      ...,
-      meta->
-    }`;
+    const query = `*[_type == "privacyPolicyPage"]`;
     const [privacyPolicyPage] = await client.fetch<PrivacyPolicyPageDocument[]>(
       query
     );
@@ -94,10 +91,7 @@ export const createPageService = (client: SanityClient) => {
   };
 
   const findTermsAndConditionsPage = async () => {
-    const query = `*[_type == "termsAndConditionsPage"]{
-      ...,
-      meta->
-    }`;
+    const query = `*[_type == "termsAndConditionsPage"]`;
     const [termsAndConditionsPage] = await client.fetch<
       TermsAndConditionsPageDocument[]
     >(query);
@@ -105,10 +99,7 @@ export const createPageService = (client: SanityClient) => {
   };
 
   const findAboutUsPage = async () => {
-    const query = `*[_type == "aboutUsPage"]{
-      ...,
-      meta->
-    }`;
+    const query = `*[_type == "aboutUsPage"]`;
     const [aboutUsPage] = await client.fetch<AboutUsPageDocument[]>(query);
     return aboutUsPage;
   };

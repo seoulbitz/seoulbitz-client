@@ -132,8 +132,7 @@ const Search: FC<SearchProps> = ({ t, ...props }) => {
                       <A textDecoration="initial" color="initial">
                         <ContentItem
                           kind="location"
-                          title={title.en}
-                          titleKo={title.ko}
+                          title={title}
                           subtitle={subtitle}
                           images={[thumbnailImage]}
                           likes={userLikes.length}

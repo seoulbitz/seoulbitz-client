@@ -221,7 +221,6 @@ const Account: FC<AccountProps> = ({ t }) => {
                     alignItems="center"
                     width={[1]}
                     marginTop={['28px', '32px', '40px']}>
-                    {/* Toggle UI  */}
                     <AccountToggle onChange={handleToggleChange} />
                   </Cell>
                   {bookmarksType === 'locations' &&
@@ -325,10 +324,7 @@ const Account: FC<AccountProps> = ({ t }) => {
                                                       fontSize="16px"
                                                       lineHeight="20px"
                                                       color=" #080CCE">
-                                                      {
-                                                        selectedLocation.title
-                                                          .ko
-                                                      }
+                                                      {selectedLocation.title}
                                                     </Span>
                                                   </Div>
                                                   <Div marginTop="8px">
@@ -439,8 +435,7 @@ const Account: FC<AccountProps> = ({ t }) => {
                                 <A textDecoration="initial" color="initial">
                                   <ContentItem
                                     kind="location"
-                                    title={title.en}
-                                    titleKo={title.ko}
+                                    title={title}
                                     subtitle={subtitle}
                                     images={[thumbnailImage]}
                                     likes={userLikes.length}

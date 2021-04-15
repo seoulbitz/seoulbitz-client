@@ -1,8 +1,10 @@
+import { Meta } from '@/components/meta/Meta';
 import { SanityClient, SanityDocument } from '@sanity/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { getOrderQuery } from './utils';
 
 export type LocationDocument = SanityDocument<{
+  meta: Meta;
   title: {
     en: string;
     ko: string;
@@ -11,7 +13,10 @@ export type LocationDocument = SanityDocument<{
     _type: 'slug';
     current: string;
   };
-  subtitle: string;
+  subtitle: {
+    en: string;
+    ko: string;
+  };
   category: any;
   area: any;
   thumbnailImage: SanityImageSource;
@@ -21,17 +26,18 @@ export type LocationDocument = SanityDocument<{
     lat: number;
     lng: number;
   };
-  body: any[];
+  body: { en: any[]; ko: any[] };
+  likes: number;
   userLikes: any[];
   userBookmarks?: any[];
   recommendedLocations?: LocationDocument[];
-  distance?: number;
 }>;
 
 export const createLocationService = (client: SanityClient) => {
   const findOneBySlug = async (slug) => {
     const query = `*[_type == "location" && slug.current == "${slug}"]{
       ...,
+      meta->,
       category->,
       area->,
       recommendedLocations[]->,
@@ -72,6 +78,7 @@ export const createLocationService = (client: SanityClient) => {
     const query = `
     *[_type == "location" ${areasConstraint} ${categoriesConstraint}] {
       ...,
+      meta->,
       category->,
       area->,
       "userLikes": *[_type == 'userLike' && references(^._id)]
@@ -89,6 +96,7 @@ export const createLocationService = (client: SanityClient) => {
 
     const query = `*[_type == "location"] {
       ...,
+      meta->,
       category->,
       area->,
       "userLikes": *[_type == 'userLike' && references(^._id)]

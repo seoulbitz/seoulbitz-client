@@ -45,8 +45,12 @@ const LocationSlider: FC<LocationSliderProps> = ({ images }) => {
                 display={['none', 'block']}
                 height={[null, '440px', '440px']}
                 backgroundImage={`url(${url})`}
-                backgroundSize="cover"
+                // backgroundSize="cover"
+                // 이미지 슬라이더 background 사이즈번경
+                backgroundSize="contain"
+                backgroundRepeat="no-repeat"
                 backgroundPosition="center"
+                backgroundColor="black"
               />
             </SwiperSlide>
           );

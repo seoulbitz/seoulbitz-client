@@ -1,17 +1,23 @@
+import { Meta } from '@/components/meta/Meta';
 import { SanityClient, SanityDocument } from '@sanity/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { getOrderQuery } from './utils';
 
 export type ArticleDocument = SanityDocument<{
-  title: string;
+  meta: Meta;
+  title: {
+    en: string;
+    ko: string;
+  };
   slug: {
     _type: 'slug';
     current: string;
   };
-  subtitle: string;
+  subtitle: { en: string; ko: string };
   author: any;
   thumbnailImage: SanityImageSource;
-  body: any;
+  images: SanityImageSource[];
+  body: { en: any[]; ko: any[] };
   userLikes: any[];
   userBookmarks?: any[];
   recommendedArticles: ArticleDocument[];
@@ -21,6 +27,7 @@ export const createArticleService = (client: SanityClient) => {
   const findOneBySlug = async (slug) => {
     const query = `*[_type == "article" && slug.current == "${slug}"]{
       ...,
+      meta->,
       author->,
       body[]{
         ...,
@@ -51,6 +58,7 @@ export const createArticleService = (client: SanityClient) => {
 
     const query = `*[_type == "article"] {
       ...,
+      meta->,
       author->,
       "userLikes": *[_type == 'userLike' && references(^._id)]
     }${orderQuery}`;
