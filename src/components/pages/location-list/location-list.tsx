@@ -225,8 +225,7 @@ const LocationList: FC<LocationListProps> = (props) => {
                   <A textDecoration="initial" color="initial">
                     <ContentItem
                       kind="location"
-                      title={title.en}
-                      titleKo={title.ko}
+                      title={title}
                       subtitle={subtitle}
                       subtitleKo={subtitle.ko}
                       images={[thumbnailImage]}

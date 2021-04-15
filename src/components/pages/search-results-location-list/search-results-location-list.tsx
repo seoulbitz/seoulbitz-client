@@ -100,8 +100,7 @@ const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
                       <A textDecoration="initial" color="initial">
                         <ContentItem
                           kind="location"
-                          title={title.en}
-                          titleKo={title.ko}
+                          title={title}
                           subtitle={subtitle}
                           images={[thumbnailImage]}
                           likes={userLikes.length}

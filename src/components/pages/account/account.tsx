@@ -221,7 +221,6 @@ const Account: FC<AccountProps> = ({ t }) => {
                     alignItems="center"
                     width={[1]}
                     marginTop={['28px', '32px', '40px']}>
-                    {/* Toggle UI  */}
                     <AccountToggle onChange={handleToggleChange} />
                   </Cell>
                   {bookmarksType === 'locations' &&
@@ -326,7 +325,7 @@ const Account: FC<AccountProps> = ({ t }) => {
                                                       lineHeight="20px"
                                                       color=" #080CCE">
                                                       {
-                                                        selectedLocation.title
+                                                        selectedLocation.titleKo
                                                           .ko
                                                       }
                                                     </Span>
@@ -421,6 +420,7 @@ const Account: FC<AccountProps> = ({ t }) => {
                             area
                           } = location;
                           const remainder = i % 4;
+                          console.log(location);
 
                           const href = `/locations/${slug.current}`;
 
@@ -439,8 +439,7 @@ const Account: FC<AccountProps> = ({ t }) => {
                                 <A textDecoration="initial" color="initial">
                                   <ContentItem
                                     kind="location"
-                                    title={title.en}
-                                    titleKo={title.ko}
+                                    title={title}
                                     subtitle={subtitle}
                                     images={[thumbnailImage]}
                                     likes={userLikes.length}
@@ -500,14 +499,15 @@ const Account: FC<AccountProps> = ({ t }) => {
                               marginBottom={['40px', null, '24px']}>
                               <Link href={href} passHref>
                                 <A textDecoration="initial" color="initial">
-                                  <ContentItem
+                                  {/* <ContentItem
                                     kind="article"
-                                    title={title}
+                                    title={title.en}
+                                    titleKo={title.ko}
                                     subtitle={subtitle}
                                     images={[thumbnailImage]}
                                     likes={userLikes.length}
                                     author={author}
-                                  />
+                                  /> */}
                                 </A>
                               </Link>
                             </Cell>

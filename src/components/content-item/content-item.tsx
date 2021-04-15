@@ -24,7 +24,6 @@ const DesktopImage = styled(Div)`
 type ContentItemProps = {
   kind: 'location' | 'article';
   title: { en: string; ko: string };
-  titleKo?: string;
   subtitle: { en: string; ko: string };
   subtitleKo?: string;
   images?: SanityImageSource[];
@@ -40,7 +39,6 @@ const ContentItem: FC<ContentItemProps> = (props) => {
   const {
     kind,
     title,
-    titleKo,
     subtitle,
     subtitleKo,
     images,
@@ -54,6 +52,8 @@ const ContentItem: FC<ContentItemProps> = (props) => {
   const isLocation = kind === 'location';
   const isArticle = kind === 'article';
   const thumbnailImageUrl = sanity.image.getUrl(images[0]);
+
+  console.log(i18n.language);
 
   return (
     <Div>
@@ -107,28 +107,8 @@ const ContentItem: FC<ContentItemProps> = (props) => {
                 fontWeight="800"
                 textAlign="center"
                 color="#ffffff">
-                {i18n.language === 'en' ? title : null}
+                {i18n.language === 'en' ? title.en : title.ko}
               </Div>
-              {isLocation && (
-                <Div
-                  fontFamily={theme.fonts.nanumSquare}
-                  fontSize="24px"
-                  lineHeight="32px"
-                  fontWeight="700"
-                  color="#ffffff">
-                  {i18n.language === 'ko' ? titleKo : null}
-                </Div>
-              )}
-              {isArticle && (
-                <Div
-                  fontFamily={theme.fonts.nanumSquare}
-                  fontSize="24px"
-                  lineHeight="32px"
-                  fontWeight="700"
-                  color="#ffffff">
-                  {i18n.language === 'ko' ? titleKo : null}
-                </Div>
-              )}
             </Div>
             <Div
               marginTop="16px"
@@ -187,29 +167,9 @@ const ContentItem: FC<ContentItemProps> = (props) => {
           lineHeight="20px"
           fontWeight="800"
           color=" #080CCE">
-          {i18n.language === 'en' ? title : null}
+          {i18n.language === 'en' ? title.en : title.ko}
           {isLocation && ''}
         </Span>
-        {isLocation && (
-          <Span
-            fontFamily={theme.fonts.nanumSquare}
-            fontWeight="800"
-            fontSize="16px"
-            lineHeight="20px"
-            color=" #080CCE">
-            {i18n.language === 'ko' ? titleKo : null}
-          </Span>
-        )}
-        {isArticle && (
-          <Span
-            fontFamily={theme.fonts.nanumSquare}
-            fontWeight="800"
-            fontSize="16px"
-            lineHeight="20px"
-            color=" #080CCE">
-            {i18n.language === 'ko' ? titleKo : null}
-          </Span>
-        )}
       </Div>
       <Div
         display={[null, null, 'none']}

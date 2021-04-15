@@ -16,7 +16,7 @@ const ArticleTitle: FC<ArticleTitle> = ({ enTitle, koTitle }) => {
         fontSize="28px"
         lineHeight="34px"
         fontWeight="800">
-        {koTitle},{' '}
+        {koTitle}
       </Span>
       <Span
         fontFamily={theme.fonts.futura}
