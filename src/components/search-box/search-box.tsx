@@ -1,6 +1,7 @@
 import { theme } from '@/styles/theme';
 import { useRouter } from 'next/dist/client/router';
 import React, { FC, useRef } from 'react';
+import { i18n } from '../../../i18n';
 import Search from '../icons/search/search';
 import Button from '../styled-system/button/button';
 import Div from '../styled-system/div/div';
@@ -58,10 +59,11 @@ const SearchBox: FC<SearchBoxProps> = ({ onSearch }) => {
         width="100%"
         padding="0px"
         border="0px"
-        placeholder="Search"
+        // placeholder="Search"
+        placeholder={i18n.language === 'en' ? 'Search' : '검색'}
         fontFamily={theme.fonts.futura}
-        fontSize="18px"
-        lineHeight="22px"
+        fontSize="16px"
+        lineHeight="20px"
         fontWeight="400"
         color="#777777"
         onKeyDown={handleInputKeyDown}
@@ -76,7 +78,7 @@ const SearchBox: FC<SearchBoxProps> = ({ onSearch }) => {
         border="0px"
         backgroundColor="initial"
         onClick={handleButtonClick}>
-        <Search display="block" />
+        <Search display="block" width="18px" height="18px" />
       </Button>
     </Div>
   );

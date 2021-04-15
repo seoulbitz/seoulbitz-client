@@ -1,18 +1,22 @@
 import firebase from '@/services/firebase';
 import { useGlobalUIState } from '@/services/react/hooks';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Close from '../icons/close/close';
 import MenuContents from '../menu-contents/menu-contents';
 import StyledButton from '../button/button';
 import Button from '../styled-system/button/button';
-import Div from '../styled-system/div/div';
+import Div, { DivProps } from '../styled-system/div/div';
 import SearchBox from '../search-box/search-box';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import A from '../styled-system/a/a';
 import { ModalType } from 'types';
+import { withTranslation, i18n } from '../../../i18n';
+import { TFunction } from 'next-i18next';
 
-const DrawerContent = () => {
+type DrawerContentProps = { readonly t: TFunction } & DivProps;
+
+const DrawerContent: FC<DrawerContentProps> = ({ t, ...rest }) => {
   const globalUIState = useGlobalUIState();
   const router = useRouter();
 
@@ -61,34 +65,41 @@ const DrawerContent = () => {
             <>
               <Link href="/account" passHref>
                 <A flex="3" textDecoration="none">
-                  <StyledButton
-                    variant="blue"
-                    // marginRight="10px" TODO: Add internalization
-                  >
-                    MY ACCOUNT
+                  <StyledButton variant="blue" marginRight="10px">
+                    {t('common:account-button')}
                   </StyledButton>
                 </A>
               </Link>
               {/* TODO: Add internalization */}
-              {/* <StyledButton flex="1" variant="black" marginLeft="10px">
-                EN
-              </StyledButton> */}
+              <StyledButton
+                flex="1"
+                variant="black"
+                marginLeft="10px"
+                onClick={() =>
+                  i18n.changeLanguage(i18n.language === 'en' ? 'ko' : 'en')
+                }>
+                {t('common:language')}
+              </StyledButton>
             </>
           ) : (
             <>
               <StyledButton
                 variant="blue"
-                // marginRight="10px" TODO: Add internalization
+                marginRight="10px"
                 onClick={() => {
                   globalUIState.openModal(ModalType.logInModal);
                 }}>
-                LOG IN
+                {t('common:login')}
               </StyledButton>
-              {/* TODO: Add internalization */}
 
-              {/* <StyledButton variant="black" marginLeft="10px">
-                EN
-              </StyledButton> */}
+              <StyledButton
+                variant="black"
+                marginLeft="10px"
+                onClick={() =>
+                  i18n.changeLanguage(i18n.language === 'en' ? 'ko' : 'en')
+                }>
+                {t('common:language')}
+              </StyledButton>
             </>
           )}
         </Div>
@@ -98,4 +109,4 @@ const DrawerContent = () => {
   );
 };
 
-export default DrawerContent;
+export default withTranslation('common')(DrawerContent);

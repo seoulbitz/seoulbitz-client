@@ -1,43 +1,81 @@
+import { Meta } from '@/components/meta/Meta';
 import { SanityClient, SanityDocument } from '@sanity/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
+export type LocationListPageDocument = SanityDocument<{
+  meta: Meta;
+  title: string;
+}>;
+
+export type ArticleListPageDocument = SanityDocument<{
+  meta: Meta;
+  title: string;
+}>;
+
 export type FAQDocument = SanityDocument<{
-  question: string;
-  answer: any[];
+  question: { en: string; ko: string };
+  answer: { en: any[]; ko: any[] };
 }>;
 
 export type FAQPageDocument = SanityDocument<{
+  meta: Meta;
   title: string;
   image: SanityImageSource;
   faqItems: FAQDocument[];
 }>;
 
 export type PrivacyPolicyPageDocument = SanityDocument<{
-  title: string;
-  body: any[];
+  meta: Meta;
+  title: { en: string; ko: string };
+  body: { en: any[]; ko: any[] };
 }>;
 
 export type TermsAndConditionsPageDocument = SanityDocument<{
-  title: string;
-  body: any[];
+  meta: Meta;
+  title: { en: string; ko: string };
+  body: { en: any[]; ko: any[] };
 }>;
 
 export type AboutUsPageDocument = SanityDocument<{
-  title: string;
+  meta: Meta;
+  title: { en: string; ko: string };
   image: SanityImageSource;
-  body: any[];
+  body: { en: any[]; ko: any[] };
+}>;
+
+export type examplePageDocument = SanityDocument<{
+  title: { en: string; ko: string };
+  image: SanityImageSource;
+  body: { en: any[]; ko: any[] };
 }>;
 
 export const createPageService = (client: SanityClient) => {
+  const findLocationListPage = async () => {
+    const query = `*[_type == "locationListPage"]{
+      ...,
+      meta->
+    }`;
+    const [locationListPage] = await client.fetch<LocationListPageDocument[]>(
+      query
+    );
+    return locationListPage;
+  };
+
+  const findArticleListPage = async () => {
+    const query = `*[_type == "articleListPage"]{
+      ...,
+      meta->
+    }`;
+    const [articleListPage] = await client.fetch<ArticleListPageDocument[]>(
+      query
+    );
+    return articleListPage;
+  };
+
   const findFAQPage = async () => {
     const query = `*[_type == "faqPage"]{
-      _id,
-      _rev,
-      _type,
-      _createdAt,
-      _updatedAt,
-      title,
-      image,
+      ...,
+      meta->,
       faqItems[]->
     }`;
     const [faqPage] = await client.fetch<FAQPageDocument[]>(query);
@@ -67,6 +105,8 @@ export const createPageService = (client: SanityClient) => {
   };
 
   return {
+    findLocationListPage,
+    findArticleListPage,
     findFAQPage,
     findPrivacyPolicyPage,
     findTermsAndConditionsPage,

@@ -6,32 +6,47 @@ import Layout from '@/components/layout/layout';
 import sanity from '@/services/sanity';
 import { TermsAndConditionsPageDocument } from '@/services/sanity/api/page';
 import BlockContent from '@/services/sanity/block-content';
+import { i18n } from '../../../../i18n';
+import Meta from '@/components/meta/Meta';
 
 const TermsAndConditions: FC<{
   termsAndConditionsPage: TermsAndConditionsPageDocument;
 }> = ({ termsAndConditionsPage }) => {
+  const language = termsAndConditionsPage.body;
+
   return (
-    <Layout>
-      <Grid width="100%" justifyContent="center">
-        <Cell width={['100%', null, 10 / 12]}>
-          <Div
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            marginTop={['48px', null, '88px']}
-            fontFamily={theme.fonts.futura}
-            fontSize="28px"
-            lineHeight="34px"
-            fontWeight="700"
-            color="#000000">
-            {termsAndConditionsPage.title}
-          </Div>
-          <Div marginTop="32px">
-            <BlockContent blocks={termsAndConditionsPage.body} />
-          </Div>
-        </Cell>
-      </Grid>
-    </Layout>
+    <>
+      <Meta meta={termsAndConditionsPage.meta} />
+      <Layout>
+        <Grid width="100%" justifyContent="center">
+          <Cell width={['100%', null, 10 / 12]}>
+            <Div
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              marginTop={['48px', null, '88px']}
+              fontFamily={theme.fonts.futura}
+              fontSize="28px"
+              lineHeight="34px"
+              fontWeight="700"
+              color="#000000">
+              {i18n.language === 'en'
+                ? termsAndConditionsPage.title.en
+                : termsAndConditionsPage.title.ko}
+            </Div>
+            <Div marginTop="32px">
+              <BlockContent
+                blocks={
+                  i18n.language === 'en'
+                    ? termsAndConditionsPage.body.en
+                    : termsAndConditionsPage.body.ko
+                }
+              />
+            </Div>
+          </Cell>
+        </Grid>
+      </Layout>
+    </>
   );
 };
 

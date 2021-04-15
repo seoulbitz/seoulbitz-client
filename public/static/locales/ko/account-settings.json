@@ -1,0 +1,8 @@
+{
+  "title": "계정 설정",
+  "change-password": "비밀번호 변경",
+  "send-link": "비밀번호 재설정 링크 보내기",
+  "delete": "계정 삭제",
+  "delete-warning": "회원님의 계정은 모든 개인정보와 함께 영구히 삭제됩니다. 탈퇴한 계정은 복구될 수 없습니다.",
+  "delete-button": "계정 삭제"
+}

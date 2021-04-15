@@ -5,7 +5,31 @@ import Div from '@/components/styled-system/div/div';
 import Span from '@/components/styled-system/span/span';
 import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+import { withTranslation } from '../../../i18n';
+import { TFunction } from 'next-i18next';
+
+const DistanceNormal = styled(Distance)`
+  path:nth-child(1) {
+    fill: rgb(0 0 0 / 0.3);
+  }
+
+  path:nth-child(2) {
+    stroke: rgb(0 0 0 / 0.3);
+  }
+
+  path:nth-child(3) {
+    fill: rgb(0 0 0 / 0.3);
+  }
+
+  path:nth-child(4) {
+    fill: rgb(0 0 0 / 0.3);
+  }
+
+  path:nth-child(5) {
+    stroke: rgb(0 0 0 / 0.3);
+  }
+`;
 
 const DistanceWhite = styled(Distance)`
   path:nth-child(1) {
@@ -28,6 +52,12 @@ const DistanceWhite = styled(Distance)`
     stroke: #ffffff;
   }
 `;
+
+const ClockNormal = styled(Clock)`
+  path:nth-child(1) {
+    stroke: rgb(0 0 0 / 0.3);
+  }
+`;
 const ClockWhite = styled(Clock)`
   path:nth-child(1) {
     stroke: #ffffff;
@@ -40,7 +70,7 @@ const ClockWhite = styled(Clock)`
 
 const HeartNormal = styled(Heart)`
   path:nth-child(1) {
-    stroke: rgb(130, 136, 249);
+    stroke: rgb(0 0 0 / 0.3);
   }
 `;
 const HeartWhite = styled(Heart)`
@@ -50,35 +80,34 @@ const HeartWhite = styled(Heart)`
 `;
 
 type ContentListToggleProps = {
+  readonly t: TFunction;
   items?: {
     distance: boolean;
     latest: boolean;
     likes: boolean;
   };
+  value: string;
   onChange?: (value: 'distance' | 'latest' | 'likes') => void;
 };
 
 // TODO: Refactor to get selected value through props instead of managing its own state
 const ContentListToggle: FC<ContentListToggleProps> = ({
   items = { distance: true, latest: true, likes: true },
-  onChange
+  value,
+  onChange,
+  t
 }) => {
-  const [state, setState] = useState<'distance' | 'latest' | 'likes'>('latest');
-
   const handleLatestClick = () => {
-    setState('latest');
     if (onChange) {
       onChange('latest');
     }
   };
   const handleLikesClick = () => {
-    setState('likes');
     if (onChange) {
       onChange('likes');
     }
   };
   const handleDistanceClick = () => {
-    setState('distance');
     if (onChange) {
       onChange('distance');
     }
@@ -89,83 +118,90 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
   const buttonCount = Object.keys(items).filter((key) => {
     return items[key];
   }).length;
-  const containerWidth = 48 * buttonCount + 4 * buttonCount + 4;
-  const labelMarginLeft = `${containerWidth / 2 - 48}px`;
+  const containerWidth = 40 * buttonCount + 4 * buttonCount + 4;
 
   return (
     <>
       <Div
         display="flex"
         alignItems="center"
-        justifyContent="flex-start"
+        justifyContent="center"
         marginTop="40px"
-        marginLeft={labelMarginLeft}
+        textAlign="center"
         width="100%">
         <Span
           fontFamily={theme.fonts.futura}
           fontSize="16px"
           lineHeight="22px"
           whiteSpace="nowrap">
-          Sort by
+          {t('content-list-toggle:sort-en')}
         </Span>
-        {state === 'distance' && (
+        {value === 'distance' && (
           <Span
+            whiteSpace="nowrap"
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"
             color="#0511F2">
-            distance
+            {t('content-list-toggle:distance')}
           </Span>
         )}
-        {state === 'latest' && (
+        {value === 'latest' && (
           <Span
+            whiteSpace="nowrap"
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"
             color="#0511F2">
-            latest
+            {t('content-list-toggle:latest')}
           </Span>
         )}
-        {state === 'likes' && (
+        {value === 'likes' && (
           <Span
+            whiteSpace="nowrap"
             marginLeft="4px"
             fontFamily={theme.fonts.futura}
-            fontStyle="italic"
             fontSize="16px"
             lineHeight="22px"
             fontWeight="500"
             color="#0511F2">
-            likes
+            {t('content-list-toggle:likes')}
           </Span>
         )}
+        <Span
+          fontFamily={theme.fonts.futura}
+          fontSize="16px"
+          lineHeight="22px"
+          marginLeft="6px"
+          whiteSpace="nowrap">
+          {t('content-list-toggle:sort-ko')}
+        </Span>
       </Div>
       <Div
         display="flex"
         justifyContent="center"
         alignItems="center"
-        border="2px solid #0511F2"
+        border="1px solid #000000"
         borderRadius="29px"
         marginTop="16px"
         width={containerWidth}
-        height="56px">
+        height="48px">
         {distance && (
           <Div
             display="flex"
             justifyContent="center"
             alignItems="center"
             onClick={handleDistanceClick}
-            width="48px"
-            height="48px"
+            width="40px"
+            height="40px"
             margin="2px"
             borderRadius="100px"
-            backgroundColor={state === 'distance' ? '#0511F2' : 'initial'}>
-            {state === 'distance' ? <DistanceWhite /> : <Distance />}
+            backgroundColor={value === 'distance' ? '#0511F2' : 'initial'}>
+            {value === 'distance' ? <DistanceWhite /> : <DistanceNormal />}
           </Div>
         )}
         {latest && (
@@ -174,12 +210,12 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             justifyContent="center"
             alignItems="center"
             onClick={handleLatestClick}
-            width="48px"
-            height="48px"
+            width="40px"
+            height="40px"
             margin="2px"
             borderRadius="100px"
-            backgroundColor={state === 'latest' ? '#0511F2' : 'initial'}>
-            {state === 'latest' ? <ClockWhite /> : <Clock />}
+            backgroundColor={value === 'latest' ? '#0511F2' : 'initial'}>
+            {value === 'latest' ? <ClockWhite /> : <ClockNormal />}
           </Div>
         )}
         {likes && (
@@ -188,12 +224,12 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
             justifyContent="center"
             alignItems="center"
             onClick={handleLikesClick}
-            width="48px"
-            height="48px"
+            width="40px"
+            height="40px"
             margin="2px"
             borderRadius="100px"
-            backgroundColor={state === 'likes' ? '#0511F2' : 'initial'}>
-            {state === 'likes' ? <HeartWhite /> : <HeartNormal />}
+            backgroundColor={value === 'likes' ? '#0511F2' : 'initial'}>
+            {value === 'likes' ? <HeartWhite /> : <HeartNormal />}
           </Div>
         )}
       </Div>
@@ -201,4 +237,4 @@ const ContentListToggle: FC<ContentListToggleProps> = ({
   );
 };
 
-export default ContentListToggle;
+export default withTranslation('common')(ContentListToggle);

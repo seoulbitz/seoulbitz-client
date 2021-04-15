@@ -12,8 +12,8 @@ const Search: FC<SearchProps> = (props) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}>
-      <circle cx={10.5} cy={10.5} r={8.5} stroke="#0511F2" />
-      <path stroke="#0511F2" d="M16.854 16.146l6 6" />
+      <circle cx={10.5} cy={10.5} r={8.5} stroke="#b2b2b2" strokeWidth="2px" />
+      <path stroke="#b2b2b2" d="M16.854 16.146l6 6" strokeWidth="2px" />
     </SVG>
   );
 };

@@ -1,0 +1,13 @@
+{
+  "login": "Log In",
+  "account-exist": "Log into your account",
+  "no-account": "Don’t have an account?",
+  "sign-up": "Sign up",
+  "free": "for free",
+  "email": "Email",
+  "password": "Password",
+  "forgot-password": "Forgot password?",
+  "sign-in": "SIGN IN",
+  "or": "or",
+  "google-login": "Continue with Google"
+}

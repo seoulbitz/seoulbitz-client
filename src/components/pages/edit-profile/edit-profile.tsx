@@ -14,12 +14,17 @@ import BackButton from '@/components/back-button/back-button';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 import { UpdateUsernameResult } from '@/services/firebase/auth';
+import { TFunction } from 'next-i18next';
+import { withTranslation, i18n } from '../../../../i18n';
+import Meta from '@/components/meta/Meta';
 
 const editprofileSchema = Yup.object().shape({
   username: Yup.string().required('Required')
 });
 
-const EditProfile: FC = () => {
+type EditProfileProps = { readonly t: TFunction };
+
+const EditProfile: FC<EditProfileProps> = ({ t }) => {
   const router = useRouter();
 
   const [user, setUser] = useState(null);
@@ -53,137 +58,158 @@ const EditProfile: FC = () => {
   };
 
   return (
-    <Layout>
-      {user && (
-        <Grid
-          width="100%"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          paddingBottom={['88px', null, '96px']}>
-          <Cell marginTop="40px" width={1}>
-            <Link href="/account" passHref>
-              <A>
-                <BackButton text="ACCOUNT" />
-              </A>
-            </Link>
-          </Cell>
-          <Cell
-            marginTop={['40px', null, '56px']}
-            width={[1, 1 / 2]}
-            display="flex"
-            flexDirection="row"
-            justifyContent="center">
-            <Div
-              fontFamily={theme.fonts.futura}
-              fontSize="28px"
-              fontWeight="700"
-              lineHeight="34px">
-              Edit profile
-            </Div>
-          </Cell>
-          <Cell width={[1, 1 / 2]} marginTop="32px">
-            <Formik
-              initialValues={{ email: user.email, username: user.displayName }}
-              validationSchema={editprofileSchema}
-              onSubmit={handleSubmit}>
-              {({ isSubmitting }) => {
-                return (
-                  <Form>
-                    <Div display="flex" flexDirection="column">
-                      <Label
-                        fontFamily={theme.fonts.futura}
-                        fontSize="16px"
-                        fontWeight="500"
-                        lineHeight="20px"
-                        htmlFor="email">
-                        Email
-                      </Label>
-                      <Field
-                        id="email"
-                        name="email"
-                        component={({ field, ...props }) => {
-                          return (
-                            <Input
-                              disabled
-                              background="#FAFAFA"
-                              color="#BFBFBF"
-                              marginTop="8px"
-                              height="48px"
-                              border="1px solid #F1F1F1"
-                              paddingLeft="16px"
-                              fontSize="16px"
-                              lineHeight="20px"
-                              fontWeight="500"
-                              fontFamily={theme.fonts.futura}
-                              placeholder="patricia@gmail.com"
-                              type="email"
-                              {...field}
-                              {...props}
-                            />
-                          );
-                        }}
-                      />
-                    </Div>
-                    <Div display="flex" flexDirection="column" marginTop="24px">
-                      <Label
-                        fontFamily={theme.fonts.futura}
-                        fontSize="16px"
-                        lineHeight="20px"
-                        fontWeight="500"
-                        htmlFor="username">
-                        Username
-                      </Label>
-                      <Field name="username">
-                        {({ field, ...props }) => {
-                          return (
-                            <Input
-                              marginTop="8px"
-                              height="48px"
-                              border="1px solid #0511F2"
-                              paddingLeft="16px"
-                              fontFamily={theme.fonts.futura}
-                              fontSize="16px"
-                              lineHeight="20px"
-                              fontWeight="500"
-                              {...field}
-                              {...props}
-                            />
-                          );
-                        }}
-                      </Field>
-                      <ErrorMessage
-                        name="username"
-                        component={(props) => {
-                          return (
-                            <Div
-                              marginTop="8px"
-                              fontSize="16px"
-                              lineHeight="20px"
-                              fontFamily={theme.fonts.futura}
-                              fontWeight="400"
-                              color="#F43333"
-                              {...props}></Div>
-                          );
-                        }}
-                      />
-                    </Div>
-                    <StyledButton
-                      type="submit"
-                      marginTop="32px"
-                      variant="blue"
-                      disabled={isSubmitting}>
-                      Save
-                    </StyledButton>
-                  </Form>
-                );
-              }}
-            </Formik>
-          </Cell>
-        </Grid>
-      )}
-    </Layout>
+    <>
+      <Meta
+        meta={{
+          title: 'Edit Profile | Seoulbitz',
+          description: '',
+          keywords: '',
+          ogTitle: 'Edit Profile | Seoulbitz',
+          ogDescription: '',
+          ogSiteName: 'Seoulbitz',
+          ogImage: ''
+        }}
+      />
+      <Layout>
+        {user && (
+          <Grid
+            width="100%"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            paddingBottom={['88px', null, '96px']}>
+            <Cell marginTop="40px" width={1}>
+              <Link href="/account" passHref>
+                <A>
+                  <BackButton
+                    text={i18n.language === 'en' ? 'ACCOUNT' : '내 계정'}
+                  />
+                </A>
+              </Link>
+            </Cell>
+            <Cell
+              marginTop={['40px', null, '56px']}
+              width={[1, 1 / 2]}
+              display="flex"
+              flexDirection="row"
+              justifyContent="center">
+              <Div
+                whiteSpace="nowrap"
+                fontFamily={theme.fonts.futura}
+                fontSize="28px"
+                fontWeight="700"
+                lineHeight="34px">
+                {t('edit-profile:title')}
+              </Div>
+            </Cell>
+            <Cell width={[1, 1 / 2]} marginTop="32px">
+              <Formik
+                initialValues={{
+                  email: user.email,
+                  username: user.displayName
+                }}
+                validationSchema={editprofileSchema}
+                onSubmit={handleSubmit}>
+                {({ isSubmitting }) => {
+                  return (
+                    <Form>
+                      <Div display="flex" flexDirection="column">
+                        <Label
+                          fontFamily={theme.fonts.futura}
+                          fontSize="16px"
+                          fontWeight="500"
+                          lineHeight="20px"
+                          htmlFor="email">
+                          {t('edit-profile:email')}
+                        </Label>
+                        <Field
+                          id="email"
+                          name="email"
+                          component={({ field, ...props }) => {
+                            return (
+                              <Input
+                                disabled
+                                background="#FAFAFA"
+                                color="#BFBFBF"
+                                marginTop="8px"
+                                height="48px"
+                                border="1px solid #F1F1F1"
+                                paddingLeft="16px"
+                                fontSize="16px"
+                                lineHeight="20px"
+                                fontWeight="500"
+                                fontFamily={theme.fonts.futura}
+                                placeholder="patricia@gmail.com"
+                                type="email"
+                                {...field}
+                                {...props}
+                              />
+                            );
+                          }}
+                        />
+                      </Div>
+                      <Div
+                        display="flex"
+                        flexDirection="column"
+                        marginTop="24px">
+                        <Label
+                          fontFamily={theme.fonts.futura}
+                          fontSize="16px"
+                          lineHeight="20px"
+                          fontWeight="500"
+                          htmlFor="username">
+                          {t('edit-profile:username')}
+                        </Label>
+                        <Field name="username">
+                          {({ field, ...props }) => {
+                            return (
+                              <Input
+                                marginTop="8px"
+                                height="48px"
+                                border="1px solid #0511F2"
+                                paddingLeft="16px"
+                                fontFamily={theme.fonts.futura}
+                                fontSize="16px"
+                                lineHeight="20px"
+                                fontWeight="500"
+                                {...field}
+                                {...props}
+                              />
+                            );
+                          }}
+                        </Field>
+                        <ErrorMessage
+                          name="username"
+                          component={(props) => {
+                            return (
+                              <Div
+                                marginTop="8px"
+                                fontSize="16px"
+                                lineHeight="20px"
+                                fontFamily={theme.fonts.futura}
+                                fontWeight="400"
+                                color="#F43333"
+                                {...props}></Div>
+                            );
+                          }}
+                        />
+                      </Div>
+                      <StyledButton
+                        type="submit"
+                        marginTop="32px"
+                        variant="blue"
+                        disabled={isSubmitting}>
+                        {t('edit-profile:save')}
+                      </StyledButton>
+                    </Form>
+                  );
+                }}
+              </Formik>
+            </Cell>
+          </Grid>
+        )}
+      </Layout>
+    </>
   );
 };
-
-export default EditProfile;
+export default withTranslation('common')(EditProfile);
