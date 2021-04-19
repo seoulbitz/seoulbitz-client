@@ -27,12 +27,28 @@ const Location: FC<{
     images,
     body: { en: enBody, ko: koBody },
     location,
-    area,
-    category,
+    areas,
+    categories,
     recommendedLocations
   } = props.location;
 
   const { trendingArticles } = props;
+  const categoryNames = [
+    categories
+      .map((category) => {
+        return category.name;
+      })
+      .join(', ')
+  ];
+
+  const areaNames = [
+    areas
+      .map((area) => {
+        return area.name;
+      })
+      .join(', ')
+  ];
+
   return (
     <>
       <Meta meta={meta} />
@@ -56,7 +72,7 @@ const Location: FC<{
               fontSize="16px"
               lineHeight="20px"
               color="#777777">
-              {category.name} / {area.name}
+              {categoryNames} / {areaNames}
               {/* TODO: Add distance */}
               {/* <br />
             0.5km far */}

@@ -14,6 +14,7 @@ import { useRouter } from 'next/dist/client/router';
 import Meta from '@/components/meta/Meta';
 import { TFunction } from 'next-i18next';
 import { i18n, withTranslation, useTranslation } from '../../../../i18n';
+import { createLocationCategoryService } from '@/services/sanity/api/location-category';
 
 type SearchProps = {
   locationResults: LocationDocument[];
@@ -113,8 +114,8 @@ const Search: FC<SearchProps> = ({ t, ...props }) => {
                   subtitle,
                   thumbnailImage,
                   userLikes,
-                  category,
-                  area
+                  categories,
+                  areas
                 } = location;
 
                 const href = `/locations/${slug.current}`;
@@ -136,8 +137,8 @@ const Search: FC<SearchProps> = ({ t, ...props }) => {
                           subtitle={subtitle}
                           images={[thumbnailImage]}
                           likes={userLikes.length}
-                          category={category.name}
-                          area={area.name}
+                          categories={categories}
+                          areas={areas}
                         />
                       </A>
                     </Link>

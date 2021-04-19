@@ -17,8 +17,8 @@ export type LocationDocument = SanityDocument<{
     en: string;
     ko: string;
   };
-  category: any;
-  area: any;
+  categories: any[];
+  areas: any[];
   thumbnailImage: SanityImageSource;
   images: SanityImageSource[];
   location: {
@@ -38,8 +38,8 @@ export const createLocationService = (client: SanityClient) => {
     const query = `*[_type == "location" && slug.current == "${slug}"]{
       ...,
       meta->,
-      category->,
-      area->,
+      categories[]->,
+      areas[]->,
       recommendedLocations[]->,
       "userLikes": *[_type == 'userLike' && references(^._id)],
       "userBookmarks": *[_type == 'userBookmark' && references(^._id)]
@@ -79,8 +79,8 @@ export const createLocationService = (client: SanityClient) => {
     *[_type == "location" ${areasConstraint} ${categoriesConstraint}] {
       ...,
       meta->,
-      category->,
-      area->,
+      categories[]->,
+      areas[]->,
       "userLikes": *[_type == 'userLike' && references(^._id)]
     }${orderQuery}`;
     const locations = await client.fetch<LocationDocument[]>(query);
@@ -97,8 +97,8 @@ export const createLocationService = (client: SanityClient) => {
     const query = `*[_type == "location"] {
       ...,
       meta->,
-      category->,
-      area->,
+      categories[]->,
+      areas[]->,
       "userLikes": *[_type == 'userLike' && references(^._id)]
     }${orderQuery}`;
     const locations = await client.fetch<LocationDocument[]>(query);

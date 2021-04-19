@@ -413,8 +413,8 @@ const Account: FC<AccountProps> = ({ t }) => {
                             subtitle,
                             thumbnailImage,
                             userLikes,
-                            category,
-                            area
+                            categories,
+                            areas
                           } = location;
                           const remainder = i % 4;
 
@@ -433,14 +433,15 @@ const Account: FC<AccountProps> = ({ t }) => {
                               marginBottom={['40px', null, '24px']}>
                               <Link href={href} passHref>
                                 <A textDecoration="initial" color="initial">
+                                  {/* Food,Family / Gangnam,Iteawon */}
                                   <ContentItem
                                     kind="location"
                                     title={title}
                                     subtitle={subtitle}
                                     images={[thumbnailImage]}
                                     likes={userLikes.length}
-                                    category={category.name}
-                                    area={area.name}
+                                    categories={categories}
+                                    areas={areas}
                                   />
                                 </A>
                               </Link>

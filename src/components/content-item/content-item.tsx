@@ -29,8 +29,8 @@ type ContentItemProps = {
   images?: SanityImageSource[];
   likes?: number;
   author?: any;
-  category?: string;
-  area?: string;
+  categories?: any[];
+  areas?: any[];
   distance?: number;
 };
 
@@ -43,15 +43,31 @@ const ContentItem: FC<ContentItemProps> = (props) => {
     images,
     likes,
     author,
-    category,
-    area,
+    categories,
+    areas,
     distance
-  } = props;
+  } = props as ContentItemProps;
 
   const isLocation = kind === 'location';
   const isArticle = kind === 'article';
   const thumbnailImageUrl = sanity.image.getUrl(images[0]);
 
+  const categoryNames =
+    isLocation && categories !== undefined
+      ? categories
+          .map((category) => {
+            return category.name;
+          })
+          .join(', ')
+      : null;
+  const areaNames =
+    isLocation && areas !== undefined
+      ? areas
+          .map((area) => {
+            return area.name;
+          })
+          .join(', ')
+      : null;
   return (
     <Div>
       {/* For desktop view */}
@@ -78,7 +94,7 @@ const ContentItem: FC<ContentItemProps> = (props) => {
               lineHeight="20px"
               fontWeight="500"
               color="#ffffff">
-              {category} / {area}
+              {categoryNames} / {areaNames}
             </Div>
           ) : (
             <Div
@@ -189,7 +205,7 @@ const ContentItem: FC<ContentItemProps> = (props) => {
             lineHeight="18px"
             fontWeight="500"
             color="#777777">
-            {category} / {area}
+            {categoryNames} / {areaNames}
           </Span>
           {likes > 0 && (
             <>

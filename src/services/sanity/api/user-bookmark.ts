@@ -83,8 +83,8 @@ export const createUserBookmarkService = (client: SanityClient) => {
         ...,
         content-> {
           ...,
-          category->,
-          area->,
+          categories[]->,
+          areas[]->,
           author->,
           "userLikes": *[_type == 'userLike' && references(^._id)]
         }

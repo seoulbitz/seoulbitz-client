@@ -203,8 +203,8 @@ const LocationList: FC<LocationListProps> = (props) => {
               subtitle,
               images,
               thumbnailImage,
-              category,
-              area,
+              categories,
+              areas,
               userLikes,
               distance
             } = location;
@@ -230,8 +230,8 @@ const LocationList: FC<LocationListProps> = (props) => {
                       subtitleKo={subtitle.ko}
                       images={[thumbnailImage]}
                       likes={userLikes.length}
-                      category={category.name}
-                      area={area.name}
+                      categories={categories}
+                      areas={areas}
                       distance={distance}
                     />
                   </A>
