@@ -11,7 +11,7 @@ export const createSearchService = (client: SanityClient) => {
       subtitle.en match ${keywordQuery} ||
       subtitle.ko match ${keywordQuery})] 
       [0...4]
-      {..., category->, area->, "userLikes": *[_type == 'userLike' && references(^._id)]}`;
+      {..., categories[]->, areas[]->, "userLikes": *[_type == 'userLike' && references(^._id)]}`;
     const articlesQuery = `*[_type == "article" &&
       (title.en match ${keywordQuery} ||
       title.ko match ${keywordQuery} || 
@@ -35,7 +35,7 @@ export const createSearchService = (client: SanityClient) => {
       title.ko match ${keywordQuery} ||
       subtitle.en match ${keywordQuery} ||
       subtitle.ko match ${keywordQuery})]
-      {..., category->, area->, "userLikes": *[_type == 'userLike' && references(^._id)]}`;
+      {..., categories[]->, areas[]->, "userLikes": *[_type == 'userLike' && references(^._id)]}`;
     const locationResults = await client.fetch<LocationDocument>(query);
     return locationResults;
   };

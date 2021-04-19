@@ -81,8 +81,8 @@ const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
                   subtitle,
                   thumbnailImage,
                   userLikes,
-                  category,
-                  area
+                  categories,
+                  areas
                 } = location;
 
                 const href = `/locations/${slug.current}`;
@@ -104,8 +104,8 @@ const SearchResultsLocationList: FC<{ locationResults: LocationDocument[] }> = (
                           subtitle={subtitle}
                           images={[thumbnailImage]}
                           likes={userLikes.length}
-                          category={category.name}
-                          area={area.name}
+                          categories={categories}
+                          areas={areas}
                         />
                       </A>
                     </Link>
