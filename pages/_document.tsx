@@ -23,6 +23,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta name="naver-site-verification" content="66d416a0b78c3d166b445cbd48f647a1edddb742" />
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
